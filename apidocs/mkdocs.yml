@@ -1,0 +1,9 @@
+site_name: z-seneca
+theme: readthedocs
+site_favicon: favicon.ico
+copyright: © Zz
+pages: 
+- [index.md, util]
+- [Service.md, Service]
+- [ServiceBase.md, ServiceBase]
+- [ServiceUtilBase.md, ServiceUtilBase]
