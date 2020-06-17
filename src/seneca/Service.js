@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-06-17 22:13:09
+ * Last Modified: 2020-06-17 22:53:29
  * Modified By: Zz
  * -----
  * Description:
@@ -148,7 +148,7 @@ class Service extends ServiceBase {
       }
 
       if (this.cache) {
-        const ret = await this.db2logic(result);
+        const ret = await this.serviceUtil.db2logic(result);
         await this.cache.set(cacheKey, ret, this.getCacheTTL());
       }
 
@@ -184,7 +184,7 @@ class Service extends ServiceBase {
         const cacheKey = `${Pkg.name}:${this.role}:${msg.params.id}`;
         await this.cache.del(cacheKey);
       }
-      const ret = await this.db2logic(result);
+      const ret = await this.serviceUtil.db2logic(result);
       return util.response(0, 'SUCCESS', ret);
     } catch (dbError) {
       return this.handleCatchErr(dbError);
@@ -212,7 +212,7 @@ class Service extends ServiceBase {
         const cacheKey = `${Pkg.name}:${this.role}:${msg.params.id}`;
         await this.cache.del(cacheKey);
       }
-      const ret = await this.db2logic(result);
+      const ret = await this.serviceUtil.db2logic(result);
       return util.response(0, 'SUCCESS', ret);
     } catch (dbError) {
       return this.handleCatchErr(dbError);
