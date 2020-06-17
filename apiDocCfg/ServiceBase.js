@@ -5,7 +5,7 @@
  * Created Date: 2020-06-14 13:13:26
  * Author: Zz
  * -----
- * Last Modified: 2020-06-16 20:04:40
+ * Last Modified: 2020-06-17 22:42:59
  * Modified By: Zz
  * -----
  * Description:
@@ -18,7 +18,7 @@ module.exports = {
   name: 'ServiceBase',
   description: 'ServiceBase为Service抽象接口类。定义了一些接口：create、retrieve、update、updateStatus、list、count、listAll、findOne、logicDel、desctroy、treeList、findAll',
 
-  options: {
+  opt: {
     description: "构造函数开启api配置项",
     propertys: {
       create: {
@@ -85,7 +85,7 @@ module.exports = {
         description: 'seneca 对象',
         required: true,
       },
-      options: {
+      opt: {
         type: DataTypes.Object,
         description: '默认api开启配置。false：不加载任何默认api；true：加载所有默认api；json对象表示加载对应的操作',
         defaultValue: 'true'

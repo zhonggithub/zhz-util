@@ -1,7 +1,7 @@
 # ServiceBase
 ServiceBase为Service抽象接口类。定义了一些接口：create、retrieve、update、updateStatus、list、count、listAll、findOne、logicDel、desctroy、treeList、findAll
 
-## options
+## opt
 构造函数开启api配置项
 
 ### 属性
@@ -22,7 +22,7 @@ ServiceBase为Service抽象接口类。定义了一些接口：create、retrieve
 
 
 ## constructor
- constructor (role, seneca, options)
+ constructor (role, seneca, opt)
 
 构造函数
 
@@ -32,7 +32,7 @@ ServiceBase为Service抽象接口类。定义了一些接口：create、retrieve
 |--- | --- | --- | --- | ---|
 |role | String | 是 | 无 | 角色名称|
 |seneca | seneca | 是 | 无 | seneca 对象|
-|options | Object | 否 | true | 默认api开启配置。false：不加载任何默认api；true：加载所有默认api；json对象表示加载对应的操作|
+|opt | Object | 否 | true | 默认api开启配置。false：不加载任何默认api；true：加载所有默认api；json对象表示加载对应的操作|
 
 
 ## loadCmd
