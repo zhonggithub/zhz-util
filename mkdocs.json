@@ -1,0 +1,8 @@
+{
+  "mkdocs": {
+    "site_name": "z-seneca",
+    "site_favicon": "favicon.ico",
+    "copyright": "© Zz"
+  },
+  "apiCfgFilePath": "/Users/zz/workspace/zBase/z-util/apiDocCfg/*.js"
+}

@@ -1,0 +1,9 @@
+node_modules/
+*.log
+dist/
+.nyc_output
+./graphql
+.*_env
+.idea
+.history
+apidocs/
