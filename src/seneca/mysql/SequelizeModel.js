@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-06-16 10:35:39
+ * Last Modified: 2020-06-18 22:31:38
  * Modified By: Zz
  * -----
  * Description:
@@ -64,8 +64,18 @@ class SequelizeModel extends ModelBase {
     return tmp;
   }
 
-  async findById(id) {
-    return this.model.findByPk(id);
+  /**
+   * 解析expand: { a: true, b: true ....}，返回include对象
+   * 子类应该实现这个api
+   * @param {*} expand 子资源扩展数据
+   */
+  parseExpand(expand) {
+    return null
+  }
+
+  async findById(id, expand) {
+    const include = this.parseExpand(expand)
+    return this.model.findByPk(id, { include });
   }
 
   async findByIdAndUpdate(id, data) {
@@ -86,15 +96,29 @@ class SequelizeModel extends ModelBase {
    */
   async list(query, sort, skip, pageSize, expand) {
     let tmp = SequelizeModel.parseListQuery(query, sort, skip, pageSize);
+    const include = this.parseExpand(expand)
+    if (tmp) {
+      tmp.include = include
+    }
     return this.model.findAndCountAll(tmp);
   }
 
-  async find(query) {
-    return this.model.findAll(query);
+  async find(query, expand) {
+    const include = this.parseExpand(expand)
+    const tmp = SequelizeModel.parseQuery(query);
+    if (tmp) {
+      tmp.include = include
+    }
+    return this.model.findAll(tmp);
   }
 
-  async findOne(query) {
-    return this.model.findOne(query);
+  async findOne(query, expand) {
+    const include = this.parseExpand(expand)
+    const tmp = SequelizeModel.parseQuery(query);
+    if (tmp) {
+      tmp.include = include
+    }
+    return this.model.findOne(tmp);
   }
 
   async findByIdAndDelete(id) {
@@ -102,7 +126,7 @@ class SequelizeModel extends ModelBase {
   }
 
   async count(query) {
-    SequelizeModel.parseQuery(query);
+    const tmp = SequelizeModel.parseQuery(query);
     return this.model.count(tmp);
   }
 }

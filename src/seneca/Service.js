@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-06-18 16:10:14
+ * Last Modified: 2020-06-18 22:29:23
  * Modified By: Zz
  * -----
  * Description:
@@ -131,6 +131,7 @@ class Service extends ServiceBase {
     }
     try {
       const { id, expand } = msg.params;
+      const tmpExpand = util.parseExpand(expand);
 
       let result = null;
       const cacheKey = `${Pkg.name}:${this.role}:${id}`;
@@ -140,7 +141,7 @@ class Service extends ServiceBase {
       }
 
       if (!result) {
-        result = await this.model.findById(id);
+        result = await this.model.findById(id, tmpExpand);
       }
 
       if (!result) {
@@ -153,7 +154,7 @@ class Service extends ServiceBase {
       }
 
       const data = await this.serviceUtil.db2logic(
-        result, util.parseExpand(expand),
+        result, tmpExpand,
       );
       return util.responseSuccess(data);
     } catch (dbError) {
@@ -271,8 +272,9 @@ class Service extends ServiceBase {
     }
     try {
       const { filter, expand } = util.convertPagination(msg.params);
-      const result = await this.model.find(this.convertQueryCriteria(filter));
-      const items = await this.serviceUtil.list2logic(result, expand);
+      const tmpExpand = util.parseExpand(expand);
+      const result = await this.model.find(this.convertQueryCriteria(filter), tmpExpand);
+      const items = await this.serviceUtil.list2logic(result, tmpExpand);
       return util.responseSuccess(items);
     } catch (dbError) {
       return this.handleCatchErr(dbError);
@@ -287,12 +289,13 @@ class Service extends ServiceBase {
       }
       const { expand } = msg.params;
       delete msg.params.expand;
+      const tmpExpand = util.parseExpand(expand);
 
-      const result = await this.model.findOne(msg.params);
+      const result = await this.model.findOne(msg.params, tmpExpand);
       if (!result) {
         return util.error404(`ERR_${this.getUResouceName()}_NOT_EXIST`);
       }
-      const data = await this.serviceUtil.db2logic(result, util.parseExpand(expand));
+      const data = await this.serviceUtil.db2logic(result, tmpExpand);
       return util.responseSuccess(data);
     } catch (dbError) {
       return this.handleCatchErr(dbError);
@@ -359,7 +362,10 @@ class Service extends ServiceBase {
   async findAll(msg) {
     this.seneca.logger.info(msg);
     try {
-      const items = await this.model.find(msg.params);
+      const { expand } = msg.params;
+      delete msg.params.expand;
+      const tmpExpand = util.parseExpand(expand);
+      const items = await this.model.find(msg.params, tmpExpand);
       return util.responseSuccess(items);
     } catch (dbError) {
       return this.handleCatchErr(dbError);
@@ -375,10 +381,11 @@ class Service extends ServiceBase {
       if (error) {
         return error.toJSON()
       }
-      const { ids } = msg.params
-      const result = await this.model.findAll({
+      const { ids, expand } = msg.params
+      const tmpExpand = util.parseExpand(expand);
+      const result = await this.model.find({
         id: ids,
-      })
+      }, tmpExpand)
       return util.responseSuccess(result)
     } catch (dbError) {
       return this.handleCatchErr(dbError)
