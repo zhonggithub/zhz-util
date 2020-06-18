@@ -5,7 +5,7 @@
  * Created Date: 2020-06-17 22:18:14
  * Author: Zz
  * -----
- * Last Modified: 2020-06-17 22:21:57
+ * Last Modified: 2020-06-18 23:13:53
  * Modified By: Zz
  * -----
  * Description:
@@ -32,6 +32,23 @@ module.exports = {
         description: '',
         required: true,
       },
+    }
+  },
+  paraseExpand: {
+    description: '解析expand: { a: true, b: true ....}',
+    params: {
+      expand: {
+        type: DataTypes.Object,
+        description: '子资源扩展数据。格式为：{ a: true, b: true, ....}',
+        required: true,
+      }
+    },
+    returns: {
+      ret: {
+        type: 'Object, null',
+        required: true,
+        description: '解析成功返回include对象, 否则返回null'
+      }
     }
   },
   isValidDataWhenCreate: {

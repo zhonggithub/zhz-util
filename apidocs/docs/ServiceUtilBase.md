@@ -14,6 +14,25 @@
 |model | ModelBase | 是 | 无 | |
 
 
+## paraseExpand
+ paraseExpand (expand)
+
+解析expand: { a: true, b: true ....}
+
+### 参数
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|expand | Object | 是 | 无 | 子资源扩展数据。格式为：{ a: true, b: true, ....}|
+
+
+### 返回值
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|ret | Object, null | 是 | 无 | 解析成功返回include对象, 否则返回null|
+
+
 ## isValidDataWhenCreate
  isValidDataWhenCreate (data)
 
