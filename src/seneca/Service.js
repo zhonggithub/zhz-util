@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-06-17 22:53:29
+ * Last Modified: 2020-06-18 16:10:14
  * Modified By: Zz
  * -----
  * Description:
@@ -98,7 +98,7 @@ class Service extends ServiceBase {
     if (err.code !== undefined) {
       return err.toJSON ? err.toJSON() : err;
     }
-    return util.response('ERR_DB', err.message, err);
+    return util.response('ERR_DB', err.message, err, 500);
   }
 
   async create(msg) {
@@ -117,7 +117,7 @@ class Service extends ServiceBase {
       const result = await this.model.create(body);
       await this.serviceUtil.afterCreate(result);
       const ret = await this.serviceUtil.db2logic(result);
-      return util.response(0, 'SUCCESS', ret);
+      return util.responseSuccess(ret);
     } catch (dbError) {
       return this.handleCatchErr(dbError);
     }
@@ -155,7 +155,7 @@ class Service extends ServiceBase {
       const data = await this.serviceUtil.db2logic(
         result, util.parseExpand(expand),
       );
-      return util.response(0, 'SUCCESS', data);
+      return util.responseSuccess(data);
     } catch (dbError) {
       return this.handleCatchErr(dbError);
     }
@@ -185,7 +185,7 @@ class Service extends ServiceBase {
         await this.cache.del(cacheKey);
       }
       const ret = await this.serviceUtil.db2logic(result);
-      return util.response(0, 'SUCCESS', ret);
+      return util.responseSuccess(ret);
     } catch (dbError) {
       return this.handleCatchErr(dbError);
     }
@@ -213,7 +213,7 @@ class Service extends ServiceBase {
         await this.cache.del(cacheKey);
       }
       const ret = await this.serviceUtil.db2logic(result);
-      return util.response(0, 'SUCCESS', ret);
+      return util.responseSuccess(ret);
     } catch (dbError) {
       return this.handleCatchErr(dbError);
     }
@@ -234,7 +234,7 @@ class Service extends ServiceBase {
         sort, skip, pageSize, expand,
       );
       const items = await this.serviceUtil.list2logic(result.rows, expand);
-      return util.response(0, 'SUCCESS', {
+      return util.responseSuccess({
         items,
         total: result.count,
         offset: skip,
@@ -257,7 +257,7 @@ class Service extends ServiceBase {
       const result = await this.model.count(
         this.serviceUtil.convertCountCriteria(msg.params),
       );
-      return util.response(0, 'SUCCESS', result);
+      return util.responseSuccess(result);
     } catch (dbError) {
       return this.handleCatchErr(dbError);
     }
@@ -273,7 +273,7 @@ class Service extends ServiceBase {
       const { filter, expand } = util.convertPagination(msg.params);
       const result = await this.model.find(this.convertQueryCriteria(filter));
       const items = await this.serviceUtil.list2logic(result, expand);
-      return util.response(0, 'SUCCESS', items);
+      return util.responseSuccess(items);
     } catch (dbError) {
       return this.handleCatchErr(dbError);
     }
@@ -293,7 +293,7 @@ class Service extends ServiceBase {
         return util.error404(`ERR_${this.getUResouceName()}_NOT_EXIST`);
       }
       const data = await this.serviceUtil.db2logic(result, util.parseExpand(expand));
-      return util.response(0, 'SUCCESS', data);
+      return util.responseSuccess(data);
     } catch (dbError) {
       return this.handleCatchErr(dbError);
     }
@@ -321,7 +321,7 @@ class Service extends ServiceBase {
         const cacheKey = `${Pkg.name}:${this.role}:${msg.params.id}`;
         await this.cache.del(cacheKey);
       }
-      return util.response(0, 'SUCCESS', delResult);
+      return util.responseSuccess(delResult);
     } catch (dbError) {
       return this.handleCatchErr(dbError);
     }
@@ -350,7 +350,7 @@ class Service extends ServiceBase {
         const cacheKey = `${Pkg.name}:${this.role}:${msg.params.id}`;
         await this.cache.del(cacheKey);
       }
-      return util.response(0, 'SUCCESS', delResult);
+      return util.responseSuccess(delResult);
     } catch (dbError) {
       return this.handleCatchErr(dbError);
     }
@@ -360,7 +360,7 @@ class Service extends ServiceBase {
     this.seneca.logger.info(msg);
     try {
       const items = await this.model.find(msg.params);
-      return util.response(0, 'SUCCESS', items);
+      return util.responseSuccess(items);
     } catch (dbError) {
       return this.handleCatchErr(dbError);
     }
@@ -379,7 +379,7 @@ class Service extends ServiceBase {
       const result = await this.model.findAll({
         id: ids,
       })
-      return util.response(0, 'SUCCESS', result)
+      return util.responseSuccess(result)
     } catch (dbError) {
       return this.handleCatchErr(dbError)
     }

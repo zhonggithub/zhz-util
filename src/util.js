@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: 2020-06-17 13:38:47
+ * Last Modified: 2020-06-18 15:49:54
  * Modified By: Zz
  * -----
  * Description:
@@ -78,12 +78,17 @@ module.exports = {
     return name.charAt(0).toLowerCase() + name.slice(1);
   },
   
-  response(code, message, data) {
+  response(code, message, data, status) {
     return {
       code,
       message,
       data,
+      status,
     };
+  },
+
+  responseSuccess(data, message = 'SUCCESS') {
+    return this.response(0, message, data, 200);
   },
 
   randomInt: (min, max) => {
