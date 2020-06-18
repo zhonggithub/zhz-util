@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-06-18 22:29:23
+ * Last Modified: 2020-06-18 23:02:21
  * Modified By: Zz
  * -----
  * Description:
@@ -132,6 +132,7 @@ class Service extends ServiceBase {
     try {
       const { id, expand } = msg.params;
       const tmpExpand = util.parseExpand(expand);
+      const include = this.serviceUtil.parseExpand(tmpExpand);
 
       let result = null;
       const cacheKey = `${Pkg.name}:${this.role}:${id}`;
@@ -141,7 +142,7 @@ class Service extends ServiceBase {
       }
 
       if (!result) {
-        result = await this.model.findById(id, tmpExpand);
+        result = await this.model.findById(id, include);
       }
 
       if (!result) {
@@ -230,10 +231,18 @@ class Service extends ServiceBase {
       const {
         filter, sort, skip, pageSize, page, expand,
       } = util.convertPagination(msg.params);
-      const result = await this.model.list(
+
+      const params = ServiceUtilBase.parseListQuery(
         this.serviceUtil.convertQueryCriteria(filter),
-        sort, skip, pageSize, expand,
+        sort,
+        skip,
+        pageSize
       );
+      const include = this.serviceUtil.parseExpand(expand)
+      if (include) {
+        params.include = include
+      }
+      const result = await this.model.list(params);
       const items = await this.serviceUtil.list2logic(result.rows, expand);
       return util.responseSuccess({
         items,
@@ -255,9 +264,8 @@ class Service extends ServiceBase {
       return err.toJson();
     }
     try {
-      const result = await this.model.count(
-        this.serviceUtil.convertCountCriteria(msg.params),
-      );
+      const query = ServiceUtilBase.parseQuery(this.serviceUtil.convertCountCriteria(msg.params))
+      const result = await this.model.count(query);
       return util.responseSuccess(result);
     } catch (dbError) {
       return this.handleCatchErr(dbError);
@@ -273,7 +281,12 @@ class Service extends ServiceBase {
     try {
       const { filter, expand } = util.convertPagination(msg.params);
       const tmpExpand = util.parseExpand(expand);
-      const result = await this.model.find(this.convertQueryCriteria(filter), tmpExpand);
+      const query = ServiceUtilBase.parseQuery(this.convertQueryCriteria(filter));
+      const include = this.serviceUtil.parseExpand(tmpExpand)
+      if (include) {
+        query.include = include
+      }
+      const result = await this.model.find(query);
       const items = await this.serviceUtil.list2logic(result, tmpExpand);
       return util.responseSuccess(items);
     } catch (dbError) {
@@ -290,8 +303,12 @@ class Service extends ServiceBase {
       const { expand } = msg.params;
       delete msg.params.expand;
       const tmpExpand = util.parseExpand(expand);
-
-      const result = await this.model.findOne(msg.params, tmpExpand);
+      const query = ServiceUtilBase.parseQuery(msg.params);
+      const include = this.serviceUtil.parseExpand(tmpExpand);
+      if (include) {
+        query.include = include;
+      }
+      const result = await this.model.findOne(query);
       if (!result) {
         return util.error404(`ERR_${this.getUResouceName()}_NOT_EXIST`);
       }
@@ -365,7 +382,12 @@ class Service extends ServiceBase {
       const { expand } = msg.params;
       delete msg.params.expand;
       const tmpExpand = util.parseExpand(expand);
-      const items = await this.model.find(msg.params, tmpExpand);
+      const query = ServiceUtilBase.parseQuery(msg.params);
+      const include = this.serviceUtil.parseExpand(tmpExpand);
+      if (include) {
+        query.include = include;
+      }
+      const items = await this.model.find(query);
       return util.responseSuccess(items);
     } catch (dbError) {
       return this.handleCatchErr(dbError);
@@ -383,9 +405,14 @@ class Service extends ServiceBase {
       }
       const { ids, expand } = msg.params
       const tmpExpand = util.parseExpand(expand);
-      const result = await this.model.find({
-        id: ids,
-      }, tmpExpand)
+      const query = {
+        where: { id: ids }
+      };
+      const include = this.serviceUtil.parseExpand(tmpExpand);
+      if (include) {
+        query.include = include;
+      }
+      const result = await this.model.find(query)
       return util.responseSuccess(result)
     } catch (dbError) {
       return this.handleCatchErr(dbError)

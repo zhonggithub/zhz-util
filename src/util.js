@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: 2020-06-18 15:49:54
+ * Last Modified: 2020-06-18 23:06:07
  * Modified By: Zz
  * -----
  * Description:
@@ -253,8 +253,12 @@ module.exports = {
     let tmpExpand = this.parseExpand(expand);
 
     return {
-      filter, sort: tmpSort || sort, skip,
-      pageSize, page, expand: tmpExpand,
+      filter,
+      sort: tmpSort || sort,
+      skip,
+      pageSize,
+      page,
+      expand: tmpExpand,
       limit: pageSize,
     };
   },

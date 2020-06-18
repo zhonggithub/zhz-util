@@ -7,7 +7,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-06-18 22:26:30
+ * Last Modified: 2020-06-18 22:52:26
  * Modified By: Zz
  * -----
  * Description: 定义Service类需要操作db的抽象接口
@@ -46,7 +46,7 @@ class ServiceModel {
     return this.model.create(data);
   }
 
-  async findById(id, expand) {
+  async findById(id, include) {
   }
 
   async findByIdAndUpdate(id, data) {

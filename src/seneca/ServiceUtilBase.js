@@ -5,7 +5,7 @@
  * Created Date: 2020-06-17 21:57:59
  * Author: Zz
  * -----
- * Last Modified: 2020-06-18 22:26:42
+ * Last Modified: 2020-06-18 23:03:31
  * Modified By: Zz
  * -----
  * Description: 提供Service操作的工具抽象接口类
@@ -53,6 +53,65 @@ class ServiceUtilBase {
     }
     this.model = model
     this.seneca = seneca
+  }
+
+  static parseQuery(query) {
+    let tmp = {};
+    if (query) {
+      if (query.where) {
+        tmp = {
+          ...query,
+        };
+      } else {
+        tmp.where = query;
+      }
+    }
+    return tmp;
+  }
+
+  static parseListQuery(query, sort, skip, pageSize) {
+    let tmp = ServiceUtilBase.parseQuery(query);
+    if (skip !== undefined) {
+      tmp.offset = skip;
+    }
+    if (pageSize) {
+      tmp.limit = pageSize;
+    }
+    if (sort && Array.isArray(sort) && sort.length > 0) {
+      // 此方式默认为sequlize 支持的格式不做处理
+      if (Array.isArray(sort[0])) {
+        tmp.order = sort;
+      } else if (typeof sort[0] === 'object') {
+        // 只支持{ field: '', order: '' } 格式
+        tmp.order = sort.map((item) => [item.field, item.order]);
+      }
+    } else if (typeof sort === 'object') {
+      // 只支持{ a: -1, b: 1, c: 'ASC' } 格式
+      tmp.order = [];
+      Object.keys(sort).forEach((k) => {
+        switch (sort[k]) {
+          case 1: case 'ASC': {
+            tmp.order.push([k, 'ASC']);
+            break;
+          }
+          case -1: case 'DESC': {
+            tmp.order.push([k, 'DESC']);
+            break;
+          }
+          default:
+        }
+      });
+    }
+    return tmp;
+  }
+
+  /**
+   * 解析expand: { a: true, b: true ....}，返回include对象, 或者返回null
+   * 子类应该实现这个api
+   * @param {*} expand 子资源扩展数据
+   */
+  parseExpand(expand) {
+    return null
   }
 
   async beforeCreate(data) {
