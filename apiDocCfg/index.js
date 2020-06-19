@@ -5,7 +5,7 @@
  * Created Date: 2020-06-17 13:24:59
  * Author: Zz
  * -----
- * Last Modified: 2020-06-19 11:05:43
+ * Last Modified: 2020-06-19 11:46:43
  * Modified By: Zz
  * -----
  * Description:
@@ -313,7 +313,7 @@ module.exports = {
         required: true,
       },
       excludeAttribute: {
-        type: DataTypes.Array,
+        type: 'Array',
         required: true,
         description: '过滤的属性数组',
       },
@@ -443,7 +443,6 @@ module.exports = {
       },
       expand: {
         type: 'Any',
-        required: true,
         description: '期望值',
       }
     },
