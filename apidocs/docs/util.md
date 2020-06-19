@@ -60,8 +60,8 @@
 |val | String | 否 | 无 | |
 
 
-## lteGte
- lteGte (val1, val2)
+## gteLte
+ gteLte (val1, val2)
 
 转换成框架的大于等于，小于等于
 
@@ -80,8 +80,8 @@
 |val | String | 否 | 无 | |
 
 
-## ltGte
- ltGte (val1, val2)
+## gtLte
+ gtLte (val1, val2)
 
 转换成框架的大于，小于等于
 
@@ -100,8 +100,8 @@
 |val | String | 否 | 无 | |
 
 
-## lteGt
- lteGt (val1, val2)
+## gteLt
+ gteLt (val1, val2)
 
 转换成框架的大于等于，小于
 
@@ -120,8 +120,8 @@
 |val | String | 否 | 无 | |
 
 
-## ltGt
- ltGt (val1, val2)
+## gtLt
+ gtLt (val1, val2)
 
 转换成框架的大于，小于
 
