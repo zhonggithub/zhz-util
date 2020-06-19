@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: 2020-06-18 23:06:07
+ * Last Modified: 2020-06-19 08:33:44
  * Modified By: Zz
  * -----
  * Description:
@@ -42,6 +42,68 @@ module.exports = {
     let dec = decipher.update(text, 'hex', 'utf8');
     dec += decipher.final('utf8');
     return dec;
+  },
+
+  lteGte(val1, val2, key) {
+    if (!val1 && !val2) {
+      return '';
+    }
+    const str = `[${val1 || ''}, ${val2 || ''}]`
+    if (!key) {
+      return str
+    }
+    return { [key]: str}
+  },
+  ltGte(val1, val2, key) {
+    if (!val1 && !val2) {
+      return '';
+    }
+    const str = `(${val1 || ''}, ${val2 || ''}]`
+    if (!key) {
+      return str
+    }
+    return { [key]: str}
+  },
+  lteGt(val1, val2, key) {
+    if (!val1 && !val2) {
+      return '';
+    }
+    const str = `[${val1 || ''}, ${val2 || ''})`
+    if (!key) {
+      return str
+    }
+    return { [key]: str}
+  },
+  ltGt(val1, val2, key) {
+    if (!val1 && !val2) {
+      return '';
+    }
+    const str = `(${val1 || ''}, ${val2 || ''})`
+    if (!key) {
+      return str
+    }
+    return { [key]: str}
+  },
+  /**
+   * @param {String or Array} val 
+   */
+  includeValue(val) {
+    if (!val) return '';
+    if (typeof val === 'string') {
+      return `{${vallue}}`;
+    }
+    if (typeof val === 'array') {
+      return `{${vallue.toString()}}`;
+    }
+  },
+  excludeValue(val) {
+    if (!val) return '';
+    if (typeof val === 'string') {
+      return `!{${vallue}}!`;
+    }
+    if (typeof val === 'array') {
+      return `!{${vallue.toString()}}!`;
+    }
   },
 
   // 下划线转驼峰
@@ -347,6 +409,11 @@ module.exports = {
       } else if (beginStr === '{' && endStr === '}') {
         condition[key] = array;
       }
+    } else if (value.startsWith('!{') && value.endsWidth('}!')) {
+      let array = value;
+      array = array.replace(/(\!{)|(\}!)/g, '');
+      array = array.split(',');
+      condition[key][Op.notIn] = array;
     } else {
       condition[key] = value;
     }
@@ -397,6 +464,10 @@ module.exports = {
       } else if (beginStr === '{' && endStr === '}') {
         condition[key] = array;
       }
+    } else if (value.startsWith('!{') && value.endsWidth('}!')) {
+      let array = value;
+      array = array.replace(/(\!{)|(\}!)/g, '');
+      array = array.split(',');
     } else {
       condition[key] = value;
     }
