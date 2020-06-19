@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: 2020-06-19 08:33:44
+ * Last Modified: 2020-06-19 09:27:14
  * Modified By: Zz
  * -----
  * Description:
@@ -15,6 +15,7 @@ const { Op } = require('sequelize');
 const lodash = require('lodash');
 const moment = require('moment');
 const zerror = require('z-error');
+const string = require('string');
 
 const { ZError, verify } = zerror;
 
@@ -84,6 +85,7 @@ module.exports = {
     }
     return { [key]: str}
   },
+  
   /**
    * @param {String or Array} val 
    */
@@ -356,13 +358,50 @@ module.exports = {
             filterAttributeArray.push(condition);
             break;
           }
-          default:
+          default: {
+            if (this.isRangeQuery(criteria[condition])) {
+              let tmp;
+
+              if (dbType === 'mysql') {
+                tmp = this.convertRangeQueryCriteriaMysql(
+                  condition,
+                  criteria[condition],
+                )
+              } else if (dbType === 'mongodb') {
+                tmp = this.convertRangeQueryCriteria(
+                  condition,
+                  criteria[condition],
+                );
+              }
+              dbCriteria[condition] = tmp[condition];
+              filterAttributeArray.push(condition);
+              break;
+            }
+          }
         }
       }
     }
 
     criteria = this.filterData(criteria, filterAttributeArray);
     return { dstCriteria: dbCriteria, sourceCriteria: criteria };
+  },
+
+  isRangeQuery(value) {
+    if (!value) {
+      return false;
+    }
+    if (typeof value === 'string') {
+      const left = string(value).left(2);
+      const right = string(value).right(2);
+
+      const leftRangeStr = ['[', '(', '{', '!{'];
+      const rightRangeStr = [']', ')', '}', '!}'];
+      if (leftRangeStr.indexOf(left) !== -1 && rightRangeStr.indexOf(right)) {
+        return true;
+      }
+    }
+
+    return false;
   },
 
   convertRangeQueryCriteriaMysql(key, value, formatValue = (val) => val) {
