@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: 2020-06-19 09:27:14
+ * Last Modified: 2020-06-19 11:00:51
  * Modified By: Zz
  * -----
  * Description:
@@ -45,60 +45,48 @@ module.exports = {
     return dec;
   },
 
-  lteGte(val1, val2, key) {
+  lteGte(val1, val2) {
     if (!val1 && !val2) {
       return '';
     }
-    const str = `[${val1 || ''}, ${val2 || ''}]`
-    if (!key) {
-      return str
-    }
-    return { [key]: str}
+    return `[${val1 || ''}, ${val2 || ''}]`
   },
-  ltGte(val1, val2, key) {
+  ltGte(val1, val2) {
     if (!val1 && !val2) {
       return '';
     }
-    const str = `(${val1 || ''}, ${val2 || ''}]`
-    if (!key) {
-      return str
-    }
-    return { [key]: str}
+    return `(${val1 || ''}, ${val2 || ''}]`
   },
-  lteGt(val1, val2, key) {
+  lteGt(val1, val2) {
     if (!val1 && !val2) {
       return '';
     }
-    const str = `[${val1 || ''}, ${val2 || ''})`
-    if (!key) {
-      return str
-    }
-    return { [key]: str}
+    return `[${val1 || ''}, ${val2 || ''})`
   },
-  ltGt(val1, val2, key) {
+  ltGt(val1, val2) {
     if (!val1 && !val2) {
       return '';
     }
-    const str = `(${val1 || ''}, ${val2 || ''})`
-    if (!key) {
-      return str
-    }
-    return { [key]: str}
+    return `(${val1 || ''}, ${val2 || ''})`
   },
   
   /**
    * @param {String or Array} val 
    */
-  includeValue(val) {
+  inValue(val) {
     if (!val) return '';
     if (typeof val === 'string') {
-      return `{${vallue}}`;
+      return val.split(',');
+      // return `{${vallue}}`;
     }
     if (typeof val === 'array') {
-      return `{${vallue.toString()}}`;
+      return val;
+
+      // return `{${vallue.toString()}}`;
     }
+    return '';
   },
-  excludeValue(val) {
+  notInValue(val) {
     if (!val) return '';
     if (typeof val === 'string') {
       return `!{${vallue}}!`;
@@ -106,6 +94,7 @@ module.exports = {
     if (typeof val === 'array') {
       return `!{${vallue.toString()}}!`;
     }
+    return '';
   },
 
   // 下划线转驼峰
@@ -275,7 +264,6 @@ module.exports = {
     return expand;
   },
   /**
-   * 
    * @param {Object} queryBody 
    * @param {Number} page 当前页数
    * @param {Number} pageSize 页条数
@@ -330,12 +318,20 @@ module.exports = {
   /**
    * @param String [dbType] mongodb or mysql
    */
-  convertQueryCriteria(querycriteria, dbType = 'mongodb') {
-    let criteria = JSON.parse(JSON.stringify(querycriteria));
+  convertQueryCriteria(querycriteria, dbType = 'mysql', handle) {
+    let criteria = { ...querycriteria };
     const dbCriteria = {};
     const filterAttributeArray = [];
     for (const condition in criteria) {
       if (Object.prototype.hasOwnProperty.call(criteria, condition)) {
+        if (handle && typeof handle === 'function') {
+          const bo = handle(condition, criteria[condition], dbCriteria);
+          if (bo) {
+            continue;
+          } else {
+            filterAttributeArray.push(condition);
+          }
+        }
         switch (condition) {
           case 'createdAt':
           case 'updatedAt': {
@@ -580,7 +576,7 @@ module.exports = {
   },
 
   /**
-   * 测试 { ...actual, ...expand } 属性值和expected是否一致。
+   * 测试 { ...expected, ...expand } 属性值和actual是否一致。
    * @param {*} t ava t
    * @param {*} actual
    * @param {*} expected
