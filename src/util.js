@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: 2020-06-19 11:00:51
+ * Last Modified: 2020-06-19 13:31:28
  * Modified By: Zz
  * -----
  * Description:
@@ -45,25 +45,25 @@ module.exports = {
     return dec;
   },
 
-  lteGte(val1, val2) {
+  gteLte(val1, val2) {
     if (!val1 && !val2) {
       return '';
     }
     return `[${val1 || ''}, ${val2 || ''}]`
   },
-  ltGte(val1, val2) {
+  gtLte(val1, val2) {
     if (!val1 && !val2) {
       return '';
     }
     return `(${val1 || ''}, ${val2 || ''}]`
   },
-  lteGt(val1, val2) {
+  gteLt(val1, val2) {
     if (!val1 && !val2) {
       return '';
     }
     return `[${val1 || ''}, ${val2 || ''})`
   },
-  ltGt(val1, val2) {
+  gtLt(val1, val2) {
     if (!val1 && !val2) {
       return '';
     }

@@ -5,7 +5,7 @@
  * Created Date: 2020-06-17 13:24:59
  * Author: Zz
  * -----
- * Last Modified: 2020-06-19 11:46:43
+ * Last Modified: 2020-06-19 13:32:04
  * Modified By: Zz
  * -----
  * Description:
@@ -50,7 +50,7 @@ module.exports = {
     description: '驼峰格式转下划线格式',
   },
 
-  lteGte: {
+  gteLte: {
     description: '转换成框架的大于等于，小于等于',
     params: {
       val1: {
@@ -69,7 +69,7 @@ module.exports = {
     }
   },
 
-  ltGte: {
+  gtLte: {
     description: '转换成框架的大于，小于等于',
     params: {
       val1: {
@@ -88,7 +88,7 @@ module.exports = {
     }
   },
 
-  lteGt: {
+  gteLt: {
     description: '转换成框架的大于等于，小于',
     params: {
       val1: {
@@ -107,7 +107,7 @@ module.exports = {
     }
   },
 
-  ltGt: {
+  gtLt: {
     description: '转换成框架的大于，小于',
     params: {
       val1: {
