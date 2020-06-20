@@ -1,6 +1,6 @@
 {
   "name": "zhz-util",
-  "version": "1.4.5",
+  "version": "1.4.6",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,7 @@
     "sequelize": "^5.21.12",
     "string": "^3.3.3",
     "validator": "^13.1.1",
-    "z-error": "^2.0.0"
+    "z-error": "^2.0.1"
   },
   "files": [
     "index.js",

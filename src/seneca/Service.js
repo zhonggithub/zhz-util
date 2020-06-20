@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-06-18 23:02:21
+ * Last Modified: 2020-06-20 22:09:44
  * Modified By: Zz
  * -----
  * Description:
@@ -62,7 +62,7 @@ class Service extends ServiceBase {
   }
 
   getUResouceName() {
-    return this.resourceName ? this.resourceName.toUpperCase() : 'RESOURCE';
+    return this.resourceName ? (util.toLine(this.resourceName)).toUpperCase() : 'RESOURCE';
   }
 
   getCacheTTL() {
