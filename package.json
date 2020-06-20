@@ -20,7 +20,8 @@
   },
   "files": [
     "index.js",
-    "src/"
+    "src/",
+    "package.json"
   ],
   "devDependencies": {
     "zh-cli": "^2.2.1"
