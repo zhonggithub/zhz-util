@@ -5,7 +5,7 @@
  * Created Date: 2020-06-14 09:07:50
  * Author: Zz
  * -----
- * Last Modified: 2020-06-16 10:36:00
+ * Last Modified: 2020-06-21 17:36:45
  * Modified By: Zz
  * -----
  * Description:
@@ -24,9 +24,14 @@ class MongoosModel extends ModelBase {
     );
   }
 
-  async list(query, sort, skip, pageSize) {
+  async list(query) {
+    const { sort, offset, limit } = query;
+    delete query.sort;
+    delete query.offset;
+    delete query.limit;
+    
     const result = await Promise.all([
-      this.model.find(query).sort(sort).skip(skip).limit(pageSize),
+      this.model.find(query).sort(sort).skip(offset).limit(limit),
       this.model.countDocuments(query)
     ])
     return {

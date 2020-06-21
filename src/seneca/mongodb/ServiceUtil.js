@@ -5,7 +5,7 @@
  * Created Date: 2020-06-14 09:08:48
  * Author: Zz
  * -----
- * Last Modified: 2020-06-17 22:17:00
+ * Last Modified: 2020-06-21 17:20:14
  * Modified By: Zz
  * -----
  * Description:
@@ -15,19 +15,11 @@ const ServiceUtilBase = require('../ServiceUtilBase');
 
 class ServiceUtil extends ServiceUtilBase {
   convertQueryCriteria(criteria) {
-    let tmpCriteria = util.convertQueryCriteria(criteria, 'mongodb');
-    const dbCriteria = tmpCriteria.dstCriteria;
-    tmpCriteria = tmpCriteria.sourceCriteria;
-    for (const condition in tmpCriteria) {
-      if (Object.prototype.hasOwnProperty.call(criteria, condition)) {
-        switch (condition) {
-          default:
-            dbCriteria[condition] = tmpCriteria[condition];
-            break;
-        }
-      }
-    }
-    return dbCriteria;
+    const tmpCriteria = util.convertQueryCriteria(criteria, 'mongodb');
+    return {
+      ...tmpCriteria.dstCriteria,
+      ...tmpCriteria.sourceCriteria,
+    };
   }
 }
 
