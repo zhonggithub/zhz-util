@@ -5,7 +5,7 @@
  * Created Date: 2020-06-17 21:57:59
  * Author: Zz
  * -----
- * Last Modified: 2020-06-18 23:03:31
+ * Last Modified: 2020-06-21 16:17:19
  * Modified By: Zz
  * -----
  * Description: 提供Service操作的工具抽象接口类
@@ -110,7 +110,7 @@ class ServiceUtilBase {
    * 子类应该实现这个api
    * @param {*} expand 子资源扩展数据
    */
-  parseExpand(expand) {
+  parseExpand2Include(expand) {
     return null
   }
 
@@ -161,19 +161,11 @@ class ServiceUtilBase {
   }
 
   convertQueryCriteria(criteria) {
-    let tmpCriteria = util.convertQueryCriteria(criteria);
-    const dbCriteria = tmpCriteria.dstCriteria;
-    tmpCriteria = tmpCriteria.sourceCriteria;
-    for (const condition in tmpCriteria) {
-      if (Object.prototype.hasOwnProperty.call(criteria, condition)) {
-        switch (condition) {
-          default:
-            dbCriteria[condition] = tmpCriteria[condition];
-            break;
-        }
-      }
-    }
-    return dbCriteria;
+    const tmpCriteria = util.convertQueryCriteria(criteria, 'mysql');
+    return {
+      ...tmpCriteria.dstCriteria,
+      ...tmpCriteria.sourceCriteria,
+    };
   }
 
   convertCountCriteria(criteria) {

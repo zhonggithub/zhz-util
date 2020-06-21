@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-06-20 22:09:44
+ * Last Modified: 2020-06-21 16:12:42
  * Modified By: Zz
  * -----
  * Description:
@@ -132,7 +132,7 @@ class Service extends ServiceBase {
     try {
       const { id, expand } = msg.params;
       const tmpExpand = util.parseExpand(expand);
-      const include = this.serviceUtil.parseExpand(tmpExpand);
+      const include = this.serviceUtil.parseExpand2Include(tmpExpand);
 
       let result = null;
       const cacheKey = `${Pkg.name}:${this.role}:${id}`;
@@ -238,7 +238,7 @@ class Service extends ServiceBase {
         skip,
         pageSize
       );
-      const include = this.serviceUtil.parseExpand(expand)
+      const include = this.serviceUtil.parseExpand2Include(expand)
       if (include) {
         params.include = include
       }
@@ -282,7 +282,7 @@ class Service extends ServiceBase {
       const { filter, expand } = util.convertPagination(msg.params);
       const tmpExpand = util.parseExpand(expand);
       const query = ServiceUtilBase.parseQuery(this.convertQueryCriteria(filter));
-      const include = this.serviceUtil.parseExpand(tmpExpand)
+      const include = this.serviceUtil.parseExpand2Include(tmpExpand)
       if (include) {
         query.include = include
       }
@@ -303,8 +303,8 @@ class Service extends ServiceBase {
       const { expand } = msg.params;
       delete msg.params.expand;
       const tmpExpand = util.parseExpand(expand);
-      const query = ServiceUtilBase.parseQuery(msg.params);
-      const include = this.serviceUtil.parseExpand(tmpExpand);
+      const query = ServiceUtilBase.parseQuery(this.convertQueryCriteria(msg.params));
+      const include = this.serviceUtil.parseExpand2Include(tmpExpand);
       if (include) {
         query.include = include;
       }
@@ -382,8 +382,8 @@ class Service extends ServiceBase {
       const { expand } = msg.params;
       delete msg.params.expand;
       const tmpExpand = util.parseExpand(expand);
-      const query = ServiceUtilBase.parseQuery(msg.params);
-      const include = this.serviceUtil.parseExpand(tmpExpand);
+      const query = ServiceUtilBase.parseQuery(this.convertQueryCriteria(msg.params));
+      const include = this.serviceUtil.parseExpand2Include(tmpExpand);
       if (include) {
         query.include = include;
       }
@@ -408,7 +408,7 @@ class Service extends ServiceBase {
       const query = {
         where: { id: ids }
       };
-      const include = this.serviceUtil.parseExpand(tmpExpand);
+      const include = this.serviceUtil.parseExpand2Include(tmpExpand);
       if (include) {
         query.include = include;
       }
