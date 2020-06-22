@@ -5,7 +5,7 @@
  * Created Date: 2020-06-17 13:24:59
  * Author: Zz
  * -----
- * Last Modified: 2020-06-19 13:32:04
+ * Last Modified: 2020-06-22 13:18:24
  * Modified By: Zz
  * -----
  * Description:
@@ -212,6 +212,47 @@ module.exports = {
     returns: {
       val: {
         type: DataTypes.String,
+      }
+    }
+  },
+
+  response: {
+    description: '包装api返回数据',
+    params: {
+      code: {
+        type: 'Number, String',
+        description: '成功时为0，否则为错误编码',
+      },
+      message: {
+        type: DataTypes.String,
+        defaultValue: 'SUCCESS',
+      },
+      data: {
+        type: 'Number, String, Object',
+        required: true,
+      },
+      status: {
+        type: DataTypes.Number,
+        required: true,
+        description: 'http 状态码',
+      }
+    },
+    returns: {
+      code: {
+        type: 'Number, String',
+        description: '成功时为0，否则为错误编码',
+      },
+      message: {
+        type: DataTypes.String,
+      },
+      data: {
+        type: 'Number, String, Object',
+        required: true,
+      },
+      status: {
+        type: DataTypes.Number,
+        required: true,
+        description: 'http 状态码',
       }
     }
   },

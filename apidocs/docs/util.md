@@ -235,6 +235,31 @@
 |val | String | 否 | 无 | |
 
 
+## response
+ response (code, message, data, status)
+
+包装api返回数据
+
+### 参数
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|code | Number, String | 否 | 无 | 成功时为0，否则为错误编码|
+|message | String | 否 | SUCCESS | |
+|data | Number, String, Object | 是 | 无 | |
+|status | Number | 是 | 无 | http 状态码|
+
+
+### 返回值
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|code | Number, String | 否 | 无 | 成功时为0，否则为错误编码|
+|message | String | 否 | 无 | |
+|data | Number, String, Object | 是 | 无 | |
+|status | Number | 是 | 无 | http 状态码|
+
+
 ## responseSuccess
  responseSuccess (data, message)
 

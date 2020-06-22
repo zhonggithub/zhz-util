@@ -14,10 +14,10 @@
 |model | ModelBase | 是 | 无 | |
 
 
-## paraseExpand
- paraseExpand (expand)
+## parseExpand2Include
+ parseExpand2Include (expand)
 
-解析expand: { a: true, b: true ....}
+解析expand: { a: true, b: true ....}。该函数会在读操作：retrieve，list，listAll，findOne，findAll，findByIds之前调用。
 
 ### 参数
 
@@ -197,7 +197,7 @@ db层数据转逻辑层数据
 |参数|类型|必填|默认值|描述|
 |--- | --- | --- | --- | ---|
 |data | Object | 否 | 无 | 传入的db层的数据|
-|expand | Function | 否 | 无 | 获取指定资源的数据。{a: true, b: true}|
+|expand | Function | 否 | 无 | 获取指定资源的数据。{a: true, b: true}。如果是同一个service的model可以在parseExpand2Include返回include，如果跨service的资源获取，在此处实现获取逻辑|
 
 
 ### 返回值
