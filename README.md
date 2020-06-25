@@ -1,7 +1,7 @@
 # zhz-util
 
 ```javascript
-const { util, Service, mysqlSeneca, mongodbSeneca } = require('zhz-util')
+const { util, mysqlSeneca, mongodbSeneca } = require('zhz-util')
 
 ```
 
