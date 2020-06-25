@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-06-25 12:31:15
+ * Last Modified: 2020-06-25 12:49:42
  * Modified By: Zz
  * -----
  * Description:
@@ -54,7 +54,7 @@ class Service extends ServiceBase {
       throw err;
     }
 
-    this.serviceUtil = serviceUtil || new ServiceUtilBase(model, seneca);
+    this.serviceUtil = serviceUtil || new ServiceUtilBase(model, seneca, resourceName);
     this.model = model;
     this.cache = cache;
     this.cacheTTL = cacheTTL || 60;
