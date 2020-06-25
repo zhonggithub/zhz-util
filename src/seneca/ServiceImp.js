@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-06-21 16:12:42
+ * Last Modified: 2020-06-25 12:31:15
  * Modified By: Zz
  * -----
  * Description:
@@ -59,6 +59,7 @@ class Service extends ServiceBase {
     this.cache = cache;
     this.cacheTTL = cacheTTL || 60;
     this.resourceName = resourceName;
+    this.errCode = util.createResourceErrorCode(resourceName);
   }
 
   getUResouceName() {
@@ -110,7 +111,7 @@ class Service extends ServiceBase {
     try {
       const exist = await this.serviceUtil.isExistWhenCreate(msg.params);
       if (exist) {
-        return util.error409(`ERR_${this.getUResouceName()}_EXIST`);
+        return util.error409(this.errCode[409]);
       }
       const body = await this.serviceUtil.logic2DB(msg.params);
       await this.serviceUtil.beforeCreate(body);
@@ -146,7 +147,7 @@ class Service extends ServiceBase {
       }
 
       if (!result) {
-        return util.error404(`ERR_${this.getUResouceName()}_NOT_EXIST`);
+        return util.error404(this.errCode[404]);
       }
 
       if (this.cache) {
@@ -177,7 +178,7 @@ class Service extends ServiceBase {
         msg.params.id, data,
       );
       if (!result) {
-        return util.error404(`ERR_${this.getUResouceName()}_NOT_EXIST`);
+        return util.error404(this.errCode[404]);
       }
       await this.serviceUtil.afterUpdate(result);
 
@@ -206,7 +207,7 @@ class Service extends ServiceBase {
       await this.serviceUtil.beforeUpdateStatus({ id, status });
       const result = await this.model.findByIdAndUpdate(id, { status });
       if (!result) {
-        return util.error404(`ERR_${this.getUResouceName()}_NOT_EXIST`);
+        return util.error404(this.errCode[404]);
       }
       await this.serviceUtil.afterUpdateStatus(result);
       // 删除缓存
@@ -310,38 +311,10 @@ class Service extends ServiceBase {
       }
       const result = await this.model.findOne(query);
       if (!result) {
-        return util.error404(`ERR_${this.getUResouceName()}_NOT_EXIST`);
+        return util.error404(this.errCode[404]);
       }
       const data = await this.serviceUtil.db2logic(result, tmpExpand);
       return util.responseSuccess(data);
-    } catch (dbError) {
-      return this.handleCatchErr(dbError);
-    }
-  }
-
-  async logicDel(msg) {
-    this.seneca.logger.info(msg);
-    const err = this.serviceUtil.isValidDataWhenRetrieve(msg.params);
-    if (err) {
-      return err.toJson();
-    }
-    try {
-      const exist = await this.model.findById(msg.params.id);
-      if (!exist) {
-        return util.error404(`ERR_${this.getUResouceName()}_NOT_EXIST`);
-      }
-    
-      await this.serviceUtil.beforeDestroy(msg.params);
-      const delResult = await this.model.findByIdAndUpdate(
-        msg.params.id, { deleteFlag: 1 },
-      );
-      await this.serviceUtil.afterDestroy(delResult, exist);
-
-      if (this.cache) {
-        const cacheKey = `${Pkg.name}:${this.role}:${msg.params.id}`;
-        await this.cache.del(cacheKey);
-      }
-      return util.responseSuccess(delResult);
     } catch (dbError) {
       return this.handleCatchErr(dbError);
     }
@@ -356,13 +329,13 @@ class Service extends ServiceBase {
     try {
       const exist = await this.model.findById(msg.params.id);
       if (!exist) {
-        return util.error404(`ERR_${this.getUResouceName()}_NOT_EXIST`);
+        return util.error404(this.errCode[404]);
       }
     
       await this.serviceUtil.beforeDestroy(msg.params);
       const delResult = await this.model.findByIdAndDelete(msg.params.id);
       if (!delResult) {
-        return util.error404(`ERR_${this.getUResouceName()}_NOT_EXIST`);
+        return util.error404(this.errCode[404]);
       }
       await this.serviceUtil.afterDestroy(delResult, exist);
       // 删除缓存

@@ -5,7 +5,7 @@
  * Created Date: 2020-06-17 21:57:59
  * Author: Zz
  * -----
- * Last Modified: 2020-06-21 16:17:19
+ * Last Modified: 2020-06-25 12:11:30
  * Modified By: Zz
  * -----
  * Description: 提供Service操作的工具抽象接口类
@@ -47,12 +47,14 @@
 const util = require('../util')
 
 class ServiceUtilBase {
-  constructor(model, seneca) {
-    if (!model || !seneca) {
-      throw new Error('ServiceUtilBase: model and seneca is required')
+  constructor(model, seneca, resourceName) {
+    if (!model || !seneca || !resourceName) {
+      throw new Error('ServiceUtilBase: model and seneca and resourceName is required')
     }
     this.model = model
     this.seneca = seneca
+    this.resourceName = resourceName
+    this.errCode = util.createResourceErrorCode(resourceName)
   }
 
   static parseQuery(query) {

@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: 2020-06-19 13:31:28
+ * Last Modified: 2020-06-25 11:55:33
  * Modified By: Zz
  * -----
  * Description:
@@ -43,6 +43,17 @@ module.exports = {
     let dec = decipher.update(text, 'hex', 'utf8');
     dec += decipher.final('utf8');
     return dec;
+  },
+
+  createResourceErrorCode(resourceName) {
+    if (!resourceName) {
+      throw new Error('resourceName is required')
+    }
+    const resource = (this.toLine(resourceName)).toUpperCase()
+    return {
+      404: `ERR_${resource}_NOT_EXIST`,
+      409: `ERR_${resource}_EXIST`
+    }
   },
 
   gteLte(val1, val2) {
