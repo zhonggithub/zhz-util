@@ -5,13 +5,14 @@
  * Created Date: 2020-06-25 12:28:46
  * Author: Zz
  * -----
- * Last Modified: 2020-06-25 12:32:16
+ * Last Modified: 2020-06-25 14:34:52
  * Modified By: Zz
  * -----
  * Description:
  */
-
 const ServiceImp = require('../ServiceImp')
+const util = require('../../util')
+const Pkg = require(`${process.cwd()}/package.json`);
 
 class MongodbService extends ServiceImp {
   async logicDel(msg) {
