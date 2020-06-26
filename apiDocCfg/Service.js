@@ -5,7 +5,7 @@
  * Created Date: 2020-06-14 15:35:22
  * Author: Zz
  * -----
- * Last Modified: 2020-06-26 16:16:13
+ * Last Modified: 2020-06-26 20:22:07
  * Modified By: Zz
  * -----
  * Description:
@@ -54,6 +54,71 @@ module.exports = {
         description: '默认api开启配置。false：不加载任何默认api；true：加载所有默认api；json对象表示加载对应的操作',
         defaultValue: 'true'
       }
+    }
+  },
+
+  handleCatchErr: {
+    desc: '统一处理错误的函数',
+    params: {
+      err: {
+        type: 'Error',
+        desc: '错误对象',
+      }
+    },
+    returns: {
+      code: {
+        type: DataTypes.String,
+        defaultValue: 'ERR_DB',
+      },
+      message: {
+        type: DataTypes.String,
+        desc: '错误描述',
+      },
+      data: {
+        type: 'Error',
+        desc: '错误对象',
+      },
+      status: {
+        type: DataTypes.Number,
+        defaultValue: 500,
+      }
+    }
+  },
+
+  getCacheKey: {
+    desc: '根据id, include生成缓存key',
+    params: {
+      id: {
+        type: DataTypes.String,
+        desc: '资源id',
+      },
+      include: {
+        type: DataTypes.Object,
+        desc: 'parseExpand2Include返回的include对象',
+      }
+    },
+    returns: {
+      key: {
+        type: DataTypes.String,
+        desc: '缓存key',
+      },
+    }
+  },
+ 
+  delCache: {
+    desc: '删除缓存',
+    funcType: DataTypes.FuncType.kAsync,
+    params: {
+      id: {
+        type: DataTypes.String,
+        desc: '资源id',
+      },
+    },
+    returns: {
+      result: {
+        type: "Number, Array",
+        desc: '删除结果。如果通过key查找多个通配符key。则返回数组。否则返回Number',
+      },
     }
   },
 

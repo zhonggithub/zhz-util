@@ -19,6 +19,67 @@
 |opt | Object | 否 | true | 默认api开启配置。false：不加载任何默认api；true：加载所有默认api；json对象表示加载对应的操作|
 
 
+## handleCatchErr
+` handleCatchErr (err)`
+
+统一处理错误的函数
+
+### 参数
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|err | Error | 否 | 无 | 错误对象|
+
+
+### 返回值
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|code | String | 否 | ERR_DB | |
+|message | String | 否 | 无 | 错误描述|
+|data | Error | 否 | 无 | 错误对象|
+|status | Number | 否 | 500 | |
+
+
+## getCacheKey
+` getCacheKey (id, include)`
+
+根据id, include生成缓存key
+
+### 参数
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|id | String | 否 | 无 | 资源id|
+|include | Object | 否 | 无 | parseExpand2Include返回的include对象|
+
+
+### 返回值
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|key | String | 否 | 无 | 缓存key|
+
+
+## delCache
+`async delCache (id)`
+
+删除缓存
+
+### 参数
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|id | String | 否 | 无 | 资源id|
+
+
+### 返回值
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|result | Number, Array | 否 | 无 | 删除结果。如果通过key查找多个通配符key。则返回数组。否则返回Number|
+
+
 ## create
 `async create ({ ...params })`
 
