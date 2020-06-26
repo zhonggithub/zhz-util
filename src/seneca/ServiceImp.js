@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-06-26 22:32:02
+ * Last Modified: 2020-06-27 01:41:34
  * Modified By: Zz
  * -----
  * Description:
@@ -161,7 +161,7 @@ class Service extends ServiceBase {
       const include = this.serviceUtil.parseExpand2Include(tmpExpand);
 
       let result = null;
-      let cacheKey = this.getCacheKey(id, include);
+      let cacheKey = this.getCacheKey(id, expand);
 
       if (this.cache) {
         result = await this.cache.get(cacheKey);
@@ -175,14 +175,14 @@ class Service extends ServiceBase {
         return util.error404(this.errCode[404]);
       }
 
-      if (this.cache) {
-        const ret = await this.serviceUtil.db2logic(result);
-        await this.cache.set(cacheKey, ret, this.getCacheTTL());
-      }
-
       const data = await this.serviceUtil.db2logic(
         result, tmpExpand,
       );
+      
+      if (this.cache) {
+        await this.cache.set(cacheKey, data, this.getCacheTTL());
+      }
+      
       return util.responseSuccess(data);
     } catch (dbError) {
       return this.handleCatchErr(dbError);
