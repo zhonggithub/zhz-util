@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-06-26 20:15:42
+ * Last Modified: 2020-06-26 21:30:46
  * Modified By: Zz
  * -----
  * Description:
@@ -338,13 +338,14 @@ class Service extends ServiceBase {
       return err.toJson();
     }
     try {
-      const exist = await this.model.findById(msg.params.id);
+      const { id } = msg.params;
+      const exist = await this.model.findById(id);
       if (!exist) {
         return util.error404(this.errCode[404]);
       }
     
       await this.serviceUtil.beforeDestroy(msg.params);
-      const delResult = await this.model.findByIdAndDelete(msg.params.id);
+      const delResult = await this.model.findByIdAndDelete(id);
       if (!delResult) {
         return util.error404(this.errCode[404]);
       }
