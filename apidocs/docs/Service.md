@@ -104,6 +104,7 @@
 `async retrieve ({ id, expand })`
 
 根据id获取资源详情。retrieve会根据expand的不同生成不同缓存。
+
  * 如果没有指定expand, 缓存只包含资源id的数据。
  * 如果指定了expand, 缓存包含资源id的数据及指定子资源的数据。
 
