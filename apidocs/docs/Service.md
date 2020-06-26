@@ -14,7 +14,7 @@
 |model | ModelBase | 是 | 无 | |
 |serviceUtil | UtilBase | 否 | 无 | |
 |cache | RedisCache | 否 | 无 | 缓存|
-|cacheTTL | Number, CacheTTLEnum | 否 | 无 | 缓存周期。Number: 表示xx秒。CacheTTLEnum: s(60秒)，m(60秒内)，h(60分钟内)，d(24小时内)，M(30天内)，y(12个月内)|
+|cacheTTL | Number, CacheTTLEnum | 否 | 无 | 缓存周期。Number: 表示xx秒。CacheTTLEnum: s(60秒内)，m(60分钟内)，h(24小时内)，d(30天内)，M(12个月内)，y(一年)|
 |role | String | 是 | 无 | 角色名称|
 |opt | Object | 否 | true | 默认api开启配置。false：不加载任何默认api；true：加载所有默认api；json对象表示加载对应的操作|
 

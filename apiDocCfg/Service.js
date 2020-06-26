@@ -5,7 +5,7 @@
  * Created Date: 2020-06-14 15:35:22
  * Author: Zz
  * -----
- * Last Modified: 2020-06-27 02:01:39
+ * Last Modified: 2020-06-27 02:09:43
  * Modified By: Zz
  * -----
  * Description:
@@ -42,7 +42,7 @@ module.exports = {
       },
       cacheTTL: {
         type: 'Number, CacheTTLEnum',
-        description: '缓存周期。Number: 表示xx秒。CacheTTLEnum: s(60秒)，m(60秒内)，h(60分钟内)，d(24小时内)，M(30天内)，y(12个月内)',
+        description: '缓存周期。Number: 表示xx秒。CacheTTLEnum: s(60秒内)，m(60分钟内)，h(24小时内)，d(30天内)，M(12个月内)，y(一年)',
       },
       role: {
         type: DataTypes.String,

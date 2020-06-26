@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-06-27 01:54:25
+ * Last Modified: 2020-06-27 02:12:38
  * Modified By: Zz
  * -----
  * Description:
@@ -70,22 +70,22 @@ class Service extends ServiceBase {
     if (CacheTTLEnumKeys.indexOf(this.cacheTTL) !== -1) {
       switch (this.cacheTTL) {
         case CacheTTLEnum.s: {
-          return 60;
+          return util.randomInt(1, 60);
         }
         case CacheTTLEnum.m: {
-          return util.randomInt(1, 60) * 60;
+          return 60 * util.randomInt(1, 60);
         }
         case CacheTTLEnum.h: {
-          return util.randomInt(1, 60) * 60 * 60;
+          return 60 * 60 * util.randomInt(1, 24);
         }
         case CacheTTLEnum.d: {
-          return util.randomInt(1, 60) * 60 * 60 * 24;
+          return 60 * 60 * 24 * util.randomInt(1, 30);
         }
         case CacheTTLEnum.M: {
-          return util.randomInt(1, 60) * 60 * 60 * 24 * 30;
+          return 60 * 60 * 24 * 30 * util.randomInt(1, 12);
         }
         case CacheTTLEnum.y: {
-          return util.randomInt(1, 60) * 60 * 60 * 24 * 30 * 12;
+          return 60 * 60 * 24 * 30 * 12;
         }
         default:
           return 60;
