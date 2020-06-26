@@ -2,10 +2,10 @@
  * File: RedisCache.js
  * Project: zhz-util
  * FilePath: /src/seneca/RedisCache.js
- * Created Date: 2020-06-13 18:45:05
+ * Created Date: 2018-06-11 10:05:02
  * Author: Zz
  * -----
- * Last Modified: 2020-06-26 21:54:21
+ * Last Modified: 2020-06-26 22:31:41
  * Modified By: Zz
  * -----
  * Description:
@@ -17,6 +17,10 @@ class RedisCache {
   constructor(options) {
     this.options = options;
     this.redis = new Redis(options.options);
+  }
+
+  getKeyPrefix() {
+    return this.options.options.keyPrefix || '';
   }
 
   async get(key) {
@@ -39,9 +43,14 @@ class RedisCache {
     return this.redis.set(key, dataStr, 'EX', ttl);
   }
 
+  /**
+   * 删除缓存
+   * @param {String} key 
+   * @param {Boolean} match true: 表示删除包括所有通配符key的数据，false: 仅仅删除key的缓存数据
+   */
   async del(key, match = false) {
     if (match) {
-      const matchKeys = this.redis.keys(`${key}*`)
+      const matchKeys = this.redis.keys(`${this.getKeyPrefix()}${key}*`)
       if (matchKeys && matchKeys.length > 0) {
         return Promise.all(matchKeys.map(async (itemKey) => this.redis.del(itemKey)));
       }

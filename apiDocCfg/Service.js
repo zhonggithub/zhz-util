@@ -5,7 +5,7 @@
  * Created Date: 2020-06-14 15:35:22
  * Author: Zz
  * -----
- * Last Modified: 2020-06-26 20:22:07
+ * Last Modified: 2020-06-26 22:27:51
  * Modified By: Zz
  * -----
  * Description:
@@ -95,6 +95,12 @@ module.exports = {
       include: {
         type: DataTypes.Object,
         desc: 'parseExpand2Include返回的include对象',
+        defaultValue: null,
+      },
+      full: {
+        type: DataTypes.Boolean,
+        desc: 'true: 表示获取包括redis keyPrefix及框架生成的key组合的完整key。false: 表示获取框架生成的key',
+        defaultValue: false
       }
     },
     returns: {

@@ -1,14 +1,24 @@
 {
   "name": "zhz-util",
-  "version": "1.5.10",
+  "version": "1.6.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Zz",
   "license": "ISC",
+  "maintainers": [
+    "Zz <quitjie@gmail.com>"
+  ],
+  "contributors": [
+    "Zz (https://github.com/zhonggithub)"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zhonggithub/zhz-util.git"
+  },
   "dependencies": {
     "ioredis": "^4.17.3",
     "lodash": "^4.17.15",

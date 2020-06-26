@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-06-26 21:30:46
+ * Last Modified: 2020-06-26 22:32:02
  * Modified By: Zz
  * -----
  * Description:
@@ -102,11 +102,20 @@ class Service extends ServiceBase {
     return util.response('ERR_DB', err.message, err, 500);
   }
 
-  getCacheKey(id, include) {
+  /**
+   * 获取缓存key
+   * @param {String | Number} id 资源id
+   * @param {Object | Array} include parseExpand2Include 返回的对象
+   * @param {Boolean} full true: 表示获取包括redis keyPrefix及框架生成的key组合的完整key。false: 表示获取框架生成的key
+   */
+  getCacheKey(id, include = null, full = false) {
     if (!this.cache) return '';
     let cacheKey = `${Pkg.name}:${this.role}:${id}`;
     if (include) {
       cacheKey = `${cacheKey}:${util.md5(JSON.stringify(include))}`;
+    }
+    if (full) {
+      return `${this.cache.getKeyPrefix()}${cacheKey}`;
     }
     return cacheKey;
   }
