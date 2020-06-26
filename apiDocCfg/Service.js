@@ -5,7 +5,7 @@
  * Created Date: 2020-06-14 15:35:22
  * Author: Zz
  * -----
- * Last Modified: 2020-06-26 22:27:51
+ * Last Modified: 2020-06-27 01:45:47
  * Modified By: Zz
  * -----
  * Description:
@@ -92,9 +92,9 @@ module.exports = {
         type: DataTypes.String,
         desc: '资源id',
       },
-      include: {
+      expand: {
         type: DataTypes.Object,
-        desc: 'parseExpand2Include返回的include对象',
+        desc: '指定的子资源',
         defaultValue: null,
       },
       full: {

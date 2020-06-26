@@ -42,7 +42,7 @@
 
 
 ## getCacheKey
-` getCacheKey (id, include, full)`
+` getCacheKey (id, expand, full)`
 
 根据id, include生成缓存key
 
@@ -51,7 +51,7 @@
 |参数|类型|必填|默认值|描述|
 |--- | --- | --- | --- | ---|
 |id | String | 否 | 无 | 资源id|
-|include | Object | 否 | 无 | parseExpand2Include返回的include对象|
+|expand | Object | 否 | 无 | 指定的子资源|
 |full | Boolean | 否 | 无 | true: 表示获取包括redis keyPrefix及框架生成的key组合的完整key。false: 表示获取框架生成的key|
 
 

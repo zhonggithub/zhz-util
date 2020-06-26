@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-06-27 01:41:34
+ * Last Modified: 2020-06-27 01:54:25
  * Modified By: Zz
  * -----
  * Description:
@@ -105,7 +105,7 @@ class Service extends ServiceBase {
   /**
    * 获取缓存key
    * @param {String | Number} id 资源id
-   * @param {Object | Array} include parseExpand2Include 返回的对象
+   * @param {Object} expand 指定的子资源: {a: true, b: true}
    * @param {Boolean} full true: 表示获取包括redis keyPrefix及框架生成的key组合的完整key。false: 表示获取框架生成的key
    */
   getCacheKey(id, include = null, full = false) {
@@ -149,6 +149,11 @@ class Service extends ServiceBase {
     }
   }
 
+  /**
+   * retrieve会根据expand的不同生成不同缓存。
+   * 如果没有指定expand, 缓存只包含资源id的数据。
+   * 如果指定了expand, 缓存包含资源id的数据及指定子资源的数据。
+   */
   async retrieve(msg) {
     this.seneca.logger.info(msg);
     const err = this.serviceUtil.isValidDataWhenRetrieve(msg.params);
@@ -161,7 +166,7 @@ class Service extends ServiceBase {
       const include = this.serviceUtil.parseExpand2Include(tmpExpand);
 
       let result = null;
-      let cacheKey = this.getCacheKey(id, expand);
+      let cacheKey = this.getCacheKey(id, tmpExpand);
 
       if (this.cache) {
         result = await this.cache.get(cacheKey);
