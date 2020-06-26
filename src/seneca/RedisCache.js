@@ -5,7 +5,7 @@
  * Created Date: 2018-06-11 10:05:02
  * Author: Zz
  * -----
- * Last Modified: 2020-06-26 22:31:41
+ * Last Modified: 2020-06-26 23:48:02
  * Modified By: Zz
  * -----
  * Description:
@@ -50,9 +50,17 @@ class RedisCache {
    */
   async del(key, match = false) {
     if (match) {
-      const matchKeys = this.redis.keys(`${this.getKeyPrefix()}${key}*`)
+      const prefix = this.getKeyPrefix();
+      const matchKeys = await this.redis.keys(`${prefix}${key}*`)
       if (matchKeys && matchKeys.length > 0) {
-        return Promise.all(matchKeys.map(async (itemKey) => this.redis.del(itemKey)));
+        if (!prefix) {
+          return Promise.all(matchKeys.map(async (itemKey) => this.redis.del(itemKey)));
+        }
+        const result = await  Promise.all(matchKeys.map(async (itemKey) => {
+          const tmpKey = itemKey.substr(prefix.length);
+          return this.redis.del(tmpKey)
+        }));
+        return result
       }
     }
     return this.redis.del(key);
