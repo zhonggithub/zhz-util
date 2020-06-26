@@ -1,12 +1,12 @@
 {
   "name": "zhz-util",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": ["seneca"],
   "author": "Zz",
   "license": "ISC",
   "maintainers": [
