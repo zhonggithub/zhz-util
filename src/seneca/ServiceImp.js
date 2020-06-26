@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-06-25 12:49:42
+ * Last Modified: 2020-06-26 11:52:07
  * Modified By: Zz
  * -----
  * Description:
@@ -282,7 +282,7 @@ class Service extends ServiceBase {
     try {
       const { filter, expand } = util.convertPagination(msg.params);
       const tmpExpand = util.parseExpand(expand);
-      const query = ServiceUtilBase.parseQuery(this.convertQueryCriteria(filter));
+      const query = ServiceUtilBase.parseQuery(this.serviceUtil.convertQueryCriteria(filter));
       const include = this.serviceUtil.parseExpand2Include(tmpExpand)
       if (include) {
         query.include = include
@@ -304,7 +304,7 @@ class Service extends ServiceBase {
       const { expand } = msg.params;
       delete msg.params.expand;
       const tmpExpand = util.parseExpand(expand);
-      const query = ServiceUtilBase.parseQuery(this.convertQueryCriteria(msg.params));
+      const query = ServiceUtilBase.parseQuery(this.serviceUtil.convertQueryCriteria(msg.params));
       const include = this.serviceUtil.parseExpand2Include(tmpExpand);
       if (include) {
         query.include = include;
@@ -355,7 +355,7 @@ class Service extends ServiceBase {
       const { expand } = msg.params;
       delete msg.params.expand;
       const tmpExpand = util.parseExpand(expand);
-      const query = ServiceUtilBase.parseQuery(this.convertQueryCriteria(msg.params));
+      const query = ServiceUtilBase.parseQuery(this.serviceUtil.convertQueryCriteria(msg.params));
       const include = this.serviceUtil.parseExpand2Include(tmpExpand);
       if (include) {
         query.include = include;
