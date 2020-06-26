@@ -5,7 +5,7 @@
  * Created Date: 2020-06-14 15:35:22
  * Author: Zz
  * -----
- * Last Modified: 2020-06-27 01:45:47
+ * Last Modified: 2020-06-27 01:58:18
  * Modified By: Zz
  * -----
  * Description:
@@ -148,7 +148,7 @@ module.exports = {
   },
 
   retrieve: {
-    desc: '根据id获取资源详情',
+    desc: '根据id获取资源详情。retrieve会根据expand的不同生成不同缓存。\r\n * 如果没有指定expand, 缓存只包含资源id的数据。\r\n * 如果指定了expand, 缓存包含资源id的数据及指定子资源的数据。',
     paramsIsObject: true,
     funcType: DataTypes.FuncType.kAsync,
     params: {
