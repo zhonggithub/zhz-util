@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-06-26 11:52:07
+ * Last Modified: 2020-06-26 19:54:48
  * Modified By: Zz
  * -----
  * Description:
@@ -102,6 +102,22 @@ class Service extends ServiceBase {
     return util.response('ERR_DB', err.message, err, 500);
   }
 
+  getCacheKey(id, include) {
+    if (!this.cache) return '';
+    let cacheKey = `${Pkg.name}:${this.role}:${id}`;
+    if (include) {
+      cacheKey = `${cacheKey}:${util.md5(JSON.stringify(include))}`;
+    }
+    return cacheKey;
+  }
+
+  async delCache(id) {
+    if (this.cache) {
+      const cacheKey = this.getCacheKey(id);
+      return this.cache.del(cacheKey, true);
+    }
+  }
+
   async create(msg) {
     this.seneca.logger.info(msg);
     const err = this.serviceUtil.isValidDataWhenCreate(msg.params);
@@ -136,7 +152,7 @@ class Service extends ServiceBase {
       const include = this.serviceUtil.parseExpand2Include(tmpExpand);
 
       let result = null;
-      const cacheKey = `${Pkg.name}:${this.role}:${id}`;
+      let cacheKey = this.getCacheKey(id, include);
 
       if (this.cache) {
         result = await this.cache.get(cacheKey);
@@ -183,10 +199,7 @@ class Service extends ServiceBase {
       await this.serviceUtil.afterUpdate(result);
 
       // 删除缓存
-      if (this.cache) {
-        const cacheKey = `${Pkg.name}:${this.role}:${msg.params.id}`;
-        await this.cache.del(cacheKey);
-      }
+      await this.delCache(msg.params.id);
       const ret = await this.serviceUtil.db2logic(result);
       return util.responseSuccess(ret);
     } catch (dbError) {
@@ -211,10 +224,7 @@ class Service extends ServiceBase {
       }
       await this.serviceUtil.afterUpdateStatus(result);
       // 删除缓存
-      if (this.cache) {
-        const cacheKey = `${Pkg.name}:${this.role}:${msg.params.id}`;
-        await this.cache.del(cacheKey);
-      }
+      await this.delCache(id);
       const ret = await this.serviceUtil.db2logic(result);
       return util.responseSuccess(ret);
     } catch (dbError) {
@@ -281,8 +291,8 @@ class Service extends ServiceBase {
     }
     try {
       const { filter, expand } = util.convertPagination(msg.params);
-      const tmpExpand = util.parseExpand(expand);
       const query = ServiceUtilBase.parseQuery(this.serviceUtil.convertQueryCriteria(filter));
+      const tmpExpand = util.parseExpand(expand);
       const include = this.serviceUtil.parseExpand2Include(tmpExpand)
       if (include) {
         query.include = include
@@ -303,8 +313,9 @@ class Service extends ServiceBase {
       }
       const { expand } = msg.params;
       delete msg.params.expand;
-      const tmpExpand = util.parseExpand(expand);
+
       const query = ServiceUtilBase.parseQuery(this.serviceUtil.convertQueryCriteria(msg.params));
+      const tmpExpand = util.parseExpand(expand);
       const include = this.serviceUtil.parseExpand2Include(tmpExpand);
       if (include) {
         query.include = include;
@@ -338,11 +349,7 @@ class Service extends ServiceBase {
         return util.error404(this.errCode[404]);
       }
       await this.serviceUtil.afterDestroy(delResult, exist);
-      // 删除缓存
-      if (this.cache) {
-        const cacheKey = `${Pkg.name}:${this.role}:${msg.params.id}`;
-        await this.cache.del(cacheKey);
-      }
+      await this.delCache(id);
       return util.responseSuccess(delResult);
     } catch (dbError) {
       return this.handleCatchErr(dbError);
@@ -354,8 +361,8 @@ class Service extends ServiceBase {
     try {
       const { expand } = msg.params;
       delete msg.params.expand;
-      const tmpExpand = util.parseExpand(expand);
       const query = ServiceUtilBase.parseQuery(this.serviceUtil.convertQueryCriteria(msg.params));
+      const tmpExpand = util.parseExpand(expand);
       const include = this.serviceUtil.parseExpand2Include(tmpExpand);
       if (include) {
         query.include = include;
@@ -377,10 +384,10 @@ class Service extends ServiceBase {
         return error.toJSON()
       }
       const { ids, expand } = msg.params
-      const tmpExpand = util.parseExpand(expand);
       const query = {
         where: { id: ids }
       };
+      const tmpExpand = util.parseExpand(expand);
       const include = this.serviceUtil.parseExpand2Include(tmpExpand);
       if (include) {
         query.include = include;

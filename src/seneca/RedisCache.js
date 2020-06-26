@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-06-13 23:17:17
+ * Last Modified: 2020-06-26 19:55:48
  * Modified By: Zz
  * -----
  * Description:
@@ -39,7 +39,13 @@ class RedisCache {
     return this.redis.set(key, dataStr, 'PX', ttl);
   }
 
-  async del(key) {
+  async del(key, match = false) {
+    if (match) {
+      const matchKeys = this.redis.keys(`${key}:*`)
+      if (matchKeys && matchKeys.length > 0) {
+        return Promise.all(matchKeys.map(async (itemKey) => this.redis.del(itemKey)));
+      }
+    }
     return this.redis.del(key);
   }
 }

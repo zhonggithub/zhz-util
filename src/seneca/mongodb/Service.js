@@ -5,7 +5,7 @@
  * Created Date: 2020-06-25 12:28:46
  * Author: Zz
  * -----
- * Last Modified: 2020-06-25 14:34:52
+ * Last Modified: 2020-06-26 19:39:50
  * Modified By: Zz
  * -----
  * Description:
@@ -33,10 +33,7 @@ class MongodbService extends ServiceImp {
       );
       await this.serviceUtil.afterDestroy(delResult, exist);
 
-      if (this.cache) {
-        const cacheKey = `${Pkg.name}:${this.role}:${msg.params.id}`;
-        await this.cache.del(cacheKey);
-      }
+      await this.delCache(msg.params.id);
       return util.responseSuccess(delResult);
     } catch (dbError) {
       return this.handleCatchErr(dbError);
