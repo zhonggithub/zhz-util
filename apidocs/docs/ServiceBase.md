@@ -22,7 +22,7 @@ ServiceBase为Service抽象接口类。定义了一些接口：create、retrieve
 
 
 ## constructor
- constructor (role, seneca, opt)
+` constructor (role, seneca, opt)`
 
 构造函数
 
@@ -36,12 +36,12 @@ ServiceBase为Service抽象接口类。定义了一些接口：create、retrieve
 
 
 ## loadCmd
- loadCmd ()
+` loadCmd ()`
 
 加载默认方法
 
 ## addAsync
- addAsync (cmd, func)
+` addAsync (cmd, func)`
 
 加载自定义方法
 

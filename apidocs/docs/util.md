@@ -2,7 +2,7 @@
 工具类函数
 
 ## isFunction
- isFunction (funcName)
+` isFunction (funcName)`
 
 判断一个值或对象是否是函数
 
@@ -21,7 +21,7 @@
 
 
 ## md5
- md5 (type, description)
+` md5 (type, description)`
 
 对一个字符串进行md5。
 
@@ -42,7 +42,7 @@
 
 
 ## toLine
- toLine (val)
+` toLine (val)`
 
 驼峰转下划线
 
@@ -61,7 +61,7 @@
 
 
 ## gteLte
- gteLte (val1, val2)
+` gteLte (val1, val2)`
 
 转换成框架的大于等于，小于等于
 
@@ -81,7 +81,7 @@
 
 
 ## gtLte
- gtLte (val1, val2)
+` gtLte (val1, val2)`
 
 转换成框架的大于，小于等于
 
@@ -101,7 +101,7 @@
 
 
 ## gteLt
- gteLt (val1, val2)
+` gteLt (val1, val2)`
 
 转换成框架的大于等于，小于
 
@@ -121,7 +121,7 @@
 
 
 ## gtLt
- gtLt (val1, val2)
+` gtLt (val1, val2)`
 
 转换成框架的大于，小于
 
@@ -141,7 +141,7 @@
 
 
 ## inValue
- inValue (val)
+` inValue (val)`
 
 转换成框架的in查询语句
 
@@ -160,7 +160,7 @@
 
 
 ## notInValue
- notInValue (val)
+` notInValue (val)`
 
 转换成框架的not in查询语句
 
@@ -179,7 +179,7 @@
 
 
 ## toHump
- toHump (val)
+` toHump (val)`
 
 下划线转小驼峰
 
@@ -198,7 +198,7 @@
 
 
 ## fistLetterUpper
- fistLetterUpper (val)
+` fistLetterUpper (val)`
 
 首字母大写
 
@@ -217,7 +217,7 @@
 
 
 ## fistLetterLower
- fistLetterLower (val)
+` fistLetterLower (val)`
 
 首字母小写
 
@@ -236,7 +236,7 @@
 
 
 ## response
- response (code, message, data, status)
+` response (code, message, data, status)`
 
 包装api返回数据
 
@@ -261,7 +261,7 @@
 
 
 ## responseSuccess
- responseSuccess (data, message)
+` responseSuccess (data, message)`
 
 包装api 成功时返回数据
 
@@ -284,7 +284,7 @@
 
 
 ## randomInt
- randomInt (min, max)
+` randomInt (min, max)`
 
 随机整数
 
@@ -304,7 +304,7 @@
 
 
 ## randomStr
- randomStr (places)
+` randomStr (places)`
 
 随机一个数字字符串
 
@@ -323,7 +323,7 @@
 
 
 ## cacleRise
- cacleRise (value, preValue)
+` cacleRise (value, preValue)`
 
 计算百分比增长率
 
@@ -343,7 +343,7 @@
 
 
 ## filterData
- filterData (data, excludeAttribute)
+` filterData (data, excludeAttribute)`
 
 过滤属性值
 
@@ -363,7 +363,7 @@
 
 
 ## parseExpand
- parseExpand (expand)
+` parseExpand (expand)`
 
 解析expand字符串，转换对象
 
@@ -382,7 +382,7 @@
 
 
 ## convertQueryCriteria
- convertQueryCriteria (querycriteria, dbType, handle)
+` convertQueryCriteria (querycriteria, dbType, handle)`
 
 把逻辑层的查询条件转成db层的查询条件。默认会处理范围查找的条件。
 
@@ -405,7 +405,7 @@
 
 
 ## isRangeQuery
- isRangeQuery (value)
+` isRangeQuery (value)`
 
 判断一个字符串是否是范围字符串
 
@@ -424,7 +424,7 @@
 
 
 ## isInt
- isInt (val, strong)
+` isInt (val, strong)`
 
 判断一个值是否为整数或整数字符串
 
@@ -444,9 +444,9 @@
 
 
 ## notEmptyStr
- notEmptyStr (val)
+` notEmptyStr (val)`
 
-判断一个值是否为非空符串
+判断一个值是否为非空符串。如果是非空字符串，返回true，否则返回false
 
 ### 参数
 
@@ -463,7 +463,7 @@
 
 
 ## avaTest
- avaTest (t, actual, expected, expand)
+` avaTest (t, actual, expected, expand)`
 
 测试 { ...expected, ...expand } 属性值和actual是否一致。
 
@@ -485,7 +485,7 @@
 
 
 ## utcToDate
- utcToDate (unixTimestamp)
+` utcToDate (unixTimestamp)`
 
 unix时间戳转Date
 
@@ -494,6 +494,25 @@ unix时间戳转Date
 |参数|类型|必填|默认值|描述|
 |--- | --- | --- | --- | ---|
 |unixTimestamp | Number | 是 | 无 | |
+
+
+### 返回值
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|date | Date | 否 | current date | |
+
+
+## dateStrToDate
+` dateStrToDate (dateStr)`
+
+日期字符串转utc Date
+
+### 参数
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|dateStr | String | 是 | 无 | |
 
 
 ### 返回值

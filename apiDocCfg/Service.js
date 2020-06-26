@@ -5,7 +5,7 @@
  * Created Date: 2020-06-14 15:35:22
  * Author: Zz
  * -----
- * Last Modified: 2020-06-18 23:15:05
+ * Last Modified: 2020-06-26 16:16:13
  * Modified By: Zz
  * -----
  * Description:
@@ -16,7 +16,7 @@ const DataTypes = dataTypes.nodejs;
 
 module.exports = {
   name: 'Service',
-  description: '继承ServiceBase。实现接口：create、retrieve、update、updateStatus、list、count、listAll、findOne、logicDel、desctroy、treeList、findAll',
+  description: '继承ServiceBase。实现接口：create、retrieve、update、updateStatus、list、count、listAll、findOne、logicDel、desctroy、treeList、findAll, findByIds',
 
   constructor: {
     description: '构造函数',
@@ -56,4 +56,281 @@ module.exports = {
       }
     }
   },
+
+  create: {
+    desc: '创建一个资源',
+    paramsIsObject: true,
+    funcType: DataTypes.FuncType.kAsync,
+    params: {
+      ['...params']: {
+        type: DataTypes.Object,
+        required: true,
+        desc: '资源对象',
+      }
+    },
+    returns: {
+      data: {
+        type: DataTypes.Object,
+        required: true,
+      }
+    }
+  },
+
+  retrieve: {
+    desc: '根据id获取资源详情',
+    paramsIsObject: true,
+    funcType: DataTypes.FuncType.kAsync,
+    params: {
+      id: {
+        type: DataTypes.String,
+        required: true,
+        desc: '资源对象id',
+      },
+      expand: {
+        type: DataTypes.String,
+        required: true,
+        desc: '指定获取的子资源',
+      }
+    },
+    returns: {
+      data: {
+        type: DataTypes.Object,
+        required: true,
+      }
+    }
+  },
+
+  update: {
+    desc: '根据id更新数据',
+    paramsIsObject: true,
+    funcType: DataTypes.FuncType.kAsync,
+    params: {
+      id: {
+        type: DataTypes.String,
+        required: true,
+        desc: '资源对象id',
+      },
+      fields: {
+        type: 'Any',
+        required: true,
+        desc: '待更新的字段',
+      }
+    },
+    returns: {
+      data: {
+        type: DataTypes.Object,
+        required: true,
+      }
+    }
+  },
+
+  updateStatus: {
+    desc: '根据id更新状态',
+    paramsIsObject: true,
+    funcType: DataTypes.FuncType.kAsync,
+    params: {
+      id: {
+        type: DataTypes.String,
+        required: true,
+        desc: '资源对象id',
+      },
+      status: {
+        type: DataTypes.Number,
+        required: true,
+        desc: '状态值',
+      }
+    },
+    returns: {
+      data: {
+        type: DataTypes.Object,
+        required: true,
+      }
+    },
+  },
+  
+  list: {
+    desc: '列表',
+    paramsIsObject: true,
+    funcType: DataTypes.FuncType.kAsync,
+    params: {
+      page: {
+        type: DataTypes.Number,
+        comment: '当前页数',
+        defaultValue: 1,
+      },
+      pageSize: {
+        type: DataTypes.Number,
+        comment: '每页条数',
+        defaultValue: 10,
+      },
+      limit: {
+        type: DataTypes.Number,
+        comment: '同pageSize',
+        defaultValue: 10,
+      },
+      offset: {
+        type: DataTypes.Number,
+        comment: '起始条数',
+        defaultValue: 0,
+      },
+      sort: {
+        type: 'Array，Object, String',
+        comment: '排序。支持四种格式：array of { field: "", order: "DESC" }；array of [[field, "DESC"]]；object of {a: -1("DESC"), b: 1("ASC")}；sort=-a,b',
+      },
+      search: {
+        type: DataTypes.String,
+        comment: '搜索关键字',
+      },
+      expand: {
+        type: DataTypes.String,
+        comment: '获取指定子资源数据，多个子资源使用逗号隔开。例如：expand=a,b',
+      },
+    },
+    returns: {
+      pageSize: {
+        type: DataTypes.Number,
+        comment: '每页条数',
+        required: true,
+      },
+      page: {
+        type: DataTypes.Number,
+        comment: '当前页数',
+        required: true,
+      },
+      total: {
+        type: DataTypes.Number,
+        comment: '符合条件的总数量',
+        required: true,
+      },
+      limit: {
+        type: DataTypes.Number,
+        comment: '同pageSize',
+        required: true,
+      },
+      offset: {
+        type: DataTypes.Number,
+        comment: '起始条数',
+        required: true,
+      },
+      items: {
+        type: DataTypes.Number,
+        comment: '返回数据项',
+      },
+    }
+  },
+
+  count: {
+    desc: '根据条件统计数量',
+    funcType: DataTypes.FuncType.kAsync,
+    params: {
+      query: {
+        type: 'Object',
+        desc: '条件'
+      }
+    },
+    returns: {
+      data: {
+        type: DataTypes.Number,
+        desc: '数量',
+        required: true,
+      }
+    }
+  },
+
+  listAll: {
+    desc: '根据条件返回所有数据',
+    funcType: DataTypes.FuncType.kAsync,
+    paramsIsObject: true,
+    params: {
+      ['...query']: {
+        type: '...Object',
+        desc: '各种查询条件条件'
+      },
+      expand: {
+        type: DataTypes.String,
+        comment: '获取指定子资源数据，多个子资源使用逗号隔开。例如：expand=a,b',
+      },
+    },
+    returns: {
+      data: {
+        type: DataTypes.arrayOf(DataTypes.Object),
+      }
+    }
+  },
+
+  findOne: {
+    desc: '根据条件返回一条数据',
+    funcType: DataTypes.FuncType.kAsync,
+    paramsIsObject: true,
+    params: {
+      ['...query']: {
+        type: '...Object',
+        desc: '各种查询条件条件'
+      },
+      expand: {
+        type: DataTypes.String,
+        comment: '获取指定子资源数据，多个子资源使用逗号隔开。例如：expand=a,b',
+      },
+    },
+    returns: {
+      data: {
+        type: DataTypes.Object,
+      }
+    }
+  },
+
+  destroy: {
+    desc: '根据id删除一条数据',
+    funcType: DataTypes.FuncType.kAsync,
+    paramsIsObject: true,
+    params: {
+      id: {
+        type: DataTypes.String,
+        comment: '资源id',
+      },
+    }
+  },
+
+  findAll: {
+    desc: '根据条件返回所有数据',
+    paramsIsObject: true,
+    funcType: DataTypes.FuncType.kAsync,
+    params: {
+      ['...query']: {
+        type: '...Object',
+        desc: '各种查询条件条件'
+      },
+      expand: {
+        type: DataTypes.String,
+        comment: '获取指定子资源数据，多个子资源使用逗号隔开。例如：expand=a,b',
+      },
+    },
+    returns: {
+      data: {
+        type: DataTypes.arrayOf(DataTypes.Object),
+      }
+    }
+  },
+
+  findByIds: {
+    desc: '根据id返回所有数据',
+    paramsIsObject: true,
+    funcType: DataTypes.FuncType.kAsync,
+    params: {
+      ids: {
+        type: DataTypes.arrayOf(DataTypes.String),
+        desc: 'id数组',
+        required: true,
+      },
+      expand: {
+        type: DataTypes.String,
+        comment: '获取指定子资源数据，多个子资源使用逗号隔开。例如：expand=a,b',
+      },
+    },
+    returns: {
+      data: {
+        type: DataTypes.arrayOf(DataTypes.Object),
+      }
+    }
+  }
 }

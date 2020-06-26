@@ -2,7 +2,7 @@
 提供Service操作的工具抽象接口类
 
 ## constructor
- constructor (model, seneca, resourceName)
+` constructor (model, seneca, resourceName)`
 
 构造函数
 
@@ -16,7 +16,7 @@
 
 
 ## parseExpand2Include
- parseExpand2Include (expand)
+` parseExpand2Include (expand)`
 
 解析expand: { a: true, b: true ....}。该函数会在读操作：retrieve，list，listAll，findOne，findAll，findByIds之前调用。
 
@@ -35,7 +35,7 @@
 
 
 ## isValidDataWhenCreate
- isValidDataWhenCreate (data)
+` isValidDataWhenCreate (data)`
 
 创建的时候判断数据合法性，验证不通过返回ZError对象，否则返回null
 
@@ -54,7 +54,7 @@
 
 
 ## isValidDataWhenRetrieve
- isValidDataWhenRetrieve (id, expand)
+` isValidDataWhenRetrieve (id, expand)`
 
 获取数据时候判断数据是否包含必填字段，默认校验id，但是不对id合法性校验。验证不通过返回ZEerror对象,否则返回null
 
@@ -74,7 +74,7 @@
 
 
 ## isValidDataWhenUpdateStatus
- isValidDataWhenUpdateStatus (id, expand)
+` isValidDataWhenUpdateStatus (id, expand)`
 
 更新状态时判断id, status必填字段，不对id，status合法性校验.验证不通过返回ZError对象,否则返回null
 
@@ -94,7 +94,7 @@
 
 
 ## isExistWhenCreate
-async isExistWhenCreate (data)
+`async isExistWhenCreate (data)`
 
 创建的时候校验数据唯一性
 
@@ -113,7 +113,7 @@ async isExistWhenCreate (data)
 
 
 ## isValidQueryCondition
- isValidQueryCondition (criteria)
+` isValidQueryCondition (criteria)`
 
 判断list条件合法性. 验证不通过返回ZEerror对象,否则返回null
 
@@ -132,7 +132,7 @@ async isExistWhenCreate (data)
 
 
 ## convertQueryCriteria
- convertQueryCriteria (criteria)
+` convertQueryCriteria (criteria)`
 
 list前转换传入的查询条件。逻辑表达查询条件转换成sql条件
 
@@ -151,7 +151,7 @@ list前转换传入的查询条件。逻辑表达查询条件转换成sql条件
 
 
 ## convertCountCriteria
- convertCountCriteria (criteria)
+` convertCountCriteria (criteria)`
 
 count前转换传入的查询条件。逻辑表达查询条件转换成sql条件。
 
@@ -170,7 +170,7 @@ count前转换传入的查询条件。逻辑表达查询条件转换成sql条件
 
 
 ## logic2DBWhenUpdate
-async logic2DBWhenUpdate (data)
+`async logic2DBWhenUpdate (data)`
 
 逻辑层数据转db层数据
 
@@ -189,7 +189,7 @@ async logic2DBWhenUpdate (data)
 
 
 ## db2logic
-async db2logic (data, expand)
+`async db2logic (data, expand)`
 
 db层数据转逻辑层数据
 
@@ -209,7 +209,7 @@ db层数据转逻辑层数据
 
 
 ## list2logic
-async list2logic (items, expand)
+`async list2logic (items, expand)`
 
 list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 
@@ -229,7 +229,7 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 
 
 ## beforeCreate
-async beforeCreate (data)
+`async beforeCreate (data)`
 
 创建之前调用
 
@@ -241,7 +241,7 @@ async beforeCreate (data)
 
 
 ## afterCreate
-async afterCreate (data)
+`async afterCreate (data)`
 
 创建之后调用
 
@@ -253,7 +253,7 @@ async afterCreate (data)
 
 
 ## beforeUpdate
-async beforeUpdate (data)
+`async beforeUpdate (data)`
 
 更新之前调用
 
@@ -265,7 +265,7 @@ async beforeUpdate (data)
 
 
 ## afterUpdate
-async afterUpdate (data)
+`async afterUpdate (data)`
 
 更新之后调用
 
@@ -277,7 +277,7 @@ async afterUpdate (data)
 
 
 ## beforeUpdateStatus
-async beforeUpdateStatus (data)
+`async beforeUpdateStatus (data)`
 
 更新状态之前调用
 
@@ -289,7 +289,7 @@ async beforeUpdateStatus (data)
 
 
 ## afterUpdateStatus
-async afterUpdateStatus (data)
+`async afterUpdateStatus (data)`
 
 更新状态之后调用
 
@@ -301,7 +301,7 @@ async afterUpdateStatus (data)
 
 
 ## beforeDestroy
-async beforeDestroy (data)
+`async beforeDestroy (data)`
 
 删除之前调用
 
@@ -313,7 +313,7 @@ async beforeDestroy (data)
 
 
 ## afterDestroyDestroy
-async afterDestroyDestroy (data)
+`async afterDestroyDestroy (data)`
 
 删除之后调用
 
