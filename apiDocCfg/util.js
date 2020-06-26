@@ -5,7 +5,7 @@
  * Created Date: 2020-06-17 13:24:59
  * Author: Zz
  * -----
- * Last Modified: 2020-06-26 14:12:40
+ * Last Modified: 2020-06-27 01:01:31
  * Modified By: Zz
  * -----
  * Description:
@@ -441,6 +441,38 @@ module.exports = {
     }
   },
 
+  isValidData: {
+    desc: '验证数据的合法性和有效性',
+    params: {
+      data: {
+        type: DataTypes.Object,
+        desc: '待验证的数据',
+        required: true,
+      },
+      requiredParams: {
+        type: DataTypes.arrayOf(DataTypes.String),
+        desc: '合法性校验。校验必备参数',
+      },
+      fieldVerfiyFunc: {
+        type: DataTypes.Object,
+        desc: '参数有效性校验。{ field1: val => func(val), field2: val => func2(val), ... }',
+      },
+      missingPrefix: {
+        type: DataTypes.String,
+        desc: '合法性校验失败后添加的code前缀。',
+      },
+      invalidePrefix: {
+        type: DataTypes.String,
+        desc: '有效性校验失败后添加的code前缀。',
+      }
+    },
+    returns: {
+      error: {
+        type: 'ZError',
+        desc: '校验失败返回ZError对象，否则返回null',
+      }
+    }
+  },
   isInt: {
     description: '判断一个值是否为整数或整数字符串',
     params: {
@@ -467,6 +499,24 @@ module.exports = {
         type: 'Any',
         required: true,
       },
+    },
+    returns: {
+      bo: {
+        type: DataTypes.Boolean,
+      }
+    }
+  },
+  isValueOf: {
+    description: '判断一个值是否在期望值之内。如果actualValue和expectedValues都是Number、Boolean、String类型，采用\`===\`比较。如果expectedValues是Array或Object类型。则判断actualValue值是否是存在数组或Object.values(expectedValues)中',
+    params: {
+      actualValue: {
+        type: 'Number，Boolean，String',
+        required: true,
+      },
+      expectedValues: {
+        type: 'Number，Boolean，String，Array，Object',
+        required: true,
+      }
     },
     returns: {
       bo: {

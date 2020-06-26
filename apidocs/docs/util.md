@@ -423,6 +423,29 @@
 |bo | Boolean | 否 | 无 | |
 
 
+## isValidData
+` isValidData (data, requiredParams, fieldVerfiyFunc, missingPrefix, invalidePrefix)`
+
+验证数据的合法性和有效性
+
+### 参数
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|data | Object | 是 | 无 | 待验证的数据|
+|requiredParams | String[] | 否 | 无 | 合法性校验。校验必备参数|
+|fieldVerfiyFunc | Object | 否 | 无 | 参数有效性校验。{ field1: val => func(val), field2: val => func2(val), ... }|
+|missingPrefix | String | 否 | 无 | 合法性校验失败后添加的code前缀。|
+|invalidePrefix | String | 否 | 无 | 有效性校验失败后添加的code前缀。|
+
+
+### 返回值
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|error | ZError | 否 | 无 | 校验失败返回ZError对象，否则返回null|
+
+
 ## isInt
 ` isInt (val, strong)`
 
@@ -453,6 +476,26 @@
 |参数|类型|必填|默认值|描述|
 |--- | --- | --- | --- | ---|
 |val | Any | 是 | 无 | |
+
+
+### 返回值
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|bo | Boolean | 否 | 无 | |
+
+
+## isValueOf
+` isValueOf (actualValue, expectedValues)`
+
+判断一个值是否在期望值之内。如果actualValue和expectedValues都是Number、Boolean、String类型，采用`===`比较。如果expectedValues是Array或Object类型。则判断actualValue值是否是存在数组或Object.values(expectedValues)中
+
+### 参数
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|actualValue | Number，Boolean，String | 是 | 无 | |
+|expectedValues | Number，Boolean，String，Array，Object | 是 | 无 | |
 
 
 ### 返回值

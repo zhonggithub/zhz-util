@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: 2020-06-26 14:16:06
+ * Last Modified: 2020-06-27 00:34:41
  * Modified By: Zz
  * -----
  * Description:
@@ -80,7 +80,6 @@ module.exports = {
     }
     return `(${val1 || ''}, ${val2 || ''})`
   },
-  
   /**
    * @param {String or Array} val 
    */
@@ -355,7 +354,7 @@ module.exports = {
                 (val) => this.dateStrToDate(val),
               )
             } else if (dbType === 'mongodb') {
-              tmp = this.convertRangeQueryCriteria(
+              tmp = this.convertRangeQueryCriteriaMongodb(
                 condition,
                 criteria[condition],
                 (val) => this.dateStrToDate(val),
@@ -375,7 +374,7 @@ module.exports = {
                   criteria[condition],
                 )
               } else if (dbType === 'mongodb') {
-                tmp = this.convertRangeQueryCriteria(
+                tmp = this.convertRangeQueryCriteriaMongodb(
                   condition,
                   criteria[condition],
                 );
@@ -398,11 +397,17 @@ module.exports = {
       return false;
     }
     if (typeof value === 'string') {
-      const left = string(value).left(2);
-      const right = string(value).right(2);
+      let left = string(value).left(2);
+      let right = string(value).right(2);
 
-      const leftRangeStr = ['[', '(', '{', '!{'];
-      const rightRangeStr = [']', ')', '}', '!}'];
+      if (left === '!{' && right === '}!') {
+        return true;
+      }
+
+      left = string(value).left(1);
+      right = string(value).right(1);
+      const leftRangeStr = ['[', '(', '{'];
+      const rightRangeStr = [']', ')', '}'];
       if (leftRangeStr.indexOf(left) !== -1 && rightRangeStr.indexOf(right)) {
         return true;
       }
@@ -466,7 +471,7 @@ module.exports = {
     return condition;
   },
 
-  convertRangeQueryCriteria(key, value, formatValue = (val) => val) {
+  convertRangeQueryCriteriaMongodb(key, value, formatValue = (val) => val) {
     if (!key || !value) {
       return null;
     }
@@ -575,7 +580,6 @@ module.exports = {
     }
     return `${val}` === `${parseInt(val, 10)}`
   },
-
   /**
    * 判断一个值是否是非空字符串
    * @param {*} str 
@@ -584,6 +588,24 @@ module.exports = {
    */
   notEmptyStr(str) {
     return str && typeof str === 'string';
+  },
+  /**
+   * 判断一个值是否在期望值之内
+   * @param {Number|Boolean|String} actualValue 
+   * @param {Array|Object|Number|Boolean|String} expectedValues 
+   */
+  isValueOf(actualValue, expectedValues) {
+    if (typeof actualValue === 'function' || typeof expectedValues === 'function') {
+      throw new Error('function type is not support')
+    }
+    if (Array.isArray(expectedValues)) {
+      return expectedValues.indexOf(actualValue) !== -1;
+    }
+    if (typeof expectedValues === 'object') {
+      return this.isValueOf(actualValue, Object.values(expectedValues));
+    }
+
+    return actualValue === expectedValues;
   },
 
   /**
