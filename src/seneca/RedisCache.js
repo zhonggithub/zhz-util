@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-06-26 21:21:34
+ * Last Modified: 2020-06-26 21:54:21
  * Modified By: Zz
  * -----
  * Description:
@@ -41,7 +41,7 @@ class RedisCache {
 
   async del(key, match = false) {
     if (match) {
-      const matchKeys = this.redis.keys(`${key}:*`)
+      const matchKeys = this.redis.keys(`${key}*`)
       if (matchKeys && matchKeys.length > 0) {
         return Promise.all(matchKeys.map(async (itemKey) => this.redis.del(itemKey)));
       }
