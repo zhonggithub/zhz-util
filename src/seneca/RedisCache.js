@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-06-26 19:55:48
+ * Last Modified: 2020-06-26 21:21:34
  * Modified By: Zz
  * -----
  * Description:
@@ -36,7 +36,7 @@ class RedisCache {
       ttl = parseInt(ttl, 10);
     }
     const dataStr = JSON.stringify(data);
-    return this.redis.set(key, dataStr, 'PX', ttl);
+    return this.redis.set(key, dataStr, 'EX', ttl);
   }
 
   async del(key, match = false) {
