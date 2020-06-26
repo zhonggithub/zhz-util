@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: 2020-06-26 11:44:32
+ * Last Modified: 2020-06-26 13:44:10
  * Modified By: Zz
  * -----
  * Description:
@@ -580,13 +580,13 @@ module.exports = {
    * 判断一个值是否是非空字符串
    * @param {*} str 
    * 
-   * @returns {Boolean} true or false
+   * @returns {Boolean} 如果是非空字符串，返回true，否则返回false
    */
   notEmptyStr(str) {
     return str && typeof str === 'string';
   },
   isEmptyStr(str) {
-    return this.notEmptyStr(str)
+    return typeof str === 'string' && str == '';
   },
 
   /**

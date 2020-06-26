@@ -5,7 +5,7 @@
  * Created Date: 2020-06-17 13:24:59
  * Author: Zz
  * -----
- * Last Modified: 2020-06-22 13:18:24
+ * Last Modified: 2020-06-26 14:12:40
  * Modified By: Zz
  * -----
  * Description:
@@ -48,6 +48,17 @@ module.exports = {
 
   toLine: {
     description: '驼峰格式转下划线格式',
+    params: {
+      val: {
+        type: DataTypes.String,
+        required: true,
+      }
+    },
+    returns: {
+      val: {
+        type: DataTypes.String,
+      }
+    }
   },
 
   gteLte: {
@@ -449,9 +460,8 @@ module.exports = {
       }
     }
   },
-
   notEmptyStr: {
-    description: '判断一个值是否为非空符串',
+    description: '判断一个值是否为非空符串。如果是非空字符串，返回true，否则返回false',
     params: {
       val: {
         type: 'Any',
@@ -508,6 +518,22 @@ module.exports = {
         defaultValue: 'current date'
       }
     },
+  },
+
+  dateStrToDate: {
+    description: '日期字符串转utc Date',
+    params: {
+      dateStr: {
+        type: DataTypes.String,
+        required: true,
+      },
+    },
+    returns: {
+      date: {
+        type: DataTypes.Date,
+        defaultValue: 'current date'
+      }
+    }, 
   }
 }
 
