@@ -5,7 +5,7 @@
  * Created Date: 2020-06-17 22:18:14
  * Author: Zz
  * -----
- * Last Modified: 2020-06-21 16:25:19
+ * Last Modified: 2020-06-26 13:29:47
  * Modified By: Zz
  * -----
  * Description:
@@ -20,16 +20,20 @@ module.exports = {
 
   constructor: {
     description: '构造函数',
-    paramsIsObject: true,
     params: {
+      model: {
+        type: 'ModelBase',
+        description: '',
+        required: true,
+      },
       seneca: {
         type: 'seneca',
         description: 'seneca 对象',
         required: true,
       },
-      model: {
-        type: 'ModelBase',
-        description: '',
+      resourceName: {
+        type: DataTypes.String,
+        description: '资源名称',
         required: true,
       },
     }
@@ -45,7 +49,7 @@ module.exports = {
     },
     returns: {
       ret: {
-        type: 'Object, null',
+        type: 'Object, Array',
         required: true,
         description: '解析成功返回include对象, 否则返回null'
       }

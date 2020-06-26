@@ -2,7 +2,7 @@
 提供Service操作的工具抽象接口类
 
 ## constructor
- constructor ({ seneca, model })
+ constructor (model, seneca, resourceName)
 
 构造函数
 
@@ -10,8 +10,9 @@
 
 |参数|类型|必填|默认值|描述|
 |--- | --- | --- | --- | ---|
-|seneca | seneca | 是 | 无 | seneca 对象|
 |model | ModelBase | 是 | 无 | |
+|seneca | seneca | 是 | 无 | seneca 对象|
+|resourceName | String | 是 | 无 | 资源名称|
 
 
 ## parseExpand2Include
@@ -30,7 +31,7 @@
 
 |参数|类型|必填|默认值|描述|
 |--- | --- | --- | --- | ---|
-|ret | Object, null | 是 | 无 | 解析成功返回include对象, 否则返回null|
+|ret | Object, Array | 是 | 无 | 解析成功返回include对象, 否则返回null|
 
 
 ## isValidDataWhenCreate
