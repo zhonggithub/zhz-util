@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: 2020-06-26 13:44:10
+ * Last Modified: 2020-06-26 14:16:06
  * Modified By: Zz
  * -----
  * Description:
@@ -584,9 +584,6 @@ module.exports = {
    */
   notEmptyStr(str) {
     return str && typeof str === 'string';
-  },
-  isEmptyStr(str) {
-    return typeof str === 'string' && str == '';
   },
 
   /**
