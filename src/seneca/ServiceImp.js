@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-06-27 02:12:38
+ * Last Modified: 2020-06-27 09:33:24
  * Modified By: Zz
  * -----
  * Description:
@@ -120,6 +120,19 @@ class Service extends ServiceBase {
     return cacheKey;
   }
 
+  /**
+   * 
+   * @param {Object} query db的查询条件
+   * @param {Object} expand { a: true, b: true }
+   */
+  appendInclude(query, expand) {
+    if (!query || !expand) return;
+    const include = this.serviceUtil.parseExpand2Include(expand);
+    if (include) {
+      query.include = include;
+    }
+  }
+
   async delCache(id) {
     if (this.cache) {
       const cacheKey = this.getCacheKey(id);
@@ -211,9 +224,8 @@ class Service extends ServiceBase {
         return util.error404(this.errCode[404]);
       }
       await this.serviceUtil.afterUpdate(result);
-
-      // 删除缓存
       await this.delCache(msg.params.id);
+      
       const ret = await this.serviceUtil.db2logic(result);
       return util.responseSuccess(ret);
     } catch (dbError) {
@@ -237,10 +249,36 @@ class Service extends ServiceBase {
         return util.error404(this.errCode[404]);
       }
       await this.serviceUtil.afterUpdateStatus(result);
-      // 删除缓存
       await this.delCache(id);
+      
       const ret = await this.serviceUtil.db2logic(result);
       return util.responseSuccess(ret);
+    } catch (dbError) {
+      return this.handleCatchErr(dbError);
+    }
+  }
+
+  async destroy(msg) {
+    this.seneca.logger.info(msg);
+    const err = this.serviceUtil.isValidDataWhenRetrieve(msg.params);
+    if (err) {
+      return err.toJson();
+    }
+    try {
+      const { id } = msg.params;
+      const exist = await this.model.findById(id);
+      if (!exist) {
+        return util.error404(this.errCode[404]);
+      }
+    
+      await this.serviceUtil.beforeDestroy(msg.params);
+      const delResult = await this.model.findByIdAndDelete(id);
+      if (!delResult) {
+        return util.error404(this.errCode[404]);
+      }
+      await this.serviceUtil.afterDestroy(delResult, exist);
+      await this.delCache(id);
+      return util.responseSuccess(delResult);
     } catch (dbError) {
       return this.handleCatchErr(dbError);
     }
@@ -263,10 +301,9 @@ class Service extends ServiceBase {
         skip,
         pageSize
       );
-      const include = this.serviceUtil.parseExpand2Include(expand)
-      if (include) {
-        params.include = include
-      }
+
+      this.appendInclude(params, expand);
+
       const result = await this.model.list(params);
       const items = await this.serviceUtil.list2logic(result.rows, expand);
       return util.responseSuccess({
@@ -305,12 +342,10 @@ class Service extends ServiceBase {
     }
     try {
       const { filter, expand } = util.convertPagination(msg.params);
-      const query = ServiceUtilBase.parseQuery(this.serviceUtil.convertQueryCriteria(filter));
+      const params = this.serviceUtil.convertQueryCriteria(filter);
+      const query = ServiceUtilBase.parseQuery(params);
       const tmpExpand = util.parseExpand(expand);
-      const include = this.serviceUtil.parseExpand2Include(tmpExpand)
-      if (include) {
-        query.include = include
-      }
+      this.appendInclude(query, tmpExpand);
       const result = await this.model.find(query);
       const items = await this.serviceUtil.list2logic(result, tmpExpand);
       return util.responseSuccess(items);
@@ -328,12 +363,10 @@ class Service extends ServiceBase {
       const { expand } = msg.params;
       delete msg.params.expand;
 
-      const query = ServiceUtilBase.parseQuery(this.serviceUtil.convertQueryCriteria(msg.params));
+      const params = this.serviceUtil.convertQueryCriteria(msg.params);
+      const query = ServiceUtilBase.parseQuery(params);
       const tmpExpand = util.parseExpand(expand);
-      const include = this.serviceUtil.parseExpand2Include(tmpExpand);
-      if (include) {
-        query.include = include;
-      }
+      this.appendInclude(query, tmpExpand);
       const result = await this.model.findOne(query);
       if (!result) {
         return util.error404(this.errCode[404]);
@@ -345,44 +378,18 @@ class Service extends ServiceBase {
     }
   }
 
-  async destroy(msg) {
-    this.seneca.logger.info(msg);
-    const err = this.serviceUtil.isValidDataWhenRetrieve(msg.params);
-    if (err) {
-      return err.toJson();
-    }
-    try {
-      const { id } = msg.params;
-      const exist = await this.model.findById(id);
-      if (!exist) {
-        return util.error404(this.errCode[404]);
-      }
-    
-      await this.serviceUtil.beforeDestroy(msg.params);
-      const delResult = await this.model.findByIdAndDelete(id);
-      if (!delResult) {
-        return util.error404(this.errCode[404]);
-      }
-      await this.serviceUtil.afterDestroy(delResult, exist);
-      await this.delCache(id);
-      return util.responseSuccess(delResult);
-    } catch (dbError) {
-      return this.handleCatchErr(dbError);
-    }
-  }
-
   async findAll(msg) {
     this.seneca.logger.info(msg);
     try {
       const { expand } = msg.params;
       delete msg.params.expand;
-      const query = ServiceUtilBase.parseQuery(this.serviceUtil.convertQueryCriteria(msg.params));
+      
+      const params = this.serviceUtil.convertQueryCriteria(msg.params);
+      const query = ServiceUtilBase.parseQuery(params);
       const tmpExpand = util.parseExpand(expand);
-      const include = this.serviceUtil.parseExpand2Include(tmpExpand);
-      if (include) {
-        query.include = include;
-      }
-      const items = await this.model.find(query);
+      this.appendInclude(query, tmpExpand);
+      const result = await this.model.find(query);
+      const items = await this.serviceUtil.list2logic(result, tmpExpand);
       return util.responseSuccess(items);
     } catch (dbError) {
       return this.handleCatchErr(dbError);
@@ -403,12 +410,10 @@ class Service extends ServiceBase {
         where: { id: ids }
       };
       const tmpExpand = util.parseExpand(expand);
-      const include = this.serviceUtil.parseExpand2Include(tmpExpand);
-      if (include) {
-        query.include = include;
-      }
-      const result = await this.model.find(query)
-      return util.responseSuccess(result)
+      this.appendInclude(query, tmpExpand);
+      const result = await this.model.find(query);
+      const items = await this.serviceUtil.list2logic(result, tmpExpand);
+      return util.responseSuccess(items);
     } catch (dbError) {
       return this.handleCatchErr(dbError)
     }
