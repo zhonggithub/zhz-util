@@ -5,7 +5,7 @@
  * Created Date: 2020-06-17 13:24:59
  * Author: Zz
  * -----
- * Last Modified: 2020-06-27 01:01:31
+ * Last Modified: 2020-06-27 11:29:04
  * Modified By: Zz
  * -----
  * Description:
@@ -37,12 +37,16 @@ module.exports = {
   md5: {
     description: '对一个字符串进行md5。',
     params: {
-      type: DataTypes.String,
-      description: '字符串',
+      text: {
+        type: DataTypes.String,
+        description: '字符串',
+      }
     },
     returns: {
-      type: DataTypes.String,
-      description: '形参为非字符串，返回空的字符串。否则返回md5值',
+      text: {
+        type: DataTypes.String,
+        description: '形参为非字符串，返回空的字符串。否则返回md5值',
+      }
     }
   },
 
