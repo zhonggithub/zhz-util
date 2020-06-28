@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: 2020-06-27 09:26:38
+ * Last Modified: 2020-06-28 09:00:01
  * Modified By: Zz
  * -----
  * Description:
@@ -337,9 +337,8 @@ module.exports = {
         if (handle && typeof handle === 'function') {
           const bo = handle(condition, criteria[condition], dbCriteria);
           if (bo) {
-            continue;
-          } else {
             filterAttributeArray.push(condition);
+            continue;
           }
         }
         switch (condition) {
