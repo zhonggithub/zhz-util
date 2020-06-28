@@ -87,7 +87,7 @@ module.exports = {
 
 
 ## md5
-` md5 (type, description)`
+` md5 (text)`
 
 对一个字符串进行md5。
 
@@ -95,16 +95,14 @@ module.exports = {
 
 |参数|类型|必填|默认值|描述|
 |--- | --- | --- | --- | ---|
-|type | String | 否 | 无 | |
-|description | 字符串 | 否 | 无 | |
+|text | String | 否 | 无 | 字符串|
 
 
 ### 返回值
 
 |参数|类型|必填|默认值|描述|
 |--- | --- | --- | --- | ---|
-|type | String | 否 | 无 | |
-|description | 形参为非字符串，返回空的字符串。否则返回md5值 | 否 | 无 | |
+|text | String | 否 | 无 | 形参为非字符串，返回空的字符串。否则返回md5值|
 
 
 ## toLine
