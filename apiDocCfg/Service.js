@@ -5,7 +5,7 @@
  * Created Date: 2020-06-14 15:35:22
  * Author: Zz
  * -----
- * Last Modified: 2020-06-27 02:09:43
+ * Last Modified: 2020-06-29 17:15:31
  * Modified By: Zz
  * -----
  * Description:
@@ -129,7 +129,7 @@ module.exports = {
   },
 
   create: {
-    desc: '创建一个资源',
+    desc: '创建一个资源。create执行流程：\r\n 1，isValidDataWhenCreate。\r\n 2，logic2DB。 \r\n 3，beforeCreate\r\n 4，afterCreate\r\n5，db2logic',
     paramsIsObject: true,
     funcType: DataTypes.FuncType.kAsync,
     params: {
