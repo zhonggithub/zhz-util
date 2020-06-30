@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: 2020-06-30 20:39:46
+ * Last Modified: 2020-06-30 22:59:11
  * Modified By: Zz
  * -----
  * Description:
@@ -52,7 +52,8 @@ module.exports = {
     const resource = (this.toLine(resourceName)).toUpperCase()
     return {
       404: `ERR_${resource}_NOT_EXIST`,
-      409: `ERR_${resource}_EXIST`
+      409: `ERR_${resource}_EXIST`,
+      500: `ERR_${resource}_UNKONW`
     }
   },
 
