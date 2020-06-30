@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: 2020-06-28 09:00:01
+ * Last Modified: 2020-06-30 20:39:46
  * Modified By: Zz
  * -----
  * Description:
@@ -615,7 +615,7 @@ module.exports = {
    * @param {*} expand
    */
   avaTest(t, actual, expected, expand) {
-    if (!t || !actual || !expand) {
+    if (!t || !actual || !expected) {
       return;
     }
     if (typeof actual !== typeof expected) {
