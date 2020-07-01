@@ -3,8 +3,6 @@ theme: readthedocs
 site_favicon: favicon.ico
 copyright: © Zz
 pages: 
-- [Service.md, Service]
+- [index.md, Service]
 - [ServiceBase.md, ServiceBase]
-- [ServiceUtilBase.md, ServiceUtilBase]
 - [util.md, util]
-- [index.md, Overview]

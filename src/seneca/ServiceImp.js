@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-06-27 09:33:24
+ * Last Modified: 2020-07-01 13:43:45
  * Modified By: Zz
  * -----
  * Description:
@@ -15,13 +15,12 @@ const { verify } = require('z-error');
 const validator = require('validator');
 const util = require('../util');
 const ServiceBase = require('./ServiceBase');
-const ServiceUtilBase = require('./ServiceUtilBase');
 const { CacheTTLEnum, CacheTTLEnumKeys } = require('./EnumConst');
 const Pkg = require(`${process.cwd()}/package.json`);
 
 class Service extends ServiceBase {
   constructor({
-    seneca, model, serviceUtil,
+    seneca, model,
     cache, role, resourceName,
     cacheTTL, opt,
   }) {
@@ -54,7 +53,6 @@ class Service extends ServiceBase {
       throw err;
     }
 
-    this.serviceUtil = serviceUtil || new ServiceUtilBase(model, seneca, resourceName);
     this.model = model;
     this.cache = cache;
     this.cacheTTL = cacheTTL || 60;
@@ -127,7 +125,7 @@ class Service extends ServiceBase {
    */
   appendInclude(query, expand) {
     if (!query || !expand) return;
-    const include = this.serviceUtil.parseExpand2Include(expand);
+    const include = this.parseExpand2Include(expand);
     if (include) {
       query.include = include;
     }
@@ -139,23 +137,166 @@ class Service extends ServiceBase {
       return this.cache.del(cacheKey, true);
     }
   }
+ 
+  static parseQuery(query) {
+    let tmp = {};
+    if (query) {
+      if (query.where) {
+        tmp = {
+          ...query,
+        };
+      } else {
+        tmp.where = query;
+      }
+    }
+    return tmp;
+  }
+
+  static parseListQuery(query, sort, skip, pageSize) {
+    let tmp = Service.parseQuery(query);
+    if (skip !== undefined) {
+      tmp.offset = skip;
+    }
+    if (pageSize) {
+      tmp.limit = pageSize;
+    }
+    if (sort && Array.isArray(sort) && sort.length > 0) {
+      // 此方式默认为sequlize 支持的格式不做处理
+      if (Array.isArray(sort[0])) {
+        tmp.order = sort;
+      } else if (typeof sort[0] === 'object') {
+        // 只支持{ field: '', order: '' } 格式
+        tmp.order = sort.map((item) => [item.field, item.order]);
+      }
+    } else if (typeof sort === 'object') {
+      // 只支持{ a: -1, b: 1, c: 'ASC' } 格式
+      tmp.order = [];
+      Object.keys(sort).forEach((k) => {
+        switch (sort[k]) {
+          case 1: case 'ASC': {
+            tmp.order.push([k, 'ASC']);
+            break;
+          }
+          case -1: case 'DESC': {
+            tmp.order.push([k, 'DESC']);
+            break;
+          }
+          default:
+        }
+      });
+    }
+    return tmp;
+  }
+
+  /**
+   * 解析expand: { a: true, b: true ....}，返回include对象, 或者返回null
+   * 子类应该实现这个api
+   * @param {*} expand 子资源扩展数据
+   */
+  parseExpand2Include(expand) {
+    return null
+  }
+
+  async beforeCreate(data) {
+  }
+  async afterCreate(data) {
+  }
+
+  async beforeUpdate(data) {
+  }
+  async afterUpdate(data) {
+  }
+
+  async beforeUpdateStatus(data) {
+  }
+  async afterUpdateStatus(data) {
+  }
+
+  async beforeDestroy(params) {
+  }
+  /**
+   * @param {*} delResult 删除结果，如果是逻辑删除，返回的是数据；如果是物理删，返回number
+   * @param {*} beforeData 删除之前的数据
+   */
+  async afterDestroy(delResult, beforeData) {
+  }
+
+  isValidDataWhenCreate(data) {
+    return null;
+  }
+
+  isValidDataWhenRetrieve(data) {
+    return util.isValidData(data, ['id'], {
+      expand: (val) => typeof val === 'object' || typeof val === 'string',
+    });
+  }
+
+  isValidDataWhenUpdateStatus(data) {
+    return util.isValidData(data, ['id', 'status']);
+  }
+
+  async isExist(where) {
+    return this.model.findOne(where);
+  }
+
+  async isExistWhenCreate(data) {
+    return null;
+  }
+
+  convertQueryCriteria(criteria) {
+    const tmpCriteria = util.convertQueryCriteria(criteria, 'mysql');
+    return {
+      ...tmpCriteria.dstCriteria,
+      ...tmpCriteria.sourceCriteria,
+    };
+  }
+
+  convertCountCriteria(criteria) {
+    return this.convertQueryCriteria(criteria);
+  }
+
+  isValidQueryCondition(criteria) {
+    return null;
+  }
+
+  async logic2DBWhenUpdate(logicInfo) {
+    return logicInfo;
+  }
+
+  async logic2DB(logicInfo) {
+    return logicInfo;
+  }
+
+  async db2logic(item, expand = {}) {
+    if (!item) {
+      return null;
+    }
+    return item.toJSON ? item.toJSON() : item;
+  }
+
+  async list2logic(items, expand = { }) {
+    if (!items || items.length === 0) {
+      return [];
+    }
+    return Promise.all(items.map(async (item) => this.db2logic(item, expand)));
+  }
 
   async create(msg) {
     this.seneca.logger.info(msg);
-    const err = this.serviceUtil.isValidDataWhenCreate(msg.params);
+    const err = this.isValidDataWhenCreate(msg.params);
     if (err) {
       return err.toJson();
     }
     try {
-      const exist = await this.serviceUtil.isExistWhenCreate(msg.params);
+      const exist = await this.isExistWhenCreate(msg.params);
       if (exist) {
         return util.error409(this.errCode[409]);
       }
-      const body = await this.serviceUtil.logic2DB(msg.params);
-      await this.serviceUtil.beforeCreate(body);
+      const body = await this.logic2DB(msg.params);
+      await this.beforeCreate(body);
       const result = await this.model.create(body);
-      await this.serviceUtil.afterCreate(result);
-      const ret = await this.serviceUtil.db2logic(result);
+      await this.afterCreate(result);
+      const ret = await this.db2logic(result);
       return util.responseSuccess(ret);
     } catch (dbError) {
       return this.handleCatchErr(dbError);
@@ -169,14 +310,14 @@ class Service extends ServiceBase {
    */
   async retrieve(msg) {
     this.seneca.logger.info(msg);
-    const err = this.serviceUtil.isValidDataWhenRetrieve(msg.params);
+    const err = this.isValidDataWhenRetrieve(msg.params);
     if (err) {
       return err.toJson();
     }
     try {
       const { id, expand } = msg.params;
       const tmpExpand = util.parseExpand(expand);
-      const include = this.serviceUtil.parseExpand2Include(tmpExpand);
+      const include = this.parseExpand2Include(tmpExpand);
 
       let result = null;
       let cacheKey = this.getCacheKey(id, tmpExpand);
@@ -193,7 +334,7 @@ class Service extends ServiceBase {
         return util.error404(this.errCode[404]);
       }
 
-      const data = await this.serviceUtil.db2logic(
+      const data = await this.db2logic(
         result, tmpExpand,
       );
       
@@ -209,24 +350,24 @@ class Service extends ServiceBase {
 
   async update(msg) {
     this.seneca.logger.info(msg);
-    const err = this.serviceUtil.isValidDataWhenRetrieve(msg.params);
+    const err = this.isValidDataWhenRetrieve(msg.params);
     if (err) {
       return err.toJson();
     }
 
     try {
-      const data = await this.serviceUtil.logic2DBWhenUpdate(msg.params);
-      await this.serviceUtil.beforeUpdate(data);
+      const data = await this.logic2DBWhenUpdate(msg.params);
+      await this.beforeUpdate(data);
       const result = await this.model.findByIdAndUpdate(
         msg.params.id, data,
       );
       if (!result) {
         return util.error404(this.errCode[404]);
       }
-      await this.serviceUtil.afterUpdate(result);
+      await this.afterUpdate(result);
       await this.delCache(msg.params.id);
       
-      const ret = await this.serviceUtil.db2logic(result);
+      const ret = await this.db2logic(result);
       return util.responseSuccess(ret);
     } catch (dbError) {
       return this.handleCatchErr(dbError);
@@ -236,22 +377,22 @@ class Service extends ServiceBase {
   async updateStatus(msg) {
     this.seneca.logger.info(msg);
 
-    const err = this.serviceUtil.isValidDataWhenUpdateStatus(msg.params);
+    const err = this.isValidDataWhenUpdateStatus(msg.params);
     if (err) {
       return err.toJson();
     }
 
     try {
       const { id, status } = msg.params;
-      await this.serviceUtil.beforeUpdateStatus({ id, status });
+      await this.beforeUpdateStatus({ id, status });
       const result = await this.model.findByIdAndUpdate(id, { status });
       if (!result) {
         return util.error404(this.errCode[404]);
       }
-      await this.serviceUtil.afterUpdateStatus(result);
+      await this.afterUpdateStatus(result);
       await this.delCache(id);
       
-      const ret = await this.serviceUtil.db2logic(result);
+      const ret = await this.db2logic(result);
       return util.responseSuccess(ret);
     } catch (dbError) {
       return this.handleCatchErr(dbError);
@@ -260,7 +401,7 @@ class Service extends ServiceBase {
 
   async destroy(msg) {
     this.seneca.logger.info(msg);
-    const err = this.serviceUtil.isValidDataWhenRetrieve(msg.params);
+    const err = this.isValidDataWhenRetrieve(msg.params);
     if (err) {
       return err.toJson();
     }
@@ -271,12 +412,12 @@ class Service extends ServiceBase {
         return util.error404(this.errCode[404]);
       }
     
-      await this.serviceUtil.beforeDestroy(msg.params);
+      await this.beforeDestroy(msg.params);
       const delResult = await this.model.findByIdAndDelete(id);
       if (!delResult) {
         return util.error404(this.errCode[404]);
       }
-      await this.serviceUtil.afterDestroy(delResult, exist);
+      await this.afterDestroy(delResult, exist);
       await this.delCache(id);
       return util.responseSuccess(delResult);
     } catch (dbError) {
@@ -286,7 +427,7 @@ class Service extends ServiceBase {
 
   async list(msg) {
     this.seneca.logger.info(msg);
-    const err = this.serviceUtil.isValidQueryCondition(msg.params);
+    const err = this.isValidQueryCondition(msg.params);
     if (err) {
       return err.toJson();
     }
@@ -295,8 +436,8 @@ class Service extends ServiceBase {
         filter, sort, skip, pageSize, page, expand,
       } = util.convertPagination(msg.params);
 
-      const params = ServiceUtilBase.parseListQuery(
-        this.serviceUtil.convertQueryCriteria(filter),
+      const params = Service.parseListQuery(
+        this.convertQueryCriteria(filter),
         sort,
         skip,
         pageSize
@@ -305,7 +446,7 @@ class Service extends ServiceBase {
       this.appendInclude(params, expand);
 
       const result = await this.model.list(params);
-      const items = await this.serviceUtil.list2logic(result.rows, expand);
+      const items = await this.list2logic(result.rows, expand);
       return util.responseSuccess({
         items,
         total: result.count,
@@ -321,12 +462,12 @@ class Service extends ServiceBase {
 
   async count(msg) {
     this.seneca.logger.info(msg);
-    const err = this.serviceUtil.isValidQueryCondition(msg.params);
+    const err = this.isValidQueryCondition(msg.params);
     if (err) {
       return err.toJson();
     }
     try {
-      const query = ServiceUtilBase.parseQuery(this.serviceUtil.convertCountCriteria(msg.params))
+      const query = Service.parseQuery(this.convertCountCriteria(msg.params))
       const result = await this.model.count(query);
       return util.responseSuccess(result);
     } catch (dbError) {
@@ -336,18 +477,18 @@ class Service extends ServiceBase {
 
   async listAll(msg) {
     this.seneca.logger.info(msg);
-    const err = this.serviceUtil.isValidQueryCondition(msg.params);
+    const err = this.isValidQueryCondition(msg.params);
     if (err) {
       return err.toJson();
     }
     try {
       const { filter, expand } = util.convertPagination(msg.params);
-      const params = this.serviceUtil.convertQueryCriteria(filter);
-      const query = ServiceUtilBase.parseQuery(params);
+      const params = this.convertQueryCriteria(filter);
+      const query = Service.parseQuery(params);
       const tmpExpand = util.parseExpand(expand);
       this.appendInclude(query, tmpExpand);
       const result = await this.model.find(query);
-      const items = await this.serviceUtil.list2logic(result, tmpExpand);
+      const items = await this.list2logic(result, tmpExpand);
       return util.responseSuccess(items);
     } catch (dbError) {
       return this.handleCatchErr(dbError);
@@ -363,15 +504,15 @@ class Service extends ServiceBase {
       const { expand } = msg.params;
       delete msg.params.expand;
 
-      const params = this.serviceUtil.convertQueryCriteria(msg.params);
-      const query = ServiceUtilBase.parseQuery(params);
+      const params = this.convertQueryCriteria(msg.params);
+      const query = Service.parseQuery(params);
       const tmpExpand = util.parseExpand(expand);
       this.appendInclude(query, tmpExpand);
       const result = await this.model.findOne(query);
       if (!result) {
         return util.error404(this.errCode[404]);
       }
-      const data = await this.serviceUtil.db2logic(result, tmpExpand);
+      const data = await this.db2logic(result, tmpExpand);
       return util.responseSuccess(data);
     } catch (dbError) {
       return this.handleCatchErr(dbError);
@@ -384,12 +525,12 @@ class Service extends ServiceBase {
       const { expand } = msg.params;
       delete msg.params.expand;
       
-      const params = this.serviceUtil.convertQueryCriteria(msg.params);
-      const query = ServiceUtilBase.parseQuery(params);
+      const params = this.convertQueryCriteria(msg.params);
+      const query = Service.parseQuery(params);
       const tmpExpand = util.parseExpand(expand);
       this.appendInclude(query, tmpExpand);
       const result = await this.model.find(query);
-      const items = await this.serviceUtil.list2logic(result, tmpExpand);
+      const items = await this.list2logic(result, tmpExpand);
       return util.responseSuccess(items);
     } catch (dbError) {
       return this.handleCatchErr(dbError);
@@ -412,7 +553,7 @@ class Service extends ServiceBase {
       const tmpExpand = util.parseExpand(expand);
       this.appendInclude(query, tmpExpand);
       const result = await this.model.find(query);
-      const items = await this.serviceUtil.list2logic(result, tmpExpand);
+      const items = await this.list2logic(result, tmpExpand);
       return util.responseSuccess(items);
     } catch (dbError) {
       return this.handleCatchErr(dbError)

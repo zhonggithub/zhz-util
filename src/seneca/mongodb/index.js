@@ -5,18 +5,16 @@
  * Created Date: 2020-06-14 09:09:18
  * Author: Zz
  * -----
- * Last Modified: 2020-06-25 12:43:33
+ * Last Modified: 2020-07-01 13:50:18
  * Modified By: Zz
  * -----
  * Description:
  */
 
-const ServiceUtil = require('./ServiceUtil');
 const MongoosModel = require('./MongoosModel');
 const Service = require('./Service');
 
 module.exports = {
-  ServiceUtil,
   MongoosModel,
   Service,
 };

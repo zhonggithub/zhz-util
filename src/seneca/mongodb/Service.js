@@ -5,16 +5,22 @@
  * Created Date: 2020-06-25 12:28:46
  * Author: Zz
  * -----
- * Last Modified: 2020-06-26 19:39:50
+ * Last Modified: 2020-07-01 13:51:50
  * Modified By: Zz
  * -----
  * Description:
  */
 const ServiceImp = require('../ServiceImp')
 const util = require('../../util')
-const Pkg = require(`${process.cwd()}/package.json`);
 
 class MongodbService extends ServiceImp {
+  convertQueryCriteria(criteria, handle) {
+    const tmpCriteria = util.convertQueryCriteria(criteria, 'mongodb', handle);
+    return {
+      ...tmpCriteria.dstCriteria,
+      ...tmpCriteria.sourceCriteria,
+    };
+  }
   async logicDel(msg) {
     this.seneca.logger.info(msg);
     const err = this.serviceUtil.isValidDataWhenRetrieve(msg.params);

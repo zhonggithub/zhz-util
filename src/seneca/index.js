@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 23:37:20
  * Author: Zz
  * -----
- * Last Modified: 2020-06-25 12:32:55
+ * Last Modified: 2020-07-01 13:46:13
  * Modified By: Zz
  * -----
  * Description:
@@ -15,7 +15,6 @@ const ModelBase = require('./ModelBase');
 const RedisCache = require('./RedisCache');
 const ServiceImp = require('./ServiceImp');
 const ServiceBase = require('./ServiceBase');
-const ServiceUtilBase = require('./ServiceUtilBase');
 const mysqlSeneca = require('./mysql');
 const mongodbSeneca = require('./mongodb');
 
@@ -25,7 +24,6 @@ module.exports = {
   RedisCache,
   ServiceImp,
   ServiceBase,
-  ServiceUtilBase,
   mysqlSeneca,
   mongodbSeneca,
 }

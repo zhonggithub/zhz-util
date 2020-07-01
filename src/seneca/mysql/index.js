@@ -5,18 +5,16 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-06-25 12:43:16
+ * Last Modified: 2020-07-01 13:50:12
  * Modified By: Zz
  * -----
  * Description:
  */
 
-const ServiceUtil = require('./ServiceUtil');
 const SequelizeModel = require('./SequelizeModel');
 const Service = require('./Service');
 
 module.exports = {
-  ServiceUtil,
   SequelizeModel,
   Service,
 };
