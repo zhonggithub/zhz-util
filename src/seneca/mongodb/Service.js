@@ -5,7 +5,7 @@
  * Created Date: 2020-06-25 12:28:46
  * Author: Zz
  * -----
- * Last Modified: 2020-07-01 13:51:50
+ * Last Modified: 2020-07-02 21:58:26
  * Modified By: Zz
  * -----
  * Description:
@@ -23,7 +23,7 @@ class MongodbService extends ServiceImp {
   }
   async logicDel(msg) {
     this.seneca.logger.info(msg);
-    const err = this.serviceUtil.isValidDataWhenRetrieve(msg.params);
+    const err = this.isValidDataWhenRetrieve(msg.params);
     if (err) {
       return err.toJson();
     }
@@ -33,11 +33,11 @@ class MongodbService extends ServiceImp {
         return util.error404(this.errCode[404]);
       }
     
-      await this.serviceUtil.beforeDestroy(msg.params);
+      await this.beforeDestroy(msg.params);
       const delResult = await this.model.findByIdAndUpdate(
         msg.params.id, { deleteFlag: 1 },
       );
-      await this.serviceUtil.afterDestroy(delResult, exist);
+      await this.afterDestroy(delResult, exist);
 
       await this.delCache(msg.params.id);
       return util.responseSuccess(delResult);
