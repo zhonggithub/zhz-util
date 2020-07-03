@@ -5,7 +5,7 @@
  * Created Date: 2020-07-03 13:07:57
  * Author: Zz
  * -----
- * Last Modified: 2020-07-03 14:35:30
+ * Last Modified: 2020-07-03 14:38:28
  * Modified By: Zz
  * -----
  * Description:
@@ -15,7 +15,7 @@ const dataTypes = require('zh-cli');
 const DataTypes = dataTypes.nodejs;
 
 module.exports = {
-  name: 'ServiceModel',
+  name: 'ModelBase',
   desc: '框架model基类，用不同的orm实现db操作继承该类并实现相应的方法',
 
   constructor: {

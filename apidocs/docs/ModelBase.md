@@ -1,4 +1,4 @@
-# ServiceModel
+# ModelBase
 框架model基类，用不同的orm实现db操作继承该类并实现相应的方法
 
 ## constructor
