@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-06-17 09:43:16
+ * Last Modified: 2020-07-03 08:27:55
  * Modified By: Zz
  * -----
  * Description: ServiceBase为Service抽象接口类
@@ -71,6 +71,7 @@ class ServiceBase {
       create, retrieve, update, updateStatus,
       list, count, listAll, findOne, logicDel,
       destroy, treeList, findAll, findByIds,
+      didLoadCmd
     } = this;
 
     const cmd = {
@@ -101,6 +102,10 @@ class ServiceBase {
         }, v.bind(this));
       }
     });
+
+    if (didLoadCmd && util.isFunction(didLoadCmd)) {
+      didLoadCmd()
+    }
   }
 
   addAsync(cmdName, func) {
