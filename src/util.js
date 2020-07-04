@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: 2020-06-30 22:59:11
+ * Last Modified: 2020-07-04 09:00:52
  * Modified By: Zz
  * -----
  * Description:
@@ -547,9 +547,9 @@ module.exports = {
     if (!unixTimestamp) return moment().utc().toDate();
     return moment.utc(unixTimestamp * 1000).toDate();
   },
-  dateStrToDate(dateStr) {
+  dateStrToDate(dateStr, style = 'YYYY-MM-DD HH:mm:ss') {
     if (!dateStr) return moment().utc().toDate();
-    return moment(dateStr).utc().toDate();
+    return moment(dateStr, style).utc().toDate();
   },
   
   delay(sec = 0.1) {
