@@ -5,7 +5,7 @@
  * Created Date: 2020-06-14 15:35:22
  * Author: Zz
  * -----
- * Last Modified: 2020-07-04 11:12:09
+ * Last Modified: 2020-07-04 11:13:51
  * Modified By: Zz
  * -----
  * Description:
@@ -373,6 +373,7 @@ module.exports = {
       id: {
         type: DataTypes.String,
         desc: '资源id',
+        required: true,
       },
       expand: {
         type: DataTypes.Object,
