@@ -1,0 +1,1694 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../favicon.ico">
+  
+  <title>util - seneca</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "util";
+    var mkdocs_page_input_path = "util.md";
+    var mkdocs_page_url = "/util/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../ModelBase/" class="icon icon-home"> seneca</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../ModelBase/">ModelBase</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Service/">Service</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../ServiceBase/">ServiceBase</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">util</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#util">util</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#isfunction">isFunction</a></li>
+        
+            <li><a class="toctree-l3" href="#md5">md5</a></li>
+        
+            <li><a class="toctree-l3" href="#toline">toLine</a></li>
+        
+            <li><a class="toctree-l3" href="#gtelte">gteLte</a></li>
+        
+            <li><a class="toctree-l3" href="#gtlte">gtLte</a></li>
+        
+            <li><a class="toctree-l3" href="#gtelt">gteLt</a></li>
+        
+            <li><a class="toctree-l3" href="#gtlt">gtLt</a></li>
+        
+            <li><a class="toctree-l3" href="#invalue">inValue</a></li>
+        
+            <li><a class="toctree-l3" href="#notinvalue">notInValue</a></li>
+        
+            <li><a class="toctree-l3" href="#tohump">toHump</a></li>
+        
+            <li><a class="toctree-l3" href="#fistletterupper">fistLetterUpper</a></li>
+        
+            <li><a class="toctree-l3" href="#fistletterlower">fistLetterLower</a></li>
+        
+            <li><a class="toctree-l3" href="#response">response</a></li>
+        
+            <li><a class="toctree-l3" href="#responsesuccess">responseSuccess</a></li>
+        
+            <li><a class="toctree-l3" href="#randomint">randomInt</a></li>
+        
+            <li><a class="toctree-l3" href="#randomstr">randomStr</a></li>
+        
+            <li><a class="toctree-l3" href="#caclerise">cacleRise</a></li>
+        
+            <li><a class="toctree-l3" href="#filterdata">filterData</a></li>
+        
+            <li><a class="toctree-l3" href="#parseexpand">parseExpand</a></li>
+        
+            <li><a class="toctree-l3" href="#convertquerycriteria">convertQueryCriteria</a></li>
+        
+            <li><a class="toctree-l3" href="#israngequery">isRangeQuery</a></li>
+        
+            <li><a class="toctree-l3" href="#isvaliddata">isValidData</a></li>
+        
+            <li><a class="toctree-l3" href="#isint">isInt</a></li>
+        
+            <li><a class="toctree-l3" href="#notemptystr">notEmptyStr</a></li>
+        
+            <li><a class="toctree-l3" href="#isvalueof">isValueOf</a></li>
+        
+            <li><a class="toctree-l3" href="#avatest">avaTest</a></li>
+        
+            <li><a class="toctree-l3" href="#utctodate">utcToDate</a></li>
+        
+            <li><a class="toctree-l3" href="#datestrtodate">dateStrToDate</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Overview</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../ModelBase/">seneca</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../ModelBase/">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>util</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="util">util</h1>
+<p>工具类函数</p>
+<h2 id="isfunction">isFunction</h2>
+<p><code>isFunction (funcName)</code></p>
+<p>判断一个值或对象是否是函数</p>
+<h3 id="_1">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>funcName</td>
+<td>any</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_2">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bo</td>
+<td>Boolean</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="md5">md5</h2>
+<p><code>md5 (text)</code></p>
+<p>对一个字符串进行md5。</p>
+<h3 id="_3">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>text</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td>字符串</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_4">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>text</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td>形参为非字符串，返回空的字符串。否则返回md5值</td>
+</tr>
+</tbody>
+</table>
+<h2 id="toline">toLine</h2>
+<p><code>toLine (val)</code></p>
+<p>驼峰转下划线</p>
+<h3 id="_5">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>val</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_6">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>val</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="gtelte">gteLte</h2>
+<p><code>gteLte (val1, val2)</code></p>
+<p>转换成框架的大于等于，小于等于</p>
+<h3 id="_7">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>val1</td>
+<td>String, Number</td>
+<td>否</td>
+<td>无</td>
+<td>大于等于该值</td>
+</tr>
+<tr>
+<td>val2</td>
+<td>String, Number</td>
+<td>否</td>
+<td>无</td>
+<td>小于等于该值</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_8">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>val</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="gtlte">gtLte</h2>
+<p><code>gtLte (val1, val2)</code></p>
+<p>转换成框架的大于，小于等于</p>
+<h3 id="_9">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>val1</td>
+<td>String, Number</td>
+<td>否</td>
+<td>无</td>
+<td>大于该值</td>
+</tr>
+<tr>
+<td>val2</td>
+<td>String, Number</td>
+<td>否</td>
+<td>无</td>
+<td>小于等于该值</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_10">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>val</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="gtelt">gteLt</h2>
+<p><code>gteLt (val1, val2)</code></p>
+<p>转换成框架的大于等于，小于</p>
+<h3 id="_11">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>val1</td>
+<td>String, Number</td>
+<td>否</td>
+<td>无</td>
+<td>大于等于该值</td>
+</tr>
+<tr>
+<td>val2</td>
+<td>String, Number</td>
+<td>否</td>
+<td>无</td>
+<td>小于</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_12">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>val</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="gtlt">gtLt</h2>
+<p><code>gtLt (val1, val2)</code></p>
+<p>转换成框架的大于，小于</p>
+<h3 id="_13">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>val1</td>
+<td>String, Number</td>
+<td>否</td>
+<td>无</td>
+<td>大于该值</td>
+</tr>
+<tr>
+<td>val2</td>
+<td>String, Number</td>
+<td>否</td>
+<td>无</td>
+<td>小于该值</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_14">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>val</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="invalue">inValue</h2>
+<p><code>inValue (val)</code></p>
+<p>转换成框架的in查询语句</p>
+<h3 id="_15">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>val</td>
+<td>String, Array</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_16">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>val</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="notinvalue">notInValue</h2>
+<p><code>notInValue (val)</code></p>
+<p>转换成框架的not in查询语句</p>
+<h3 id="_17">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>val</td>
+<td>String, Array</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_18">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>val</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="tohump">toHump</h2>
+<p><code>toHump (val)</code></p>
+<p>下划线转小驼峰</p>
+<h3 id="_19">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>val</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_20">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>val</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="fistletterupper">fistLetterUpper</h2>
+<p><code>fistLetterUpper (val)</code></p>
+<p>首字母大写</p>
+<h3 id="_21">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>val</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_22">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>val</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="fistletterlower">fistLetterLower</h2>
+<p><code>fistLetterLower (val)</code></p>
+<p>首字母小写</p>
+<h3 id="_23">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>val</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_24">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>val</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="response">response</h2>
+<p><code>response (code, message, data, status)</code></p>
+<p>包装api返回数据</p>
+<h3 id="_25">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>code</td>
+<td>Number, String</td>
+<td>否</td>
+<td>无</td>
+<td>成功时为0，否则为错误编码</td>
+</tr>
+<tr>
+<td>message</td>
+<td>String</td>
+<td>否</td>
+<td>SUCCESS</td>
+<td></td>
+</tr>
+<tr>
+<td>data</td>
+<td>Number, String, Object</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>status</td>
+<td>Number</td>
+<td>是</td>
+<td>无</td>
+<td>http 状态码</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_26">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>code</td>
+<td>Number, String</td>
+<td>否</td>
+<td>无</td>
+<td>成功时为0，否则为错误编码</td>
+</tr>
+<tr>
+<td>message</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>data</td>
+<td>Number, String, Object</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>status</td>
+<td>Number</td>
+<td>是</td>
+<td>无</td>
+<td>http 状态码</td>
+</tr>
+</tbody>
+</table>
+<h2 id="responsesuccess">responseSuccess</h2>
+<p><code>responseSuccess (data, message)</code></p>
+<p>包装api 成功时返回数据</p>
+<h3 id="_27">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>data</td>
+<td>Number, String, Object</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>message</td>
+<td>String</td>
+<td>否</td>
+<td>SUCCESS</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_28">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>code</td>
+<td>Number, String</td>
+<td>否</td>
+<td>无</td>
+<td>成功时为0，否则为错误编码</td>
+</tr>
+<tr>
+<td>message</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>data</td>
+<td>Number, String, Object</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>status</td>
+<td>Number</td>
+<td>是</td>
+<td>无</td>
+<td>http 状态码</td>
+</tr>
+</tbody>
+</table>
+<h2 id="randomint">randomInt</h2>
+<p><code>randomInt (min, max)</code></p>
+<p>随机整数</p>
+<h3 id="_29">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>min</td>
+<td>Number</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>max</td>
+<td>Number</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_30">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>val</td>
+<td>Number</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="randomstr">randomStr</h2>
+<p><code>randomStr (places)</code></p>
+<p>随机一个数字字符串</p>
+<h3 id="_31">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>places</td>
+<td>Number</td>
+<td>是</td>
+<td>16</td>
+<td>位数</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_32">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>val</td>
+<td>Number</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="caclerise">cacleRise</h2>
+<p><code>cacleRise (value, preValue)</code></p>
+<p>计算百分比增长率</p>
+<h3 id="_33">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>value</td>
+<td>Number</td>
+<td>是</td>
+<td>无</td>
+<td>当前值</td>
+</tr>
+<tr>
+<td>preValue</td>
+<td>Number</td>
+<td>是</td>
+<td>无</td>
+<td>对比值</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_34">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>val</td>
+<td>Number</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="filterdata">filterData</h2>
+<p><code>filterData (data, excludeAttribute)</code></p>
+<p>过滤属性值</p>
+<h3 id="_35">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>data</td>
+<td>Object</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>excludeAttribute</td>
+<td>Array</td>
+<td>是</td>
+<td>无</td>
+<td>过滤的属性数组</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_36">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>data</td>
+<td>Object</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="parseexpand">parseExpand</h2>
+<p><code>parseExpand (expand)</code></p>
+<p>解析expand字符串，转换对象</p>
+<h3 id="_37">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>expand</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td>a,b,c格式的字符串</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_38">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>val</td>
+<td>Object</td>
+<td>否</td>
+<td>无</td>
+<td>{a: true, b: true, c: true}</td>
+</tr>
+</tbody>
+</table>
+<h2 id="convertquerycriteria">convertQueryCriteria</h2>
+<p><code>convertQueryCriteria (querycriteria, dbType, handle)</code></p>
+<p>把逻辑层的查询条件转成db层的查询条件。默认会处理范围查找的条件。</p>
+<h3 id="_39">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>querycriteria</td>
+<td>Object</td>
+<td>是</td>
+<td>无</td>
+<td>查询条件</td>
+</tr>
+<tr>
+<td>dbType</td>
+<td>String</td>
+<td>否</td>
+<td>mysql</td>
+<td>db类型。mongodb</td>
+</tr>
+<tr>
+<td>handle</td>
+<td>Function</td>
+<td>否</td>
+<td>无</td>
+<td>自定义处理函数。接收参数：(key, value, distData)。处理成功时把数据填在distData并返回ture, 否则返回false</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_40">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>data</td>
+<td>Object</td>
+<td>否</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>data.dstCriteria</td>
+<td>Object</td>
+<td>否</td>
+<td>无</td>
+<td>已处理的完成的查询条件</td>
+</tr>
+<tr>
+<td>data.sourceCriteria</td>
+<td>Object</td>
+<td>否</td>
+<td>无</td>
+<td>未处理处理的完成的查询条件</td>
+</tr>
+</tbody>
+</table>
+<h2 id="israngequery">isRangeQuery</h2>
+<p><code>isRangeQuery (value)</code></p>
+<p>判断一个字符串是否是范围字符串</p>
+<h3 id="_41">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>value</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_42">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bo</td>
+<td>Boolean</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="isvaliddata">isValidData</h2>
+<p><code>isValidData (data, requiredParams, fieldVerfiyFunc, missingPrefix, invalidePrefix)</code></p>
+<p>验证数据的合法性和有效性</p>
+<h3 id="_43">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>data</td>
+<td>Object</td>
+<td>是</td>
+<td>无</td>
+<td>待验证的数据</td>
+</tr>
+<tr>
+<td>requiredParams</td>
+<td>String[]</td>
+<td>否</td>
+<td>无</td>
+<td>合法性校验。校验必备参数</td>
+</tr>
+<tr>
+<td>fieldVerfiyFunc</td>
+<td>Object</td>
+<td>否</td>
+<td>无</td>
+<td>参数有效性校验。{ field1: val =&gt; func(val), field2: val =&gt; func2(val), ... }</td>
+</tr>
+<tr>
+<td>missingPrefix</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td>合法性校验失败后添加的code前缀。</td>
+</tr>
+<tr>
+<td>invalidePrefix</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td>有效性校验失败后添加的code前缀。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_44">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>error</td>
+<td>ZError</td>
+<td>否</td>
+<td>无</td>
+<td>校验失败返回ZError对象，否则返回null</td>
+</tr>
+</tbody>
+</table>
+<h2 id="isint">isInt</h2>
+<p><code>isInt (val, strong)</code></p>
+<p>判断一个值是否为整数或整数字符串</p>
+<h3 id="_45">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>val</td>
+<td>Any</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>strong</td>
+<td>Boolean</td>
+<td>否</td>
+<td>无</td>
+<td>是否开启强认证。true表示认证val必须是数字，否则数字字符串也可以</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_46">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bo</td>
+<td>Boolean</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="notemptystr">notEmptyStr</h2>
+<p><code>notEmptyStr (val)</code></p>
+<p>判断一个值是否为非空符串。如果是非空字符串，返回true，否则返回false</p>
+<h3 id="_47">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>val</td>
+<td>Any</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_48">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bo</td>
+<td>Boolean</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="isvalueof">isValueOf</h2>
+<p><code>isValueOf (actualValue, expectedValues)</code></p>
+<p>判断一个值是否在期望值之内。如果actualValue和expectedValues都是Number、Boolean、String类型，采用<code>===</code>比较。如果expectedValues是Array或Object类型。则判断actualValue值是否是存在数组或Object.values(expectedValues)中</p>
+<h3 id="_49">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>actualValue</td>
+<td>Number，Boolean，String</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>expectedValues</td>
+<td>Number，Boolean，String，Array，Object</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_50">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bo</td>
+<td>Boolean</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="avatest">avaTest</h2>
+<p><code>avaTest (t, actual, expected, expand)</code></p>
+<p>测试 { ...expected, ...expand } 属性值和actual是否一致。</p>
+<h3 id="_51">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>t</td>
+<td>Test</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>actual</td>
+<td>Any</td>
+<td>是</td>
+<td>无</td>
+<td>实际值</td>
+</tr>
+<tr>
+<td>expected</td>
+<td>Any</td>
+<td>是</td>
+<td>无</td>
+<td>期望值</td>
+</tr>
+<tr>
+<td>expand</td>
+<td>Any</td>
+<td>否</td>
+<td>无</td>
+<td>期望值</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_52">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bo</td>
+<td>Boolean</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="utctodate">utcToDate</h2>
+<p><code>utcToDate (unixTimestamp)</code></p>
+<p>unix时间戳转Date</p>
+<h3 id="_53">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>unixTimestamp</td>
+<td>Number</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_54">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>date</td>
+<td>Date</td>
+<td>否</td>
+<td>current date</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="datestrtodate">dateStrToDate</h2>
+<p><code>dateStrToDate (dateStr)</code></p>
+<p>日期字符串转utc Date</p>
+<h3 id="_55">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dateStr</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_56">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>date</td>
+<td>Date</td>
+<td>否</td>
+<td>current date</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href=".." class="btn btn-neutral float-right" title="Overview">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../ServiceBase/" class="btn btn-neutral" title="ServiceBase"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>© Zz</p>
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../ServiceBase/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href=".." style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../js/theme.js"></script>
+
+</body>
+</html>
