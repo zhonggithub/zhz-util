@@ -352,13 +352,13 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 ## getCacheKey
 ` getCacheKey (id, expand, full)`
 
-根据id, include生成缓存key
+根据id, expand生成缓存key
 
 ### 参数
 
 |参数|类型|必填|默认值|描述|
 |--- | --- | --- | --- | ---|
-|id | String | 否 | 无 | 资源id|
+|id | String | 是 | 无 | 资源id|
 |expand | Object | 否 | 无 | 指定的子资源|
 |full | Boolean | 否 | 无 | true: 表示获取包括redis keyPrefix及框架生成的key组合的完整key。false: 表示获取框架生成的key|
 
@@ -368,6 +368,18 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 |参数|类型|必填|默认值|描述|
 |--- | --- | --- | --- | ---|
 |key | String | 否 | 无 | 缓存key|
+
+
+## getCacheTTL
+` getCacheTTL ()`
+
+获取缓存时间
+
+### 返回值
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|ttl | Number | 否 | 无 | 缓存时间|
 
 
 ## delCache

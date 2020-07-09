@@ -5,7 +5,7 @@
  * Created Date: 2020-06-14 15:35:22
  * Author: Zz
  * -----
- * Last Modified: 2020-07-04 11:13:51
+ * Last Modified: 2020-07-09 10:58:08
  * Modified By: Zz
  * -----
  * Description:
@@ -391,6 +391,16 @@ module.exports = {
         type: DataTypes.String,
         desc: '缓存key',
       },
+    }
+  },
+  getCacheTTL: {
+    desc: '获取缓存时间',
+    params: {},
+    returns: {
+      ttl: {
+        type: DataTypes.Number,
+        desc: '缓存时间',
+      }
     }
   },
  

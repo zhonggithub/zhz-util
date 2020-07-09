@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-07-01 13:43:45
+ * Last Modified: 2020-07-09 10:54:58
  * Modified By: Zz
  * -----
  * Description:
@@ -89,7 +89,7 @@ class Service extends ServiceBase {
           return 60;
       }
     }
-    return parseInt(this.CacheTTLEnum || 60, 10);
+    return parseInt(this.cacheTTL || 60, 10);
   }
 
   handleCatchErr(err) {
