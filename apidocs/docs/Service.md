@@ -428,7 +428,15 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 ## retrieve
 `async retrieve ({ id, expand })`
 
-根据id获取资源详情。retrieve执行流程：1，isValidDataWhenRetrieve。2，parseExpand2Include2Include。3，findById。4，db2logic。retrieve会根据expand的不同生成不同缓存。
+根据id获取资源详情。retrieve执行流程：
+
+ * 1，isValidDataWhenRetrieve。
+
+ * 2，parseExpand2Include2Include。
+
+ * 3，findById。
+
+ * 4，db2logic。retrieve会根据expand的不同生成不同缓存。
 
  * 如果没有指定expand, 缓存只包含资源id的数据。
  * 如果指定了expand, 缓存包含资源id的数据及指定子资源的数据。
