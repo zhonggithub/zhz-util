@@ -18,8 +18,8 @@
 |opt | Object | 否 | true | 默认api开启配置。false：不加载任何默认api；true：加载所有默认api；json对象表示加载对应的操作|
 
 
-## parseExpand2Include
-` parseExpand2Include (expand)`
+## parseExpand2Include2Include
+` parseExpand2Include2Include (expand)`
 
 解析expand: { a: true, b: true ....}。该函数会在读操作：retrieve，list，listAll，findOne，findAll，findByIds之前调用。
 
@@ -201,7 +201,7 @@ db层数据转逻辑层数据
 |参数|类型|必填|默认值|描述|
 |--- | --- | --- | --- | ---|
 |data | Object | 否 | 无 | 传入的db层的数据|
-|expand | Function | 否 | 无 | 获取指定资源的数据。{a: true, b: true}。如果是同一个service的model可以在parseExpand2Include返回include，如果跨service的资源获取，在此处实现获取逻辑|
+|expand | Function | 否 | 无 | 获取指定资源的数据。{a: true, b: true}。如果是同一个service的model可以在parseExpand2Include2Include返回include，如果跨service的资源获取，在此处实现获取逻辑|
 
 
 ### 返回值
@@ -428,7 +428,7 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 ## retrieve
 `async retrieve ({ id, expand })`
 
-根据id获取资源详情。retrieve会根据expand的不同生成不同缓存。
+根据id获取资源详情。retrieve执行流程：1，isValidDataWhenRetrieve。2，parseExpand2Include2Include。3，findById。4，db2logic。retrieve会根据expand的不同生成不同缓存。
 
  * 如果没有指定expand, 缓存只包含资源id的数据。
  * 如果指定了expand, 缓存包含资源id的数据及指定子资源的数据。
@@ -451,7 +451,7 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 ## update
 `async update ({ id, fields })`
 
-根据id更新数据
+根据id更新数据。update执行流程：1，isValidDataWhenRetrieve。2，logic2DBWhenUpdate。3，beforeUpdate。4，findByIdAndUpdate。5，afterUpdate。6，delCache。7，db2logic
 
 ### 参数
 
@@ -471,7 +471,7 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 ## updateStatus
 `async updateStatus ({ id, status })`
 
-根据id更新状态
+根据id更新状态。1，isValidDataWhenUpdateStatus。2，beforeUpdateStatus。3，beforeUpdateStatus。4，findByIdAndUpdate。5，afterUpdateStatus
 
 ### 参数
 
@@ -488,10 +488,22 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 |data | Object | 是 | 无 | |
 
 
+## destroy
+`async destroy ({ id })`
+
+根据id删除一条数据。1，isValidDataWhenRetrieve。2，beforeDestroy。3，findByIdAndDelete。4，afterDestroy。5，delCache
+
+### 参数
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|id | String | 否 | 无 | 资源id|
+
+
 ## list
 `async list ({ page, pageSize, limit, offset, sort, search, expand })`
 
-列表
+列表及分页。1，isValidQueryCondition。2，convertQueryCriteria。3，parseExpand2Include。4，list。5，list2logic
 
 ### 参数
 
@@ -521,7 +533,7 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 ## count
 `async count (query)`
 
-根据条件统计数量
+根据条件统计数量。1，isValidQueryCondition。2，convertCountCriteria。3，count
 
 ### 参数
 
@@ -540,7 +552,7 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 ## listAll
 `async listAll ({ ...query, expand })`
 
-根据条件返回所有数据
+根据条件返回所有数据。1，isValidQueryCondition。2，convertQueryCriteria。3，parseExpand2Include。4，find。5, list2logic
 
 ### 参数
 
@@ -560,7 +572,7 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 ## findOne
 `async findOne ({ ...query, expand })`
 
-根据条件返回一条数据
+根据条件返回一条数据。1，convertQueryCriteria。2，parseExpand2Include。3，findOne。4，db2logic
 
 ### 参数
 
@@ -577,22 +589,10 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 |data | Object | 否 | 无 | |
 
 
-## destroy
-`async destroy ({ id })`
-
-根据id删除一条数据
-
-### 参数
-
-|参数|类型|必填|默认值|描述|
-|--- | --- | --- | --- | ---|
-|id | String | 否 | 无 | 资源id|
-
-
 ## findAll
 `async findAll ({ ...query, expand })`
 
-根据条件返回所有数据
+根据条件返回所有数据。1，convertQueryCriteria。2，parseExpand2Include。3，find。4，list2logic
 
 ### 参数
 
@@ -612,7 +612,7 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 ## findByIds
 `async findByIds ({ ids, expand })`
 
-根据id返回所有数据
+根据id返回所有数据。1，parseExpand2Include。2，find。3，list2logic
 
 ### 参数
 

@@ -5,7 +5,7 @@
  * Created Date: 2020-06-14 15:35:22
  * Author: Zz
  * -----
- * Last Modified: 2020-07-09 10:58:08
+ * Last Modified: 2020-07-09 13:10:20
  * Modified By: Zz
  * -----
  * Description:
@@ -53,7 +53,7 @@ module.exports = {
     }
   },
 
-  parseExpand2Include: {
+  parseExpand2Include2Include: {
     description: '解析expand: { a: true, b: true ....}。该函数会在读操作：retrieve，list，listAll，findOne，findAll，findByIds之前调用。',
     params: {
       expand: {
@@ -218,7 +218,7 @@ module.exports = {
       },
       expand: {
         type: DataTypes.Function,
-        description: '获取指定资源的数据。{a: true, b: true}。如果是同一个service的model可以在parseExpand2Include返回include，如果跨service的资源获取，在此处实现获取逻辑'
+        description: '获取指定资源的数据。{a: true, b: true}。如果是同一个service的model可以在parseExpand2Include2Include返回include，如果跨service的资源获取，在此处实现获取逻辑'
       }
     },
     returns: {
@@ -441,7 +441,7 @@ module.exports = {
   },
 
   retrieve: {
-    desc: '根据id获取资源详情。retrieve会根据expand的不同生成不同缓存。\r\n\r\n * 如果没有指定expand, 缓存只包含资源id的数据。\r\n * 如果指定了expand, 缓存包含资源id的数据及指定子资源的数据。',
+    desc: '根据id获取资源详情。retrieve执行流程：1，isValidDataWhenRetrieve。2，parseExpand2Include2Include。3，findById。4，db2logic。retrieve会根据expand的不同生成不同缓存。\r\n\r\n * 如果没有指定expand, 缓存只包含资源id的数据。\r\n * 如果指定了expand, 缓存包含资源id的数据及指定子资源的数据。',
     paramsIsObject: true,
     funcType: DataTypes.FuncType.kAsync,
     params: {
@@ -465,7 +465,7 @@ module.exports = {
   },
 
   update: {
-    desc: '根据id更新数据',
+    desc: '根据id更新数据。update执行流程：1，isValidDataWhenRetrieve。2，logic2DBWhenUpdate。3，beforeUpdate。4，findByIdAndUpdate。5，afterUpdate。6，delCache。7，db2logic',
     paramsIsObject: true,
     funcType: DataTypes.FuncType.kAsync,
     params: {
@@ -489,7 +489,7 @@ module.exports = {
   },
 
   updateStatus: {
-    desc: '根据id更新状态',
+    desc: '根据id更新状态。1，isValidDataWhenUpdateStatus。2，beforeUpdateStatus。3，beforeUpdateStatus。4，findByIdAndUpdate。5，afterUpdateStatus',
     paramsIsObject: true,
     funcType: DataTypes.FuncType.kAsync,
     params: {
@@ -511,9 +511,20 @@ module.exports = {
       }
     },
   },
+  destroy: {
+    desc: '根据id删除一条数据。1，isValidDataWhenRetrieve。2，beforeDestroy。3，findByIdAndDelete。4，afterDestroy。5，delCache',
+    funcType: DataTypes.FuncType.kAsync,
+    paramsIsObject: true,
+    params: {
+      id: {
+        type: DataTypes.String,
+        comment: '资源id',
+      },
+    }
+  },
   
   list: {
-    desc: '列表',
+    desc: '列表及分页。1，isValidQueryCondition。2，convertQueryCriteria。3，parseExpand2Include。4，list。5，list2logic',
     paramsIsObject: true,
     funcType: DataTypes.FuncType.kAsync,
     params: {
@@ -584,7 +595,7 @@ module.exports = {
   },
 
   count: {
-    desc: '根据条件统计数量',
+    desc: '根据条件统计数量。1，isValidQueryCondition。2，convertCountCriteria。3，count',
     funcType: DataTypes.FuncType.kAsync,
     params: {
       query: {
@@ -602,7 +613,7 @@ module.exports = {
   },
 
   listAll: {
-    desc: '根据条件返回所有数据',
+    desc: '根据条件返回所有数据。1，isValidQueryCondition。2，convertQueryCriteria。3，parseExpand2Include。4，find。5, list2logic',
     funcType: DataTypes.FuncType.kAsync,
     paramsIsObject: true,
     params: {
@@ -623,7 +634,7 @@ module.exports = {
   },
 
   findOne: {
-    desc: '根据条件返回一条数据',
+    desc: '根据条件返回一条数据。1，convertQueryCriteria。2，parseExpand2Include。3，findOne。4，db2logic',
     funcType: DataTypes.FuncType.kAsync,
     paramsIsObject: true,
     params: {
@@ -643,20 +654,8 @@ module.exports = {
     }
   },
 
-  destroy: {
-    desc: '根据id删除一条数据',
-    funcType: DataTypes.FuncType.kAsync,
-    paramsIsObject: true,
-    params: {
-      id: {
-        type: DataTypes.String,
-        comment: '资源id',
-      },
-    }
-  },
-
   findAll: {
-    desc: '根据条件返回所有数据',
+    desc: '根据条件返回所有数据。1，convertQueryCriteria。2，parseExpand2Include。3，find。4，list2logic',
     paramsIsObject: true,
     funcType: DataTypes.FuncType.kAsync,
     params: {
@@ -677,7 +676,7 @@ module.exports = {
   },
 
   findByIds: {
-    desc: '根据id返回所有数据',
+    desc: '根据id返回所有数据。1，parseExpand2Include。2，find。3，list2logic',
     paramsIsObject: true,
     funcType: DataTypes.FuncType.kAsync,
     params: {
