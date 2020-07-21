@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:42
  * Author: Zz
  * -----
- * Last Modified: 2020-07-21 15:20:51
+ * Last Modified: 2020-07-21 15:52:24
  * Modified By: Zz
  * -----
  * Description:
@@ -15,7 +15,6 @@ const util = require('./util');
 const seneca = require('./seneca');
 
 const setLocal = function(lang, local) {
-  console.log(lang, local)
   zerror.setLocal(lang, local);
 }
 
