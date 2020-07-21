@@ -562,3 +562,113 @@ unix时间戳转Date
 |--- | --- | --- | --- | ---|
 |date | Date | 否 | current date | |
 
+
+## zerror400
+` zerror400 (name, code, message, desc)`
+
+参数错误对象，对应http code 为400
+
+### 参数
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|name | String | 是 | 无 | |
+|code | String | 是 | 无 | |
+|message | String | 否 | 无 | |
+|desc | String | 否 | 无 | |
+
+
+### 返回值
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|zerror | Object | 否 | 无 | ZError对象|
+
+
+## zerror409
+` zerror409 (name, code, message, desc)`
+
+参数错误对象，对应http code 为409
+
+### 参数
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|name | String | 是 | 无 | |
+|code | String | 是 | 无 | |
+|message | String | 否 | 无 | |
+|desc | String | 否 | 无 | |
+
+
+### 返回值
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|zerror | Object | 否 | 无 | ZError对象|
+
+
+## zerror404
+` zerror404 (name, code, message, desc)`
+
+参数错误对象，对应http code 为404
+
+### 参数
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|name | String | 是 | 无 | |
+|code | String | 是 | 无 | |
+|message | String | 否 | 无 | |
+|desc | String | 否 | 无 | |
+
+
+### 返回值
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|zerror | Object | 否 | 无 | ZError对象|
+
+
+## zerror422
+` zerror422 (name, code, message, desc)`
+
+参数错误对象，对应http code 为422
+
+### 参数
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|name | String | 是 | 无 | |
+|code | String | 是 | 无 | |
+|message | String | 否 | 无 | |
+|desc | String | 否 | 无 | |
+
+
+### 返回值
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|zerror | Object | 否 | 无 | ZError对象|
+
+
+## zerror500
+` zerror500 (name, code, message, desc)`
+
+参数错误对象，对应http code 为500
+
+### 参数
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|name | String | 是 | 无 | |
+|code | String | 是 | 无 | |
+|message | String | 否 | 无 | |
+|desc | String | 否 | 无 | |
+
+
+### 返回值
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|zerror | Object | 否 | 无 | ZError对象|
+

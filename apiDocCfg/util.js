@@ -5,7 +5,7 @@
  * Created Date: 2020-06-17 13:24:59
  * Author: Zz
  * -----
- * Last Modified: 2020-06-27 11:29:04
+ * Last Modified: 2020-07-21 13:55:29
  * Modified By: Zz
  * -----
  * Description:
@@ -587,7 +587,133 @@ module.exports = {
         type: DataTypes.Date,
         defaultValue: 'current date'
       }
-    }, 
+    },
+  },
+
+  zerror400: {
+    description: '参数错误对象，对应http code 为400',
+    params: {
+      name: {
+        type: DataTypes.String,
+        required: true,
+      },
+      code: {
+        type: DataTypes.String,
+        required: true,
+      },
+      message: {
+        type: DataTypes.String,
+      },
+      desc: {
+        type: DataTypes.String,
+      }
+    },
+    returns: {
+      zerror: {
+        type: DataTypes.Object,
+        desc: 'ZError对象',
+      }
+    },
+  },
+  zerror409: {
+    description: '参数错误对象，对应http code 为409',
+    params: {
+      name: {
+        type: DataTypes.String,
+        required: true,
+      },
+      code: {
+        type: DataTypes.String,
+        required: true,
+      },
+      message: {
+        type: DataTypes.String,
+      },
+      desc: {
+        type: DataTypes.String,
+      }
+    },
+    returns: {
+      zerror: {
+        type: DataTypes.Object,
+        desc: 'ZError对象',
+      }
+    },
+  },
+  zerror404: {
+    description: '参数错误对象，对应http code 为404',
+    params: {
+      name: {
+        type: DataTypes.String,
+        required: true,
+      },
+      code: {
+        type: DataTypes.String,
+        required: true,
+      },
+      message: {
+        type: DataTypes.String,
+      },
+      desc: {
+        type: DataTypes.String,
+      }
+    },
+    returns: {
+      zerror: {
+        type: DataTypes.Object,
+        desc: 'ZError对象',
+      }
+    },
+  },
+  zerror422: {
+    description: '参数错误对象，对应http code 为422',
+    params: {
+      name: {
+        type: DataTypes.String,
+        required: true,
+      },
+      code: {
+        type: DataTypes.String,
+        required: true,
+      },
+      message: {
+        type: DataTypes.String,
+      },
+      desc: {
+        type: DataTypes.String,
+      }
+    },
+    returns: {
+      zerror: {
+        type: DataTypes.Object,
+        desc: 'ZError对象',
+      }
+    },
+  },
+  zerror500: {
+    description: '参数错误对象，对应http code 为500',
+    params: {
+      name: {
+        type: DataTypes.String,
+        required: true,
+      },
+      code: {
+        type: DataTypes.String,
+        required: true,
+      },
+      message: {
+        type: DataTypes.String,
+      },
+      desc: {
+        type: DataTypes.String,
+      }
+    },
+    returns: {
+      zerror: {
+        type: DataTypes.Object,
+        desc: 'ZError对象',
+      }
+    },
   }
 }
 

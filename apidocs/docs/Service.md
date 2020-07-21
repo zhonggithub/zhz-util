@@ -432,7 +432,7 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 
  * 1，isValidDataWhenRetrieve。
 
- * 2，parseExpand2Include2Include。
+ * 2，parseExpand2Include。
 
  * 3，findById。
 
@@ -495,7 +495,7 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 ## updateStatus
 `async updateStatus ({ id, status })`
 
-根据id更新状态。
+根据id更新状态。retrieve执行流程：
 
  * 1，isValidDataWhenUpdateStatus。
 
@@ -525,7 +525,7 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 ## destroy
 `async destroy ({ id })`
 
-根据id删除一条数据。
+根据id删除一条数据。retrieve执行流程：
 
  * 1，isValidDataWhenRetrieve。
 
@@ -547,7 +547,7 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 ## list
 `async list ({ page, pageSize, limit, offset, sort, search, expand })`
 
-列表及分页。
+列表及分页。retrieve执行流程：
 
  * 1，isValidQueryCondition。
 
@@ -587,7 +587,7 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 ## count
 `async count (query)`
 
-根据条件统计数量。
+根据条件统计数量。retrieve执行流程：
 
  * 1，isValidQueryCondition。
 
@@ -612,7 +612,7 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 ## listAll
 `async listAll ({ ...query, expand })`
 
-根据条件返回所有数据。
+根据条件返回所有数据。retrieve执行流程：
 
  * 1，isValidQueryCondition。
 
@@ -642,7 +642,7 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 ## findOne
 `async findOne ({ ...query, expand })`
 
-根据条件返回一条数据。
+根据条件返回一条数据。retrieve执行流程：
 
  * 1，convertQueryCriteria。
 
@@ -670,7 +670,7 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 ## findAll
 `async findAll ({ ...query, expand })`
 
-根据条件返回所有数据。
+根据条件返回所有数据。retrieve执行流程：
 
  * 1，convertQueryCriteria。
 
@@ -698,7 +698,7 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 ## findByIds
 `async findByIds ({ ids, expand })`
 
-根据id返回所有数据。
+根据id返回所有数据。retrieve执行流程：
 
  * 1，parseExpand2Include。
 

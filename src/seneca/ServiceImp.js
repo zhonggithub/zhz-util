@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-07-09 10:54:58
+ * Last Modified: 2020-07-21 14:19:47
  * Modified By: Zz
  * -----
  * Description:
@@ -97,7 +97,7 @@ class Service extends ServiceBase {
     if (err.code !== undefined) {
       return err.toJSON ? err.toJSON() : err;
     }
-    return util.response('ERR_DB', err.message, err, 500);
+    return util.response('ERR_UNKOWN', err.message, err, 500);
   }
 
   /**
@@ -290,7 +290,10 @@ class Service extends ServiceBase {
     try {
       const exist = await this.isExistWhenCreate(msg.params);
       if (exist) {
-        return util.error409(this.errCode[409]);
+        return util.responseError409(
+          this.getUResouceName(),
+          this.errCode[409],
+        );
       }
       const body = await this.logic2DB(msg.params);
       await this.beforeCreate(body);
@@ -331,7 +334,10 @@ class Service extends ServiceBase {
       }
 
       if (!result) {
-        return util.error404(this.errCode[404]);
+        return util.responseError404(
+          this.getUResouceName(),
+          this.errCode[404],
+        );
       }
 
       const data = await this.db2logic(
@@ -362,7 +368,10 @@ class Service extends ServiceBase {
         msg.params.id, data,
       );
       if (!result) {
-        return util.error404(this.errCode[404]);
+        return util.responseError404(
+          this.getUResouceName(),
+          this.errCode[404],
+        );
       }
       await this.afterUpdate(result);
       await this.delCache(msg.params.id);
@@ -387,7 +396,10 @@ class Service extends ServiceBase {
       await this.beforeUpdateStatus({ id, status });
       const result = await this.model.findByIdAndUpdate(id, { status });
       if (!result) {
-        return util.error404(this.errCode[404]);
+        return util.responseError404(
+          this.getUResouceName(),
+          this.errCode[404],
+        );
       }
       await this.afterUpdateStatus(result);
       await this.delCache(id);
@@ -409,13 +421,19 @@ class Service extends ServiceBase {
       const { id } = msg.params;
       const exist = await this.model.findById(id);
       if (!exist) {
-        return util.error404(this.errCode[404]);
+        return util.responseError404(
+          this.getUResouceName(),
+          this.errCode[404],
+        );
       }
     
       await this.beforeDestroy(msg.params);
       const delResult = await this.model.findByIdAndDelete(id);
       if (!delResult) {
-        return util.error404(this.errCode[404]);
+        return util.responseError404(
+          this.getUResouceName(),
+          this.errCode[404],
+        );
       }
       await this.afterDestroy(delResult, exist);
       await this.delCache(id);
@@ -510,7 +528,10 @@ class Service extends ServiceBase {
       this.appendInclude(query, tmpExpand);
       const result = await this.model.findOne(query);
       if (!result) {
-        return util.error404(this.errCode[404]);
+        return util.responseError404(
+          this.getUResouceName(),
+          this.errCode[404],
+        );
       }
       const data = await this.db2logic(result, tmpExpand);
       return util.responseSuccess(data);

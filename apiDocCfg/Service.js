@@ -5,7 +5,7 @@
  * Created Date: 2020-06-14 15:35:22
  * Author: Zz
  * -----
- * Last Modified: 2020-07-09 15:27:46
+ * Last Modified: 2020-07-21 14:21:32
  * Modified By: Zz
  * -----
  * Description:
@@ -441,7 +441,7 @@ module.exports = {
   },
 
   retrieve: {
-    desc: '根据id获取资源详情。retrieve执行流程：\r\n\r\n * 1，isValidDataWhenRetrieve。\r\n\r\n * 2，parseExpand2Include2Include。\r\n\r\n * 3，findById。\r\n\r\n * 4，db2logic。\r\n\r\n retrieve会根据expand的不同生成不同缓存。\r\n\r\n * 如果没有指定expand, 缓存只包含资源id的数据。\r\n * 如果指定了expand, 缓存包含资源id的数据及指定子资源的数据。',
+    desc: '根据id获取资源详情。retrieve执行流程：\r\n\r\n * 1，isValidDataWhenRetrieve。\r\n\r\n * 2，parseExpand2Include。\r\n\r\n * 3，findById。\r\n\r\n * 4，db2logic。\r\n\r\n retrieve会根据expand的不同生成不同缓存。\r\n\r\n * 如果没有指定expand, 缓存只包含资源id的数据。\r\n * 如果指定了expand, 缓存包含资源id的数据及指定子资源的数据。',
     paramsIsObject: true,
     funcType: DataTypes.FuncType.kAsync,
     params: {

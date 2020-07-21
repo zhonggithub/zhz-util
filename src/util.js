@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: 2020-07-04 09:00:52
+ * Last Modified: 2020-07-21 14:08:00
  * Modified By: Zz
  * -----
  * Description:
@@ -154,6 +154,22 @@ module.exports = {
   responseSuccess(data, message = 'SUCCESS') {
     return this.response(0, message, data, 200);
   },
+  
+  responseError400(name, code, message, desc) {
+    return new ZError(name, code || 'ERR_PARAMS', message, desc, 400).toJson();
+  },
+  responseError409(name, code, message, desc) {
+    return new ZError(name, code || 'ERR_RESOURCE_EXIST', message, desc, 409).toJson();
+  },
+  responseError404(name, code, message, desc) {
+    return new ZError(name, code || 'ERR_RESOURCE_NOT_EXIST', message, desc, 404).toJson();
+  },
+  responseError422(name, code, message, desc) {
+    return new ZError(name, code || 'INVALID_PARAMS', message, desc, 422).toJson();
+  },
+  responseError500(name, code, message, desc) {
+    return new ZError(name, code || 'ERR_UNKOWN', message, desc, 500).toJson();
+  },
 
   randomInt: (min, max) => {
     if (max === undefined) {
@@ -222,17 +238,20 @@ module.exports = {
     return time;
   },
 
-  zerror400(name = 'Error', code = 'ERR_PARAMS', message = '') {
-    return new ZError(name, code, message, '', 400)
+  zerror400(name = 'Error', code = 'ERR_PARAMS', message = '', desc = '') {
+    return new ZError(name, code, message, desc, 400)
   },
-  zerror409(name = 'Error', code = 'ERR_RESOURCE_EXIST', message = '') {
-    return new ZError(name, code, message, '', 409)
+  zerror409(name = 'Error', code = 'ERR_RESOURCE_EXIST', message = '', desc = '') {
+    return new ZError(name, code, message, desc, 409)
   },
-  zerror404(name = 'Error', code = 'ERR_RESOURCE_NOT_EXIST', message = '') {
-    return new ZError(name, code, message, '', 409)
+  zerror404(name = 'Error', code = 'ERR_RESOURCE_NOT_EXIST', message = '', desc = '') {
+    return new ZError(name, code, message, desc, 409)
   },
-  zerror422(name = 'Error', code = 'INVALID_PARAMS', message = '') {
-    return new ZError(name, code, message, '', 409)
+  zerror422(name = 'Error', code = 'INVALID_PARAMS', message = '', desc = '') {
+    return new ZError(name, code, message, desc, 409)
+  },
+  zerror500(name = 'Error', code = 'ERR_UNKONW', message = '', desc = '') {
+    return new ZError(name, code, message, desc, 500)
   },
   
   error400(code, message) {
