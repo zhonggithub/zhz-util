@@ -7,7 +7,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-07-22 13:26:55
+ * Last Modified: 2020-07-22 13:37:39
  * Modified By: Zz
  * -----
  * Description: 定义Service类需要操作db的抽象接口
@@ -58,10 +58,10 @@ class ModelBase {
   async count(query) {
   }
 
-  async find(query, expand) {
+  async find(query) {
   }
 
-  async findOne(query, expand) {
+  async findOne(query) {
   }
 
   async findByIdAndDelete(id) {
