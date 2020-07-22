@@ -7,7 +7,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-07-03 13:43:30
+ * Last Modified: 2020-07-22 13:26:55
  * Modified By: Zz
  * -----
  * Description: 定义Service类需要操作db的抽象接口
@@ -24,7 +24,7 @@
 
 const { verify } = require('z-error');
 
-class ServiceModel {
+class ModelBase {
   constructor(model) {
     const err = verify({
       model,
@@ -68,4 +68,4 @@ class ServiceModel {
   }
 }
 
-module.exports = ServiceModel
+module.exports = ModelBase
