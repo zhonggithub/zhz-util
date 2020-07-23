@@ -9,7 +9,7 @@ $ npm install ioredis
 ## Basic Usage
 
 ```javascipt
-const { util, ServiceBase, ServiceImp, ServiceUtilBase, mysqlSeneca, mongodbSeneca } = require('zhz-util');
+const { util, ServiceBase, ServiceImp, mysqlSeneca, mongodbSeneca } = require('zhz-util');
 ```
 
 ### seneca service plugs
