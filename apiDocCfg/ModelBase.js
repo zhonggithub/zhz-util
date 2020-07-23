@@ -5,7 +5,7 @@
  * Created Date: 2020-07-03 13:07:57
  * Author: Zz
  * -----
- * Last Modified: 2020-07-03 14:38:28
+ * Last Modified: 2020-07-23 13:28:58
  * Modified By: Zz
  * -----
  * Description:
@@ -49,6 +49,24 @@ module.exports = {
         type: DataTypes.Object,
         desc: '待写入db的数据',
       },
+    }
+  },
+
+  findById: {
+    funcType: DataTypes.FuncType.kAsync,
+    desc: '通过id获取数据',
+    params: {
+      id: {
+        type: DataTypes.String,
+        required: true,
+      },
+    },
+    returns: {
+      data: {
+        type: DataTypes.Object,
+        desc: '资源数据',
+        required: true,
+      }
     }
   },
   
