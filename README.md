@@ -3,7 +3,7 @@
 ## Install
 
 ```shell
-$ npm install ioredis
+$ npm install zhz-util
 ```
 
 ## Basic Usage
@@ -58,6 +58,12 @@ module.exports = {
 ```
 
 ## Docs
+
+```shell
+$ pip install mkdocs
+$ cd apidocs
+$ mkdocs server
+```
 
 - [util](./apidocs/docs/util.md)
 - [ServiceBase](./apidocs/docs/ServiceBase.md)
