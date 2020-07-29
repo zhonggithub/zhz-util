@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-07-03 08:27:55
+ * Last Modified: 2020-07-29 22:00:47
  * Modified By: Zz
  * -----
  * Description: ServiceBase为Service抽象接口类
@@ -90,18 +90,16 @@ class ServiceBase {
       findByIds,
     };
 
-    if (this.opt === false) {
-      return;
+    if (this.opt) {
+      lodash.each(cmd, (v, k) => {
+        if (util.isFunction(v) && (this.opt === true || this.opt[k])) {
+          this.seneca.addAsync({
+            role: this.role,
+            cmd: k,
+          }, v.bind(this));
+        }
+      });
     }
-
-    lodash.each(cmd, (v, k) => {
-      if (util.isFunction(v) && (this.opt === true || this.opt[k])) {
-        this.seneca.addAsync({
-          role: this.role,
-          cmd: k,
-        }, v.bind(this));
-      }
-    });
 
     if (didLoadCmd && util.isFunction(didLoadCmd)) {
       didLoadCmd()
