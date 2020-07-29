@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: 2020-07-21 14:08:00
+ * Last Modified: 2020-07-29 21:04:57
  * Modified By: Zz
  * -----
  * Description:
@@ -606,7 +606,7 @@ module.exports = {
    * @returns {Boolean} 如果是非空字符串，返回true，否则返回false
    */
   notEmptyStr(str) {
-    return str && typeof str === 'string';
+    return typeof str === 'string' && (!str === false);
   },
   /**
    * 判断一个值是否在期望值之内
