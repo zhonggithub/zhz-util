@@ -5,7 +5,7 @@
  * Created Date: 2020-06-14 15:35:22
  * Author: Zz
  * -----
- * Last Modified: 2020-07-21 14:21:32
+ * Last Modified: 2020-07-30 17:37:22
  * Modified By: Zz
  * -----
  * Description:
@@ -524,7 +524,7 @@ module.exports = {
   },
   
   list: {
-    desc: '列表及分页。retrieve执行流程：\r\n\r\n * 1，isValidQueryCondition。\r\n\r\n * 2，convertQueryCriteria。\r\n\r\n * 3，parseExpand2Include。\r\n\r\n * 4，list。\r\n\r\n * 5，list2logic',
+    desc: '列表及分页。list执行流程：\r\n\r\n * 1，isValidQueryCondition。\r\n\r\n * 2，convertQueryCriteria。\r\n\r\n * 3，parseExpand2Include。\r\n\r\n * 4，list。\r\n\r\n * 5，list2logic',
     paramsIsObject: true,
     funcType: DataTypes.FuncType.kAsync,
     params: {

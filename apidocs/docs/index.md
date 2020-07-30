@@ -10,6 +10,8 @@ api的入参和出参统一采用json格式。
     data: {},
   }
 ```
+
+框架会默认为每一个表生成api：`create`、`retrieve`、`update`、`updateStatus`、`list`、`count`、`listAll`、`findOne`、`desctroy`、`findAll`、`findByIds`
   
 ### 统一返回值
 

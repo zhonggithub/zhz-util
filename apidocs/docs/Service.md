@@ -547,7 +547,7 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 ## list
 `async list ({ page, pageSize, limit, offset, sort, search, expand })`
 
-列表及分页。retrieve执行流程：
+列表及分页。list执行流程：
 
  * 1，isValidQueryCondition。
 
