@@ -9,7 +9,7 @@ $ npm install zhz-util
 ## Basic Usage
 
 ```javascipt
-const { util, ServiceBase, ServiceImp, mysqlSeneca, mongodbSeneca, xmlUtil } = require('zhz-util');
+const { util, ServiceBase, ServiceImp, mysqlSeneca, mongodbSeneca, XmlUtil } = require('zhz-util');
 ```
 
 ### seneca service plugs
