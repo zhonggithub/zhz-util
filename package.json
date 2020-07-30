@@ -1,6 +1,6 @@
 {
   "name": "zhz-util",
-  "version": "2.0.8",
+  "version": "2.0.9",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -22,6 +22,7 @@
     "url": "https://github.com/zhonggithub/zhz-util.git"
   },
   "dependencies": {
+    "@alicloud/fc2": "^2.2.1",
     "ioredis": "^4.17.3",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
