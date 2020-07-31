@@ -5,7 +5,7 @@
  * Created Date: 2020-07-30 20:21:57
  * Author: Zz
  * -----
- * Last Modified: 2020-07-30 20:46:52
+ * Last Modified: 2020-07-31 11:06:43
  * Modified By: Zz
  * -----
  * Description:
@@ -20,6 +20,11 @@ class ZFCClient {
 
     const { accountId } = options
     delete options.accountId
+    
+    if (!options.accessKeyID) {
+      options.accessKeyID = options.accessKeyId;
+    }
+    
     this.fcClient = new FCClient(accountId, options)
   }
 
