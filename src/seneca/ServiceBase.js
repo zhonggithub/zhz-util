@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-08-04 23:34:31
+ * Last Modified: 2020-08-04 23:45:45
  * Modified By: Zz
  * -----
  * Description: ServiceBase为Service抽象接口类
@@ -62,6 +62,7 @@ class ServiceBase extends ServiceInterface {
     if (err) {
       throw err;
     }
+    super();
 
     this.role = role;
     this.seneca = seneca;
