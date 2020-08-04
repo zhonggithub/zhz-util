@@ -5,7 +5,7 @@
  * Created Date: 2020-08-04 21:23:16
  * Author: Zz
  * -----
- * Last Modified: 2020-08-04 21:44:40
+ * Last Modified: 2020-08-04 21:50:30
  * Modified By: Zz
  * -----
  * Description:
@@ -74,6 +74,10 @@ module.exports = {
       customMapping: {
         type: DataTypes.Object,
         desc: '自定义映射',
+      },
+      options: {
+        type: DataTypes.Object,
+        desc: 'xml-js的xml2js第二参数',
       }
     },
     returns: {

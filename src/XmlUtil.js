@@ -5,7 +5,7 @@
  * Created Date: 2020-07-28 14:15:37
  * Author: Zz
  * -----
- * Last Modified: 2020-08-04 21:32:31
+ * Last Modified: 2020-08-04 21:49:08
  * Modified By: Zz
  * -----
  * Description:
@@ -61,12 +61,12 @@ class XmlUtil {
     return resultObj
   }
 
-  xml2obj(xml, customMapping) {
-    return this.xml2objImp(xml2js(xml, {
-      compact: true,
-      ignoreDeclaration: true,
-      ignoreAttributes: true,
-    }), customMapping)
+  xml2obj(xml, customMapping, options = {
+    compact: true,
+    ignoreDeclaration: true,
+    ignoreAttributes: true,
+  }) {
+    return this.xml2objImp(xml2js(xml, options), customMapping)
   }
 
   obj2XmlImp(obj, customMapping) {
