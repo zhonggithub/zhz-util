@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-07-29 22:00:47
+ * Last Modified: 2020-08-04 23:34:31
  * Modified By: Zz
  * -----
  * Description: ServiceBase为Service抽象接口类
@@ -28,8 +28,25 @@
 const lodash = require('lodash');
 const { verify } = require('z-error');
 const util = require('../util');
+const ServiceInterface = require('./ServiceInterface');
 
-class ServiceBase {
+const operate = {
+  create: true,
+  retrieve: true,
+  update: true,
+  updateStatus: true,
+  list: true,
+  count: true,
+  listAll: true,
+  findOne: true,
+  logicDel: true,
+  destroy: true,
+  treeList: true,
+  findAll: true,
+  findByIds: true,
+};
+
+class ServiceBase extends ServiceInterface {
   /**
    *
    * @param {*} role
@@ -49,46 +66,19 @@ class ServiceBase {
     this.role = role;
     this.seneca = seneca;
 
-    this.opt = opt === false ? opt : opt || {
-      create: true,
-      retrieve: true,
-      update: true,
-      updateStatus: true,
-      list: true,
-      count: true,
-      listAll: true,
-      findOne: true,
-      logicDel: true,
-      destroy: true,
-      treeList: true,
-      findAll: true,
-      findByIds: true,
-    };
+    this.opt = opt === false ? opt : opt || operate;
   }
 
   loadCmd() {
-    const {
-      create, retrieve, update, updateStatus,
-      list, count, listAll, findOne, logicDel,
-      destroy, treeList, findAll, findByIds,
-      didLoadCmd
-    } = this;
+    const { didLoadCmd } = this;
 
-    const cmd = {
-      create,
-      retrieve,
-      update,
-      updateStatus,
-      list,
-      count,
-      findAll,
-      findOne,
-      logicDel,
-      destroy,
-      treeList,
-      listAll,
-      findByIds,
-    };
+    const cmd = {};
+
+    lodash.each(operate, (v, k) => {
+      if (this[k] && util.isFunction(this[k])) {
+        cmd[k] = this[k];
+      }
+    })
 
     if (this.opt) {
       lodash.each(cmd, (v, k) => {
