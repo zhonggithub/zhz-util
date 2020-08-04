@@ -52,3 +52,8 @@ ServiceBase为Service抽象接口类。定义了一些接口：create、retrieve
 |cmd | String, Object | 否 | 无 | String：函数名。Object of { funName: function }|
 |func | Function | 否 | 无 | 如果cmd未String，func为函数|
 
+
+## didLoadCmd
+` didLoadCmd ()`
+
+loadCmd后会调用此函数。可在此函数通过addAscyn添加自定义方法

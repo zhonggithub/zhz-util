@@ -57,6 +57,50 @@ module.exports = {
 
 ```
 
+### 阿里云函数计算
+
+```javascript
+const bunyan = require('bunyan')
+const moment = require('moment')
+const zhzutil = require('zhz-util')
+
+const logger = bunyan.createLogger({
+  name: 'test',
+  streams: [{
+    level: 'info',
+    path: 'test.log',
+  }, {
+    level: 'debug',
+    stream: process.stdout,
+  }],
+})
+const accountId = ''
+const options = {
+  accessKeyID: '',
+  accessKeySecret: '',
+  region: 'cn-shenzhen',
+}
+
+const zclient = new zhzutil.FCClient('test', 'test', {
+  accountId,
+  ...options,
+})
+
+zclient.actAsync({
+  role: 'seneca.author',
+  cmd: 'create',
+}, {
+  params: {
+    name: Math.random().toString(),
+    mobile: '13760471840',
+    sex: 'MAN',
+  },
+}).then((ret) => {
+  console.log('zclient: ', ret)
+})
+
+```
+
 ## Docs
 
 ```shell

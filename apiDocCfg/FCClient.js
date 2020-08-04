@@ -5,7 +5,7 @@
  * Created Date: 2020-08-04 19:16:06
  * Author: Zz
  * -----
- * Last Modified: 2020-08-04 19:35:18
+ * Last Modified: 2020-08-04 20:43:24
  * Modified By: Zz
  * -----
  * Description:
@@ -91,7 +91,7 @@ module.exports = {
     },
     returns: {
       data: {
-        type: DataTypes.promiseOf(`\`${DataTypes.Object}\``),
+        type: DataTypes.promiseOf(DataTypes.Object),
       }
     }
   },

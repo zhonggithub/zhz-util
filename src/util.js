@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: 2020-07-29 21:04:57
+ * Last Modified: 2020-08-04 20:19:01
  * Modified By: Zz
  * -----
  * Description:
@@ -151,7 +151,7 @@ module.exports = {
     };
   },
 
-  responseSuccess(data, message = 'SUCCESS') {
+  responseSuccess(data, message = 'success') {
     return this.response(0, message, data, 200);
   },
   

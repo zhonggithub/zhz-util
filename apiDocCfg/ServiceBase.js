@@ -5,7 +5,7 @@
  * Created Date: 2020-06-14 13:13:26
  * Author: Zz
  * -----
- * Last Modified: 2020-06-17 22:42:59
+ * Last Modified: 2020-08-04 20:16:26
  * Modified By: Zz
  * -----
  * Description:
@@ -110,5 +110,10 @@ module.exports = {
         description: '如果cmd未String，func为函数',
       }
     }
+  },
+
+  didLoadCmd: {
+    desc: 'loadCmd后会调用此函数。可在此函数通过addAscyn添加自定义方法',
+    params: {}
   }
 }
