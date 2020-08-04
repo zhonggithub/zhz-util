@@ -5,7 +5,7 @@
  * Created Date: 2020-07-28 14:15:37
  * Author: Zz
  * -----
- * Last Modified: 2020-08-04 21:10:03
+ * Last Modified: 2020-08-04 21:22:01
  * Modified By: Zz
  * -----
  * Description:
@@ -37,12 +37,12 @@ class XmlUtil {
     return this.fieldMappingXmlCode[field] || field
   }
 
-  parseObj(obj, customMapping) {
+  xml2objImp(obj, customMapping) {
     if (typeof obj === 'string') {
       return obj
     }
     if (Array.isArray(obj)) {
-      return obj.map((o) => this.parseObj(o, customMapping))
+      return obj.map((o) => this.xml2objImp(o, customMapping))
     }
     if (Object.keys(obj).length === 0) {
       return null
@@ -54,7 +54,7 @@ class XmlUtil {
     for (const [k, v] of Object.entries(obj)) {
       let local = customMapping ? customMapping[k] : null
       local = local || this.getField(k)
-      resultObj[local] = this.parseObj(v, customMapping)
+      resultObj[local] = this.xml2objImp(v, customMapping)
       if (k === 'row' && !Array.isArray(resultObj[local])) {
         resultObj[local] = resultObj[local] ? [resultObj[local]] : []
       }
@@ -63,24 +63,24 @@ class XmlUtil {
   }
 
   xml2obj(xml, customMapping) {
-    return this.parseObj(xml2js(xml, {
+    return this.xml2objImp(xml2js(xml, {
       compact: true,
       ignoreDeclaration: true,
       ignoreAttributes: true,
     }), customMapping)
   }
 
-  convertObjKey(obj, customMapping) {
+  obj2XmlImp(obj, customMapping) {
     let result
     if (Array.isArray(obj)) {
-      result = obj.map((o) => ({ row: this.convertObjKey(o, customMapping) }))
+      result = obj.map((o) => ({ row: this.obj2XmlImp(o, customMapping) }))
     } else if (obj && typeof obj === 'object') {
       result = {}
       for (const [k, v] of Object.entries(obj)) {
         let yinhaiKey = customMapping ? customMapping[k] : null
         yinhaiKey = yinhaiKey || this.getXmlCode(k)
         if (v && (Array.isArray(v) || typeof v === 'object')) {
-          result[yinhaiKey] = this.convertObjKey(v, customMapping)
+          result[yinhaiKey] = this.obj2XmlImp(v, customMapping)
         } else {
           result[yinhaiKey] = v
         }
@@ -92,7 +92,7 @@ class XmlUtil {
   }
 
   obj2xml(data, customMapping) {
-    data = this.convertObjKey(data, customMapping)
+    data = this.obj2XmlImp(data, customMapping)
     return json2xml({
       _declaration: {
         _attributes: {
@@ -101,7 +101,11 @@ class XmlUtil {
         },
       },
       ...data,
-    }, { compact: true, ignoreComment: true, spaces: 4 })
+    }, {
+      compact: true,
+      ignoreComment: true,
+      spaces: 4
+    })
   }
 }
 

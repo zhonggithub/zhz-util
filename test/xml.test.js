@@ -5,7 +5,7 @@
  * Created Date: 2020-07-28 14:17:21
  * Author: Zz
  * -----
- * Last Modified: 2020-07-29 09:01:26
+ * Last Modified: 2020-08-04 21:22:36
  * Modified By: Zz
  * -----
  * Description:
@@ -23,7 +23,7 @@ const obj = {
     password: 'zz'
   }
 }
-console.log(xmlUtil.obj2Xml(obj));
+console.log(xmlUtil.obj2xml(obj));
 
 const xmlStr = `
 <?xml version="1.0" encoding="GBK"?>
@@ -32,4 +32,4 @@ const xmlStr = `
 <aka002>zz</aka002>
 </row>
 `
-console.log(xmlUtil.xml2Obj(xmlStr));
+console.log(xmlUtil.xml2obj(xmlStr));

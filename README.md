@@ -12,7 +12,7 @@ $ npm install zhz-util
 const { util, ServiceBase, ServiceImp, mysqlSeneca, mongodbSeneca, XmlUtil, FCService, FCClient } = require('zhz-util');
 ```
 
-### seneca service plugs
+### Seneca Service Plugs
 
 ```javascript
 const { util, mysqlSeneca } = require('zhz-util');
