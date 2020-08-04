@@ -10,3 +10,4 @@ pages:
 - [Service.md, Service]
 - [ServiceBase.md, ServiceBase]
 - [util.md, util]
+- [XmlUtil.md, XmlUtil]

@@ -5,7 +5,7 @@
  * Created Date: 2020-07-28 14:15:37
  * Author: Zz
  * -----
- * Last Modified: 2020-08-04 21:22:01
+ * Last Modified: 2020-08-04 21:32:31
  * Modified By: Zz
  * -----
  * Description:
@@ -21,11 +21,10 @@ class XmlUtil {
     this.xmlCodeMappingField = {}
 
     for (const [k, v] of Object.entries(keyMappings)) {
-      const xmlCode = v.toLocaleLowerCase()
-      if (this.xmlCodeMappingField[xmlCode]) {
-        throw new Error(`key ${xmlCode} already existed， map to ${k}`)
+      if (this.xmlCodeMappingField[v]) {
+        throw new Error(`key ${v} already existed， map to ${k}`)
       }
-      this.xmlCodeMappingField[xmlCode] = k
+      this.xmlCodeMappingField[v] = k
     }
   }
 
