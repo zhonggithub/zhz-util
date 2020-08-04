@@ -106,6 +106,7 @@ zclient.actAsync({
 ```shell
 $ pip install mkdocs
 $ cd apidocs
+$ modify mkdocs.yml pages to nav if you use apidocs version > 1
 $ mkdocs server
 ```
 
