@@ -37,6 +37,25 @@
 |data | Object | 否 | 无 | 待写入db的数据|
 
 
+## findById
+`async findById (id)`
+
+通过id获取数据
+
+### 参数
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|id | String | 是 | 无 | |
+
+
+### 返回值
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|data | Object | 是 | 无 | 资源数据|
+
+
 ## findByIdAndUpdate
 `async findByIdAndUpdate (id, data)`
 

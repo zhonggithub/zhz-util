@@ -5,7 +5,7 @@
  * Created Date: 2020-07-29 16:54:37
  * Author: Zz
  * -----
- * Last Modified: 2020-07-30 20:47:10
+ * Last Modified: 2020-08-04 19:12:17
  * Modified By: Zz
  * -----
  * Description:
@@ -30,14 +30,14 @@ class FCService {
     }
   }
 
-  async remoteActAsync(serviceName, funName, { role, cmd, params }) {
+  async remoteActAsync(serviceName, funName, { role, cmd, msg }) {
     if (!this.remote[serviceName]) {
-      throw new Error('ERR_SERVICE_NAME')
+      throw new Error('ERROR_SERVICE_NAME')
     }
     if (!this.remote[serviceName][funName]) {
-      throw new Error('ERR_FUN_NAME')
+      throw new Error('ERROR_FUN_NAME')
     }
-    return this.remote[serviceName][funName].actAsync({ role, cmd }, params)
+    return this.remote[serviceName][funName].actAsync({ role, cmd }, msg)
   }
 
   async addAsync({ role, cmd }, fun) {

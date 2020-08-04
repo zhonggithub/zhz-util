@@ -1,6 +1,6 @@
 {
   "name": "zhz-util",
-  "version": "2.0.10",
+  "version": "2.0.11",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -37,6 +37,6 @@
     "src/"
   ],
   "devDependencies": {
-    "zh-cli": "^2.2.1"
+    "zh-cli": "^2.2.9"
   }
 }

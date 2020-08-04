@@ -9,7 +9,7 @@ $ npm install zhz-util
 ## Basic Usage
 
 ```javascipt
-const { util, ServiceBase, ServiceImp, mysqlSeneca, mongodbSeneca, XmlUtil } = require('zhz-util');
+const { util, ServiceBase, ServiceImp, mysqlSeneca, mongodbSeneca, XmlUtil, FCService, FCClient } = require('zhz-util');
 ```
 
 ### seneca service plugs
@@ -71,3 +71,5 @@ $ mkdocs server
 - [ServiceBase](./apidocs/docs/ServiceBase.md)
 - [Service](./apidocs/docs/Service.md)
 - [ModelBase](./apidocs/docs/ModelBase.md)
+- [FCService](./apidocs/docs/FCService.md)
+- [FCClient](./apidocs/docs/FCClient.md)
