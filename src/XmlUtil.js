@@ -5,7 +5,7 @@
  * Created Date: 2020-07-28 14:15:37
  * Author: Zz
  * -----
- * Last Modified: 2020-07-28 14:16:23
+ * Last Modified: 2020-08-04 21:09:34
  * Modified By: Zz
  * -----
  * Description:
@@ -48,7 +48,6 @@ class XmlUtil {
       return null
     }
     if (Object.prototype.hasOwnProperty.call(obj, '_text')) {
-      // eslint-disable-next-line no-underscore-dangle
       return obj._text
     }
     const resultObj = {}
