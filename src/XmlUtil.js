@@ -5,7 +5,7 @@
  * Created Date: 2020-07-28 14:15:37
  * Author: Zz
  * -----
- * Last Modified: 2020-08-04 21:09:34
+ * Last Modified: 2020-08-04 21:10:03
  * Modified By: Zz
  * -----
  * Description:
@@ -62,7 +62,7 @@ class XmlUtil {
     return resultObj
   }
 
-  xml2Obj(xml, customMapping) {
+  xml2obj(xml, customMapping) {
     return this.parseObj(xml2js(xml, {
       compact: true,
       ignoreDeclaration: true,
@@ -91,7 +91,7 @@ class XmlUtil {
     return result
   }
 
-  obj2Xml(data, customMapping) {
+  obj2xml(data, customMapping) {
     data = this.convertObjKey(data, customMapping)
     return json2xml({
       _declaration: {
