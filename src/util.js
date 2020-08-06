@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: 2020-08-04 21:15:21
+ * Last Modified: 2020-08-06 09:10:19
  * Modified By: Zz
  * -----
  * Description:
@@ -156,19 +156,19 @@ module.exports = {
   },
   
   responseError400(name, code, message, desc) {
-    return new ZError(name, code || 'ERR_PARAMS', message, desc, 400).toJson();
+    return new ZError(name, code || 'ERROR_PARAMS', message, desc, 400).toJson();
   },
   responseError409(name, code, message, desc) {
-    return new ZError(name, code || 'ERR_RESOURCE_EXIST', message, desc, 409).toJson();
+    return new ZError(name, code || 'ERROR_RESOURCE_EXIST', message, desc, 409).toJson();
   },
   responseError404(name, code, message, desc) {
-    return new ZError(name, code || 'ERR_RESOURCE_NOT_EXIST', message, desc, 404).toJson();
+    return new ZError(name, code || 'ERROR_RESOURCE_NOT_EXIST', message, desc, 404).toJson();
   },
   responseError422(name, code, message, desc) {
     return new ZError(name, code || 'INVALID_PARAMS', message, desc, 422).toJson();
   },
   responseError500(name, code, message, desc) {
-    return new ZError(name, code || 'ERR_UNKOWN', message, desc, 500).toJson();
+    return new ZError(name, code || 'ERROR_UNKOWN', message, desc, 500).toJson();
   },
 
   randomInt: (min, max) => {
@@ -238,36 +238,36 @@ module.exports = {
     return time;
   },
 
-  zerror400(name = 'Error', code = 'ERR_PARAMS', message = '', desc = '') {
+  zerror400(name = 'Error', code = 'ERROR_PARAMS', message = '', desc = '') {
     return new ZError(name, code, message, desc, 400)
   },
-  zerror409(name = 'Error', code = 'ERR_RESOURCE_EXIST', message = '', desc = '') {
+  zerror409(name = 'Error', code = 'ERROR_RESOURCE_EXIST', message = '', desc = '') {
     return new ZError(name, code, message, desc, 409)
   },
-  zerror404(name = 'Error', code = 'ERR_RESOURCE_NOT_EXIST', message = '', desc = '') {
-    return new ZError(name, code, message, desc, 409)
+  zerror404(name = 'Error', code = 'ERROR_RESOURCE_NOT_EXIST', message = '', desc = '') {
+    return new ZError(name, code, message, desc, 404)
   },
   zerror422(name = 'Error', code = 'INVALID_PARAMS', message = '', desc = '') {
-    return new ZError(name, code, message, desc, 409)
+    return new ZError(name, code, message, desc, 422)
   },
-  zerror500(name = 'Error', code = 'ERR_UNKONW', message = '', desc = '') {
+  zerror500(name = 'Error', code = 'ERROR_UNKONW', message = '', desc = '') {
     return new ZError(name, code, message, desc, 500)
   },
   
   error400(code, message) {
-    return new ZError('Error', code || 'ERR_PARAMS', message, '', 400).toJson();
+    return new ZError('Error', code || 'ERROR_PARAMS', message, '', 400).toJson();
   },
   error409(code, message) {
-    return new ZError('Error', code || 'ERR_RESOURCE_EXIST', message, '', 409).toJson();
+    return new ZError('Error', code || 'ERROR_RESOURCE_EXIST', message, '', 409).toJson();
   },
   error404(code, message) {
-    return new ZError('Error', code || 'ERR_RESOURCE_NOT_EXIST', message, '', 404).toJson();
+    return new ZError('Error', code || 'ERROR_RESOURCE_NOT_EXIST', message, '', 404).toJson();
   },
   error422(code, message) {
     return new ZError('Error', code || 'INVALID_PARAMS', message, '', 422).toJson();
   },
   errorDB(code, message) {
-    return new ZError('Error', code || 'ERR_RESOURCE_DB', message, '', 500).toJson();
+    return new ZError('Error', code || 'ERROR_RESOURCE_DB', message, '', 500).toJson();
   },
   filterData(dataInfo, excludeAttribute = []) {
     if (!dataInfo) {
@@ -551,7 +551,7 @@ module.exports = {
    */
   isValidData(data, testArray, itemFunc, missingPrefix, invalidePrefix) {
     if (!data) {
-      return new ZError('Error', 'ERR_PARAMS', '', '', 400);
+      return new ZError('Error', 'ERROR_PARAMS', '', '', 400);
     }
     return verify(data, testArray, itemFunc, missingPrefix, invalidePrefix);
   },

@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-07-21 14:19:47
+ * Last Modified: 2020-08-06 09:12:06
  * Modified By: Zz
  * -----
  * Description:
@@ -97,7 +97,7 @@ class Service extends ServiceBase {
     if (err.code !== undefined) {
       return err.toJSON ? err.toJSON() : err;
     }
-    return util.response('ERR_UNKOWN', err.message, err, 500);
+    return util.response('ERROR_UNKNOW', err.message, err, 500);
   }
 
   /**
