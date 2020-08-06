@@ -5,7 +5,7 @@
  * Created Date: 2020-07-29 16:54:37
  * Author: Zz
  * -----
- * Last Modified: 2020-08-04 19:12:17
+ * Last Modified: 2020-08-06 09:31:10
  * Modified By: Zz
  * -----
  * Description:
@@ -49,6 +49,9 @@ class FCService {
   }
 
   async actAsync({ role, cmd }, msg) {
+    if (this.logger) {
+      this.logger.info({ role, cmd, msg })
+    }
     const err = util.isValidData({ role, cmd }, ['role', 'cmd'], {
       role: util.notEmptyStr,
       cmd: util.notEmptyStr,
