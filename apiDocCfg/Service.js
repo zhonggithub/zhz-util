@@ -5,7 +5,7 @@
  * Created Date: 2020-06-14 15:35:22
  * Author: Zz
  * -----
- * Last Modified: 2020-07-30 17:37:22
+ * Last Modified: 2020-08-11 14:11:21
  * Modified By: Zz
  * -----
  * Description:
@@ -53,7 +53,7 @@ module.exports = {
     }
   },
 
-  parseExpand2Include2Include: {
+  parseExpand2Include: {
     description: '解析expand: { a: true, b: true ....}。该函数会在读操作：retrieve，list，listAll，findOne，findAll，findByIds之前调用。',
     params: {
       expand: {
@@ -217,8 +217,8 @@ module.exports = {
         description: '传入的db层的数据',
       },
       expand: {
-        type: DataTypes.Function,
-        description: '获取指定资源的数据。{a: true, b: true}。如果是同一个service的model可以在parseExpand2Include2Include返回include，如果跨service的资源获取，在此处实现获取逻辑'
+        type: DataTypes.Object,
+        description: '获取指定资源的数据。{a: true, b: true}。如果是同一个service的model可以在parseExpand2Include返回include，如果跨service的资源获取，在此处实现获取逻辑'
       }
     },
     returns: {
@@ -239,7 +239,7 @@ module.exports = {
         description: '传入的db层的数据',
       },
       expand: {
-        type: DataTypes.Function,
+        type: DataTypes.Object,
         description: '获取指定资源的数据。{a: true, b: true}'
       }
     },
