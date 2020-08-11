@@ -58,7 +58,7 @@
 
 |参数|类型|必填|默认值|描述|
 |--- | --- | --- | --- | ---|
-|data | Promise <Object> | 否 | 无 | |
+|data | Promise `<Object>` | 否 | 无 | |
 
 
 ## addRemoteService

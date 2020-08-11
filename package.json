@@ -37,6 +37,6 @@
     "src/"
   ],
   "devDependencies": {
-    "zh-cli": "^2.2.9"
+    "zh-cli": "^2.2.10"
   }
 }
