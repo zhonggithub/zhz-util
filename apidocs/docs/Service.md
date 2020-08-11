@@ -1,5 +1,5 @@
 # Service
-继承ServiceBase。实现接口：create、retrieve、update、updateStatus、list、count、listAll、findOne、logicDel、desctroy、treeList、findAll, findByIds
+继承ServiceBase。实现接口：create、retrieve、update、updateStatus、list、count、listAll、findOne、logicDel、desctroy、treeList、findAll、findByIds
 
 ## constructor
 ` constructor ({ seneca, model, cache, cacheTTL, role, opt })`
@@ -405,11 +405,16 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 `async create ({ ...params })`
 
 创建一个资源。create执行流程：
- 1，isValidDataWhenCreate。
- 2，logic2DB。 
- 3，beforeCreate
- 4，afterCreate
-5，db2logic
+
+ * 1，isValidDataWhenCreate 
+
+ * 2，logic2DB 
+
+ * 3，beforeCreate
+
+ * 4，afterCreate
+
+ * 5，db2logic
 
 ### 参数
 
@@ -430,18 +435,18 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 
 根据id获取资源详情。retrieve执行流程：
 
- * 1，isValidDataWhenRetrieve。
+ * 1，isValidDataWhenRetrieve 
 
- * 2，parseExpand2Include。
+ * 2，parseExpand2Include 
 
- * 3，findById。
+ * 3，findById 
 
- * 4，db2logic。
+ * 4，db2logic 
 
- retrieve会根据expand的不同生成不同缓存。
+ retrieve会根据expand的不同生成不同缓存： 
 
- * 如果没有指定expand, 缓存只包含资源id的数据。
- * 如果指定了expand, 缓存包含资源id的数据及指定子资源的数据。
+ * 如果没有指定expand, 缓存只包含通过资源id获取的数据 
+ * 如果指定了expand, 缓存包含通过资源id获取的数据及指定子资源的数据 
 
 ### 参数
 
@@ -463,17 +468,17 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 
 根据id更新数据。update执行流程：
 
- * 1，isValidDataWhenRetrieve。
+ * 1，isValidDataWhenRetrieve 
 
- * 2，logic2DBWhenUpdate。
+ * 2，logic2DBWhenUpdate 
 
- * 3，beforeUpdate。
+ * 3，beforeUpdate 
 
- * 4，findByIdAndUpdate。
+ * 4，findByIdAndUpdate 
 
- * 5，afterUpdate。
+ * 5，afterUpdate 
 
- * 6，delCache。
+ * 6，delCache 
 
  * 7，db2logic
 
@@ -497,13 +502,13 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 
 根据id更新状态。retrieve执行流程：
 
- * 1，isValidDataWhenUpdateStatus。
+ * 1，isValidDataWhenUpdateStatus 
 
- * 2，beforeUpdateStatus。
+ * 2，beforeUpdateStatus 
 
- * 3，beforeUpdateStatus。
+ * 3，beforeUpdateStatus 
 
- * 4，findByIdAndUpdate。
+ * 4，findByIdAndUpdate 
 
  * 5，afterUpdateStatus
 
@@ -527,13 +532,13 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 
 根据id删除一条数据。retrieve执行流程：
 
- * 1，isValidDataWhenRetrieve。
+ * 1，isValidDataWhenRetrieve 
 
- * 2，beforeDestroy。
+ * 2，beforeDestroy 
 
- * 3，findByIdAndDelete。
+ * 3，findByIdAndDelete 
 
- * 4，afterDestroy。
+ * 4，afterDestroy 
 
  * 5，delCache
 
@@ -549,13 +554,13 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 
 列表及分页。list执行流程：
 
- * 1，isValidQueryCondition。
+ * 1，isValidQueryCondition 
 
- * 2，convertQueryCriteria。
+ * 2，convertQueryCriteria 
 
- * 3，parseExpand2Include。
+ * 3，parseExpand2Include 
 
- * 4，list。
+ * 4，list 
 
  * 5，list2logic
 
@@ -589,9 +594,9 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 
 根据条件统计数量。retrieve执行流程：
 
- * 1，isValidQueryCondition。
+ * 1，isValidQueryCondition 
 
- * 2，convertCountCriteria。
+ * 2，convertCountCriteria 
 
  * 3，count
 
@@ -614,13 +619,13 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 
 根据条件返回所有数据。retrieve执行流程：
 
- * 1，isValidQueryCondition。
+ * 1，isValidQueryCondition 
 
- * 2，convertQueryCriteria。
+ * 2，convertQueryCriteria 
 
- * 3，parseExpand2Include。
+ * 3，parseExpand2Include 
 
- * 4，find。
+ * 4，find 
 
  * 5, list2logic
 
@@ -644,11 +649,11 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 
 根据条件返回一条数据。retrieve执行流程：
 
- * 1，convertQueryCriteria。
+ * 1，convertQueryCriteria 
 
- * 2，parseExpand2Include。
+ * 2，parseExpand2Include 
 
- * 3，findOne。
+ * 3，findOne 
 
  * 4，db2logic
 

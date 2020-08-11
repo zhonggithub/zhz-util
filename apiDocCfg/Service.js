@@ -5,7 +5,7 @@
  * Created Date: 2020-06-14 15:35:22
  * Author: Zz
  * -----
- * Last Modified: 2020-08-11 14:11:21
+ * Last Modified: 2020-08-11 14:39:33
  * Modified By: Zz
  * -----
  * Description:
@@ -16,7 +16,7 @@ const DataTypes = dataTypes.nodejs;
 
 module.exports = {
   name: 'Service',
-  description: '继承ServiceBase。实现接口：create、retrieve、update、updateStatus、list、count、listAll、findOne、logicDel、desctroy、treeList、findAll, findByIds',
+  description: '继承ServiceBase。实现接口：create、retrieve、update、updateStatus、list、count、listAll、findOne、logicDel、desctroy、treeList、findAll、findByIds',
 
   constructor: {
     description: '构造函数',
@@ -422,7 +422,7 @@ module.exports = {
   },
 
   create: {
-    desc: '创建一个资源。create执行流程：\r\n 1，isValidDataWhenCreate。\r\n 2，logic2DB。 \r\n 3，beforeCreate\r\n 4，afterCreate\r\n5，db2logic',
+    desc: '创建一个资源。create执行流程：\r\n\r\n * 1，isValidDataWhenCreate \r\n\r\n * 2，logic2DB \r\n\r\n * 3，beforeCreate\r\n\r\n * 4，afterCreate\r\n\r\n * 5，db2logic',
     paramsIsObject: true,
     funcType: DataTypes.FuncType.kAsync,
     params: {
@@ -441,7 +441,7 @@ module.exports = {
   },
 
   retrieve: {
-    desc: '根据id获取资源详情。retrieve执行流程：\r\n\r\n * 1，isValidDataWhenRetrieve。\r\n\r\n * 2，parseExpand2Include。\r\n\r\n * 3，findById。\r\n\r\n * 4，db2logic。\r\n\r\n retrieve会根据expand的不同生成不同缓存。\r\n\r\n * 如果没有指定expand, 缓存只包含资源id的数据。\r\n * 如果指定了expand, 缓存包含资源id的数据及指定子资源的数据。',
+    desc: '根据id获取资源详情。retrieve执行流程：\r\n\r\n * 1，isValidDataWhenRetrieve \r\n\r\n * 2，parseExpand2Include \r\n\r\n * 3，findById \r\n\r\n * 4，db2logic \r\n\r\n retrieve会根据expand的不同生成不同缓存： \r\n\r\n * 如果没有指定expand, 缓存只包含通过资源id获取的数据 \r\n * 如果指定了expand, 缓存包含通过资源id获取的数据及指定子资源的数据 ',
     paramsIsObject: true,
     funcType: DataTypes.FuncType.kAsync,
     params: {
@@ -465,7 +465,7 @@ module.exports = {
   },
 
   update: {
-    desc: '根据id更新数据。update执行流程：\r\n\r\n * 1，isValidDataWhenRetrieve。\r\n\r\n * 2，logic2DBWhenUpdate。\r\n\r\n * 3，beforeUpdate。\r\n\r\n * 4，findByIdAndUpdate。\r\n\r\n * 5，afterUpdate。\r\n\r\n * 6，delCache。\r\n\r\n * 7，db2logic',
+    desc: '根据id更新数据。update执行流程：\r\n\r\n * 1，isValidDataWhenRetrieve \r\n\r\n * 2，logic2DBWhenUpdate \r\n\r\n * 3，beforeUpdate \r\n\r\n * 4，findByIdAndUpdate \r\n\r\n * 5，afterUpdate \r\n\r\n * 6，delCache \r\n\r\n * 7，db2logic',
     paramsIsObject: true,
     funcType: DataTypes.FuncType.kAsync,
     params: {
@@ -489,7 +489,7 @@ module.exports = {
   },
 
   updateStatus: {
-    desc: '根据id更新状态。retrieve执行流程：\r\n\r\n * 1，isValidDataWhenUpdateStatus。\r\n\r\n * 2，beforeUpdateStatus。\r\n\r\n * 3，beforeUpdateStatus。\r\n\r\n * 4，findByIdAndUpdate。\r\n\r\n * 5，afterUpdateStatus',
+    desc: '根据id更新状态。retrieve执行流程：\r\n\r\n * 1，isValidDataWhenUpdateStatus \r\n\r\n * 2，beforeUpdateStatus \r\n\r\n * 3，beforeUpdateStatus \r\n\r\n * 4，findByIdAndUpdate \r\n\r\n * 5，afterUpdateStatus',
     paramsIsObject: true,
     funcType: DataTypes.FuncType.kAsync,
     params: {
@@ -512,7 +512,7 @@ module.exports = {
     },
   },
   destroy: {
-    desc: '根据id删除一条数据。retrieve执行流程：\r\n\r\n * 1，isValidDataWhenRetrieve。\r\n\r\n * 2，beforeDestroy。\r\n\r\n * 3，findByIdAndDelete。\r\n\r\n * 4，afterDestroy。\r\n\r\n * 5，delCache',
+    desc: '根据id删除一条数据。retrieve执行流程：\r\n\r\n * 1，isValidDataWhenRetrieve \r\n\r\n * 2，beforeDestroy \r\n\r\n * 3，findByIdAndDelete \r\n\r\n * 4，afterDestroy \r\n\r\n * 5，delCache',
     funcType: DataTypes.FuncType.kAsync,
     paramsIsObject: true,
     params: {
@@ -524,7 +524,7 @@ module.exports = {
   },
   
   list: {
-    desc: '列表及分页。list执行流程：\r\n\r\n * 1，isValidQueryCondition。\r\n\r\n * 2，convertQueryCriteria。\r\n\r\n * 3，parseExpand2Include。\r\n\r\n * 4，list。\r\n\r\n * 5，list2logic',
+    desc: '列表及分页。list执行流程：\r\n\r\n * 1，isValidQueryCondition \r\n\r\n * 2，convertQueryCriteria \r\n\r\n * 3，parseExpand2Include \r\n\r\n * 4，list \r\n\r\n * 5，list2logic',
     paramsIsObject: true,
     funcType: DataTypes.FuncType.kAsync,
     params: {
@@ -595,7 +595,7 @@ module.exports = {
   },
 
   count: {
-    desc: '根据条件统计数量。retrieve执行流程：\r\n\r\n * 1，isValidQueryCondition。\r\n\r\n * 2，convertCountCriteria。\r\n\r\n * 3，count',
+    desc: '根据条件统计数量。retrieve执行流程：\r\n\r\n * 1，isValidQueryCondition \r\n\r\n * 2，convertCountCriteria \r\n\r\n * 3，count',
     funcType: DataTypes.FuncType.kAsync,
     params: {
       query: {
@@ -613,7 +613,7 @@ module.exports = {
   },
 
   listAll: {
-    desc: '根据条件返回所有数据。retrieve执行流程：\r\n\r\n * 1，isValidQueryCondition。\r\n\r\n * 2，convertQueryCriteria。\r\n\r\n * 3，parseExpand2Include。\r\n\r\n * 4，find。\r\n\r\n * 5, list2logic',
+    desc: '根据条件返回所有数据。retrieve执行流程：\r\n\r\n * 1，isValidQueryCondition \r\n\r\n * 2，convertQueryCriteria \r\n\r\n * 3，parseExpand2Include \r\n\r\n * 4，find \r\n\r\n * 5, list2logic',
     funcType: DataTypes.FuncType.kAsync,
     paramsIsObject: true,
     params: {
@@ -634,7 +634,7 @@ module.exports = {
   },
 
   findOne: {
-    desc: '根据条件返回一条数据。retrieve执行流程：\r\n\r\n * 1，convertQueryCriteria。\r\n\r\n * 2，parseExpand2Include。\r\n\r\n * 3，findOne。\r\n\r\n * 4，db2logic',
+    desc: '根据条件返回一条数据。retrieve执行流程：\r\n\r\n * 1，convertQueryCriteria \r\n\r\n * 2，parseExpand2Include \r\n\r\n * 3，findOne \r\n\r\n * 4，db2logic',
     funcType: DataTypes.FuncType.kAsync,
     paramsIsObject: true,
     params: {
