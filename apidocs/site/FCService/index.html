@@ -9,7 +9,7 @@
   
   <link rel="shortcut icon" href="../favicon.ico">
   
-  <title>ModelBase - seneca</title>
+  <title>FCService - seneca</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -18,9 +18,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "ModelBase";
-    var mkdocs_page_input_path = "ModelBase.md";
-    var mkdocs_page_url = "/ModelBase/";
+    var mkdocs_page_name = "FCService";
+    var mkdocs_page_input_path = "FCService.md";
+    var mkdocs_page_url = "/FCService/";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js"></script>
@@ -58,44 +58,36 @@
     <a class="" href="../FCClient/">FCClient</a>
 	    </li>
           
-            <li class="toctree-l1">
-		
-    <a class="" href="../FCService/">FCService</a>
-	    </li>
-          
             <li class="toctree-l1 current">
 		
-    <a class="current" href="./">ModelBase</a>
+    <a class="current" href="./">FCService</a>
     <ul class="subnav">
             
-    <li class="toctree-l2"><a href="#modelbase">ModelBase</a></li>
+    <li class="toctree-l2"><a href="#fcservice">FCService</a></li>
     
         <ul>
         
+            <li><a class="toctree-l3" href="#fcservice_1">FCService</a></li>
+        
             <li><a class="toctree-l3" href="#constructor">constructor</a></li>
         
-            <li><a class="toctree-l3" href="#getmodel">getModel</a></li>
+            <li><a class="toctree-l3" href="#addasync">addAsync</a></li>
         
-            <li><a class="toctree-l3" href="#create">create</a></li>
+            <li><a class="toctree-l3" href="#actasync">actAsync</a></li>
         
-            <li><a class="toctree-l3" href="#findbyid">findById</a></li>
+            <li><a class="toctree-l3" href="#addremoteservice">addRemoteService</a></li>
         
-            <li><a class="toctree-l3" href="#findbyidandupdate">findByIdAndUpdate</a></li>
-        
-            <li><a class="toctree-l3" href="#list">list</a></li>
-        
-            <li><a class="toctree-l3" href="#count">count</a></li>
-        
-            <li><a class="toctree-l3" href="#find">find</a></li>
-        
-            <li><a class="toctree-l3" href="#findone">findOne</a></li>
-        
-            <li><a class="toctree-l3" href="#findbyidanddelete">findByIdAndDelete</a></li>
+            <li><a class="toctree-l3" href="#remoteactasync">remoteActAsync</a></li>
         
         </ul>
     
 
     </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../ModelBase/">ModelBase</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -140,7 +132,7 @@
     
       
     
-    <li>ModelBase</li>
+    <li>FCService</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -150,12 +142,48 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="modelbase">ModelBase</h1>
-<p>框架model基类，用不同的orm实现db操作继承该类并实现相应的方法</p>
+                <h1 id="fcservice">FCService</h1>
+<p>把阿里函数计算封装成seneca对象</p>
+<h2 id="fcservice_1">FCService</h2>
+<h3 id="_1">属性</h3>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>services</td>
+<td>Object</td>
+<td>否</td>
+<td>无</td>
+<td>本地service</td>
+</tr>
+<tr>
+<td>romote</td>
+<td>Object</td>
+<td>否</td>
+<td>无</td>
+<td>远程service</td>
+</tr>
+<tr>
+<td>logger</td>
+<td>Object</td>
+<td>否</td>
+<td>无</td>
+<td>logger对象</td>
+</tr>
+</tbody>
+</table>
 <h2 id="constructor">constructor</h2>
-<p><code>constructor (model)</code></p>
+<p><code>constructor (logger)</code></p>
 <p>构造函数</p>
-<h3 id="_1">参数</h3>
+<h3 id="_2">参数</h3>
 <table>
 <thead>
 <tr>
@@ -168,41 +196,17 @@
 </thead>
 <tbody>
 <tr>
-<td>model</td>
-<td>Model</td>
-<td>是</td>
+<td>logger</td>
+<td>Object</td>
+<td>否</td>
 <td>无</td>
-<td>orm的Model对象</td>
+<td>logger对象</td>
 </tr>
 </tbody>
 </table>
-<h2 id="getmodel">getModel</h2>
-<p><code>getModel ()</code></p>
-<p>获得orm的Model对象</p>
-<h3 id="_2">返回值</h3>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>类型</th>
-<th>必填</th>
-<th>默认值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>model</td>
-<td>Model</td>
-<td>是</td>
-<td>无</td>
-<td>orm的Model对象</td>
-</tr>
-</tbody>
-</table>
-<h2 id="create">create</h2>
-<p><code>async create (data)</code></p>
-<p>创建资源，返回值为</p>
+<h2 id="addasync">addAsync</h2>
+<p><code>async addAsync (params, fun)</code></p>
+<p>把一个函数加载到FCService的对象中</p>
 <h3 id="_3">参数</h3>
 <table>
 <thead>
@@ -216,17 +220,38 @@
 </thead>
 <tbody>
 <tr>
-<td>data</td>
+<td>params</td>
 <td>Object</td>
 <td>否</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>params.role</td>
+<td>String</td>
+<td>是</td>
 <td>无</td>
-<td>待写入db的数据</td>
+<td>角色名称</td>
+</tr>
+<tr>
+<td>params.cmd</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td>方法名称</td>
+</tr>
+<tr>
+<td>fun</td>
+<td>Function</td>
+<td>是</td>
+<td>无</td>
+<td>cmd对应的函数实现</td>
 </tr>
 </tbody>
 </table>
-<h2 id="findbyid">findById</h2>
-<p><code>async findById (id)</code></p>
-<p>通过id获取数据</p>
+<h2 id="actasync">actAsync</h2>
+<p><code>async actAsync (params, msg)</code></p>
+<p>通过role, cmd调用一个函数</p>
 <h3 id="_4">参数</h3>
 <table>
 <thead>
@@ -240,11 +265,32 @@
 </thead>
 <tbody>
 <tr>
-<td>id</td>
+<td>params</td>
+<td>Object</td>
+<td>否</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>params.role</td>
 <td>String</td>
 <td>是</td>
 <td>无</td>
-<td></td>
+<td>角色名称</td>
+</tr>
+<tr>
+<td>params.cmd</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td>方法名称</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>Object</td>
+<td>否</td>
+<td>无</td>
+<td>cmd函数参数</td>
 </tr>
 </tbody>
 </table>
@@ -262,16 +308,16 @@
 <tbody>
 <tr>
 <td>data</td>
-<td>Object</td>
-<td>是</td>
+<td>Promise <Object></td>
+<td>否</td>
 <td>无</td>
-<td>资源数据</td>
+<td></td>
 </tr>
 </tbody>
 </table>
-<h2 id="findbyidandupdate">findByIdAndUpdate</h2>
-<p><code>async findByIdAndUpdate (id, data)</code></p>
-<p>根据id更新数据</p>
+<h2 id="addremoteservice">addRemoteService</h2>
+<p><code>addRemoteService (serviceName, funcName, options)</code></p>
+<p>加载一个阿里函数计算的远程服务</p>
 <h3 id="_6">参数</h3>
 <table>
 <thead>
@@ -285,225 +331,49 @@
 </thead>
 <tbody>
 <tr>
-<td>id</td>
+<td>serviceName</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td>阿里函数计算的服务名</td>
+</tr>
+<tr>
+<td>funcName</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td>阿里云函数计算函数名称</td>
+</tr>
+<tr>
+<td>options</td>
+<td>Object</td>
+<td>否</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>options.accountId</td>
 <td>String</td>
 <td>是</td>
 <td>无</td>
 <td></td>
 </tr>
 <tr>
-<td>data</td>
-<td>Object</td>
+<td>options.accessKeyId</td>
+<td>String</td>
 <td>是</td>
 <td>无</td>
-<td>待更新db的数据</td>
+<td></td>
 </tr>
-</tbody>
-</table>
-<h3 id="_7">返回值</h3>
-<table>
-<thead>
 <tr>
-<th>参数</th>
-<th>类型</th>
-<th>必填</th>
-<th>默认值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>data</td>
-<td>Object</td>
+<td>options.accessKeySecret</td>
+<td>String</td>
 <td>是</td>
 <td>无</td>
-<td>更新后的资源数据</td>
-</tr>
-</tbody>
-</table>
-<h2 id="list">list</h2>
-<p><code>async list ({ query })</code></p>
-<p>分页api</p>
-<h3 id="_8">参数</h3>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>类型</th>
-<th>必填</th>
-<th>默认值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>query</td>
-<td>Object</td>
-<td>是</td>
-<td>无</td>
-<td>查询条件</td>
-</tr>
-</tbody>
-</table>
-<h3 id="_9">返回值</h3>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>类型</th>
-<th>必填</th>
-<th>默认值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>count</td>
-<td>Number</td>
-<td>否</td>
-<td>无</td>
-<td>符合条件的数量</td>
+<td></td>
 </tr>
 <tr>
-<td>rows</td>
-<td>Object[]</td>
-<td>否</td>
-<td>无</td>
-<td>符合条件的当前页数数据</td>
-</tr>
-</tbody>
-</table>
-<h2 id="count">count</h2>
-<p><code>async count (query)</code></p>
-<p>统计符合条件的数量</p>
-<h3 id="_10">参数</h3>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>类型</th>
-<th>必填</th>
-<th>默认值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>query</td>
-<td>Object</td>
-<td>是</td>
-<td>无</td>
-<td>查询条件</td>
-</tr>
-</tbody>
-</table>
-<h2 id="find">find</h2>
-<p><code>async find (query)</code></p>
-<p>统计符合条件的数量</p>
-<h3 id="_11">参数</h3>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>类型</th>
-<th>必填</th>
-<th>默认值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>query</td>
-<td>Object</td>
-<td>是</td>
-<td>无</td>
-<td>查询条件</td>
-</tr>
-</tbody>
-</table>
-<h3 id="_12">返回值</h3>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>类型</th>
-<th>必填</th>
-<th>默认值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>rows</td>
-<td>Object[]</td>
-<td>否</td>
-<td>无</td>
-<td>符合条件的数据</td>
-</tr>
-</tbody>
-</table>
-<h2 id="findone">findOne</h2>
-<p><code>async findOne (query)</code></p>
-<p>统计符合条件的某条数据</p>
-<h3 id="_13">参数</h3>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>类型</th>
-<th>必填</th>
-<th>默认值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>query</td>
-<td>Object</td>
-<td>是</td>
-<td>无</td>
-<td>查询条件</td>
-</tr>
-</tbody>
-</table>
-<h3 id="_14">返回值</h3>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>类型</th>
-<th>必填</th>
-<th>默认值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>data</td>
-<td>Object</td>
-<td>否</td>
-<td>无</td>
-<td>符合条件的数据</td>
-</tr>
-</tbody>
-</table>
-<h2 id="findbyidanddelete">findByIdAndDelete</h2>
-<p><code>async findByIdAndDelete (id)</code></p>
-<p>根据id删除数据</p>
-<h3 id="_15">参数</h3>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>类型</th>
-<th>必填</th>
-<th>默认值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>id</td>
+<td>options.region</td>
 <td>String</td>
 <td>是</td>
 <td>无</td>
@@ -511,7 +381,10 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_16">返回值</h3>
+<h2 id="remoteactasync">remoteActAsync</h2>
+<p><code>remoteActAsync (serviceName, funcName, params)</code></p>
+<p>调用远程服务</p>
+<h3 id="_7">参数</h3>
 <table>
 <thead>
 <tr>
@@ -524,11 +397,46 @@
 </thead>
 <tbody>
 <tr>
-<td>data</td>
+<td>serviceName</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td>阿里函数计算的服务名</td>
+</tr>
+<tr>
+<td>funcName</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td>阿里云函数计算函数名称</td>
+</tr>
+<tr>
+<td>params</td>
+<td>Object</td>
+<td>否</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>params.role</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td>角色名称</td>
+</tr>
+<tr>
+<td>params.cmd</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td>方法名称</td>
+</tr>
+<tr>
+<td>params.msg</td>
 <td>Object</td>
 <td>否</td>
 <td>无</td>
-<td>删除结果</td>
+<td>cmd函数参数</td>
 </tr>
 </tbody>
 </table>
@@ -539,10 +447,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../Service/" class="btn btn-neutral float-right" title="Service">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../ModelBase/" class="btn btn-neutral float-right" title="ModelBase">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../FCService/" class="btn btn-neutral" title="FCService"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../FCClient/" class="btn btn-neutral" title="FCClient"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -570,10 +478,10 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../FCService/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../FCClient/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../Service/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../ModelBase/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

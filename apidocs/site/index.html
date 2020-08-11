@@ -36,7 +36,7 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
       <div class="wy-side-nav-search">
-        <a href="ModelBase/" class="icon icon-home"> seneca</a>
+        <a href="." class="icon icon-home"> seneca</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -47,6 +47,43 @@
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
 	<ul class="current">
 	  
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href=".">Overview</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#zhz-util">zhz-util</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#install">Install</a></li>
+        
+            <li><a class="toctree-l3" href="#basic-usage">Basic Usage</a></li>
+        
+            <li><a class="toctree-l3" href="#docs">Docs</a></li>
+        
+            <li><a class="toctree-l3" href="#api">API约束</a></li>
+        
+            <li><a class="toctree-l3" href="#api_1">API 说明</a></li>
+        
+            <li><a class="toctree-l3" href="#list-api">资源list api格式</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="FCClient/">FCClient</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="FCService/">FCService</a>
+	    </li>
           
             <li class="toctree-l1">
 		
@@ -68,23 +105,9 @@
     <a class="" href="util/">util</a>
 	    </li>
           
-            <li class="toctree-l1 current">
+            <li class="toctree-l1">
 		
-    <a class="current" href=".">Overview</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l2"><a href="#api">API约束</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l3" href="#_1">统一返回值</a></li>
-        
-            <li><a class="toctree-l3" href="#list-api">资源list api格式</a></li>
-        
-        </ul>
-    
-
-    </ul>
+    <a class="" href="XmlUtil/">XmlUtil</a>
 	    </li>
           
         </ul>
@@ -97,7 +120,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="ModelBase/">seneca</a>
+        <a href=".">seneca</a>
       </nav>
 
       
@@ -105,7 +128,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href="ModelBase/">Docs</a> &raquo;</li>
+    <li><a href=".">Docs</a> &raquo;</li>
     
       
     
@@ -119,16 +142,131 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="api">API约束</h1>
-<p>api的入参和出参统一采用json格式。
-<code>services</code>里面对表的操作的统一公布<code>create</code>，<code>retrieve</code>，<code>delete</code>，<code>update</code>，<code>updateStatus</code>，<code>list</code>，<code>count</code>，<code>treeList</code>，<code>listAll</code>这些基本api。不根据每一个业务需求去公布一个api比如以userId去统计订单数量统一在<code>count</code>api实现。除非是一些复杂性的业务相关的需求需要单独提供api，例如统计在某场景购买品类商品的男女比例。每一个api都需要做参数的合法性和有效性的校验。api返回的JSON对象格式如下：</p>
-<p><code>{
-    code: 0,
-    message: '',
-    status: 200,
-    data: {},
-  }</code></p>
-<h3 id="_1">统一返回值</h3>
+                <h1 id="zhz-util">zhz-util</h1>
+<p>通过<a href="https://www.npmjs.com/package/seneca">seneca</a>提供rpc服务。</p>
+<ul>
+<li>FCClient、FCService: 封装阿里云函数计算<a href="https://www.npmjs.com/package/@alicloud/fc2">@alicloud/fc2
+</a>提供调用rpc api的实例</li>
+<li>Service: 通过<a href="https://www.npmjs.com/package/z-seneca-extended">z-seneca-extended</a>提供rpc api</li>
+</ul>
+<h2 id="install">Install</h2>
+<pre><code class="shell">$ npm install zhz-util
+</code></pre>
+
+<h2 id="basic-usage">Basic Usage</h2>
+<pre><code class="javascipt">const { util, ServiceBase, ServiceImp, mysqlSeneca, mongodbSeneca, XmlUtil, FCService, FCClient } = require('zhz-util');
+</code></pre>
+
+<h3 id="seneca-service-plugs">seneca service plugs</h3>
+<pre><code class="javascript">const { util, mysqlSeneca } = require('zhz-util');
+const models = require('../../models');
+const config = require('../../../config');
+
+const model = models.Book;
+
+module.exports = {
+  init: () =&gt; Promise.resolve(),
+  seneca(ctx) {
+    const resourceName = 'book';
+    const role = `${config.serviceName}.${resourceName}`;
+
+    const service = new mysqlSeneca.Service({
+      seneca: this,
+      model: new mysqlSeneca.SequelizeModel(model),
+      role,
+      cache: ctx.cache,
+      resourceName,
+    });
+    service.loadCmd();
+    service.addAsync('treeList', async function (msg) {
+      const { id } = msg.params;
+      const data = await this.model.findById(id);
+      return util.responseSuccess(data);
+    });
+    service.addAsync({
+      async treeList1(msg) {
+        const { id } = msg.params;
+        const data = await this.model.findById(id);
+        return util.responseSuccess(data);
+      },
+      async treeList2(msg) {
+        const { id } = msg.params;
+        const data = await this.model.findById(id);
+        return util.responseSuccess(data);
+      },
+    });
+  },
+};
+
+</code></pre>
+
+<h3 id="_1">阿里云函数计算</h3>
+<pre><code class="javascript">const bunyan = require('bunyan')
+const moment = require('moment')
+const zhzutil = require('zhz-util')
+
+const logger = bunyan.createLogger({
+  name: 'test',
+  streams: [{
+    level: 'info',
+    path: 'test.log',
+  }, {
+    level: 'debug',
+    stream: process.stdout,
+  }],
+})
+const accountId = ''
+const options = {
+  accessKeyID: '',
+  accessKeySecret: '',
+  region: 'cn-shenzhen',
+}
+
+const zclient = new zhzutil.FCClient('test', 'test', {
+  accountId,
+  ...options,
+})
+
+zclient.actAsync({
+  role: 'seneca.author',
+  cmd: 'create',
+}, {
+  params: {
+    name: Math.random().toString(),
+    mobile: '13760471840',
+    sex: 'MAN',
+  },
+}).then((ret) =&gt; {
+  console.log('zclient: ', ret)
+})
+
+</code></pre>
+
+<h2 id="docs">Docs</h2>
+<pre><code class="shell">$ pip install mkdocs
+$ cd apidocs
+$ mkdocs server
+</code></pre>
+
+<p><img alt="框架类图关系" src="./框架类图关系.jpg" /></p>
+<ul>
+<li><a href="./util">util</a></li>
+<li><a href="./ServiceBase">ServiceBase</a></li>
+<li><a href="./Service">Service</a></li>
+<li><a href="./ModelBase">ModelBase</a></li>
+<li><a href="./FCService">FCService</a></li>
+<li><a href="./FCClient">FCClient</a></li>
+</ul>
+<h2 id="api">API约束</h2>
+<p>api的入参和出参统一采用json格式。api返回的JSON对象格式如下：</p>
+<pre><code class="javascript">{
+  code: 0,
+  message: '',
+  status: 200,
+  data: {},
+}
+</code></pre>
+
 <table>
 <thead>
 <tr>
@@ -152,7 +290,7 @@
 <td>String</td>
 <td>是</td>
 <td>无</td>
-<td>code=0为SUCCESS；否则为错误描述</td>
+<td>code=0为success；否则为错误描述</td>
 </tr>
 <tr>
 <td>data</td>
@@ -170,6 +308,8 @@
 </tr>
 </tbody>
 </table>
+<h2 id="api_1">API 说明</h2>
+<p>继承<a href="./Service">ServiceImp、mysqlSeneca.Service、mongodbSeneca.Service</a>的类，会默认为生成api：<code>create</code>、<code>retrieve</code>、<code>update</code>、<code>updateStatus</code>、<code>list</code>、<code>count</code>、<code>listAll</code>、<code>findOne</code>、<code>desctroy</code>、<code>findAll</code>、<code>findByIds</code>。自定义api时请通过<code>addAsync</code>添加</p>
 <h2 id="list-api">资源list api格式</h2>
 <ul>
 <li>分页。参数<code>page</code>表示获取第几页,默认为<code>1</code>。<code>pageSize</code>表示获取当前页的数据条.数默认为<code>10</code>。</li>
@@ -304,8 +444,8 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+        <a href="FCClient/" class="btn btn-neutral float-right" title="FCClient">Next <span class="icon icon-circle-arrow-right"></span></a>
       
-        <a href="util/" class="btn btn-neutral" title="util"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -333,8 +473,8 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="util/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
+        <span style="margin-left: 15px"><a href="FCClient/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
@@ -345,5 +485,5 @@
 
 <!--
 MkDocs version : 0.16.2
-Build Date UTC : 2020-07-09 07:21:21
+Build Date UTC : 2020-08-11 06:14:24
 -->

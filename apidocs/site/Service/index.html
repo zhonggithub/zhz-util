@@ -36,7 +36,7 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
       <div class="wy-side-nav-search">
-        <a href="../ModelBase/" class="icon icon-home"> seneca</a>
+        <a href=".." class="icon icon-home"> seneca</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -47,6 +47,21 @@
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
 	<ul class="current">
 	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Overview</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../FCClient/">FCClient</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../FCService/">FCService</a>
+	    </li>
           
             <li class="toctree-l1">
 		
@@ -64,7 +79,7 @@
         
             <li><a class="toctree-l3" href="#constructor">constructor</a></li>
         
-            <li><a class="toctree-l3" href="#parseexpand2include2include">parseExpand2Include2Include</a></li>
+            <li><a class="toctree-l3" href="#parseexpand2include">parseExpand2Include</a></li>
         
             <li><a class="toctree-l3" href="#isvaliddatawhencreate">isValidDataWhenCreate</a></li>
         
@@ -150,7 +165,7 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="..">Overview</a>
+    <a class="" href="../XmlUtil/">XmlUtil</a>
 	    </li>
           
         </ul>
@@ -163,7 +178,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../ModelBase/">seneca</a>
+        <a href="..">seneca</a>
       </nav>
 
       
@@ -171,7 +186,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href="../ModelBase/">Docs</a> &raquo;</li>
+    <li><a href="..">Docs</a> &raquo;</li>
     
       
     
@@ -246,8 +261,8 @@
 </tr>
 </tbody>
 </table>
-<h2 id="parseexpand2include2include">parseExpand2Include2Include</h2>
-<p><code>parseExpand2Include2Include (expand)</code></p>
+<h2 id="parseexpand2include">parseExpand2Include</h2>
+<p><code>parseExpand2Include (expand)</code></p>
 <p>解析expand: { a: true, b: true ....}。该函数会在读操作：retrieve，list，listAll，findOne，findAll，findByIds之前调用。</p>
 <h3 id="_2">参数</h3>
 <table>
@@ -689,10 +704,10 @@
 </tr>
 <tr>
 <td>expand</td>
-<td>Function</td>
+<td>Object</td>
 <td>否</td>
 <td>无</td>
-<td>获取指定资源的数据。{a: true, b: true}。如果是同一个service的model可以在parseExpand2Include2Include返回include，如果跨service的资源获取，在此处实现获取逻辑</td>
+<td>获取指定资源的数据。{a: true, b: true}。如果是同一个service的model可以在parseExpand2Include返回include，如果跨service的资源获取，在此处实现获取逻辑</td>
 </tr>
 </tbody>
 </table>
@@ -741,7 +756,7 @@
 </tr>
 <tr>
 <td>expand</td>
-<td>Function</td>
+<td>Object</td>
 <td>否</td>
 <td>无</td>
 <td>获取指定资源的数据。{a: true, b: true}</td>
@@ -1213,7 +1228,7 @@
 <p>1，isValidDataWhenRetrieve。</p>
 </li>
 <li>
-<p>2，parseExpand2Include2Include。</p>
+<p>2，parseExpand2Include。</p>
 </li>
 <li>
 <p>3，findById。</p>
@@ -1353,7 +1368,7 @@
 </table>
 <h2 id="updatestatus">updateStatus</h2>
 <p><code>async updateStatus ({ id, status })</code></p>
-<p>根据id更新状态。</p>
+<p>根据id更新状态。retrieve执行流程：</p>
 <ul>
 <li>
 <p>1，isValidDataWhenUpdateStatus。</p>
@@ -1422,7 +1437,7 @@
 </table>
 <h2 id="destroy">destroy</h2>
 <p><code>async destroy ({ id })</code></p>
-<p>根据id删除一条数据。</p>
+<p>根据id删除一条数据。retrieve执行流程：</p>
 <ul>
 <li>
 <p>1，isValidDataWhenRetrieve。</p>
@@ -1463,7 +1478,7 @@
 </table>
 <h2 id="list">list</h2>
 <p><code>async list ({ page, pageSize, limit, offset, sort, search, expand })</code></p>
-<p>列表及分页。</p>
+<p>列表及分页。list执行流程：</p>
 <ul>
 <li>
 <p>1，isValidQueryCondition。</p>
@@ -1602,7 +1617,7 @@
 </table>
 <h2 id="count">count</h2>
 <p><code>async count (query)</code></p>
-<p>根据条件统计数量。</p>
+<p>根据条件统计数量。retrieve执行流程：</p>
 <ul>
 <li>
 <p>1，isValidQueryCondition。</p>
@@ -1658,7 +1673,7 @@
 </table>
 <h2 id="listall">listAll</h2>
 <p><code>async listAll ({ ...query, expand })</code></p>
-<p>根据条件返回所有数据。</p>
+<p>根据条件返回所有数据。retrieve执行流程：</p>
 <ul>
 <li>
 <p>1，isValidQueryCondition。</p>
@@ -1727,7 +1742,7 @@
 </table>
 <h2 id="findone">findOne</h2>
 <p><code>async findOne ({ ...query, expand })</code></p>
-<p>根据条件返回一条数据。</p>
+<p>根据条件返回一条数据。retrieve执行流程：</p>
 <ul>
 <li>
 <p>1，convertQueryCriteria。</p>
@@ -1793,7 +1808,7 @@
 </table>
 <h2 id="findall">findAll</h2>
 <p><code>async findAll ({ ...query, expand })</code></p>
-<p>根据条件返回所有数据。</p>
+<p>根据条件返回所有数据。retrieve执行流程：</p>
 <ul>
 <li>
 <p>1，convertQueryCriteria。</p>
@@ -1859,7 +1874,7 @@
 </table>
 <h2 id="findbyids">findByIds</h2>
 <p><code>async findByIds ({ ids, expand })</code></p>
-<p>根据id返回所有数据。</p>
+<p>根据id返回所有数据。retrieve执行流程：</p>
 <ul>
 <li>
 <p>1，parseExpand2Include。</p>

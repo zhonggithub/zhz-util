@@ -18,8 +18,8 @@
 |opt | Object | 否 | true | 默认api开启配置。false：不加载任何默认api；true：加载所有默认api；json对象表示加载对应的操作|
 
 
-## parseExpand2Include2Include
-` parseExpand2Include2Include (expand)`
+## parseExpand2Include
+` parseExpand2Include (expand)`
 
 解析expand: { a: true, b: true ....}。该函数会在读操作：retrieve，list，listAll，findOne，findAll，findByIds之前调用。
 
@@ -201,7 +201,7 @@ db层数据转逻辑层数据
 |参数|类型|必填|默认值|描述|
 |--- | --- | --- | --- | ---|
 |data | Object | 否 | 无 | 传入的db层的数据|
-|expand | Function | 否 | 无 | 获取指定资源的数据。{a: true, b: true}。如果是同一个service的model可以在parseExpand2Include2Include返回include，如果跨service的资源获取，在此处实现获取逻辑|
+|expand | Object | 否 | 无 | 获取指定资源的数据。{a: true, b: true}。如果是同一个service的model可以在parseExpand2Include返回include，如果跨service的资源获取，在此处实现获取逻辑|
 
 
 ### 返回值
@@ -221,7 +221,7 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 |参数|类型|必填|默认值|描述|
 |--- | --- | --- | --- | ---|
 |items | Object | 是 | 无 | 传入的db层的数据|
-|expand | Function | 否 | 无 | 获取指定资源的数据。{a: true, b: true}|
+|expand | Object | 否 | 无 | 获取指定资源的数据。{a: true, b: true}|
 
 
 ### 返回值

@@ -36,7 +36,7 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
       <div class="wy-side-nav-search">
-        <a href="../ModelBase/" class="icon icon-home"> seneca</a>
+        <a href=".." class="icon icon-home"> seneca</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -47,6 +47,21 @@
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
 	<ul class="current">
 	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Overview</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../FCClient/">FCClient</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../FCService/">FCService</a>
+	    </li>
           
             <li class="toctree-l1">
 		
@@ -128,6 +143,16 @@
         
             <li><a class="toctree-l3" href="#datestrtodate">dateStrToDate</a></li>
         
+            <li><a class="toctree-l3" href="#zerror400">zerror400</a></li>
+        
+            <li><a class="toctree-l3" href="#zerror409">zerror409</a></li>
+        
+            <li><a class="toctree-l3" href="#zerror404">zerror404</a></li>
+        
+            <li><a class="toctree-l3" href="#zerror422">zerror422</a></li>
+        
+            <li><a class="toctree-l3" href="#zerror500">zerror500</a></li>
+        
         </ul>
     
 
@@ -136,7 +161,7 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="..">Overview</a>
+    <a class="" href="../XmlUtil/">XmlUtil</a>
 	    </li>
           
         </ul>
@@ -149,7 +174,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../ModelBase/">seneca</a>
+        <a href="..">seneca</a>
       </nav>
 
       
@@ -157,7 +182,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href="../ModelBase/">Docs</a> &raquo;</li>
+    <li><a href="..">Docs</a> &raquo;</li>
     
       
     
@@ -1643,6 +1668,336 @@
 </tr>
 </tbody>
 </table>
+<h2 id="zerror400">zerror400</h2>
+<p><code>zerror400 (name, code, message, desc)</code></p>
+<p>参数错误对象，对应http code 为400</p>
+<h3 id="_57">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>code</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>message</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>desc</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_58">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>zerror</td>
+<td>Object</td>
+<td>否</td>
+<td>无</td>
+<td>ZError对象</td>
+</tr>
+</tbody>
+</table>
+<h2 id="zerror409">zerror409</h2>
+<p><code>zerror409 (name, code, message, desc)</code></p>
+<p>参数错误对象，对应http code 为409</p>
+<h3 id="_59">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>code</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>message</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>desc</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_60">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>zerror</td>
+<td>Object</td>
+<td>否</td>
+<td>无</td>
+<td>ZError对象</td>
+</tr>
+</tbody>
+</table>
+<h2 id="zerror404">zerror404</h2>
+<p><code>zerror404 (name, code, message, desc)</code></p>
+<p>参数错误对象，对应http code 为404</p>
+<h3 id="_61">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>code</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>message</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>desc</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_62">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>zerror</td>
+<td>Object</td>
+<td>否</td>
+<td>无</td>
+<td>ZError对象</td>
+</tr>
+</tbody>
+</table>
+<h2 id="zerror422">zerror422</h2>
+<p><code>zerror422 (name, code, message, desc)</code></p>
+<p>参数错误对象，对应http code 为422</p>
+<h3 id="_63">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>code</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>message</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>desc</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_64">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>zerror</td>
+<td>Object</td>
+<td>否</td>
+<td>无</td>
+<td>ZError对象</td>
+</tr>
+</tbody>
+</table>
+<h2 id="zerror500">zerror500</h2>
+<p><code>zerror500 (name, code, message, desc)</code></p>
+<p>参数错误对象，对应http code 为500</p>
+<h3 id="_65">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>code</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>message</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>desc</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_66">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>zerror</td>
+<td>Object</td>
+<td>否</td>
+<td>无</td>
+<td>ZError对象</td>
+</tr>
+</tbody>
+</table>
               
             </div>
           </div>
@@ -1650,7 +2005,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href=".." class="btn btn-neutral float-right" title="Overview">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../XmlUtil/" class="btn btn-neutral float-right" title="XmlUtil">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../ServiceBase/" class="btn btn-neutral" title="ServiceBase"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -1684,7 +2039,7 @@
         <span><a href="../ServiceBase/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href=".." style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../XmlUtil/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

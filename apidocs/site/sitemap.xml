@@ -3,8 +3,32 @@
 
     
     <url>
+     <loc>/</loc>
+     <lastmod>2020-08-11</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/FCClient/</loc>
+     <lastmod>2020-08-11</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/FCService/</loc>
+     <lastmod>2020-08-11</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
      <loc>/ModelBase/</loc>
-     <lastmod>2020-07-09</lastmod>
+     <lastmod>2020-08-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -12,7 +36,7 @@
     
     <url>
      <loc>/Service/</loc>
-     <lastmod>2020-07-09</lastmod>
+     <lastmod>2020-08-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -20,7 +44,7 @@
     
     <url>
      <loc>/ServiceBase/</loc>
-     <lastmod>2020-07-09</lastmod>
+     <lastmod>2020-08-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -28,15 +52,15 @@
     
     <url>
      <loc>/util/</loc>
-     <lastmod>2020-07-09</lastmod>
+     <lastmod>2020-08-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
 
     
     <url>
-     <loc>/</loc>
-     <lastmod>2020-07-09</lastmod>
+     <loc>/XmlUtil/</loc>
+     <lastmod>2020-08-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     

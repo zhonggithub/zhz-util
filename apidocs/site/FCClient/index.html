@@ -9,7 +9,7 @@
   
   <link rel="shortcut icon" href="../favicon.ico">
   
-  <title>ServiceBase - seneca</title>
+  <title>FCClient - seneca</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -18,9 +18,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "ServiceBase";
-    var mkdocs_page_input_path = "ServiceBase.md";
-    var mkdocs_page_url = "/ServiceBase/";
+    var mkdocs_page_name = "FCClient";
+    var mkdocs_page_input_path = "FCClient.md";
+    var mkdocs_page_url = "/FCClient/";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js"></script>
@@ -53,9 +53,25 @@
     <a class="" href="..">Overview</a>
 	    </li>
           
-            <li class="toctree-l1">
+            <li class="toctree-l1 current">
 		
-    <a class="" href="../FCClient/">FCClient</a>
+    <a class="current" href="./">FCClient</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#fcclient">FCClient</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#fcclient_1">FCClient</a></li>
+        
+            <li><a class="toctree-l3" href="#constructor">constructor</a></li>
+        
+            <li><a class="toctree-l3" href="#actasync">actAsync</a></li>
+        
+        </ul>
+    
+
+    </ul>
 	    </li>
           
             <li class="toctree-l1">
@@ -73,29 +89,9 @@
     <a class="" href="../Service/">Service</a>
 	    </li>
           
-            <li class="toctree-l1 current">
+            <li class="toctree-l1">
 		
-    <a class="current" href="./">ServiceBase</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l2"><a href="#servicebase">ServiceBase</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l3" href="#opt">opt</a></li>
-        
-            <li><a class="toctree-l3" href="#constructor">constructor</a></li>
-        
-            <li><a class="toctree-l3" href="#loadcmd">loadCmd</a></li>
-        
-            <li><a class="toctree-l3" href="#addasync">addAsync</a></li>
-        
-            <li><a class="toctree-l3" href="#didloadcmd">didLoadCmd</a></li>
-        
-        </ul>
-    
-
-    </ul>
+    <a class="" href="../ServiceBase/">ServiceBase</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -130,7 +126,7 @@
     
       
     
-    <li>ServiceBase</li>
+    <li>FCClient</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -140,10 +136,9 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="servicebase">ServiceBase</h1>
-<p>ServiceBase为Service抽象接口类。定义了一些接口：create、retrieve、update、updateStatus、list、count、listAll、findOne、logicDel、desctroy、treeList、findAll</p>
-<h2 id="opt">opt</h2>
-<p>构造函数开启api配置项</p>
+                <h1 id="fcclient">FCClient</h1>
+<p>把阿里函数计算封装成seneca客户端</p>
+<h2 id="fcclient_1">FCClient</h2>
 <h3 id="_1">属性</h3>
 <table>
 <thead>
@@ -157,86 +152,30 @@
 </thead>
 <tbody>
 <tr>
-<td>create</td>
-<td>Boolean</td>
+<td>serviceName</td>
+<td>Object</td>
 <td>否</td>
 <td>无</td>
-<td>true：开启。false：不开启</td>
+<td>阿里函数计算的服务名</td>
 </tr>
 <tr>
-<td>update</td>
-<td>Boolean</td>
+<td>funName</td>
+<td>Object</td>
 <td>否</td>
 <td>无</td>
-<td>true：开启。false：不开启</td>
+<td>阿里云函数计算函数名称</td>
 </tr>
 <tr>
-<td>updateStatus</td>
-<td>Boolean</td>
+<td>fcClient</td>
+<td>Object</td>
 <td>否</td>
 <td>无</td>
-<td>true：开启。false：不开启</td>
-</tr>
-<tr>
-<td>retrieve</td>
-<td>Boolean</td>
-<td>否</td>
-<td>无</td>
-<td>true：开启。false：不开启</td>
-</tr>
-<tr>
-<td>list</td>
-<td>Boolean</td>
-<td>否</td>
-<td>无</td>
-<td>true：开启。false：不开启</td>
-</tr>
-<tr>
-<td>count</td>
-<td>Boolean</td>
-<td>否</td>
-<td>无</td>
-<td>true：开启。false：不开启</td>
-</tr>
-<tr>
-<td>findAll</td>
-<td>Boolean</td>
-<td>否</td>
-<td>无</td>
-<td>true：开启。false：不开启</td>
-</tr>
-<tr>
-<td>findOne</td>
-<td>Boolean</td>
-<td>否</td>
-<td>无</td>
-<td>true：开启。false：不开启</td>
-</tr>
-<tr>
-<td>logicDel</td>
-<td>Boolean</td>
-<td>否</td>
-<td>无</td>
-<td>true：开启。false：不开启</td>
-</tr>
-<tr>
-<td>destroy</td>
-<td>Boolean</td>
-<td>否</td>
-<td>无</td>
-<td>true：开启。false：不开启</td>
-</tr>
-<tr>
-<td>treeList</td>
-<td>Boolean</td>
-<td>否</td>
-<td>无</td>
-<td>true：开启。false：不开启</td>
+<td><a href="https://www.npmjs.com/package/@alicloud/fc2">@alicloud/fc2</a>对象</td>
 </tr>
 </tbody>
 </table>
 <h2 id="constructor">constructor</h2>
-<p><code>constructor (role, seneca, opt)</code></p>
+<p><code>constructor (serviceName, funcName, options)</code></p>
 <p>构造函数</p>
 <h3 id="_2">参数</h3>
 <table>
@@ -251,34 +190,59 @@
 </thead>
 <tbody>
 <tr>
-<td>role</td>
+<td>serviceName</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td>阿里函数计算的服务名</td>
+</tr>
+<tr>
+<td>funcName</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td>阿里云函数计算函数名称</td>
+</tr>
+<tr>
+<td>options</td>
+<td>Object</td>
+<td>否</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>options.accountId</td>
 <td>String</td>
 <td>是</td>
 <td>无</td>
-<td>角色名称</td>
+<td></td>
 </tr>
 <tr>
-<td>seneca</td>
-<td>seneca</td>
+<td>options.accessKeyId</td>
+<td>String</td>
 <td>是</td>
 <td>无</td>
-<td>seneca 对象</td>
+<td></td>
 </tr>
 <tr>
-<td>opt</td>
-<td>Object</td>
-<td>否</td>
-<td>true</td>
-<td>默认api开启配置。false：不加载任何默认api；true：加载所有默认api；json对象表示加载对应的操作</td>
+<td>options.accessKeySecret</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>options.region</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td></td>
 </tr>
 </tbody>
 </table>
-<h2 id="loadcmd">loadCmd</h2>
-<p><code>loadCmd ()</code></p>
-<p>加载默认方法</p>
-<h2 id="addasync">addAsync</h2>
-<p><code>addAsync (cmd, func)</code></p>
-<p>加载自定义方法</p>
+<h2 id="actasync">actAsync</h2>
+<p><code>async actAsync (params1, msg)</code></p>
+<p>通过role, cmd调用一个函数</p>
 <h3 id="_3">参数</h3>
 <table>
 <thead>
@@ -292,24 +256,56 @@
 </thead>
 <tbody>
 <tr>
-<td>cmd</td>
-<td>String, Object</td>
+<td>params1</td>
+<td>Object</td>
 <td>否</td>
-<td>无</td>
-<td>String：函数名。Object of { funName: function }</td>
+<td></td>
+<td></td>
 </tr>
 <tr>
-<td>func</td>
-<td>Function</td>
+<td>params1.role</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td>角色名称</td>
+</tr>
+<tr>
+<td>params1.cmd</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td>方法名称</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>Object</td>
 <td>否</td>
 <td>无</td>
-<td>如果cmd未String，func为函数</td>
+<td>cmd函数参数</td>
 </tr>
 </tbody>
 </table>
-<h2 id="didloadcmd">didLoadCmd</h2>
-<p><code>didLoadCmd ()</code></p>
-<p>loadCmd后会调用此函数。可在此函数通过addAscyn添加自定义方法</p>
+<h3 id="_4">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>data</td>
+<td>Promise <Object></td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
               
             </div>
           </div>
@@ -317,10 +313,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../util/" class="btn btn-neutral float-right" title="util">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../FCService/" class="btn btn-neutral float-right" title="FCService">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../Service/" class="btn btn-neutral" title="Service"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href=".." class="btn btn-neutral" title="Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -348,10 +344,10 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../Service/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../util/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../FCService/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

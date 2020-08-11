@@ -9,7 +9,7 @@
   
   <link rel="shortcut icon" href="../favicon.ico">
   
-  <title>ModelBase - seneca</title>
+  <title>XmlUtil - seneca</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -18,9 +18,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "ModelBase";
-    var mkdocs_page_input_path = "ModelBase.md";
-    var mkdocs_page_url = "/ModelBase/";
+    var mkdocs_page_name = "XmlUtil";
+    var mkdocs_page_input_path = "XmlUtil.md";
+    var mkdocs_page_url = "/XmlUtil/";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js"></script>
@@ -63,39 +63,9 @@
     <a class="" href="../FCService/">FCService</a>
 	    </li>
           
-            <li class="toctree-l1 current">
+            <li class="toctree-l1">
 		
-    <a class="current" href="./">ModelBase</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l2"><a href="#modelbase">ModelBase</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l3" href="#constructor">constructor</a></li>
-        
-            <li><a class="toctree-l3" href="#getmodel">getModel</a></li>
-        
-            <li><a class="toctree-l3" href="#create">create</a></li>
-        
-            <li><a class="toctree-l3" href="#findbyid">findById</a></li>
-        
-            <li><a class="toctree-l3" href="#findbyidandupdate">findByIdAndUpdate</a></li>
-        
-            <li><a class="toctree-l3" href="#list">list</a></li>
-        
-            <li><a class="toctree-l3" href="#count">count</a></li>
-        
-            <li><a class="toctree-l3" href="#find">find</a></li>
-        
-            <li><a class="toctree-l3" href="#findone">findOne</a></li>
-        
-            <li><a class="toctree-l3" href="#findbyidanddelete">findByIdAndDelete</a></li>
-        
-        </ul>
-    
-
-    </ul>
+    <a class="" href="../ModelBase/">ModelBase</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -113,9 +83,29 @@
     <a class="" href="../util/">util</a>
 	    </li>
           
-            <li class="toctree-l1">
+            <li class="toctree-l1 current">
 		
-    <a class="" href="../XmlUtil/">XmlUtil</a>
+    <a class="current" href="./">XmlUtil</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#xmlutil">XmlUtil</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#constructor">constructor</a></li>
+        
+            <li><a class="toctree-l3" href="#getfield">getField</a></li>
+        
+            <li><a class="toctree-l3" href="#getxmlcode">getXmlCode</a></li>
+        
+            <li><a class="toctree-l3" href="#xml2obj">xml2obj</a></li>
+        
+            <li><a class="toctree-l3" href="#obj2xml">obj2xml</a></li>
+        
+        </ul>
+    
+
+    </ul>
 	    </li>
           
         </ul>
@@ -140,7 +130,7 @@
     
       
     
-    <li>ModelBase</li>
+    <li>XmlUtil</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -150,10 +140,10 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="modelbase">ModelBase</h1>
-<p>框架model基类，用不同的orm实现db操作继承该类并实现相应的方法</p>
+                <h1 id="xmlutil">XmlUtil</h1>
+<p>提供xml与jons对象转换的方法</p>
 <h2 id="constructor">constructor</h2>
-<p><code>constructor (model)</code></p>
+<p><code>constructor (keyMappings)</code></p>
 <p>构造函数</p>
 <h3 id="_1">参数</h3>
 <table>
@@ -168,65 +158,62 @@
 </thead>
 <tbody>
 <tr>
-<td>model</td>
-<td>Model</td>
-<td>是</td>
-<td>无</td>
-<td>orm的Model对象</td>
-</tr>
-</tbody>
-</table>
-<h2 id="getmodel">getModel</h2>
-<p><code>getModel ()</code></p>
-<p>获得orm的Model对象</p>
-<h3 id="_2">返回值</h3>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>类型</th>
-<th>必填</th>
-<th>默认值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>model</td>
-<td>Model</td>
-<td>是</td>
-<td>无</td>
-<td>orm的Model对象</td>
-</tr>
-</tbody>
-</table>
-<h2 id="create">create</h2>
-<p><code>async create (data)</code></p>
-<p>创建资源，返回值为</p>
-<h3 id="_3">参数</h3>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>类型</th>
-<th>必填</th>
-<th>默认值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>data</td>
+<td>keyMappings</td>
 <td>Object</td>
+<td>是</td>
+<td>无</td>
+<td>json对象，定义了json字段对应的xml字段。如：{ name: 'abc001' }</td>
+</tr>
+</tbody>
+</table>
+<h2 id="getfield">getField</h2>
+<p><code>getField (xmlCode)</code></p>
+<p>获得xmlCode对应json的field</p>
+<h3 id="_2">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>xmlCode</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td>xml的code</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_3">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>field</td>
+<td>String</td>
 <td>否</td>
 <td>无</td>
-<td>待写入db的数据</td>
+<td>keyMappings的k</td>
 </tr>
 </tbody>
 </table>
-<h2 id="findbyid">findById</h2>
-<p><code>async findById (id)</code></p>
-<p>通过id获取数据</p>
+<h2 id="getxmlcode">getXmlCode</h2>
+<p><code>getXmlCode (field)</code></p>
+<p>获得json的field对应的xmlCode</p>
 <h3 id="_4">参数</h3>
 <table>
 <thead>
@@ -240,11 +227,11 @@
 </thead>
 <tbody>
 <tr>
-<td>id</td>
+<td>field</td>
 <td>String</td>
 <td>是</td>
 <td>无</td>
-<td></td>
+<td>keyMappings的k</td>
 </tr>
 </tbody>
 </table>
@@ -261,17 +248,17 @@
 </thead>
 <tbody>
 <tr>
-<td>data</td>
-<td>Object</td>
-<td>是</td>
+<td>field</td>
+<td>String</td>
+<td>否</td>
 <td>无</td>
-<td>资源数据</td>
+<td>xml的code</td>
 </tr>
 </tbody>
 </table>
-<h2 id="findbyidandupdate">findByIdAndUpdate</h2>
-<p><code>async findByIdAndUpdate (id, data)</code></p>
-<p>根据id更新数据</p>
+<h2 id="xml2obj">xml2obj</h2>
+<p><code>xml2obj (xml, customMapping, options)</code></p>
+<p>xml对象转换成json对象</p>
 <h3 id="_6">参数</h3>
 <table>
 <thead>
@@ -285,18 +272,25 @@
 </thead>
 <tbody>
 <tr>
-<td>id</td>
+<td>xml</td>
 <td>String</td>
 <td>是</td>
 <td>无</td>
-<td></td>
+<td>xml格式的字符串</td>
 </tr>
 <tr>
-<td>data</td>
+<td>customMapping</td>
 <td>Object</td>
-<td>是</td>
+<td>否</td>
 <td>无</td>
-<td>待更新db的数据</td>
+<td>自定义映射</td>
+</tr>
+<tr>
+<td>options</td>
+<td>Object</td>
+<td>否</td>
+<td>无</td>
+<td>xml-js的xml2js第二参数</td>
 </tr>
 </tbody>
 </table>
@@ -315,15 +309,15 @@
 <tr>
 <td>data</td>
 <td>Object</td>
-<td>是</td>
+<td>否</td>
 <td>无</td>
-<td>更新后的资源数据</td>
+<td>xml转换得到的json对象</td>
 </tr>
 </tbody>
 </table>
-<h2 id="list">list</h2>
-<p><code>async list ({ query })</code></p>
-<p>分页api</p>
+<h2 id="obj2xml">obj2xml</h2>
+<p><code>obj2xml (data, customMapping)</code></p>
+<p>json对象转换成xml对象</p>
 <h3 id="_8">参数</h3>
 <table>
 <thead>
@@ -337,11 +331,18 @@
 </thead>
 <tbody>
 <tr>
-<td>query</td>
+<td>data</td>
 <td>Object</td>
 <td>是</td>
 <td>无</td>
-<td>查询条件</td>
+<td>json对象</td>
+</tr>
+<tr>
+<td>customMapping</td>
+<td>Object</td>
+<td>否</td>
+<td>无</td>
+<td>自定义映射</td>
 </tr>
 </tbody>
 </table>
@@ -358,177 +359,11 @@
 </thead>
 <tbody>
 <tr>
-<td>count</td>
-<td>Number</td>
-<td>否</td>
-<td>无</td>
-<td>符合条件的数量</td>
-</tr>
-<tr>
-<td>rows</td>
-<td>Object[]</td>
-<td>否</td>
-<td>无</td>
-<td>符合条件的当前页数数据</td>
-</tr>
-</tbody>
-</table>
-<h2 id="count">count</h2>
-<p><code>async count (query)</code></p>
-<p>统计符合条件的数量</p>
-<h3 id="_10">参数</h3>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>类型</th>
-<th>必填</th>
-<th>默认值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>query</td>
-<td>Object</td>
-<td>是</td>
-<td>无</td>
-<td>查询条件</td>
-</tr>
-</tbody>
-</table>
-<h2 id="find">find</h2>
-<p><code>async find (query)</code></p>
-<p>统计符合条件的数量</p>
-<h3 id="_11">参数</h3>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>类型</th>
-<th>必填</th>
-<th>默认值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>query</td>
-<td>Object</td>
-<td>是</td>
-<td>无</td>
-<td>查询条件</td>
-</tr>
-</tbody>
-</table>
-<h3 id="_12">返回值</h3>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>类型</th>
-<th>必填</th>
-<th>默认值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>rows</td>
-<td>Object[]</td>
-<td>否</td>
-<td>无</td>
-<td>符合条件的数据</td>
-</tr>
-</tbody>
-</table>
-<h2 id="findone">findOne</h2>
-<p><code>async findOne (query)</code></p>
-<p>统计符合条件的某条数据</p>
-<h3 id="_13">参数</h3>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>类型</th>
-<th>必填</th>
-<th>默认值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>query</td>
-<td>Object</td>
-<td>是</td>
-<td>无</td>
-<td>查询条件</td>
-</tr>
-</tbody>
-</table>
-<h3 id="_14">返回值</h3>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>类型</th>
-<th>必填</th>
-<th>默认值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>data</td>
-<td>Object</td>
-<td>否</td>
-<td>无</td>
-<td>符合条件的数据</td>
-</tr>
-</tbody>
-</table>
-<h2 id="findbyidanddelete">findByIdAndDelete</h2>
-<p><code>async findByIdAndDelete (id)</code></p>
-<p>根据id删除数据</p>
-<h3 id="_15">参数</h3>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>类型</th>
-<th>必填</th>
-<th>默认值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>id</td>
+<td>xml</td>
 <td>String</td>
-<td>是</td>
-<td>无</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h3 id="_16">返回值</h3>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>类型</th>
-<th>必填</th>
-<th>默认值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>data</td>
-<td>Object</td>
 <td>否</td>
 <td>无</td>
-<td>删除结果</td>
+<td>json对象转换的xml字符串</td>
 </tr>
 </tbody>
 </table>
@@ -539,10 +374,8 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../Service/" class="btn btn-neutral float-right" title="Service">Next <span class="icon icon-circle-arrow-right"></span></a>
       
-      
-        <a href="../FCService/" class="btn btn-neutral" title="FCService"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../util/" class="btn btn-neutral" title="util"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -570,10 +403,8 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../FCService/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../util/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
-      
-        <span style="margin-left: 15px"><a href="../Service/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

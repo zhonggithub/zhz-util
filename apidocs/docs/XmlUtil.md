@@ -52,7 +52,7 @@
 
 
 ## xml2obj
-` xml2obj (xml, customMapping)`
+` xml2obj (xml, customMapping, options)`
 
 xml对象转换成json对象
 
@@ -62,6 +62,7 @@ xml对象转换成json对象
 |--- | --- | --- | --- | ---|
 |xml | String | 是 | 无 | xml格式的字符串|
 |customMapping | Object | 否 | 无 | 自定义映射|
+|options | Object | 否 | 无 | xml-js的xml2js第二参数|
 
 
 ### 返回值
