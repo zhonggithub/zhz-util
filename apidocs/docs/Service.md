@@ -408,13 +408,15 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 
  * 1，isValidDataWhenCreate 
 
- * 2，logic2DB 
+ * 2，isExistWhenCreate 
 
- * 3，beforeCreate
+ * 3，logic2DB 
 
- * 4，afterCreate
+ * 4，beforeCreate 
 
- * 5，db2logic
+ * 5，afterCreate 
+
+ * 6，db2logic
 
 ### 参数
 
