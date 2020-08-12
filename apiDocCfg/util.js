@@ -5,7 +5,7 @@
  * Created Date: 2020-06-17 13:24:59
  * Author: Zz
  * -----
- * Last Modified: 2020-07-21 13:55:29
+ * Last Modified: 2020-08-12 09:46:46
  * Modified By: Zz
  * -----
  * Description:
@@ -299,6 +299,203 @@ module.exports = {
       status: {
         type: DataTypes.Number,
         required: true,
+        defaultValue: 200,
+        description: 'http 状态码',
+      }
+    }
+  },
+  responseError400: {
+    description: '包装api返回400错误码数据',
+    params: {
+      name: {
+        type: DataTypes.String,
+        required: true,
+      },
+      code: {
+        type: DataTypes.String,
+        defaultValue: 'MISSING_PARAMS',
+      },
+      message: {
+        type: DataTypes.String,
+      },
+      desc: {
+        type: DataTypes.String,
+      }
+    },
+    returns: {
+      code: {
+        type: DataTypes.String,
+        description: '错误编码',
+        required: true,
+      },
+      message: {
+        type: DataTypes.String,
+        required: true,
+      },
+      desc: {
+        type: DataTypes.String,
+      },
+      status: {
+        type: DataTypes.Number,
+        required: true,
+        defaultValue: '400',
+        description: 'http 状态码',
+      }
+    }
+  },
+  responseError404: {
+    description: '包装api返回404错误码数据',
+    params: {
+      name: {
+        type: DataTypes.String,
+        required: true,
+      },
+      code: {
+        type: DataTypes.String,
+        defaultValue: 'ERROR_RESOURCE_NOT_EXIST',
+      },
+      message: {
+        type: DataTypes.String,
+      },
+      desc: {
+        type: DataTypes.String,
+      }
+    },
+    returns: {
+      code: {
+        type: DataTypes.String,
+        description: '错误编码',
+        required: true,
+      },
+      message: {
+        type: DataTypes.String,
+        required: true,
+      },
+      desc: {
+        type: DataTypes.String,
+      },
+      status: {
+        type: DataTypes.Number,
+        required: true,
+        defaultValue: '404',
+        description: 'http 状态码',
+      }
+    }
+  },
+  responseError409: {
+    description: '包装api返回409错误码数据',
+    params: {
+      name: {
+        type: DataTypes.String,
+        required: true,
+      },
+      code: {
+        type: DataTypes.String,
+        defaultValue: 'ERROR_RESOURCE_EXIST',
+      },
+      message: {
+        type: DataTypes.String,
+      },
+      desc: {
+        type: DataTypes.String,
+      }
+    },
+    returns: {
+      code: {
+        type: DataTypes.String,
+        description: '错误编码',
+        required: true,
+      },
+      message: {
+        type: DataTypes.String,
+        required: true,
+      },
+      desc: {
+        type: DataTypes.String,
+      },
+      status: {
+        type: DataTypes.Number,
+        required: true,
+        defaultValue: '409',
+        description: 'http 状态码',
+      }
+    }
+  },
+  responseError422: {
+    description: '包装api返回422错误码数据',
+    params: {
+      name: {
+        type: DataTypes.String,
+        required: true,
+      },
+      code: {
+        type: DataTypes.String,
+        defaultValue: 'INVALID_PARAMS',
+      },
+      message: {
+        type: DataTypes.String,
+      },
+      desc: {
+        type: DataTypes.String,
+      }
+    },
+    returns: {
+      code: {
+        type: DataTypes.String,
+        description: '错误编码',
+        required: true,
+      },
+      message: {
+        type: DataTypes.String,
+        required: true,
+      },
+      desc: {
+        type: DataTypes.String,
+      },
+      status: {
+        type: DataTypes.Number,
+        required: true,
+        defaultValue: '422',
+        description: 'http 状态码',
+      }
+    }
+  },
+  responseError500: {
+    description: '包装api返回500错误码数据',
+    params: {
+      name: {
+        type: DataTypes.String,
+        required: true,
+      },
+      code: {
+        type: DataTypes.String,
+        required: true,
+        defaultValue: 'ERROR_UNKOWN',
+      },
+      message: {
+        type: DataTypes.String,
+      },
+      desc: {
+        type: DataTypes.String,
+      }
+    },
+    returns: {
+      code: {
+        type: DataTypes.String,
+        description: '错误编码',
+        required: true,
+      },
+      message: {
+        type: DataTypes.String,
+        required: true,
+      },
+      desc: {
+        type: DataTypes.String,
+      },
+      status: {
+        type: DataTypes.Number,
+        required: true,
+        defaultValue: '500',
         description: 'http 状态码',
       }
     }

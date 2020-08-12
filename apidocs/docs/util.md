@@ -278,7 +278,132 @@
 |code | Number, String | 否 | 无 | 成功时为0，否则为错误编码|
 |message | String | 否 | 无 | |
 |data | Number, String, Object | 是 | 无 | |
-|status | Number | 是 | 无 | http 状态码|
+|status | Number | 是 | 200 | http 状态码|
+
+
+## responseError400
+` responseError400 (name, code, message, desc)`
+
+包装api返回400错误码数据
+
+### 参数
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|name | String | 是 | 无 | |
+|code | String | 否 | MISSING_PARAMS | |
+|message | String | 否 | 无 | |
+|desc | String | 否 | 无 | |
+
+
+### 返回值
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|code | String | 是 | 无 | 错误编码|
+|message | String | 是 | 无 | |
+|desc | String | 否 | 无 | |
+|status | Number | 是 | 400 | http 状态码|
+
+
+## responseError404
+` responseError404 (name, code, message, desc)`
+
+包装api返回404错误码数据
+
+### 参数
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|name | String | 是 | 无 | |
+|code | String | 否 | ERROR_RESOURCE_NOT_EXIST | |
+|message | String | 否 | 无 | |
+|desc | String | 否 | 无 | |
+
+
+### 返回值
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|code | String | 是 | 无 | 错误编码|
+|message | String | 是 | 无 | |
+|desc | String | 否 | 无 | |
+|status | Number | 是 | 404 | http 状态码|
+
+
+## responseError409
+` responseError409 (name, code, message, desc)`
+
+包装api返回409错误码数据
+
+### 参数
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|name | String | 是 | 无 | |
+|code | String | 否 | ERROR_RESOURCE_EXIST | |
+|message | String | 否 | 无 | |
+|desc | String | 否 | 无 | |
+
+
+### 返回值
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|code | String | 是 | 无 | 错误编码|
+|message | String | 是 | 无 | |
+|desc | String | 否 | 无 | |
+|status | Number | 是 | 409 | http 状态码|
+
+
+## responseError422
+` responseError422 (name, code, message, desc)`
+
+包装api返回422错误码数据
+
+### 参数
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|name | String | 是 | 无 | |
+|code | String | 否 | INVALID_PARAMS | |
+|message | String | 否 | 无 | |
+|desc | String | 否 | 无 | |
+
+
+### 返回值
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|code | String | 是 | 无 | 错误编码|
+|message | String | 是 | 无 | |
+|desc | String | 否 | 无 | |
+|status | Number | 是 | 422 | http 状态码|
+
+
+## responseError500
+` responseError500 (name, code, message, desc)`
+
+包装api返回500错误码数据
+
+### 参数
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|name | String | 是 | 无 | |
+|code | String | 是 | ERROR_UNKOWN | |
+|message | String | 否 | 无 | |
+|desc | String | 否 | 无 | |
+
+
+### 返回值
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|code | String | 是 | 无 | 错误编码|
+|message | String | 是 | 无 | |
+|desc | String | 否 | 无 | |
+|status | Number | 是 | 500 | http 状态码|
 
 
 ## randomInt

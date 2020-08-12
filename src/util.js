@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: 2020-08-06 09:10:19
+ * Last Modified: 2020-08-12 09:41:33
  * Modified By: Zz
  * -----
  * Description:
@@ -156,7 +156,7 @@ module.exports = {
   },
   
   responseError400(name, code, message, desc) {
-    return new ZError(name, code || 'ERROR_PARAMS', message, desc, 400).toJson();
+    return new ZError(name, code || 'MISSING_PARAMS', message, desc, 400).toJson();
   },
   responseError409(name, code, message, desc) {
     return new ZError(name, code || 'ERROR_RESOURCE_EXIST', message, desc, 409).toJson();
@@ -238,7 +238,7 @@ module.exports = {
     return time;
   },
 
-  zerror400(name = 'Error', code = 'ERROR_PARAMS', message = '', desc = '') {
+  zerror400(name = 'Error', code = 'MISSING_PARAMS', message = '', desc = '') {
     return new ZError(name, code, message, desc, 400)
   },
   zerror409(name = 'Error', code = 'ERROR_RESOURCE_EXIST', message = '', desc = '') {
@@ -255,7 +255,7 @@ module.exports = {
   },
   
   error400(code, message) {
-    return new ZError('Error', code || 'ERROR_PARAMS', message, '', 400).toJson();
+    return new ZError('Error', code || 'MISSING_PARAMS', message, '', 400).toJson();
   },
   error409(code, message) {
     return new ZError('Error', code || 'ERROR_RESOURCE_EXIST', message, '', 409).toJson();
