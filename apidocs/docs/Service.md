@@ -172,6 +172,25 @@ count前转换传入的查询条件。逻辑表达查询条件转换成sql条件
 |ret | Object | 否 | 无 | 转换后的查询条件|
 
 
+## logic2db
+`async logic2db (data)`
+
+逻辑层数据转成db层数据
+
+### 参数
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|data | Object | 否 | 无 | 传入的逻辑层的数据|
+
+
+### 返回值
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|data | Object | 否 | 无 | 返回db层数据|
+
+
 ## logic2DBWhenUpdate
 `async logic2DBWhenUpdate (data)`
 

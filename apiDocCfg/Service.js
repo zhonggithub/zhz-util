@@ -5,7 +5,7 @@
  * Created Date: 2020-06-14 15:35:22
  * Author: Zz
  * -----
- * Last Modified: 2020-08-12 08:55:17
+ * Last Modified: 2020-08-12 14:48:10
  * Modified By: Zz
  * -----
  * Description:
@@ -187,6 +187,23 @@ module.exports = {
       ret: {
         type: DataTypes.Object,
         description: '转换后的查询条件',
+      }
+    }
+  },
+
+  logic2db: {
+    funcType: DataTypes.FuncType.kAsync,
+    description: '逻辑层数据转成db层数据',
+    params: {
+      data: {
+        type: DataTypes.Object,
+        description: '传入的逻辑层的数据',
+      },
+    },
+    returns: {
+      data: {
+        type: DataTypes.Object,
+        description: '返回db层数据',
       }
     }
   },
