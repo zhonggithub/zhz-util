@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-08-13 15:22:49
+ * Last Modified: 2020-08-13 15:26:12
  * Modified By: Zz
  * -----
  * Description:
@@ -62,6 +62,10 @@ class Service extends ServiceBase {
 
   getUResourceName() {
     return this.resourceName ? (util.toLine(this.resourceName)).toUpperCase() : 'RESOURCE';
+  }
+
+  getUResouceName() {
+    return this.getUResourceName()
   }
 
   getCacheTTL() {
@@ -291,7 +295,7 @@ class Service extends ServiceBase {
       const exist = await this.isExistWhenCreate(msg.params);
       if (exist) {
         return util.responseError409(
-          this.getUResouceName(),
+          this.getUResourceName(),
           this.errCode[409],
         );
       }
@@ -335,7 +339,7 @@ class Service extends ServiceBase {
 
       if (!result) {
         return util.responseError404(
-          this.getUResouceName(),
+          this.getUResourceName(),
           this.errCode[404],
         );
       }
@@ -369,7 +373,7 @@ class Service extends ServiceBase {
       );
       if (!result) {
         return util.responseError404(
-          this.getUResouceName(),
+          this.getUResourceName(),
           this.errCode[404],
         );
       }
@@ -397,7 +401,7 @@ class Service extends ServiceBase {
       const result = await this.model.findByIdAndUpdate(id, { status });
       if (!result) {
         return util.responseError404(
-          this.getUResouceName(),
+          this.getUResourceName(),
           this.errCode[404],
         );
       }
@@ -422,7 +426,7 @@ class Service extends ServiceBase {
       const exist = await this.model.findById(id);
       if (!exist) {
         return util.responseError404(
-          this.getUResouceName(),
+          this.getUResourceName(),
           this.errCode[404],
         );
       }
@@ -431,7 +435,7 @@ class Service extends ServiceBase {
       const delResult = await this.model.findByIdAndDelete(id);
       if (!delResult) {
         return util.responseError404(
-          this.getUResouceName(),
+          this.getUResourceName(),
           this.errCode[404],
         );
       }
@@ -529,7 +533,7 @@ class Service extends ServiceBase {
       const result = await this.model.findOne(query);
       if (!result) {
         return util.responseError404(
-          this.getUResouceName(),
+          this.getUResourceName(),
           this.errCode[404],
         );
       }
