@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-08-13 19:12:11
+ * Last Modified: 2020-08-13 19:21:26
  * Modified By: Zz
  * -----
  * Description:
@@ -244,7 +244,7 @@ class Service extends ServiceBase {
   }
 
   async isExistWhenCreateImp(where) {
-    const row = await this.model.findOne({ where })
+    const row = await this.model.findOne(where)
     if (row) {
       return util.responseError409(
         this.getUResourceName(),
