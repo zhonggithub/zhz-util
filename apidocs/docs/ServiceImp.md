@@ -1,4 +1,4 @@
-# Service
+# ServiceImp
 继承ServiceBase。实现接口：create、retrieve、update、updateStatus、list、count、listAll、findOne、logicDel、desctroy、treeList、findAll、findByIds
 
 ## constructor
@@ -47,6 +47,25 @@
 |参数|类型|必填|默认值|描述|
 |--- | --- | --- | --- | ---|
 |data | Object | 否 | 无 | 创建时传入的数据|
+
+
+### 返回值
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|ret | ZError, null | 否 | 无 | 验证不通过返回ZError对象，否则返回null|
+
+
+## isValidDataWhenUpdate
+` isValidDataWhenUpdate (data)`
+
+更新的时候判断数据合法性，验证不通过返回ZError对象，否则返回null
+
+### 参数
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|data | Object | 否 | 无 | 更新时传入的数据|
 
 
 ### 返回值
@@ -106,6 +125,25 @@
 |参数|类型|必填|默认值|描述|
 |--- | --- | --- | --- | ---|
 |data | Object | 否 | 无 | 创建时传入的数据|
+
+
+### 返回值
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|ret | ZError, null | 否 | 无 | 验证不通过返回ZError对象，否则返回null|
+
+
+## isExistWhenCreateImp
+`async isExistWhenCreateImp (params)`
+
+创建的时候校验数据唯一性
+
+### 参数
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|params | Object | 否 | 无 | 框架Model findOne 能识别的查询条件|
 
 
 ### 返回值

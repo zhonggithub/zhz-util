@@ -5,7 +5,7 @@
  * Created Date: 2020-06-14 15:35:22
  * Author: Zz
  * -----
- * Last Modified: 2020-08-13 16:49:46
+ * Last Modified: 2020-08-13 21:33:46
  * Modified By: Zz
  * -----
  * Description:
@@ -15,7 +15,7 @@ const dataTypes = require('zh-cli');
 const DataTypes = dataTypes.nodejs;
 
 module.exports = {
-  name: 'Service',
+  name: 'ServiceImp',
   description: '继承ServiceBase。实现接口：create、retrieve、update、updateStatus、list、count、listAll、findOne、logicDel、desctroy、treeList、findAll、findByIds',
 
   constructor: {
@@ -85,6 +85,21 @@ module.exports = {
       }
     }
   },
+  isValidDataWhenUpdate: {
+    description: '更新的时候判断数据合法性，验证不通过返回ZError对象，否则返回null',
+    params: {
+      data: {
+        type: DataTypes.Object,
+        description: '更新时传入的数据',
+      }
+    },
+    returns: {
+      ret: {
+        type: 'ZError, null',
+        description: '验证不通过返回ZError对象，否则返回null',
+      }
+    }
+  },
 
   isValidDataWhenRetrieve: {
     description: '获取数据时候判断数据是否包含必填字段，默认校验id，但是不对id合法性校验。验证不通过返回ZEerror对象,否则返回null',
@@ -133,6 +148,23 @@ module.exports = {
       data: {
         type: DataTypes.Object,
         description: '创建时传入的数据',
+      }
+    },
+    returns: {
+      ret: {
+        type: 'ZError, null',
+        description: '验证不通过返回ZError对象，否则返回null',
+      }
+    }
+  },
+
+  isExistWhenCreateImp: {
+    description: '创建的时候校验数据唯一性',
+    funcType: DataTypes.FuncType.kAsync,
+    params: {
+      params: {
+        type: DataTypes.Object,
+        description: '框架Model findOne 能识别的查询条件',
       }
     },
     returns: {
