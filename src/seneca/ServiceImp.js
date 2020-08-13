@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-08-13 17:10:57
+ * Last Modified: 2020-08-13 19:08:35
  * Modified By: Zz
  * -----
  * Description:
@@ -243,8 +243,15 @@ class Service extends ServiceBase {
     return this.model.findOne(where);
   }
 
-  async isExistWhenCreate(data) {
-    return null;
+  async isExistWhenCreate(where) {
+    const row = await this.model.findOne({ where })
+    if (row) {
+      return util.responseError409(
+        this.getUResourceName(),
+        this.errCode[409],
+      )
+    }
+    return null
   }
 
   convertQueryCriteria(criteria) {
