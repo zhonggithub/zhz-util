@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-08-06 09:12:06
+ * Last Modified: 2020-08-13 15:22:49
  * Modified By: Zz
  * -----
  * Description:
@@ -60,7 +60,7 @@ class Service extends ServiceBase {
     this.errCode = util.createResourceErrorCode(resourceName);
   }
 
-  getUResouceName() {
+  getUResourceName() {
     return this.resourceName ? (util.toLine(this.resourceName)).toUpperCase() : 'RESOURCE';
   }
 
