@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-08-13 16:48:27
+ * Last Modified: 2020-08-13 17:10:57
  * Modified By: Zz
  * -----
  * Description:
@@ -232,11 +232,7 @@ class Service extends ServiceBase {
   }
 
   isValidDataWhenUpdate(data) {
-    const error = util.isValidData(data, ['id']);
-    if (error) {
-      return error
-    }
-    return this.isValidDataWhenCreate(data)
+    return util.isValidData(data, ['id']);
   }
 
   isValidDataWhenUpdateStatus(data) {
