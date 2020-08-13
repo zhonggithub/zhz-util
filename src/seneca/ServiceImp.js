@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-08-13 16:21:37
+ * Last Modified: 2020-08-13 16:48:27
  * Modified By: Zz
  * -----
  * Description:
@@ -61,7 +61,7 @@ class Service extends ServiceBase {
   }
 
   getUResourceName() {
-    return this.resourceName ? util.fistLetterUpper(this.resourceName) : 'RESOURCE';
+    return this.resourceName ? util.fistLetterUpper(this.resourceName) : 'Resource';
   }
 
   getCacheTTL() {
@@ -231,6 +231,14 @@ class Service extends ServiceBase {
     });
   }
 
+  isValidDataWhenUpdate(data) {
+    const error = util.isValidData(data, ['id']);
+    if (error) {
+      return error
+    }
+    return this.isValidDataWhenCreate(data)
+  }
+
   isValidDataWhenUpdateStatus(data) {
     return util.isValidData(data, ['id', 'status']);
   }
@@ -356,7 +364,7 @@ class Service extends ServiceBase {
 
   async update(msg) {
     this.seneca.logger.info(msg);
-    const err = this.isValidDataWhenRetrieve(msg.params);
+    const err = this.isValidDataWhenUpdate(msg.params);
     if (err) {
       return err.toJson();
     }

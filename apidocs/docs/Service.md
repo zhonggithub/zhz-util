@@ -489,7 +489,7 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 
 根据id更新数据。update执行流程：
 
- * 1，isValidDataWhenRetrieve 
+ * 1，isValidDataWhenUpdate 
 
  * 2，logic2DBWhenUpdate 
 

@@ -5,7 +5,7 @@
  * Created Date: 2020-06-14 15:35:22
  * Author: Zz
  * -----
- * Last Modified: 2020-08-12 14:48:10
+ * Last Modified: 2020-08-13 16:49:46
  * Modified By: Zz
  * -----
  * Description:
@@ -482,7 +482,7 @@ module.exports = {
   },
 
   update: {
-    desc: '根据id更新数据。update执行流程：\r\n\r\n * 1，isValidDataWhenRetrieve \r\n\r\n * 2，logic2DBWhenUpdate \r\n\r\n * 3，beforeUpdate \r\n\r\n * 4，findByIdAndUpdate \r\n\r\n * 5，afterUpdate \r\n\r\n * 6，delCache \r\n\r\n * 7，db2logic',
+    desc: '根据id更新数据。update执行流程：\r\n\r\n * 1，isValidDataWhenUpdate \r\n\r\n * 2，logic2DBWhenUpdate \r\n\r\n * 3，beforeUpdate \r\n\r\n * 4，findByIdAndUpdate \r\n\r\n * 5，afterUpdate \r\n\r\n * 6，delCache \r\n\r\n * 7，db2logic',
     paramsIsObject: true,
     funcType: DataTypes.FuncType.kAsync,
     params: {
