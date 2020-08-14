@@ -5,7 +5,7 @@
  * Created Date: 2020-06-25 12:19:09
  * Author: Zz
  * -----
- * Last Modified: 2020-08-14 19:53:12
+ * Last Modified: 2020-08-14 21:22:37
  * Modified By: Zz
  * -----
  * Description:
@@ -68,6 +68,9 @@ class Service extends ServiceImp {
           default:
         }
       });
+      if (tmp.order.length === 0) {
+        delete tmp.order
+      }
     }
     return tmp;
   }

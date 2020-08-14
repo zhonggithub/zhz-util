@@ -1,10 +1,10 @@
 # zhz-util
 
-通过[seneca](https://www.npmjs.com/package/seneca)提供rpc服务。
+通过[seneca](https://www.npmjs.com/package/seneca)提供类rpc的微服务。
 
 * FCClient、FCService: 封装阿里云函数计算[@alicloud/fc2
 ](https://www.npmjs.com/package/@alicloud/fc2)提供调用rpc api的实例
-* Service: 通过[z-seneca-extended](https://www.npmjs.com/package/z-seneca-extended)提供rpc api
+* Service: 通过[z-seneca-extended](https://www.npmjs.com/package/z-seneca-extended)提供类rpc的api
 
 ## Install
 
