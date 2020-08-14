@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-08-13 22:20:52
+ * Last Modified: 2020-08-14 19:55:25
  * Modified By: Zz
  * -----
  * Description:
@@ -119,16 +119,11 @@ class Service extends ServiceBase {
   }
 
   /**
-   * 
    * @param {Object} query db的查询条件
    * @param {Object} expand { a: true, b: true }
    */
   appendInclude(query, expand) {
     if (!query || !expand) return;
-    const include = this.parseExpand2Include(expand);
-    if (include) {
-      query.include = include;
-    }
   }
 
   async delCache(id) {
@@ -138,52 +133,20 @@ class Service extends ServiceBase {
     }
   }
  
-  static parseQuery(query) {
-    let tmp = {};
-    if (query) {
-      if (query.where) {
-        tmp = {
-          ...query,
-        };
-      } else {
-        tmp.where = query;
-      }
-    }
-    return tmp;
+  parseQuery(query) {
+    return query
   }
 
-  static parseListQuery(query, sort, skip, pageSize) {
-    let tmp = Service.parseQuery(query);
+  parseListQuery(query, sort, skip, pageSize) {
+    let tmp = this.parseQuery(query);
     if (skip !== undefined) {
       tmp.offset = skip;
     }
     if (pageSize) {
       tmp.limit = pageSize;
     }
-    if (sort && Array.isArray(sort) && sort.length > 0) {
-      // 此方式默认为sequlize 支持的格式不做处理
-      if (Array.isArray(sort[0])) {
-        tmp.order = sort;
-      } else if (typeof sort[0] === 'object') {
-        // 只支持{ field: '', order: '' } 格式
-        tmp.order = sort.map((item) => [item.field, item.order]);
-      }
-    } else if (typeof sort === 'object') {
-      // 只支持{ a: -1, b: 1, c: 'ASC' } 格式
-      tmp.order = [];
-      Object.keys(sort).forEach((k) => {
-        switch (sort[k]) {
-          case 1: case 'ASC': {
-            tmp.order.push([k, 'ASC']);
-            break;
-          }
-          case -1: case 'DESC': {
-            tmp.order.push([k, 'DESC']);
-            break;
-          }
-          default:
-        }
-      });
+    if (sort) {
+      tmp.sort = sort;
     }
     return tmp;
   }
@@ -469,7 +432,7 @@ class Service extends ServiceBase {
         filter, sort, skip, pageSize, page, expand,
       } = util.convertPagination(msg.params);
 
-      const params = Service.parseListQuery(
+      const params = this.parseListQuery(
         this.convertQueryCriteria(filter),
         sort,
         skip,
@@ -500,7 +463,7 @@ class Service extends ServiceBase {
       return err.toJson();
     }
     try {
-      const query = Service.parseQuery(this.convertCountCriteria(msg.params))
+      const query = this.parseQuery(this.convertCountCriteria(msg.params))
       const result = await this.model.count(query);
       return util.responseSuccess(result);
     } catch (dbError) {
@@ -517,7 +480,7 @@ class Service extends ServiceBase {
     try {
       const { filter, expand } = util.convertPagination(msg.params);
       const params = this.convertQueryCriteria(filter);
-      const query = Service.parseQuery(params);
+      const query = this.parseQuery(params);
       const tmpExpand = util.parseExpand(expand);
       this.appendInclude(query, tmpExpand);
       const result = await this.model.find(query);
@@ -538,7 +501,7 @@ class Service extends ServiceBase {
       delete msg.params.expand;
 
       const params = this.convertQueryCriteria(msg.params);
-      const query = Service.parseQuery(params);
+      const query = this.parseQuery(params);
       const tmpExpand = util.parseExpand(expand);
       this.appendInclude(query, tmpExpand);
       const result = await this.model.findOne(query);
@@ -562,7 +525,7 @@ class Service extends ServiceBase {
       delete msg.params.expand;
       
       const params = this.convertQueryCriteria(msg.params);
-      const query = Service.parseQuery(params);
+      const query = this.parseQuery(params);
       const tmpExpand = util.parseExpand(expand);
       this.appendInclude(query, tmpExpand);
       const result = await this.model.find(query);
@@ -583,9 +546,7 @@ class Service extends ServiceBase {
         return error.toJSON()
       }
       const { ids, expand } = msg.params
-      const query = {
-        where: { id: ids }
-      };
+      const query = this.parseQuery({ id: ids })
       const tmpExpand = util.parseExpand(expand);
       this.appendInclude(query, tmpExpand);
       const result = await this.model.find(query);

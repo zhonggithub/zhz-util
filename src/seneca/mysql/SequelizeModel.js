@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-06-18 22:57:27
+ * Last Modified: 2020-08-14 19:56:58
  * Modified By: Zz
  * -----
  * Description:
@@ -34,6 +34,10 @@ class SequelizeModel extends ModelBase {
   }
 
   async find(query) {
+    return this.model.findAll(query);
+  }
+
+  async findAll(query) {
     return this.model.findAll(query);
   }
 

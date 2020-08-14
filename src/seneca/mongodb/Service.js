@@ -5,7 +5,7 @@
  * Created Date: 2020-06-25 12:28:46
  * Author: Zz
  * -----
- * Last Modified: 2020-07-02 21:58:26
+ * Last Modified: 2020-08-14 19:38:07
  * Modified By: Zz
  * -----
  * Description:
@@ -21,6 +21,7 @@ class MongodbService extends ServiceImp {
       ...tmpCriteria.sourceCriteria,
     };
   }
+
   async logicDel(msg) {
     this.seneca.logger.info(msg);
     const err = this.isValidDataWhenRetrieve(msg.params);
