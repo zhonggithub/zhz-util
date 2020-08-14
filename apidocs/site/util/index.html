@@ -70,12 +70,12 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="../Service/">Service</a>
+    <a class="" href="../ServiceBase/">ServiceBase</a>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <a class="" href="../ServiceBase/">ServiceBase</a>
+    <a class="" href="../ServiceImp/">ServiceImp</a>
 	    </li>
           
             <li class="toctree-l1 current">
@@ -114,6 +114,16 @@
             <li><a class="toctree-l3" href="#response">response</a></li>
         
             <li><a class="toctree-l3" href="#responsesuccess">responseSuccess</a></li>
+        
+            <li><a class="toctree-l3" href="#responseerror400">responseError400</a></li>
+        
+            <li><a class="toctree-l3" href="#responseerror404">responseError404</a></li>
+        
+            <li><a class="toctree-l3" href="#responseerror409">responseError409</a></li>
+        
+            <li><a class="toctree-l3" href="#responseerror422">responseError422</a></li>
+        
+            <li><a class="toctree-l3" href="#responseerror500">responseError500</a></li>
         
             <li><a class="toctree-l3" href="#randomint">randomInt</a></li>
         
@@ -921,7 +931,442 @@
 <td>status</td>
 <td>Number</td>
 <td>是</td>
+<td>200</td>
+<td>http 状态码</td>
+</tr>
+</tbody>
+</table>
+<h2 id="responseerror400">responseError400</h2>
+<p><code>responseError400 (name, code, message, desc)</code></p>
+<p>包装api返回400错误码数据</p>
+<h3 id="_29">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>是</td>
 <td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>code</td>
+<td>String</td>
+<td>否</td>
+<td>MISSING_PARAMS</td>
+<td></td>
+</tr>
+<tr>
+<td>message</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>desc</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_30">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>code</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td>错误编码</td>
+</tr>
+<tr>
+<td>message</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>desc</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>status</td>
+<td>Number</td>
+<td>是</td>
+<td>400</td>
+<td>http 状态码</td>
+</tr>
+</tbody>
+</table>
+<h2 id="responseerror404">responseError404</h2>
+<p><code>responseError404 (name, code, message, desc)</code></p>
+<p>包装api返回404错误码数据</p>
+<h3 id="_31">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>code</td>
+<td>String</td>
+<td>否</td>
+<td>ERROR_RESOURCE_NOT_EXIST</td>
+<td></td>
+</tr>
+<tr>
+<td>message</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>desc</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_32">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>code</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td>错误编码</td>
+</tr>
+<tr>
+<td>message</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>desc</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>status</td>
+<td>Number</td>
+<td>是</td>
+<td>404</td>
+<td>http 状态码</td>
+</tr>
+</tbody>
+</table>
+<h2 id="responseerror409">responseError409</h2>
+<p><code>responseError409 (name, code, message, desc)</code></p>
+<p>包装api返回409错误码数据</p>
+<h3 id="_33">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>code</td>
+<td>String</td>
+<td>否</td>
+<td>ERROR_RESOURCE_EXIST</td>
+<td></td>
+</tr>
+<tr>
+<td>message</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>desc</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_34">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>code</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td>错误编码</td>
+</tr>
+<tr>
+<td>message</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>desc</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>status</td>
+<td>Number</td>
+<td>是</td>
+<td>409</td>
+<td>http 状态码</td>
+</tr>
+</tbody>
+</table>
+<h2 id="responseerror422">responseError422</h2>
+<p><code>responseError422 (name, code, message, desc)</code></p>
+<p>包装api返回422错误码数据</p>
+<h3 id="_35">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>code</td>
+<td>String</td>
+<td>否</td>
+<td>INVALID_PARAMS</td>
+<td></td>
+</tr>
+<tr>
+<td>message</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>desc</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_36">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>code</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td>错误编码</td>
+</tr>
+<tr>
+<td>message</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>desc</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>status</td>
+<td>Number</td>
+<td>是</td>
+<td>422</td>
+<td>http 状态码</td>
+</tr>
+</tbody>
+</table>
+<h2 id="responseerror500">responseError500</h2>
+<p><code>responseError500 (name, code, message, desc)</code></p>
+<p>包装api返回500错误码数据</p>
+<h3 id="_37">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>code</td>
+<td>String</td>
+<td>是</td>
+<td>ERROR_UNKOWN</td>
+<td></td>
+</tr>
+<tr>
+<td>message</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>desc</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_38">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>code</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td>错误编码</td>
+</tr>
+<tr>
+<td>message</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>desc</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>status</td>
+<td>Number</td>
+<td>是</td>
+<td>500</td>
 <td>http 状态码</td>
 </tr>
 </tbody>
@@ -929,7 +1374,7 @@
 <h2 id="randomint">randomInt</h2>
 <p><code>randomInt (min, max)</code></p>
 <p>随机整数</p>
-<h3 id="_29">参数</h3>
+<h3 id="_39">参数</h3>
 <table>
 <thead>
 <tr>
@@ -957,7 +1402,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_30">返回值</h3>
+<h3 id="_40">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -981,7 +1426,7 @@
 <h2 id="randomstr">randomStr</h2>
 <p><code>randomStr (places)</code></p>
 <p>随机一个数字字符串</p>
-<h3 id="_31">参数</h3>
+<h3 id="_41">参数</h3>
 <table>
 <thead>
 <tr>
@@ -1002,7 +1447,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_32">返回值</h3>
+<h3 id="_42">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -1026,7 +1471,7 @@
 <h2 id="caclerise">cacleRise</h2>
 <p><code>cacleRise (value, preValue)</code></p>
 <p>计算百分比增长率</p>
-<h3 id="_33">参数</h3>
+<h3 id="_43">参数</h3>
 <table>
 <thead>
 <tr>
@@ -1054,7 +1499,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_34">返回值</h3>
+<h3 id="_44">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -1078,7 +1523,7 @@
 <h2 id="filterdata">filterData</h2>
 <p><code>filterData (data, excludeAttribute)</code></p>
 <p>过滤属性值</p>
-<h3 id="_35">参数</h3>
+<h3 id="_45">参数</h3>
 <table>
 <thead>
 <tr>
@@ -1106,7 +1551,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_36">返回值</h3>
+<h3 id="_46">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -1130,7 +1575,7 @@
 <h2 id="parseexpand">parseExpand</h2>
 <p><code>parseExpand (expand)</code></p>
 <p>解析expand字符串，转换对象</p>
-<h3 id="_37">参数</h3>
+<h3 id="_47">参数</h3>
 <table>
 <thead>
 <tr>
@@ -1151,7 +1596,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_38">返回值</h3>
+<h3 id="_48">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -1175,7 +1620,7 @@
 <h2 id="convertquerycriteria">convertQueryCriteria</h2>
 <p><code>convertQueryCriteria (querycriteria, dbType, handle)</code></p>
 <p>把逻辑层的查询条件转成db层的查询条件。默认会处理范围查找的条件。</p>
-<h3 id="_39">参数</h3>
+<h3 id="_49">参数</h3>
 <table>
 <thead>
 <tr>
@@ -1210,7 +1655,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_40">返回值</h3>
+<h3 id="_50">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -1248,7 +1693,7 @@
 <h2 id="israngequery">isRangeQuery</h2>
 <p><code>isRangeQuery (value)</code></p>
 <p>判断一个字符串是否是范围字符串</p>
-<h3 id="_41">参数</h3>
+<h3 id="_51">参数</h3>
 <table>
 <thead>
 <tr>
@@ -1269,7 +1714,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_42">返回值</h3>
+<h3 id="_52">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -1293,7 +1738,7 @@
 <h2 id="isvaliddata">isValidData</h2>
 <p><code>isValidData (data, requiredParams, fieldVerfiyFunc, missingPrefix, invalidePrefix)</code></p>
 <p>验证数据的合法性和有效性</p>
-<h3 id="_43">参数</h3>
+<h3 id="_53">参数</h3>
 <table>
 <thead>
 <tr>
@@ -1342,7 +1787,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_44">返回值</h3>
+<h3 id="_54">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -1366,7 +1811,7 @@
 <h2 id="isint">isInt</h2>
 <p><code>isInt (val, strong)</code></p>
 <p>判断一个值是否为整数或整数字符串</p>
-<h3 id="_45">参数</h3>
+<h3 id="_55">参数</h3>
 <table>
 <thead>
 <tr>
@@ -1394,7 +1839,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_46">返回值</h3>
+<h3 id="_56">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -1418,7 +1863,7 @@
 <h2 id="notemptystr">notEmptyStr</h2>
 <p><code>notEmptyStr (val)</code></p>
 <p>判断一个值是否为非空符串。如果是非空字符串，返回true，否则返回false</p>
-<h3 id="_47">参数</h3>
+<h3 id="_57">参数</h3>
 <table>
 <thead>
 <tr>
@@ -1439,7 +1884,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_48">返回值</h3>
+<h3 id="_58">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -1463,7 +1908,7 @@
 <h2 id="isvalueof">isValueOf</h2>
 <p><code>isValueOf (actualValue, expectedValues)</code></p>
 <p>判断一个值是否在期望值之内。如果actualValue和expectedValues都是Number、Boolean、String类型，采用<code>===</code>比较。如果expectedValues是Array或Object类型。则判断actualValue值是否是存在数组或Object.values(expectedValues)中</p>
-<h3 id="_49">参数</h3>
+<h3 id="_59">参数</h3>
 <table>
 <thead>
 <tr>
@@ -1491,7 +1936,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_50">返回值</h3>
+<h3 id="_60">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -1515,7 +1960,7 @@
 <h2 id="avatest">avaTest</h2>
 <p><code>avaTest (t, actual, expected, expand)</code></p>
 <p>测试 { ...expected, ...expand } 属性值和actual是否一致。</p>
-<h3 id="_51">参数</h3>
+<h3 id="_61">参数</h3>
 <table>
 <thead>
 <tr>
@@ -1557,7 +2002,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_52">返回值</h3>
+<h3 id="_62">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -1581,7 +2026,7 @@
 <h2 id="utctodate">utcToDate</h2>
 <p><code>utcToDate (unixTimestamp)</code></p>
 <p>unix时间戳转Date</p>
-<h3 id="_53">参数</h3>
+<h3 id="_63">参数</h3>
 <table>
 <thead>
 <tr>
@@ -1602,7 +2047,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_54">返回值</h3>
+<h3 id="_64">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -1626,7 +2071,7 @@
 <h2 id="datestrtodate">dateStrToDate</h2>
 <p><code>dateStrToDate (dateStr)</code></p>
 <p>日期字符串转utc Date</p>
-<h3 id="_55">参数</h3>
+<h3 id="_65">参数</h3>
 <table>
 <thead>
 <tr>
@@ -1647,7 +2092,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_56">返回值</h3>
+<h3 id="_66">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -1671,7 +2116,7 @@
 <h2 id="zerror400">zerror400</h2>
 <p><code>zerror400 (name, code, message, desc)</code></p>
 <p>参数错误对象，对应http code 为400</p>
-<h3 id="_57">参数</h3>
+<h3 id="_67">参数</h3>
 <table>
 <thead>
 <tr>
@@ -1713,7 +2158,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_58">返回值</h3>
+<h3 id="_68">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -1737,7 +2182,7 @@
 <h2 id="zerror409">zerror409</h2>
 <p><code>zerror409 (name, code, message, desc)</code></p>
 <p>参数错误对象，对应http code 为409</p>
-<h3 id="_59">参数</h3>
+<h3 id="_69">参数</h3>
 <table>
 <thead>
 <tr>
@@ -1779,7 +2224,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_60">返回值</h3>
+<h3 id="_70">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -1803,7 +2248,7 @@
 <h2 id="zerror404">zerror404</h2>
 <p><code>zerror404 (name, code, message, desc)</code></p>
 <p>参数错误对象，对应http code 为404</p>
-<h3 id="_61">参数</h3>
+<h3 id="_71">参数</h3>
 <table>
 <thead>
 <tr>
@@ -1845,7 +2290,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_62">返回值</h3>
+<h3 id="_72">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -1869,7 +2314,7 @@
 <h2 id="zerror422">zerror422</h2>
 <p><code>zerror422 (name, code, message, desc)</code></p>
 <p>参数错误对象，对应http code 为422</p>
-<h3 id="_63">参数</h3>
+<h3 id="_73">参数</h3>
 <table>
 <thead>
 <tr>
@@ -1911,7 +2356,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_64">返回值</h3>
+<h3 id="_74">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -1935,7 +2380,7 @@
 <h2 id="zerror500">zerror500</h2>
 <p><code>zerror500 (name, code, message, desc)</code></p>
 <p>参数错误对象，对应http code 为500</p>
-<h3 id="_65">参数</h3>
+<h3 id="_75">参数</h3>
 <table>
 <thead>
 <tr>
@@ -1977,7 +2422,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_66">返回值</h3>
+<h3 id="_76">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -2008,7 +2453,7 @@
         <a href="../XmlUtil/" class="btn btn-neutral float-right" title="XmlUtil">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../ServiceBase/" class="btn btn-neutral" title="ServiceBase"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../ServiceImp/" class="btn btn-neutral" title="ServiceImp"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -2036,7 +2481,7 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../ServiceBase/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../ServiceImp/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
         <span style="margin-left: 15px"><a href="../XmlUtil/" style="color: #fcfcfc">Next &raquo;</a></span>
