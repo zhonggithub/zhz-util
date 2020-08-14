@@ -173,7 +173,7 @@
 
 
 ## convertQueryCriteria
-` convertQueryCriteria (criteria)`
+` convertQueryCriteria (criteria, handle)`
 
 list前转换传入的查询条件。逻辑表达查询条件转换成sql条件
 
@@ -182,6 +182,7 @@ list前转换传入的查询条件。逻辑表达查询条件转换成sql条件
 |参数|类型|必填|默认值|描述|
 |--- | --- | --- | --- | ---|
 |criteria | Object | 否 | 无 | list时传入的查询条件|
+|handle | Function | 否 | 无 | 自定义处理函数。接收参数：(key, value, distData)。处理成功时把数据填在distData并返回ture, 否则返回false|
 
 
 ### 返回值
@@ -258,7 +259,7 @@ db层数据转逻辑层数据
 |参数|类型|必填|默认值|描述|
 |--- | --- | --- | --- | ---|
 |data | Object | 否 | 无 | 传入的db层的数据|
-|expand | Object | 否 | 无 | 获取指定资源的数据。{a: true, b: true}。如果是同一个service的model可以在parseExpand2Include返回include，如果跨service的资源获取，在此处实现获取逻辑|
+|expand | Object | 否 | 无 | 获取指定资源的数据。{a: true, b: true}。如果是同一个service的model可以在parseExpand2Include返回include；如果跨service的资源获取，在此处实现获取逻辑|
 
 
 ### 返回值

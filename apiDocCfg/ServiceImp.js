@@ -5,7 +5,7 @@
  * Created Date: 2020-06-14 15:35:22
  * Author: Zz
  * -----
- * Last Modified: 2020-08-13 21:33:46
+ * Last Modified: 2020-08-14 13:36:42
  * Modified By: Zz
  * -----
  * Description:
@@ -197,6 +197,10 @@ module.exports = {
       criteria: {
         type: DataTypes.Object,
         description: 'list时传入的查询条件',
+      },
+      handle: {
+        type: DataTypes.Function,
+        description: '自定义处理函数。接收参数：(key, value, distData)。处理成功时把数据填在distData并返回ture, 否则返回false',
       }
     },
     returns: {
@@ -267,7 +271,7 @@ module.exports = {
       },
       expand: {
         type: DataTypes.Object,
-        description: '获取指定资源的数据。{a: true, b: true}。如果是同一个service的model可以在parseExpand2Include返回include，如果跨service的资源获取，在此处实现获取逻辑'
+        description: '获取指定资源的数据。{a: true, b: true}。如果是同一个service的model可以在parseExpand2Include返回include；如果跨service的资源获取，在此处实现获取逻辑'
       }
     },
     returns: {
