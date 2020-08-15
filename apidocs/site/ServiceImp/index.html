@@ -469,7 +469,7 @@
 </table>
 <h2 id="isexistwhencreate">isExistWhenCreate</h2>
 <p><code>async isExistWhenCreate (data)</code></p>
-<p>创建的时候校验数据唯一性</p>
+<p>创建的时候校验数据唯一性。已存在数据的时返回ZError对象，否则返回null</p>
 <h3 id="_10">参数</h3>
 <table>
 <thead>
@@ -514,7 +514,7 @@
 </table>
 <h2 id="isexistwhencreateimp">isExistWhenCreateImp</h2>
 <p><code>async isExistWhenCreateImp (params)</code></p>
-<p>创建的时候校验数据唯一性</p>
+<p>创建的时候校验数据唯一性。如果已存在资源则返回409的ZError对象，否则返回null</p>
 <h3 id="_12">参数</h3>
 <table>
 <thead>
@@ -553,7 +553,7 @@
 <td>ZError, null</td>
 <td>否</td>
 <td>无</td>
-<td>验证不通过返回ZError对象，否则返回null</td>
+<td>验证不通过返回409的ZError对象，否则返回null</td>
 </tr>
 </tbody>
 </table>

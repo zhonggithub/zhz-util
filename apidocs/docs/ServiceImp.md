@@ -118,7 +118,7 @@
 ## isExistWhenCreateImp
 `async isExistWhenCreateImp (params)`
 
-创建的时候校验数据唯一性
+创建的时候校验数据唯一性。如果已存在资源则返回409的ZError对象，否则返回null
 
 ### 参数
 
@@ -131,7 +131,7 @@
 
 |参数|类型|必填|默认值|描述|
 |--- | --- | --- | --- | ---|
-|ret | ZError, null | 否 | 无 | 验证不通过返回ZError对象，否则返回null|
+|ret | ZError, null | 否 | 无 | 验证不通过返回409的ZError对象，否则返回null|
 
 
 ## isValidQueryCondition

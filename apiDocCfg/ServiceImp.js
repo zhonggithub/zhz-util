@@ -5,7 +5,7 @@
  * Created Date: 2020-06-14 15:35:22
  * Author: Zz
  * -----
- * Last Modified: 2020-08-15 17:16:17
+ * Last Modified: 2020-08-15 17:24:52
  * Modified By: Zz
  * -----
  * Description:
@@ -142,7 +142,7 @@ module.exports = {
   },
 
   isExistWhenCreateImp: {
-    description: '创建的时候校验数据唯一性',
+    description: '创建的时候校验数据唯一性。如果已存在资源则返回409的ZError对象，否则返回null',
     funcType: DataTypes.FuncType.kAsync,
     params: {
       params: {
@@ -153,7 +153,7 @@ module.exports = {
     returns: {
       ret: {
         type: 'ZError, null',
-        description: '验证不通过返回ZError对象，否则返回null',
+        description: '验证不通过返回409的ZError对象，否则返回null',
       }
     }
   },
