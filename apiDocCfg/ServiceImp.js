@@ -5,7 +5,7 @@
  * Created Date: 2020-06-14 15:35:22
  * Author: Zz
  * -----
- * Last Modified: 2020-08-15 09:30:21
+ * Last Modified: 2020-08-15 17:16:17
  * Modified By: Zz
  * -----
  * Description:
@@ -125,7 +125,7 @@ module.exports = {
   },
 
   isExistWhenCreate: {
-    description: '创建的时候校验数据唯一性',
+    description: '创建的时候校验数据唯一性。已存在数据的时返回ZError对象，否则返回null',
     funcType: DataTypes.FuncType.kAsync,
     params: {
       data: {

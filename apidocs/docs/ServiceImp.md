@@ -99,7 +99,7 @@
 ## isExistWhenCreate
 `async isExistWhenCreate (data)`
 
-创建的时候校验数据唯一性
+创建的时候校验数据唯一性。已存在数据的时返回ZError对象，否则返回null
 
 ### 参数
 
