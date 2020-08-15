@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: 2020-08-12 09:41:33
+ * Last Modified: 2020-08-15 15:32:03
  * Modified By: Zz
  * -----
  * Description:
@@ -151,8 +151,8 @@ module.exports = {
     };
   },
 
-  responseSuccess(data, message = 'success') {
-    return this.response(0, message, data, 200);
+  responseSuccess(data, status = 200, message = 'success') {
+    return this.response(0, message, data, status);
   },
   
   responseError400(name, code, message, desc) {

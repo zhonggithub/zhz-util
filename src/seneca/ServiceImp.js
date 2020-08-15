@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-08-15 09:19:43
+ * Last Modified: 2020-08-15 15:32:52
  * Modified By: Zz
  * -----
  * Description:
@@ -285,7 +285,7 @@ class Service extends ServiceBase {
       const result = await this.model.create(body);
       await this.afterCreate(result);
       const ret = await this.db2logic(result);
-      return util.responseSuccess(ret);
+      return util.responseSuccess(ret, 201);
     } catch (dbError) {
       return this.handleCatchErr(dbError);
     }
@@ -422,7 +422,7 @@ class Service extends ServiceBase {
       }
       await this.afterDestroy(delResult, exist);
       await this.delCache(id);
-      return util.responseSuccess(delResult);
+      return util.responseSuccess(delResult, 204);
     } catch (dbError) {
       return this.handleCatchErr(dbError);
     }

@@ -5,7 +5,7 @@
  * Created Date: 2020-06-25 12:28:46
  * Author: Zz
  * -----
- * Last Modified: 2020-08-14 19:38:07
+ * Last Modified: 2020-08-15 15:33:03
  * Modified By: Zz
  * -----
  * Description:
@@ -41,7 +41,7 @@ class MongodbService extends ServiceImp {
       await this.afterDestroy(delResult, exist);
 
       await this.delCache(msg.params.id);
-      return util.responseSuccess(delResult);
+      return util.responseSuccess(delResult, 204);
     } catch (dbError) {
       return this.handleCatchErr(dbError);
     }
