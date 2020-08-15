@@ -84,8 +84,6 @@
         
             <li><a class="toctree-l3" href="#constructor">constructor</a></li>
         
-            <li><a class="toctree-l3" href="#parseexpand2include">parseExpand2Include</a></li>
-        
             <li><a class="toctree-l3" href="#isvaliddatawhencreate">isValidDataWhenCreate</a></li>
         
             <li><a class="toctree-l3" href="#isvaliddatawhenupdate">isValidDataWhenUpdate</a></li>
@@ -135,6 +133,14 @@
             <li><a class="toctree-l3" href="#getcachettl">getCacheTTL</a></li>
         
             <li><a class="toctree-l3" href="#delcache">delCache</a></li>
+        
+            <li><a class="toctree-l3" href="#parsequery">parseQuery</a></li>
+        
+            <li><a class="toctree-l3" href="#parselistquery">parseListQuery</a></li>
+        
+            <li><a class="toctree-l3" href="#parseexpand2include">parseExpand2Include</a></li>
+        
+            <li><a class="toctree-l3" href="#appendinclude">appendInclude</a></li>
         
             <li><a class="toctree-l3" href="#create">create</a></li>
         
@@ -267,55 +273,10 @@
 </tr>
 </tbody>
 </table>
-<h2 id="parseexpand2include">parseExpand2Include</h2>
-<p><code>parseExpand2Include (expand)</code></p>
-<p>解析expand: { a: true, b: true ....}。该函数会在读操作：retrieve，list，listAll，findOne，findAll，findByIds之前调用。</p>
-<h3 id="_2">参数</h3>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>类型</th>
-<th>必填</th>
-<th>默认值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>expand</td>
-<td>Object</td>
-<td>是</td>
-<td>无</td>
-<td>子资源扩展数据。格式为：{ a: true, b: true, ....}</td>
-</tr>
-</tbody>
-</table>
-<h3 id="_3">返回值</h3>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>类型</th>
-<th>必填</th>
-<th>默认值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ret</td>
-<td>Object, Array</td>
-<td>是</td>
-<td>无</td>
-<td>解析成功返回include对象, 否则返回null</td>
-</tr>
-</tbody>
-</table>
 <h2 id="isvaliddatawhencreate">isValidDataWhenCreate</h2>
 <p><code>isValidDataWhenCreate (data)</code></p>
 <p>创建的时候判断数据合法性，验证不通过返回ZError对象，否则返回null</p>
-<h3 id="_4">参数</h3>
+<h3 id="_2">参数</h3>
 <table>
 <thead>
 <tr>
@@ -333,6 +294,51 @@
 <td>否</td>
 <td>无</td>
 <td>创建时传入的数据</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_3">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ret</td>
+<td>ZError, null</td>
+<td>否</td>
+<td>无</td>
+<td>验证不通过返回ZError对象，否则返回null</td>
+</tr>
+</tbody>
+</table>
+<h2 id="isvaliddatawhenupdate">isValidDataWhenUpdate</h2>
+<p><code>isValidDataWhenUpdate (data)</code></p>
+<p>更新的时候判断数据合法性，验证不通过返回ZError对象，否则返回null</p>
+<h3 id="_4">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>data</td>
+<td>Object</td>
+<td>否</td>
+<td>无</td>
+<td>更新时传入的数据</td>
 </tr>
 </tbody>
 </table>
@@ -357,9 +363,9 @@
 </tr>
 </tbody>
 </table>
-<h2 id="isvaliddatawhenupdate">isValidDataWhenUpdate</h2>
-<p><code>isValidDataWhenUpdate (data)</code></p>
-<p>更新的时候判断数据合法性，验证不通过返回ZError对象，否则返回null</p>
+<h2 id="isvaliddatawhenretrieve">isValidDataWhenRetrieve</h2>
+<p><code>isValidDataWhenRetrieve (id, expand)</code></p>
+<p>获取数据时候判断数据是否包含必填字段，默认校验id，但是不对id合法性校验。验证不通过返回ZEerror对象,否则返回null</p>
 <h3 id="_6">参数</h3>
 <table>
 <thead>
@@ -373,11 +379,18 @@
 </thead>
 <tbody>
 <tr>
-<td>data</td>
-<td>Object</td>
+<td>id</td>
+<td>String</td>
 <td>否</td>
 <td>无</td>
-<td>更新时传入的数据</td>
+<td>资源id</td>
+</tr>
+<tr>
+<td>expand</td>
+<td>String, Object</td>
+<td>否</td>
+<td>无</td>
+<td>获取指定的子资源。expand=a,b 或 { a: true, b: true }</td>
 </tr>
 </tbody>
 </table>
@@ -402,9 +415,9 @@
 </tr>
 </tbody>
 </table>
-<h2 id="isvaliddatawhenretrieve">isValidDataWhenRetrieve</h2>
-<p><code>isValidDataWhenRetrieve (id, expand)</code></p>
-<p>获取数据时候判断数据是否包含必填字段，默认校验id，但是不对id合法性校验。验证不通过返回ZEerror对象,否则返回null</p>
+<h2 id="isvaliddatawhenupdatestatus">isValidDataWhenUpdateStatus</h2>
+<p><code>isValidDataWhenUpdateStatus (id, expand)</code></p>
+<p>更新状态时判断id, status必填字段，不对id，status合法性校验.验证不通过返回ZError对象,否则返回null</p>
 <h3 id="_8">参数</h3>
 <table>
 <thead>
@@ -454,9 +467,9 @@
 </tr>
 </tbody>
 </table>
-<h2 id="isvaliddatawhenupdatestatus">isValidDataWhenUpdateStatus</h2>
-<p><code>isValidDataWhenUpdateStatus (id, expand)</code></p>
-<p>更新状态时判断id, status必填字段，不对id，status合法性校验.验证不通过返回ZError对象,否则返回null</p>
+<h2 id="isexistwhencreate">isExistWhenCreate</h2>
+<p><code>async isExistWhenCreate (data)</code></p>
+<p>创建的时候校验数据唯一性</p>
 <h3 id="_10">参数</h3>
 <table>
 <thead>
@@ -470,18 +483,11 @@
 </thead>
 <tbody>
 <tr>
-<td>id</td>
-<td>String</td>
+<td>data</td>
+<td>Object</td>
 <td>否</td>
 <td>无</td>
-<td>资源id</td>
-</tr>
-<tr>
-<td>expand</td>
-<td>String, Object</td>
-<td>否</td>
-<td>无</td>
-<td>获取指定的子资源。expand=a,b 或 { a: true, b: true }</td>
+<td>创建时传入的数据</td>
 </tr>
 </tbody>
 </table>
@@ -506,8 +512,8 @@
 </tr>
 </tbody>
 </table>
-<h2 id="isexistwhencreate">isExistWhenCreate</h2>
-<p><code>async isExistWhenCreate (data)</code></p>
+<h2 id="isexistwhencreateimp">isExistWhenCreateImp</h2>
+<p><code>async isExistWhenCreateImp (params)</code></p>
 <p>创建的时候校验数据唯一性</p>
 <h3 id="_12">参数</h3>
 <table>
@@ -522,11 +528,11 @@
 </thead>
 <tbody>
 <tr>
-<td>data</td>
+<td>params</td>
 <td>Object</td>
 <td>否</td>
 <td>无</td>
-<td>创建时传入的数据</td>
+<td>框架Model findOne 能识别的查询条件</td>
 </tr>
 </tbody>
 </table>
@@ -551,9 +557,9 @@
 </tr>
 </tbody>
 </table>
-<h2 id="isexistwhencreateimp">isExistWhenCreateImp</h2>
-<p><code>async isExistWhenCreateImp (params)</code></p>
-<p>创建的时候校验数据唯一性</p>
+<h2 id="isvalidquerycondition">isValidQueryCondition</h2>
+<p><code>isValidQueryCondition (criteria)</code></p>
+<p>判断list条件合法性. 验证不通过返回ZEerror对象,否则返回null</p>
 <h3 id="_14">参数</h3>
 <table>
 <thead>
@@ -567,11 +573,11 @@
 </thead>
 <tbody>
 <tr>
-<td>params</td>
+<td>criteria</td>
 <td>Object</td>
 <td>否</td>
 <td>无</td>
-<td>框架Model findOne 能识别的查询条件</td>
+<td>list时传入的查询条件</td>
 </tr>
 </tbody>
 </table>
@@ -596,9 +602,9 @@
 </tr>
 </tbody>
 </table>
-<h2 id="isvalidquerycondition">isValidQueryCondition</h2>
-<p><code>isValidQueryCondition (criteria)</code></p>
-<p>判断list条件合法性. 验证不通过返回ZEerror对象,否则返回null</p>
+<h2 id="convertquerycriteria">convertQueryCriteria</h2>
+<p><code>convertQueryCriteria (criteria, handle)</code></p>
+<p>list前转换传入的字段查询条件。逻辑表达查询条件转换成sql条件</p>
 <h3 id="_16">参数</h3>
 <table>
 <thead>
@@ -616,7 +622,14 @@
 <td>Object</td>
 <td>否</td>
 <td>无</td>
-<td>list时传入的查询条件</td>
+<td>list时传入的字段查询条件</td>
+</tr>
+<tr>
+<td>handle</td>
+<td>Function</td>
+<td>否</td>
+<td>无</td>
+<td>自定义处理函数。接收参数：(key, value, distData)。处理成功时把数据填在distData并返回ture, 否则返回false</td>
 </tr>
 </tbody>
 </table>
@@ -634,16 +647,16 @@
 <tbody>
 <tr>
 <td>ret</td>
-<td>ZError, null</td>
+<td>Object</td>
 <td>否</td>
 <td>无</td>
-<td>验证不通过返回ZError对象，否则返回null</td>
+<td>转换后的查询条件</td>
 </tr>
 </tbody>
 </table>
-<h2 id="convertquerycriteria">convertQueryCriteria</h2>
-<p><code>convertQueryCriteria (criteria, handle)</code></p>
-<p>list前转换传入的查询条件。逻辑表达查询条件转换成sql条件</p>
+<h2 id="convertcountcriteria">convertCountCriteria</h2>
+<p><code>convertCountCriteria (criteria)</code></p>
+<p>count前转换传入的查询条件。逻辑表达查询条件转换成sql条件。</p>
 <h3 id="_18">参数</h3>
 <table>
 <thead>
@@ -661,14 +674,7 @@
 <td>Object</td>
 <td>否</td>
 <td>无</td>
-<td>list时传入的查询条件</td>
-</tr>
-<tr>
-<td>handle</td>
-<td>Function</td>
-<td>否</td>
-<td>无</td>
-<td>自定义处理函数。接收参数：(key, value, distData)。处理成功时把数据填在distData并返回ture, 否则返回false</td>
+<td>count时传入的查询条件</td>
 </tr>
 </tbody>
 </table>
@@ -693,55 +699,10 @@
 </tr>
 </tbody>
 </table>
-<h2 id="convertcountcriteria">convertCountCriteria</h2>
-<p><code>convertCountCriteria (criteria)</code></p>
-<p>count前转换传入的查询条件。逻辑表达查询条件转换成sql条件。</p>
-<h3 id="_20">参数</h3>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>类型</th>
-<th>必填</th>
-<th>默认值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>criteria</td>
-<td>Object</td>
-<td>否</td>
-<td>无</td>
-<td>count时传入的查询条件</td>
-</tr>
-</tbody>
-</table>
-<h3 id="_21">返回值</h3>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>类型</th>
-<th>必填</th>
-<th>默认值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ret</td>
-<td>Object</td>
-<td>否</td>
-<td>无</td>
-<td>转换后的查询条件</td>
-</tr>
-</tbody>
-</table>
 <h2 id="logic2db">logic2db</h2>
 <p><code>async logic2db (data)</code></p>
 <p>逻辑层数据转成db层数据</p>
-<h3 id="_22">参数</h3>
+<h3 id="_20">参数</h3>
 <table>
 <thead>
 <tr>
@@ -759,6 +720,51 @@
 <td>否</td>
 <td>无</td>
 <td>传入的逻辑层的数据</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_21">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>data</td>
+<td>Object</td>
+<td>否</td>
+<td>无</td>
+<td>返回db层数据</td>
+</tr>
+</tbody>
+</table>
+<h2 id="logic2dbwhenupdate">logic2DBWhenUpdate</h2>
+<p><code>async logic2DBWhenUpdate (data)</code></p>
+<p>逻辑层数据转db层数据</p>
+<h3 id="_22">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>data</td>
+<td>Object</td>
+<td>否</td>
+<td>无</td>
+<td>传入的逻辑表现层的数据</td>
 </tr>
 </tbody>
 </table>
@@ -783,55 +789,10 @@
 </tr>
 </tbody>
 </table>
-<h2 id="logic2dbwhenupdate">logic2DBWhenUpdate</h2>
-<p><code>async logic2DBWhenUpdate (data)</code></p>
-<p>逻辑层数据转db层数据</p>
-<h3 id="_24">参数</h3>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>类型</th>
-<th>必填</th>
-<th>默认值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>data</td>
-<td>Object</td>
-<td>否</td>
-<td>无</td>
-<td>传入的逻辑表现层的数据</td>
-</tr>
-</tbody>
-</table>
-<h3 id="_25">返回值</h3>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>类型</th>
-<th>必填</th>
-<th>默认值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>data</td>
-<td>Object</td>
-<td>否</td>
-<td>无</td>
-<td>返回db层数据</td>
-</tr>
-</tbody>
-</table>
 <h2 id="db2logic">db2logic</h2>
 <p><code>async db2logic (data, expand)</code></p>
 <p>db层数据转逻辑层数据</p>
-<h3 id="_26">参数</h3>
+<h3 id="_24">参数</h3>
 <table>
 <thead>
 <tr>
@@ -859,7 +820,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_27">返回值</h3>
+<h3 id="_25">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -883,7 +844,7 @@
 <h2 id="list2logic">list2logic</h2>
 <p><code>async list2logic (items, expand)</code></p>
 <p>list获得数据转换层逻辑表现层数据。默认循环调用db2logic</p>
-<h3 id="_28">参数</h3>
+<h3 id="_26">参数</h3>
 <table>
 <thead>
 <tr>
@@ -911,7 +872,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_29">返回值</h3>
+<h3 id="_27">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -935,7 +896,7 @@
 <h2 id="beforecreate">beforeCreate</h2>
 <p><code>async beforeCreate (data)</code></p>
 <p>创建之前调用</p>
-<h3 id="_30">参数</h3>
+<h3 id="_28">参数</h3>
 <table>
 <thead>
 <tr>
@@ -959,7 +920,7 @@
 <h2 id="aftercreate">afterCreate</h2>
 <p><code>async afterCreate (data)</code></p>
 <p>创建之后调用</p>
-<h3 id="_31">参数</h3>
+<h3 id="_29">参数</h3>
 <table>
 <thead>
 <tr>
@@ -983,7 +944,7 @@
 <h2 id="beforeupdate">beforeUpdate</h2>
 <p><code>async beforeUpdate (data)</code></p>
 <p>更新之前调用</p>
-<h3 id="_32">参数</h3>
+<h3 id="_30">参数</h3>
 <table>
 <thead>
 <tr>
@@ -1007,7 +968,7 @@
 <h2 id="afterupdate">afterUpdate</h2>
 <p><code>async afterUpdate (data)</code></p>
 <p>更新之后调用</p>
-<h3 id="_33">参数</h3>
+<h3 id="_31">参数</h3>
 <table>
 <thead>
 <tr>
@@ -1031,7 +992,7 @@
 <h2 id="beforeupdatestatus">beforeUpdateStatus</h2>
 <p><code>async beforeUpdateStatus (data)</code></p>
 <p>更新状态之前调用</p>
-<h3 id="_34">参数</h3>
+<h3 id="_32">参数</h3>
 <table>
 <thead>
 <tr>
@@ -1055,7 +1016,7 @@
 <h2 id="afterupdatestatus">afterUpdateStatus</h2>
 <p><code>async afterUpdateStatus (data)</code></p>
 <p>更新状态之后调用</p>
-<h3 id="_35">参数</h3>
+<h3 id="_33">参数</h3>
 <table>
 <thead>
 <tr>
@@ -1079,7 +1040,7 @@
 <h2 id="beforedestroy">beforeDestroy</h2>
 <p><code>async beforeDestroy (data)</code></p>
 <p>删除之前调用</p>
-<h3 id="_36">参数</h3>
+<h3 id="_34">参数</h3>
 <table>
 <thead>
 <tr>
@@ -1103,7 +1064,7 @@
 <h2 id="afterdestroydestroy">afterDestroyDestroy</h2>
 <p><code>async afterDestroyDestroy (data)</code></p>
 <p>删除之后调用</p>
-<h3 id="_37">参数</h3>
+<h3 id="_35">参数</h3>
 <table>
 <thead>
 <tr>
@@ -1127,7 +1088,7 @@
 <h2 id="handlecatcherr">handleCatchErr</h2>
 <p><code>handleCatchErr (err)</code></p>
 <p>统一处理错误的函数</p>
-<h3 id="_38">参数</h3>
+<h3 id="_36">参数</h3>
 <table>
 <thead>
 <tr>
@@ -1148,7 +1109,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_39">返回值</h3>
+<h3 id="_37">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -1193,7 +1154,7 @@
 <h2 id="getcachekey">getCacheKey</h2>
 <p><code>getCacheKey (id, expand, full)</code></p>
 <p>根据id, expand生成缓存key</p>
-<h3 id="_40">参数</h3>
+<h3 id="_38">参数</h3>
 <table>
 <thead>
 <tr>
@@ -1228,7 +1189,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_41">返回值</h3>
+<h3 id="_39">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -1252,7 +1213,7 @@
 <h2 id="getcachettl">getCacheTTL</h2>
 <p><code>getCacheTTL ()</code></p>
 <p>获取缓存时间</p>
-<h3 id="_42">返回值</h3>
+<h3 id="_40">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -1276,7 +1237,7 @@
 <h2 id="delcache">delCache</h2>
 <p><code>async delCache (id)</code></p>
 <p>删除缓存</p>
-<h3 id="_43">参数</h3>
+<h3 id="_41">参数</h3>
 <table>
 <thead>
 <tr>
@@ -1297,7 +1258,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_44">返回值</h3>
+<h3 id="_42">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -1318,6 +1279,193 @@
 </tr>
 </tbody>
 </table>
+<h2 id="parsequery">parseQuery</h2>
+<p><code>parseQuery (query)</code></p>
+<p>解析查询条件。把查询条件转成orm识别的查询条件。sequlize应该转换成：{ where: query }；mongoose应该转换成：{...query}</p>
+<h3 id="_43">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>query</td>
+<td>Object</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_44">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>query</td>
+<td>Object</td>
+<td>否</td>
+<td>无</td>
+<td>sequlize orm应该返回{ where: query }。mongoose应该返回{ ...query }</td>
+</tr>
+</tbody>
+</table>
+<h2 id="parselistquery">parseListQuery</h2>
+<p><code>parseListQuery (query, sort, offset, limit)</code></p>
+<p>解析list api传进来的查询条件。该函数会先调用parseQuery</p>
+<h3 id="_45">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>query</td>
+<td>Object</td>
+<td>否</td>
+<td>无</td>
+<td>字段查询条件</td>
+</tr>
+<tr>
+<td>sort</td>
+<td>Object, Array</td>
+<td>否</td>
+<td>无</td>
+<td>排序。如果是json对象，数据格式为：{ a: -1, b: 1, c: 'ASC'}，如果是数组，数据格式为：[{ field: a, order: 'ASC'}, { field: b, order: 'DESC'}] 或 [[a, 'ASC'],[b, 'DESC']]</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>Number</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>limit</td>
+<td>Number</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="parseexpand2include">parseExpand2Include</h2>
+<p><code>parseExpand2Include (expand)</code></p>
+<p>解析expand: { a: true, b: true ....}。该函数会在读操作：retrieve，list，listAll，findOne，findAll，findByIds之前调用。</p>
+<h3 id="_46">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>expand</td>
+<td>Object</td>
+<td>是</td>
+<td>无</td>
+<td>子资源扩展数据。格式为：{ a: true, b: true, ....}</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_47">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ret</td>
+<td>Object, Array</td>
+<td>是</td>
+<td>无</td>
+<td>解析成功返回include对象, 否则返回null</td>
+</tr>
+</tbody>
+</table>
+<h2 id="appendinclude">appendInclude</h2>
+<p><code>appendInclude (query, expand)</code></p>
+<p>调用parseExpand2Include, 并把include添加到query对象里</p>
+<h3 id="_48">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>query</td>
+<td>Object</td>
+<td>是</td>
+<td>无</td>
+<td>db查询条件</td>
+</tr>
+<tr>
+<td>expand</td>
+<td>Object</td>
+<td>是</td>
+<td>无</td>
+<td>子资源扩展数据。格式为：{ a: true, b: true, ....}</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_49">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>query</td>
+<td>Object</td>
+<td>是</td>
+<td>无</td>
+<td>{ ...query, include }</td>
+</tr>
+</tbody>
+</table>
 <h2 id="create">create</h2>
 <p><code>async create ({ ...params })</code></p>
 <p>创建一个资源。create执行流程：</p>
@@ -1335,13 +1483,16 @@
 <p>4，beforeCreate </p>
 </li>
 <li>
-<p>5，afterCreate </p>
+<p>5，model.create </p>
 </li>
 <li>
-<p>6，db2logic</p>
+<p>6，afterCreate </p>
+</li>
+<li>
+<p>7，db2logic</p>
 </li>
 </ul>
-<h3 id="_45">参数</h3>
+<h3 id="_50">参数</h3>
 <table>
 <thead>
 <tr>
@@ -1362,7 +1513,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_46">返回值</h3>
+<h3 id="_51">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -1394,18 +1545,21 @@
 <p>2，parseExpand2Include </p>
 </li>
 <li>
-<p>3，findById </p>
+<p>3，appendInclude </p>
 </li>
 <li>
-<p>4，db2logic </p>
+<p>4，model.findById </p>
+</li>
+<li>
+<p>5，db2logic </p>
 </li>
 </ul>
-<p>retrieve会根据expand的不同生成不同缓存： </p>
+<p>retrieve会根据expand的不同生成不同key对应的缓存： </p>
 <ul>
 <li>如果没有指定expand, 缓存只包含通过资源id获取的数据 </li>
 <li>如果指定了expand, 缓存包含通过资源id获取的数据及指定子资源的数据 </li>
 </ul>
-<h3 id="_47">参数</h3>
+<h3 id="_52">参数</h3>
 <table>
 <thead>
 <tr>
@@ -1433,7 +1587,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_48">返回值</h3>
+<h3 id="_53">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -1468,7 +1622,7 @@
 <p>3，beforeUpdate </p>
 </li>
 <li>
-<p>4，findByIdAndUpdate </p>
+<p>4，model.findByIdAndUpdate </p>
 </li>
 <li>
 <p>5，afterUpdate </p>
@@ -1480,7 +1634,7 @@
 <p>7，db2logic</p>
 </li>
 </ul>
-<h3 id="_49">参数</h3>
+<h3 id="_54">参数</h3>
 <table>
 <thead>
 <tr>
@@ -1508,7 +1662,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_50">返回值</h3>
+<h3 id="_55">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -1543,13 +1697,13 @@
 <p>3，beforeUpdateStatus </p>
 </li>
 <li>
-<p>4，findByIdAndUpdate </p>
+<p>4，model.findByIdAndUpdate </p>
 </li>
 <li>
 <p>5，afterUpdateStatus</p>
 </li>
 </ul>
-<h3 id="_51">参数</h3>
+<h3 id="_56">参数</h3>
 <table>
 <thead>
 <tr>
@@ -1577,7 +1731,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_52">返回值</h3>
+<h3 id="_57">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -1609,7 +1763,7 @@
 <p>2，beforeDestroy </p>
 </li>
 <li>
-<p>3，findByIdAndDelete </p>
+<p>3，model.findByIdAndDelete </p>
 </li>
 <li>
 <p>4，afterDestroy </p>
@@ -1618,7 +1772,7 @@
 <p>5，delCache</p>
 </li>
 </ul>
-<h3 id="_53">参数</h3>
+<h3 id="_58">参数</h3>
 <table>
 <thead>
 <tr>
@@ -1650,16 +1804,22 @@
 <p>2，convertQueryCriteria </p>
 </li>
 <li>
-<p>3，parseExpand2Include </p>
+<p>3，parseListQuery </p>
 </li>
 <li>
-<p>4，list </p>
+<p>4，parseExpand2Include </p>
 </li>
 <li>
-<p>5，list2logic</p>
+<p>5，appendInclude </p>
+</li>
+<li>
+<p>6，model.list </p>
+</li>
+<li>
+<p>7，list2logic</p>
 </li>
 </ul>
-<h3 id="_54">参数</h3>
+<h3 id="_59">参数</h3>
 <table>
 <thead>
 <tr>
@@ -1722,7 +1882,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_55">返回值</h3>
+<h3 id="_60">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -1789,10 +1949,10 @@
 <p>2，convertCountCriteria </p>
 </li>
 <li>
-<p>3，count</p>
+<p>3，model.count</p>
 </li>
 </ul>
-<h3 id="_56">参数</h3>
+<h3 id="_61">参数</h3>
 <table>
 <thead>
 <tr>
@@ -1813,7 +1973,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_57">返回值</h3>
+<h3 id="_62">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -1847,14 +2007,17 @@
 <li>
 <p>3，parseExpand2Include </p>
 </li>
+</ul>
+<p>4，appendInclude </p>
+<ul>
 <li>
-<p>4，find </p>
+<p>5，model.find </p>
 </li>
 <li>
-<p>5, list2logic</p>
+<p>6, list2logic</p>
 </li>
 </ul>
-<h3 id="_58">参数</h3>
+<h3 id="_63">参数</h3>
 <table>
 <thead>
 <tr>
@@ -1882,7 +2045,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_59">返回值</h3>
+<h3 id="_64">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -1914,13 +2077,16 @@
 <p>2，parseExpand2Include </p>
 </li>
 <li>
-<p>3，findOne </p>
+<p>3，appendInclude </p>
 </li>
 <li>
-<p>4，db2logic</p>
+<p>4，model.findOne </p>
+</li>
+<li>
+<p>5，db2logic</p>
 </li>
 </ul>
-<h3 id="_60">参数</h3>
+<h3 id="_65">参数</h3>
 <table>
 <thead>
 <tr>
@@ -1948,7 +2114,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_61">返回值</h3>
+<h3 id="_66">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -1974,19 +2140,22 @@
 <p>根据条件返回所有数据。retrieve执行流程：</p>
 <ul>
 <li>
-<p>1，convertQueryCriteria。</p>
+<p>1，convertQueryCriteria </p>
 </li>
 <li>
-<p>2，parseExpand2Include。</p>
+<p>2，parseExpand2Include </p>
 </li>
 <li>
-<p>3，find。</p>
+<p>3，appendInclude </p>
 </li>
 <li>
-<p>4，list2logic</p>
+<p>4，model.find </p>
+</li>
+<li>
+<p>5，list2logic</p>
 </li>
 </ul>
-<h3 id="_62">参数</h3>
+<h3 id="_67">参数</h3>
 <table>
 <thead>
 <tr>
@@ -2014,7 +2183,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_63">返回值</h3>
+<h3 id="_68">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -2040,16 +2209,19 @@
 <p>根据id返回所有数据。retrieve执行流程：</p>
 <ul>
 <li>
-<p>1，parseExpand2Include。</p>
+<p>1，parseExpand2Include </p>
 </li>
 <li>
-<p>2，find。</p>
+<p>2，appendInclude </p>
 </li>
 <li>
-<p>3，list2logic</p>
+<p>3，model.find </p>
+</li>
+<li>
+<p>4，list2logic</p>
 </li>
 </ul>
-<h3 id="_64">参数</h3>
+<h3 id="_69">参数</h3>
 <table>
 <thead>
 <tr>
@@ -2077,7 +2249,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_65">返回值</h3>
+<h3 id="_70">返回值</h3>
 <table>
 <thead>
 <tr>
