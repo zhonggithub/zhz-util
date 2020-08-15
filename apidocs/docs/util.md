@@ -259,7 +259,7 @@
 
 
 ## responseSuccess
-` responseSuccess (data, message)`
+` responseSuccess (data, status, message)`
 
 包装api 成功时返回数据
 
@@ -268,7 +268,8 @@
 |参数|类型|必填|默认值|描述|
 |--- | --- | --- | --- | ---|
 |data | Number, String, Object | 是 | 无 | |
-|message | String | 否 | SUCCESS | |
+|status | http 状态码 | 否 | 200 | |
+|message | String | 否 | success | |
 
 
 ### 返回值

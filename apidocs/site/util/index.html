@@ -864,7 +864,7 @@
 </tbody>
 </table>
 <h2 id="responsesuccess">responseSuccess</h2>
-<p><code>responseSuccess (data, message)</code></p>
+<p><code>responseSuccess (data, status, message)</code></p>
 <p>包装api 成功时返回数据</p>
 <h3 id="_27">参数</h3>
 <table>
@@ -886,10 +886,17 @@
 <td></td>
 </tr>
 <tr>
+<td>status</td>
+<td>http 状态码</td>
+<td>否</td>
+<td>200</td>
+<td></td>
+</tr>
+<tr>
 <td>message</td>
 <td>String</td>
 <td>否</td>
-<td>SUCCESS</td>
+<td>success</td>
 <td></td>
 </tr>
 </tbody>

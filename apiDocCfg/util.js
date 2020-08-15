@@ -5,7 +5,7 @@
  * Created Date: 2020-06-17 13:24:59
  * Author: Zz
  * -----
- * Last Modified: 2020-08-12 09:46:46
+ * Last Modified: 2020-08-15 16:15:18
  * Modified By: Zz
  * -----
  * Description:
@@ -279,9 +279,13 @@ module.exports = {
         type: 'Number, String, Object',
         required: true,
       },
+      status: {
+        type: 'http 状态码',
+        defaultValue: 200,
+      },
       message: {
         type: DataTypes.String,
-        defaultValue: 'SUCCESS',
+        defaultValue: 'success',
       }
     },
     returns: {
