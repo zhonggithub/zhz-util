@@ -268,7 +268,7 @@
 |参数|类型|必填|默认值|描述|
 |--- | --- | --- | --- | ---|
 |data | Number, String, Object | 是 | 无 | |
-|status | http 状态码 | 否 | 200 | |
+|status | Number | 否 | 200 | http 状态码|
 |message | String | 否 | success | |
 
 

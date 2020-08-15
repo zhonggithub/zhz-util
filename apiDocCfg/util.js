@@ -5,7 +5,7 @@
  * Created Date: 2020-06-17 13:24:59
  * Author: Zz
  * -----
- * Last Modified: 2020-08-15 16:15:18
+ * Last Modified: 2020-08-15 16:18:02
  * Modified By: Zz
  * -----
  * Description:
@@ -280,7 +280,8 @@ module.exports = {
         required: true,
       },
       status: {
-        type: 'http 状态码',
+        type: DataTypes.Number,
+        desc: 'http 状态码',
         defaultValue: 200,
       },
       message: {
