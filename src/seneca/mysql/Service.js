@@ -5,7 +5,7 @@
  * Created Date: 2020-06-25 12:19:09
  * Author: Zz
  * -----
- * Last Modified: 2020-08-14 21:22:37
+ * Last Modified: 2020-08-15 09:07:40
  * Modified By: Zz
  * -----
  * Description:
@@ -14,13 +14,6 @@ const util = require('../../util')
 const ServiceImp = require('../ServiceImp')
 
 class Service extends ServiceImp {
-  appendInclude(query, expand) {
-    if (!query || !expand) return;
-    const include = this.parseExpand2Include(expand);
-    if (include) {
-      query.include = include;
-    }
-  }
   
   parseQuery(query) {
     let tmp = {};
@@ -57,11 +50,11 @@ class Service extends ServiceImp {
       tmp.order = [];
       Object.keys(sort).forEach((k) => {
         switch (sort[k]) {
-          case 1: case 'ASC': {
+          case 1: case 'ASC': case 'asc': {
             tmp.order.push([k, 'ASC']);
             break;
           }
-          case -1: case 'DESC': {
+          case -1: case 'DESC': case 'desc': {
             tmp.order.push([k, 'DESC']);
             break;
           }

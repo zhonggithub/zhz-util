@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-08-14 19:55:25
+ * Last Modified: 2020-08-15 09:19:43
  * Modified By: Zz
  * -----
  * Description:
@@ -119,11 +119,27 @@ class Service extends ServiceBase {
   }
 
   /**
+   * 解析expand: { a: true, b: true ....}，返回include对象, 或者返回null
+   * 子类应该实现这个api
+   * @param {Object} expand 子资源扩展数据
+   */
+  parseExpand2Include(expand) {
+    return null
+  }
+  
+  /**
+   * 调用parseExpand2Include, 并把返回值赋值给include
    * @param {Object} query db的查询条件
    * @param {Object} expand { a: true, b: true }
+   * 
+   * @returns {Object} query { ...query, include }
    */
   appendInclude(query, expand) {
     if (!query || !expand) return;
+    const include = this.parseExpand2Include(expand);
+    if (include) {
+      query.include = include;
+    }
   }
 
   async delCache(id) {
@@ -149,15 +165,6 @@ class Service extends ServiceBase {
       tmp.sort = sort;
     }
     return tmp;
-  }
-
-  /**
-   * 解析expand: { a: true, b: true ....}，返回include对象, 或者返回null
-   * 子类应该实现这个api
-   * @param {*} expand 子资源扩展数据
-   */
-  parseExpand2Include(expand) {
-    return null
   }
 
   async beforeCreate(data) {

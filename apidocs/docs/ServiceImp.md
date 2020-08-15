@@ -18,25 +18,6 @@
 |opt | Object | 否 | true | 默认api开启配置。false：不加载任何默认api；true：加载所有默认api；json对象表示加载对应的操作|
 
 
-## parseExpand2Include
-` parseExpand2Include (expand)`
-
-解析expand: { a: true, b: true ....}。该函数会在读操作：retrieve，list，listAll，findOne，findAll，findByIds之前调用。
-
-### 参数
-
-|参数|类型|必填|默认值|描述|
-|--- | --- | --- | --- | ---|
-|expand | Object | 是 | 无 | 子资源扩展数据。格式为：{ a: true, b: true, ....}|
-
-
-### 返回值
-
-|参数|类型|必填|默认值|描述|
-|--- | --- | --- | --- | ---|
-|ret | Object, Array | 是 | 无 | 解析成功返回include对象, 否则返回null|
-
-
 ## isValidDataWhenCreate
 ` isValidDataWhenCreate (data)`
 
@@ -175,13 +156,13 @@
 ## convertQueryCriteria
 ` convertQueryCriteria (criteria, handle)`
 
-list前转换传入的查询条件。逻辑表达查询条件转换成sql条件
+list前转换传入的字段查询条件。逻辑表达查询条件转换成sql条件
 
 ### 参数
 
 |参数|类型|必填|默认值|描述|
 |--- | --- | --- | --- | ---|
-|criteria | Object | 否 | 无 | list时传入的查询条件|
+|criteria | Object | 否 | 无 | list时传入的字段查询条件|
 |handle | Function | 否 | 无 | 自定义处理函数。接收参数：(key, value, distData)。处理成功时把数据填在distData并返回ture, 否则返回false|
 
 
@@ -459,6 +440,79 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 |result | Number, Array | 否 | 无 | 删除结果。如果通过key查找多个通配符key。则返回数组。否则返回Number|
 
 
+## parseQuery
+` parseQuery (query)`
+
+解析查询条件。把查询条件转成orm识别的查询条件。sequlize应该转换成：{ where: query }；mongoose应该转换成：{...query}
+
+### 参数
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|query | Object | 否 | 无 | |
+
+
+### 返回值
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|query | Object | 否 | 无 | sequlize orm应该返回{ where: query }。mongoose应该返回{ ...query }|
+
+
+## parseListQuery
+` parseListQuery (query, sort, offset, limit)`
+
+解析list api传进来的查询条件。该函数会先调用parseQuery
+
+### 参数
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|query | Object | 否 | 无 | 字段查询条件|
+|sort | Object, Array | 否 | 无 | 排序。如果是json对象，数据格式为：{ a: -1, b: 1, c: 'ASC'}，如果是数组，数据格式为：[{ field: a, order: 'ASC'}, { field: b, order: 'DESC'}] 或 [[a, 'ASC'],[b, 'DESC']]|
+|offset | Number | 否 | 无 | |
+|limit | Number | 否 | 无 | |
+
+
+## parseExpand2Include
+` parseExpand2Include (expand)`
+
+解析expand: { a: true, b: true ....}。该函数会在读操作：retrieve，list，listAll，findOne，findAll，findByIds之前调用。
+
+### 参数
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|expand | Object | 是 | 无 | 子资源扩展数据。格式为：{ a: true, b: true, ....}|
+
+
+### 返回值
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|ret | Object, Array | 是 | 无 | 解析成功返回include对象, 否则返回null|
+
+
+## appendInclude
+` appendInclude (query, expand)`
+
+调用parseExpand2Include, 并把include添加到query对象里
+
+### 参数
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|query | Object | 是 | 无 | db查询条件|
+|expand | Object | 是 | 无 | 子资源扩展数据。格式为：{ a: true, b: true, ....}|
+
+
+### 返回值
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|query | Object | 是 | 无 | { ...query, include }|
+
+
 ## create
 `async create ({ ...params })`
 
@@ -472,9 +526,11 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 
  * 4，beforeCreate 
 
- * 5，afterCreate 
+ * 5，model.create 
 
- * 6，db2logic
+ * 6，afterCreate 
+
+ * 7，db2logic
 
 ### 参数
 
@@ -499,11 +555,13 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 
  * 2，parseExpand2Include 
 
- * 3，findById 
+ * 3，appendInclude 
 
- * 4，db2logic 
+ * 4，model.findById 
 
- retrieve会根据expand的不同生成不同缓存： 
+ * 5，db2logic 
+
+ retrieve会根据expand的不同生成不同key对应的缓存： 
 
  * 如果没有指定expand, 缓存只包含通过资源id获取的数据 
  * 如果指定了expand, 缓存包含通过资源id获取的数据及指定子资源的数据 
@@ -534,7 +592,7 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 
  * 3，beforeUpdate 
 
- * 4，findByIdAndUpdate 
+ * 4，model.findByIdAndUpdate 
 
  * 5，afterUpdate 
 
@@ -568,7 +626,7 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 
  * 3，beforeUpdateStatus 
 
- * 4，findByIdAndUpdate 
+ * 4，model.findByIdAndUpdate 
 
  * 5，afterUpdateStatus
 
@@ -596,7 +654,7 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 
  * 2，beforeDestroy 
 
- * 3，findByIdAndDelete 
+ * 3，model.findByIdAndDelete 
 
  * 4，afterDestroy 
 
@@ -618,11 +676,15 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 
  * 2，convertQueryCriteria 
 
- * 3，parseExpand2Include 
+ * 3，parseListQuery 
 
- * 4，list 
+ * 4，parseExpand2Include 
 
- * 5，list2logic
+ * 5，appendInclude 
+
+ * 6，model.list 
+
+ * 7，list2logic
 
 ### 参数
 
@@ -658,7 +720,7 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 
  * 2，convertCountCriteria 
 
- * 3，count
+ * 3，model.count
 
 ### 参数
 
@@ -685,9 +747,11 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 
  * 3，parseExpand2Include 
 
- * 4，find 
+ 4，appendInclude 
 
- * 5, list2logic
+ * 5，model.find 
+
+ * 6, list2logic
 
 ### 参数
 
@@ -713,9 +777,11 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 
  * 2，parseExpand2Include 
 
- * 3，findOne 
+ * 3，appendInclude 
 
- * 4，db2logic
+ * 4，model.findOne 
+
+ * 5，db2logic
 
 ### 参数
 
@@ -737,13 +803,15 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 
 根据条件返回所有数据。retrieve执行流程：
 
- * 1，convertQueryCriteria。
+ * 1，convertQueryCriteria 
 
- * 2，parseExpand2Include。
+ * 2，parseExpand2Include 
 
- * 3，find。
+ * 3，appendInclude 
 
- * 4，list2logic
+ * 4，model.find 
+
+ * 5，list2logic
 
 ### 参数
 
@@ -765,11 +833,13 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 
 根据id返回所有数据。retrieve执行流程：
 
- * 1，parseExpand2Include。
+ * 1，parseExpand2Include 
 
- * 2，find。
+ * 2，appendInclude 
 
- * 3，list2logic
+ * 3，model.find 
+
+ * 4，list2logic
 
 ### 参数
 
