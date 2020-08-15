@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-08-15 17:21:39
+ * Last Modified: 2020-08-15 17:49:39
  * Modified By: Zz
  * -----
  * Description:
@@ -282,7 +282,7 @@ class Service extends ServiceBase {
       }
       const existError = await this.isExistWhenCreate(msg.params);
       if (existError) {
-        return existError;
+        return existError.toJSON();
       }
       const body = await this.logic2DB(msg.params);
       await this.beforeCreate(body);
