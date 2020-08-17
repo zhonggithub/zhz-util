@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-08-17 10:15:20
+ * Last Modified: 2020-08-17 14:13:08
  * Modified By: Zz
  * -----
  * Description:
@@ -23,6 +23,7 @@ class Service extends ServiceBase {
     seneca, model,
     cache, role, resourceName,
     cacheTTL, opt,
+    logger,
   }) {
     super(role, seneca, opt === false ? false : opt || true);
 
@@ -57,6 +58,7 @@ class Service extends ServiceBase {
     this.cache = cache;
     this.cacheTTL = cacheTTL || 60;
     this.resourceName = resourceName;
+    this.logger = logger || seneca.logger;
     this.errCode = util.createResourceErrorCode(resourceName);
   }
 
@@ -270,16 +272,9 @@ class Service extends ServiceBase {
     this.seneca.logger.info(msg);
     const err = this.isValidDataWhenCreate(msg.params);
     if (err) {
-      return err.toJson();
+      return err.JSON();
     }
     try {
-      const exist = await this.isExistWhenCreate(msg.params);
-      if (exist) {
-        return util.responseError409(
-          this.getUResourceName(),
-          this.errCode[409],
-        );
-      }
       const existError = await this.isExistWhenCreate(msg.params);
       if (existError) {
         return existError.toJSON();
