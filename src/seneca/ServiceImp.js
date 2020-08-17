@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-08-17 17:15:17
+ * Last Modified: 2020-08-17 17:40:35
  * Modified By: Zz
  * -----
  * Description:
@@ -271,7 +271,7 @@ class Service extends ServiceBase {
     this.seneca.logger.info(msg);
     const err = this.isValidDataWhenCreate(msg.params);
     if (err) {
-      return err.JSON();
+      return err.toJSON();
     }
     try {
       const existError = await this.isExistWhenCreate(msg.params);
