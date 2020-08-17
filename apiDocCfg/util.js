@@ -5,7 +5,7 @@
  * Created Date: 2020-06-17 13:24:59
  * Author: Zz
  * -----
- * Last Modified: 2020-08-15 16:18:02
+ * Last Modified: 2020-08-17 10:14:03
  * Modified By: Zz
  * -----
  * Description:
@@ -243,7 +243,7 @@ module.exports = {
         defaultValue: 'SUCCESS',
       },
       data: {
-        type: 'Number, String, Object',
+        type: 'Number, String, Object, Array',
         required: true,
       },
       status: {
@@ -276,7 +276,7 @@ module.exports = {
     description: '包装api 成功时返回数据',
     params: {
       data: {
-        type: 'Number, String, Object',
+        type: 'Number, String, Object, Array',
         required: true,
       },
       status: {
@@ -305,6 +305,70 @@ module.exports = {
         type: DataTypes.Number,
         required: true,
         defaultValue: 200,
+        description: 'http 状态码',
+      }
+    }
+  },
+  responseCreateSuccess: {
+    description: 'create成功时返回数据',
+    params: {
+      data: {
+        type: 'Number, String, Object, Array',
+        required: true,
+      },
+      message: {
+        type: DataTypes.String,
+        defaultValue: 'success',
+      }
+    },
+    returns: {
+      code: {
+        type: 'Number, String',
+        description: '成功时为0，否则为错误编码',
+      },
+      message: {
+        type: DataTypes.String,
+      },
+      data: {
+        type: 'Number, String, Object',
+        required: true,
+      },
+      status: {
+        type: DataTypes.Number,
+        required: true,
+        defaultValue: 201,
+        description: 'http 状态码',
+      }
+    }
+  },
+  responseDestroySuccess: {
+    description: 'destroy成功时返回数据',
+    params: {
+      data: {
+        type: 'Number, String, Object, Array',
+        required: true,
+      },
+      message: {
+        type: DataTypes.String,
+        defaultValue: 'success',
+      }
+    },
+    returns: {
+      code: {
+        type: 'Number, String',
+        description: '成功时为0，否则为错误编码',
+      },
+      message: {
+        type: DataTypes.String,
+      },
+      data: {
+        type: 'Number, String, Object',
+        required: true,
+      },
+      status: {
+        type: DataTypes.Number,
+        required: true,
+        defaultValue: 204,
         description: 'http 状态码',
       }
     }

@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: 2020-08-15 15:32:03
+ * Last Modified: 2020-08-17 10:10:56
  * Modified By: Zz
  * -----
  * Description:
@@ -153,6 +153,14 @@ module.exports = {
 
   responseSuccess(data, status = 200, message = 'success') {
     return this.response(0, message, data, status);
+  },
+
+  responseCreateSuccess(data, message = 'success') {
+    return this.response(0, message, data, 201);
+  },
+
+  responseDestroySuccess(data, message = 'success') {
+    return this.response(0, message, data, 204);
   },
   
   responseError400(name, code, message, desc) {
