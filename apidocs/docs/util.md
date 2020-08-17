@@ -244,7 +244,7 @@
 |--- | --- | --- | --- | ---|
 |code | Number, String | 否 | 无 | 成功时为0，否则为错误编码|
 |message | String | 否 | SUCCESS | |
-|data | Number, String, Object | 是 | 无 | |
+|data | Number, String, Object, Array | 是 | 无 | |
 |status | Number | 是 | 无 | http 状态码|
 
 
@@ -267,7 +267,7 @@
 
 |参数|类型|必填|默认值|描述|
 |--- | --- | --- | --- | ---|
-|data | Number, String, Object | 是 | 无 | |
+|data | Number, String, Object, Array | 是 | 无 | |
 |status | Number | 否 | 200 | http 状态码|
 |message | String | 否 | success | |
 
@@ -280,6 +280,52 @@
 |message | String | 否 | 无 | |
 |data | Number, String, Object | 是 | 无 | |
 |status | Number | 是 | 200 | http 状态码|
+
+
+## responseCreateSuccess
+` responseCreateSuccess (data, message)`
+
+create成功时返回数据
+
+### 参数
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|data | Number, String, Object, Array | 是 | 无 | |
+|message | String | 否 | success | |
+
+
+### 返回值
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|code | Number, String | 否 | 无 | 成功时为0，否则为错误编码|
+|message | String | 否 | 无 | |
+|data | Number, String, Object | 是 | 无 | |
+|status | Number | 是 | 201 | http 状态码|
+
+
+## responseDestroySuccess
+` responseDestroySuccess (data, message)`
+
+destroy成功时返回数据
+
+### 参数
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|data | Number, String, Object, Array | 是 | 无 | |
+|message | String | 否 | success | |
+
+
+### 返回值
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|code | Number, String | 否 | 无 | 成功时为0，否则为错误编码|
+|message | String | 否 | 无 | |
+|data | Number, String, Object | 是 | 无 | |
+|status | Number | 是 | 204 | http 状态码|
 
 
 ## responseError400
