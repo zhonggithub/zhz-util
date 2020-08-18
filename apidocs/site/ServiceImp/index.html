@@ -1685,7 +1685,7 @@
 </table>
 <h2 id="updatestatus">updateStatus</h2>
 <p><code>async updateStatus ({ id, status })</code></p>
-<p>根据id更新状态。retrieve执行流程：</p>
+<p>根据id更新状态。updateStatus执行流程：</p>
 <ul>
 <li>
 <p>1，isValidDataWhenUpdateStatus </p>
@@ -1754,7 +1754,7 @@
 </table>
 <h2 id="destroy">destroy</h2>
 <p><code>async destroy ({ id })</code></p>
-<p>根据id删除一条数据。retrieve执行流程：</p>
+<p>根据id删除一条数据。destroy执行流程：</p>
 <ul>
 <li>
 <p>1，isValidDataWhenRetrieve </p>
@@ -1940,7 +1940,7 @@
 </table>
 <h2 id="count">count</h2>
 <p><code>async count (query)</code></p>
-<p>根据条件统计数量。retrieve执行流程：</p>
+<p>根据条件统计数量。count执行流程：</p>
 <ul>
 <li>
 <p>1，isValidQueryCondition </p>
@@ -1996,7 +1996,7 @@
 </table>
 <h2 id="listall">listAll</h2>
 <p><code>async listAll ({ ...query, expand })</code></p>
-<p>根据条件返回所有数据。retrieve执行流程：</p>
+<p>根据条件返回所有数据。listAll执行流程：</p>
 <ul>
 <li>
 <p>1，isValidQueryCondition </p>
@@ -2068,7 +2068,7 @@
 </table>
 <h2 id="findone">findOne</h2>
 <p><code>async findOne ({ ...query, expand })</code></p>
-<p>根据条件返回一条数据。retrieve执行流程：</p>
+<p>根据条件返回一条数据。findOne执行流程：</p>
 <ul>
 <li>
 <p>1，convertQueryCriteria </p>
@@ -2137,7 +2137,7 @@
 </table>
 <h2 id="findall">findAll</h2>
 <p><code>async findAll ({ ...query, expand })</code></p>
-<p>根据条件返回所有数据。retrieve执行流程：</p>
+<p>根据条件返回所有数据。findAll执行流程：</p>
 <ul>
 <li>
 <p>1，convertQueryCriteria </p>
@@ -2206,7 +2206,7 @@
 </table>
 <h2 id="findbyids">findByIds</h2>
 <p><code>async findByIds ({ ids, expand })</code></p>
-<p>根据id返回所有数据。retrieve执行流程：</p>
+<p>根据id返回所有数据。findByIds执行流程：</p>
 <ul>
 <li>
 <p>1，parseExpand2Include </p>
