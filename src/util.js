@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: 2020-08-17 10:10:56
+ * Last Modified: 2020-08-31 18:38:32
  * Modified By: Zz
  * -----
  * Description:
@@ -570,9 +570,14 @@ module.exports = {
     return null;
   },
 
-  utcToDate(unixTimestamp) {
+  utcToDate(unixTimestamp, precision = 's') {
     if (!unixTimestamp) return moment().utc().toDate();
-    return moment.utc(unixTimestamp * 1000).toDate();
+    let tmp = unixTimestamp
+    if (precision === 's') {
+      tmp = tmp * 1000
+    } else if (precision === 'ms') {
+    }
+    return moment.utc(unixTimestamp).toDate();
   },
   dateStrToDate(dateStr, style = 'YYYY-MM-DD HH:mm:ss') {
     if (!dateStr) return moment().utc().toDate();
