@@ -5,7 +5,7 @@
  * Created Date: 2020-06-14 15:35:22
  * Author: Zz
  * -----
- * Last Modified: 2020-09-05 22:08:26
+ * Last Modified: 2020-09-05 22:11:45
  * Modified By: Zz
  * -----
  * Description:
@@ -505,7 +505,7 @@ module.exports = {
   },
 
   parseExpand2Include: {
-    description: '解析expand: { a: true, b: true ....}。该函数会在读操作：retrieve，list，listAll，findOne，findAll，findByIds之前调用。',
+    description: '解析expand: { a: true, b: true ....}。返回orm（例如：sequelize）能解析的include对象。该函数会在读操作：retrieve，list，listAll，findOne，findAll，findByIds之前调用。',
     params: {
       expand: {
         type: DataTypes.Object,
@@ -517,7 +517,7 @@ module.exports = {
       ret: {
         type: 'Object, Array',
         required: true,
-        description: '解析成功返回include对象, 否则返回null'
+        description: '解析成功返回orm（例如：sequelize）能解析的include对象, 否则返回null'
       }
     }
   },

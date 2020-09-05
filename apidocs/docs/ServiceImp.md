@@ -479,7 +479,7 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 ## parseExpand2Include
 ` parseExpand2Include (expand)`
 
-解析expand: { a: true, b: true ....}。该函数会在读操作：retrieve，list，listAll，findOne，findAll，findByIds之前调用。
+解析expand: { a: true, b: true ....}。返回orm（例如：sequelize）能解析的include对象。该函数会在读操作：retrieve，list，listAll，findOne，findAll，findByIds之前调用。
 
 ### 参数
 
@@ -492,7 +492,7 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 
 |参数|类型|必填|默认值|描述|
 |--- | --- | --- | --- | ---|
-|ret | Object, Array | 是 | 无 | 解析成功返回include对象, 否则返回null|
+|ret | Object, Array | 是 | 无 | 解析成功返回orm（例如：sequelize）能解析的include对象, 否则返回null|
 
 
 ## appendInclude

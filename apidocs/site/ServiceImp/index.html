@@ -1385,7 +1385,7 @@
 </table>
 <h2 id="parseexpand2include">parseExpand2Include</h2>
 <p><code>parseExpand2Include (expand)</code></p>
-<p>解析expand: { a: true, b: true ....}。该函数会在读操作：retrieve，list，listAll，findOne，findAll，findByIds之前调用。</p>
+<p>解析expand: { a: true, b: true ....}。返回orm（例如：sequelize）能解析的include对象。该函数会在读操作：retrieve，list，listAll，findOne，findAll，findByIds之前调用。</p>
 <h3 id="_46">参数</h3>
 <table>
 <thead>
@@ -1424,7 +1424,7 @@
 <td>Object, Array</td>
 <td>是</td>
 <td>无</td>
-<td>解析成功返回include对象, 否则返回null</td>
+<td>解析成功返回orm（例如：sequelize）能解析的include对象, 否则返回null</td>
 </tr>
 </tbody>
 </table>
