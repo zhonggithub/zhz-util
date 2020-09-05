@@ -5,7 +5,7 @@
  * Created Date: 2020-06-14 15:35:22
  * Author: Zz
  * -----
- * Last Modified: 2020-08-18 11:58:47
+ * Last Modified: 2020-09-05 22:08:26
  * Modified By: Zz
  * -----
  * Description:
@@ -32,6 +32,11 @@ module.exports = {
         description: '',
         required: true,
       },
+      role: {
+        type: DataTypes.String,
+        description: '角色名称',
+        required: true,
+      },
       cache: {
         type: 'RedisCache',
         description: '缓存',
@@ -40,15 +45,19 @@ module.exports = {
         type: 'Number, CacheTTLEnum',
         description: '缓存周期。Number: 表示xx秒。CacheTTLEnum: s(60秒内)，m(60分钟内)，h(24小时内)，d(30天内)，M(12个月内)，y(一年)',
       },
-      role: {
-        type: DataTypes.String,
-        description: '角色名称',
-        required: true,
+      listCacheOn: {
+        type: DataTypes.Boolean,
+        desc: 'list api是否开启缓存。true表示将会把list的每一个资源进行缓存',
+        defaultValue: 'false'
       },
       opt: {
         type: DataTypes.Object,
         description: '默认api开启配置。false：不加载任何默认api；true：加载所有默认api；json对象表示加载对应的操作',
         defaultValue: 'true'
+      },
+      logger: {
+        type: DataTypes.Object,
+        desc: '日志实例',
       }
     }
   },

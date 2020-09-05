@@ -215,7 +215,7 @@
                 <h1 id="serviceimp">ServiceImp</h1>
 <p>继承ServiceBase。实现接口：create、retrieve、update、updateStatus、list、count、listAll、findOne、logicDel、desctroy、treeList、findAll、findByIds</p>
 <h2 id="constructor">constructor</h2>
-<p><code>constructor ({ seneca, model, cache, cacheTTL, role, opt })</code></p>
+<p><code>constructor ({ seneca, model, role, cache, cacheTTL, listCacheOn, opt, logger })</code></p>
 <p>构造函数</p>
 <h3 id="_1">参数</h3>
 <table>
@@ -244,6 +244,13 @@
 <td></td>
 </tr>
 <tr>
+<td>role</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td>角色名称</td>
+</tr>
+<tr>
 <td>cache</td>
 <td>RedisCache</td>
 <td>否</td>
@@ -258,11 +265,11 @@
 <td>缓存周期。Number: 表示xx秒。CacheTTLEnum: s(60秒内)，m(60分钟内)，h(24小时内)，d(30天内)，M(12个月内)，y(一年)</td>
 </tr>
 <tr>
-<td>role</td>
-<td>String</td>
-<td>是</td>
-<td>无</td>
-<td>角色名称</td>
+<td>listCacheOn</td>
+<td>Boolean</td>
+<td>否</td>
+<td>false</td>
+<td>list api是否开启缓存。true表示将会把list的每一个资源进行缓存</td>
 </tr>
 <tr>
 <td>opt</td>
@@ -270,6 +277,13 @@
 <td>否</td>
 <td>true</td>
 <td>默认api开启配置。false：不加载任何默认api；true：加载所有默认api；json对象表示加载对应的操作</td>
+</tr>
+<tr>
+<td>logger</td>
+<td>Object</td>
+<td>否</td>
+<td>无</td>
+<td>日志实例</td>
 </tr>
 </tbody>
 </table>
