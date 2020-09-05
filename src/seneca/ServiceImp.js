@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-09-05 21:59:27
+ * Last Modified: 2020-09-05 22:18:05
  * Modified By: Zz
  * -----
  * Description:
@@ -454,7 +454,7 @@ class Service extends ServiceBase {
       if (this.listCacheOn && this.cache) {
         await Promise.all(items.map(async (item) => {
           const cacheKey = this.getCacheKey(item.id, expand);
-          await this.cache.set(cacheKey, data, this.getCacheTTL());
+          await this.cache.set(cacheKey, item, this.getCacheTTL());
         }))
       }
       return util.responseSuccess({
