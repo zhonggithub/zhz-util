@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-08-17 17:40:35
+ * Last Modified: 2020-09-05 21:59:27
  * Modified By: Zz
  * -----
  * Description:
@@ -22,7 +22,9 @@ class Service extends ServiceBase {
   constructor({
     seneca, model,
     cache, role, resourceName,
-    cacheTTL, opt,
+    cacheTTL,
+    listCacheOn,
+    opt,
     logger,
   }) {
     super(role, seneca, opt === false ? false : opt || true);
@@ -60,6 +62,7 @@ class Service extends ServiceBase {
     this.resourceName = resourceName;
     this.logger = logger || seneca.logger;
     this.errCode = util.createResourceErrorCode(resourceName);
+    this.listCacheOn = listCacheOn === false ? false : true; // list api 默认缓存每一项
   }
 
   getUResourceName() {
@@ -448,6 +451,12 @@ class Service extends ServiceBase {
 
       const result = await this.model.list(params);
       const items = await this.list2logic(result.rows, expand);
+      if (this.listCacheOn && this.cache) {
+        await Promise.all(items.map(async (item) => {
+          const cacheKey = this.getCacheKey(item.id, expand);
+          await this.cache.set(cacheKey, data, this.getCacheTTL());
+        }))
+      }
       return util.responseSuccess({
         items,
         total: result.count,

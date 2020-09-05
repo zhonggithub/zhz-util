@@ -1,6 +1,6 @@
 {
   "name": "zhz-util",
-  "version": "3.1.10",
+  "version": "3.1.11",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -30,7 +30,7 @@
     "string": "^3.3.3",
     "validator": "^13.1.1",
     "xml-js": "^1.6.11",
-    "z-error": "^2.0.1"
+    "z-error": "^2.0.2"
   },
   "files": [
     "index.js",
