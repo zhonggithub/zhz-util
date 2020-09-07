@@ -5,7 +5,7 @@
  * Created Date: 2020-06-14 15:35:22
  * Author: Zz
  * -----
- * Last Modified: 2020-09-05 22:11:45
+ * Last Modified: 2020-09-07 17:38:55
  * Modified By: Zz
  * -----
  * Description:
@@ -48,7 +48,7 @@ module.exports = {
       listCacheOn: {
         type: DataTypes.Boolean,
         desc: 'list api是否开启缓存。true表示将会把list的每一个资源进行缓存',
-        defaultValue: 'false'
+        defaultValue: 'true'
       },
       opt: {
         type: DataTypes.Object,
