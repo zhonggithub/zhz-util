@@ -5,14 +5,13 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-09-05 22:18:05
+ * Last Modified: 2020-09-07 16:59:02
  * Modified By: Zz
  * -----
  * Description:
  * 
  */
 const { verify } = require('z-error');
-const validator = require('validator');
 const util = require('../util');
 const ServiceBase = require('./ServiceBase');
 const { CacheTTLEnum, CacheTTLEnumKeys } = require('./EnumConst');
@@ -39,17 +38,7 @@ class Service extends ServiceBase {
       cache: (val) => typeof val === 'object' || typeof val === 'function' || val === undefined,
       resourceName: (val) => (val && typeof val === 'string') || val === undefined,
       cacheTTL: (val) => {
-        if (val === undefined) {
-          return true;
-        }
-        const bo = validator.isInt(val);
-        if (bo) {
-          return true;
-        }
-        if (CacheTTLEnumKeys.indexOf(val) !== -1) {
-          return true;
-        }
-        return false;
+        return (val === undefined) || util.isInt(val) || util.isValueOf(val, CacheTTLEnumKeys)
       },
     });
     if (err) {
