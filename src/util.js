@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: 2020-08-31 18:38:32
+ * Last Modified: 2020-09-18 13:22:01
  * Modified By: Zz
  * -----
  * Description:
@@ -435,7 +435,7 @@ module.exports = {
       right = string(value).right(1);
       const leftRangeStr = ['[', '(', '{'];
       const rightRangeStr = [']', ')', '}'];
-      if (leftRangeStr.indexOf(left) !== -1 && rightRangeStr.indexOf(right)) {
+      if (leftRangeStr.indexOf(left.toString()) !== -1 && rightRangeStr.indexOf(right.toString()) !== -1) {
         return true;
       }
     }
