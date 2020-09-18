@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: 2020-09-18 13:22:01
+ * Last Modified: 2020-09-18 15:26:17
  * Modified By: Zz
  * -----
  * Description:
@@ -669,4 +669,13 @@ module.exports = {
       });
     }
   },
+
+  parseDateRange(timeRangeStr) {
+    const dateRangStr = timeRangeStr.replace(/(\[)|(\])|(\()|(\))|(\{)|(\})/g, '')
+    const dateRangeValues = dateRangStr.split(',')
+    return {
+      start: dateRangeValues[0] ? moment(dateRangeValues[0]).toDate() : null,
+      end: dateRangeValues[1] ? moment(dateRangeValues[1]).toDate() : null
+    }
+  }
 }
