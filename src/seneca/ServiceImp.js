@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-09-18 15:46:51
+ * Last Modified: 2020-09-18 15:51:17
  * Modified By: Zz
  * -----
  * Description:
@@ -442,8 +442,10 @@ class Service extends ServiceBase {
       const items = await this.list2logic(result.rows, expand);
       if (this.listCacheOn && this.cache) {
         await Promise.all(items.map(async (item) => {
-          const cacheKey = this.getCacheKey(item.id, expand);
-          await this.cache.set(cacheKey, item, this.getCacheTTL());
+          if (item.id) {
+            const cacheKey = this.getCacheKey(item.id, expand);
+            await this.cache.set(cacheKey, item, this.getCacheTTL());
+          }
         }))
       }
       return util.responseSuccess({
@@ -490,8 +492,10 @@ class Service extends ServiceBase {
       const items = await this.list2logic(result, tmpExpand);
       if (this.listCacheOn && this.cache) {
         await Promise.all(items.map(async (item) => {
-          const cacheKey = this.getCacheKey(item.id, expand);
-          await this.cache.set(cacheKey, item, this.getCacheTTL());
+          if (item.id) {
+            const cacheKey = this.getCacheKey(item.id, expand);
+            await this.cache.set(cacheKey, item, this.getCacheTTL());
+          }
         }))
       }
       return util.responseSuccess(items);
@@ -545,8 +549,10 @@ class Service extends ServiceBase {
       const items = await this.list2logic(result, tmpExpand);
       if (this.listCacheOn && this.cache) {
         await Promise.all(items.map(async (item) => {
-          const cacheKey = this.getCacheKey(item.id, expand);
-          await this.cache.set(cacheKey, item, this.getCacheTTL());
+          if (item.id) {
+            const cacheKey = this.getCacheKey(item.id, expand);
+            await this.cache.set(cacheKey, item, this.getCacheTTL());
+          }
         }))
       }
       return util.responseSuccess(items);
@@ -572,8 +578,10 @@ class Service extends ServiceBase {
       const items = await this.list2logic(result, tmpExpand);
       if (this.listCacheOn && this.cache) {
         await Promise.all(items.map(async (item) => {
-          const cacheKey = this.getCacheKey(item.id, expand);
-          await this.cache.set(cacheKey, item, this.getCacheTTL());
+          if (item.id) {
+            const cacheKey = this.getCacheKey(item.id, expand);
+            await this.cache.set(cacheKey, item, this.getCacheTTL());
+          }
         }))
       }
       return util.responseSuccess(items);
