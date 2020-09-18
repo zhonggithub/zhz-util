@@ -844,3 +844,24 @@ unix时间戳转Date
 |--- | --- | --- | --- | ---|
 |zerror | Object | 否 | 无 | ZError对象|
 
+
+## parseDateRange
+` parseDateRange (timeRangeStr)`
+
+解析时间范围字符串
+
+### 参数
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|timeRangeStr | String | 是 | 无 | |
+
+
+### 返回值
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|data | Object | 否 | |
+|data.start | Date | 否 | 无 | 起始时间。Date 对象或null|
+|data.end | Date | 否 | 无 | 起始时间。Date 对象或null|
+

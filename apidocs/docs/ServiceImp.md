@@ -15,7 +15,7 @@
 |role | String | 是 | 无 | 角色名称|
 |cache | RedisCache | 否 | 无 | 缓存|
 |cacheTTL | Number, CacheTTLEnum | 否 | 无 | 缓存周期。Number: 表示xx秒。CacheTTLEnum: s(60秒内)，m(60分钟内)，h(24小时内)，d(30天内)，M(12个月内)，y(一年)|
-|listCacheOn | Boolean | 否 | false | list api是否开启缓存。true表示将会把list的每一个资源进行缓存|
+|listCacheOn | Boolean | 否 | true | list api是否开启缓存。true表示将会把list, listAll, findAll, findByIds的每一个资源进行缓存|
 |opt | Object | 否 | true | 默认api开启配置。false：不加载任何默认api；true：加载所有默认api；json对象表示加载对应的操作|
 |logger | Object | 否 | 无 | 日志实例|
 

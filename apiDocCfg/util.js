@@ -5,7 +5,7 @@
  * Created Date: 2020-06-17 13:24:59
  * Author: Zz
  * -----
- * Last Modified: 2020-08-17 10:14:03
+ * Last Modified: 2020-09-18 16:32:09
  * Modified By: Zz
  * -----
  * Description:
@@ -978,6 +978,28 @@ module.exports = {
       zerror: {
         type: DataTypes.Object,
         desc: 'ZError对象',
+      }
+    },
+  },
+
+  parseDateRange: {
+    description: '解析时间范围字符串',
+    params: {
+      timeRangeStr: {
+        type: DataTypes.String,
+        required: true,
+      },
+    },
+    returns: {
+      data: {
+        start: {
+          type: DataTypes.Date,
+          desc: '起始时间。Date 对象或null',
+        },
+        end: {
+          type: DataTypes.Date,
+          desc: '起始时间。Date 对象或null',
+        }
       }
     },
   }
