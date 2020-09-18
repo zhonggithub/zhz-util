@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-09-07 16:59:02
+ * Last Modified: 2020-09-18 15:46:51
  * Modified By: Zz
  * -----
  * Description:
@@ -488,6 +488,12 @@ class Service extends ServiceBase {
       this.appendInclude(query, tmpExpand);
       const result = await this.model.find(query);
       const items = await this.list2logic(result, tmpExpand);
+      if (this.listCacheOn && this.cache) {
+        await Promise.all(items.map(async (item) => {
+          const cacheKey = this.getCacheKey(item.id, expand);
+          await this.cache.set(cacheKey, item, this.getCacheTTL());
+        }))
+      }
       return util.responseSuccess(items);
     } catch (dbError) {
       return this.handleCatchErr(dbError);
@@ -515,6 +521,10 @@ class Service extends ServiceBase {
         );
       }
       const data = await this.db2logic(result, tmpExpand);
+      if (this.cache && data.id) {
+        const cacheKey = this.getCacheKey(data.id, tmpExpand);
+        await this.cache.set(cacheKey, data, this.getCacheTTL());
+      }
       return util.responseSuccess(data);
     } catch (dbError) {
       return this.handleCatchErr(dbError);
@@ -533,6 +543,12 @@ class Service extends ServiceBase {
       this.appendInclude(query, tmpExpand);
       const result = await this.model.find(query);
       const items = await this.list2logic(result, tmpExpand);
+      if (this.listCacheOn && this.cache) {
+        await Promise.all(items.map(async (item) => {
+          const cacheKey = this.getCacheKey(item.id, expand);
+          await this.cache.set(cacheKey, item, this.getCacheTTL());
+        }))
+      }
       return util.responseSuccess(items);
     } catch (dbError) {
       return this.handleCatchErr(dbError);
@@ -554,6 +570,12 @@ class Service extends ServiceBase {
       this.appendInclude(query, tmpExpand);
       const result = await this.model.find(query);
       const items = await this.list2logic(result, tmpExpand);
+      if (this.listCacheOn && this.cache) {
+        await Promise.all(items.map(async (item) => {
+          const cacheKey = this.getCacheKey(item.id, expand);
+          await this.cache.set(cacheKey, item, this.getCacheTTL());
+        }))
+      }
       return util.responseSuccess(items);
     } catch (dbError) {
       return this.handleCatchErr(dbError)
