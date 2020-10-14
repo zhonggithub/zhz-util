@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-10-14 11:40:11
+ * Last Modified: 2020-10-14 15:26:13
  * Modified By: Zz
  * -----
  * Description:
@@ -439,8 +439,8 @@ class Service extends ServiceBase {
 
       this.appendInclude(params, expand);
 
-      const result = await this.model.list(params);
-      const items = await this.list2logic(result.rows, expand);
+      const result = await this.model.find(params);
+      const items = await this.list2logic(result, expand);
       if (this.listCacheOn && this.cache) {
         await Promise.all(items.map(async (item) => {
           if (item.id) {
@@ -449,7 +449,7 @@ class Service extends ServiceBase {
           }
         }))
       }
-      const total = await this.model.count(query);
+      const total = await this.model.count(this.parseQuery(this.parseQuery));
       return util.responseSuccess({
         items,
         total,
