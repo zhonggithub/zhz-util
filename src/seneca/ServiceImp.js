@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-10-14 15:26:13
+ * Last Modified: 2020-10-14 16:47:05
  * Modified By: Zz
  * -----
  * Description:
@@ -449,7 +449,7 @@ class Service extends ServiceBase {
           }
         }))
       }
-      const total = await this.model.count(this.parseQuery(this.parseQuery));
+      const total = await this.model.count(this.parseQuery(query));
       return util.responseSuccess({
         items,
         total,
