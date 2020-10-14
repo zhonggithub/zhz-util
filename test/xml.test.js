@@ -5,7 +5,7 @@
  * Created Date: 2020-07-28 14:17:21
  * Author: Zz
  * -----
- * Last Modified: 2020-08-04 21:22:36
+ * Last Modified: 2020-10-14 11:18:31
  * Modified By: Zz
  * -----
  * Description:
@@ -33,3 +33,20 @@ const xmlStr = `
 </row>
 `
 console.log(xmlUtil.xml2obj(xmlStr));
+
+const str1 = `
+<?xml version="1.0" encoding="utf-8"?>
+<Notification xlmns="http://mns.aliyuncs.com/doc/v1/">
+  <TopicOwner>$TopicOwner</TopicOwner>
+  <TopicName>$TopicName</TopicName>
+  <Subscriber>$Subscriber</Subscriber>
+  <SubscriptionName>$SubscriptionName</SubscriptionName>
+  <MessageId>6CC4D900CA59A2CD-1-15180534A8F-200000002</MessageId>
+  <Message>{1:"a", 2:"b"}</Message>
+  <MessageMD5>F1E92841751D795AB325861034B5CB55</MessageMD5>
+  <MessageTag>important</MessageTag>
+  <PublishTime>1449556920975</PublishTime>
+</Notification>
+`
+const xmlUtil1 = new XmlUtil({})
+console.log(xmlUtil1.xml2obj(str1))

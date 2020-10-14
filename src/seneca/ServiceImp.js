@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-09-18 15:51:17
+ * Last Modified: 2020-10-14 11:40:11
  * Modified By: Zz
  * -----
  * Description:
@@ -429,8 +429,9 @@ class Service extends ServiceBase {
         filter, sort, skip, pageSize, page, expand,
       } = util.convertPagination(msg.params);
 
+      const query = this.convertQueryCriteria(filter)
       const params = this.parseListQuery(
-        this.convertQueryCriteria(filter),
+        query,
         sort,
         skip,
         pageSize
@@ -448,9 +449,10 @@ class Service extends ServiceBase {
           }
         }))
       }
+      const total = await this.model.count(query);
       return util.responseSuccess({
         items,
-        total: result.count,
+        total,
         offset: skip,
         limit: pageSize,
         page,
