@@ -5,7 +5,7 @@
  * Created Date: 2020-07-28 14:15:37
  * Author: Zz
  * -----
- * Last Modified: 2020-08-04 21:49:08
+ * Last Modified: 2020-10-20 11:12:30
  * Modified By: Zz
  * -----
  * Description:
@@ -13,7 +13,7 @@
 const { xml2js, json2xml } = require('xml-js')
 
 class XmlUtil {
-  constructor(keyMappings) {
+  constructor(keyMappings = {}) {
     if (typeof keyMappings !== 'object') {
       throw new Error('keyMappings requred object')
     }
