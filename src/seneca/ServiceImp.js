@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-10-14 16:47:05
+ * Last Modified: 2020-10-20 19:07:56
  * Modified By: Zz
  * -----
  * Description:
@@ -485,9 +485,9 @@ class Service extends ServiceBase {
       return err.toJson();
     }
     try {
-      const { filter, expand } = util.convertPagination(msg.params);
+      const { filter, expand, sort } = util.convertPagination(msg.params);
       const params = this.convertQueryCriteria(filter);
-      const query = this.parseQuery(params);
+      const query = this.parseListQuery(params, sort);
       const tmpExpand = util.parseExpand(expand);
       this.appendInclude(query, tmpExpand);
       const result = await this.model.find(query);
@@ -542,9 +542,13 @@ class Service extends ServiceBase {
     try {
       const { expand } = msg.params;
       delete msg.params.expand;
+
+      const { filter, expand, sort } = util.convertPagination(msg.params);
+      const params = this.convertQueryCriteria(filter);
+      const query = this.parseListQuery(params, sort);
       
-      const params = this.convertQueryCriteria(msg.params);
-      const query = this.parseQuery(params);
+      // const params = this.convertQueryCriteria(msg.params);
+      // const query = this.parseQuery(params);
       const tmpExpand = util.parseExpand(expand);
       this.appendInclude(query, tmpExpand);
       const result = await this.model.find(query);
