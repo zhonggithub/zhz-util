@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-10-20 19:07:56
+ * Last Modified: 2020-10-20 19:10:48
  * Modified By: Zz
  * -----
  * Description:
@@ -540,12 +540,11 @@ class Service extends ServiceBase {
   async findAll(msg) {
     this.seneca.logger.info(msg);
     try {
-      const { expand } = msg.params;
-      delete msg.params.expand;
-
       const { filter, expand, sort } = util.convertPagination(msg.params);
       const params = this.convertQueryCriteria(filter);
       const query = this.parseListQuery(params, sort);
+
+      delete msg.params.expand;
       
       // const params = this.convertQueryCriteria(msg.params);
       // const query = this.parseQuery(params);
