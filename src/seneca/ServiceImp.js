@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-10-20 19:10:48
+ * Last Modified: 2020-11-13 15:55:42
  * Modified By: Zz
  * -----
  * Description:
@@ -441,7 +441,7 @@ class Service extends ServiceBase {
 
       const result = await this.model.find(params);
       const items = await this.list2logic(result, expand);
-      if (this.listCacheOn && this.cache) {
+      if (this.listCacheOn && this.cache && !query.attributes) {
         await Promise.all(items.map(async (item) => {
           if (item.id) {
             const cacheKey = this.getCacheKey(item.id, expand);
@@ -492,7 +492,7 @@ class Service extends ServiceBase {
       this.appendInclude(query, tmpExpand);
       const result = await this.model.find(query);
       const items = await this.list2logic(result, tmpExpand);
-      if (this.listCacheOn && this.cache) {
+      if (this.listCacheOn && this.cache && !query.attributes) {
         await Promise.all(items.map(async (item) => {
           if (item.id) {
             const cacheKey = this.getCacheKey(item.id, expand);
@@ -552,7 +552,7 @@ class Service extends ServiceBase {
       this.appendInclude(query, tmpExpand);
       const result = await this.model.find(query);
       const items = await this.list2logic(result, tmpExpand);
-      if (this.listCacheOn && this.cache) {
+      if (this.listCacheOn && this.cache && !query.attributes) {
         await Promise.all(items.map(async (item) => {
           if (item.id) {
             const cacheKey = this.getCacheKey(item.id, expand);
@@ -581,7 +581,7 @@ class Service extends ServiceBase {
       this.appendInclude(query, tmpExpand);
       const result = await this.model.find(query);
       const items = await this.list2logic(result, tmpExpand);
-      if (this.listCacheOn && this.cache) {
+      if (this.listCacheOn && this.cache && !query.attributes) {
         await Promise.all(items.map(async (item) => {
           if (item.id) {
             const cacheKey = this.getCacheKey(item.id, expand);
