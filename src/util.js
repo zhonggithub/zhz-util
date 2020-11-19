@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: 2020-11-19 18:41:24
+ * Last Modified: 2020-11-19 19:00:15
  * Modified By: Zz
  * -----
  * Description:
@@ -447,9 +447,18 @@ module.exports = {
     if (!key || !value) {
       return null;
     }
+
     const condition = {
       [key]: {},
     };
+    if (value.startsWith('!{') && value.endsWidth('}!')) {
+      let array = value;
+      array = array.replace(/(\!{)|(\}!)/g, '');
+      array = array.split(',');
+      condition[key][Op.notIn] = array;
+      return condition
+    }
+    
     const beginStr = value[0];
     const endStr = value[value.length - 1];
     if (beginStr === '[' || beginStr === '(' || beginStr === '{') {
@@ -487,11 +496,6 @@ module.exports = {
       } else if (beginStr === '{' && endStr === '}') {
         condition[key] = array;
       }
-    } else if (value.startsWith('!{') && value.endsWidth('}!')) {
-      let array = value;
-      array = array.replace(/(\!{)|(\}!)/g, '');
-      array = array.split(',');
-      condition[key][Op.notIn] = array;
     } else {
       condition[key] = value;
     }
@@ -505,6 +509,13 @@ module.exports = {
     const condition = {
       [key]: {},
     };
+    if (value.startsWith('!{') && value.endsWidth('}!')) {
+      let array = value;
+      array = array.replace(/(\!{)|(\}!)/g, '');
+      array = array.split(',');
+      condition[key] = { $nin: array };
+      return condition;
+    }
     const beginStr = value[0];
     const endStr = value[value.length - 1];
     if (beginStr === '[' || beginStr === '(' || beginStr === '{') {
@@ -542,10 +553,6 @@ module.exports = {
       } else if (beginStr === '{' && endStr === '}') {
         condition[key] = array;
       }
-    } else if (value.startsWith('!{') && value.endsWidth('}!')) {
-      let array = value;
-      array = array.replace(/(\!{)|(\}!)/g, '');
-      array = array.split(',');
     } else {
       condition[key] = value;
     }
