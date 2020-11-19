@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: 2020-10-20 11:17:16
+ * Last Modified: 2020-11-19 10:11:50
  * Modified By: Zz
  * -----
  * Description:
@@ -99,7 +99,7 @@ module.exports = {
   },
   notInValue(val) {
     if (!val) return '';
-    if (typeof val === 'string') {
+    if (typeof val === 'string' || typeof val === 'number') {
       return `!{${vallue}}!`;
     }
     if (typeof val === 'array') {
