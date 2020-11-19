@@ -5,7 +5,7 @@
  * Created Date: 2020-06-27 00:57:14
  * Author: Zz
  * -----
- * Last Modified: 2020-07-29 21:05:37
+ * Last Modified: 2020-11-19 15:26:20
  * Modified By: Zz
  * -----
  * Description:
@@ -27,3 +27,6 @@ console.log(util.isValueOf('a', { b: 'b' }))
 
 console.log(util.notEmptyStr(''))
 console.log(util.notEmptyStr('a'))
+
+const db = util.convertQueryCriteria({ id: 'aaa' })
+console.log(db)
