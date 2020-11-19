@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: 2020-11-19 10:11:50
+ * Last Modified: 2020-11-19 18:41:24
  * Modified By: Zz
  * -----
  * Description:
@@ -100,10 +100,10 @@ module.exports = {
   notInValue(val) {
     if (!val) return '';
     if (typeof val === 'string' || typeof val === 'number') {
-      return `!{${vallue}}!`;
+      return `!{${val}}!`;
     }
     if (typeof val === 'array') {
-      return `!{${vallue.toString()}}!`;
+      return `!{${val.toString()}}!`;
     }
     return '';
   },

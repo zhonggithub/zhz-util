@@ -5,7 +5,7 @@
  * Created Date: 2020-06-27 00:57:14
  * Author: Zz
  * -----
- * Last Modified: 2020-11-19 15:26:20
+ * Last Modified: 2020-11-19 15:44:53
  * Modified By: Zz
  * -----
  * Description:
@@ -28,5 +28,5 @@ console.log(util.isValueOf('a', { b: 'b' }))
 console.log(util.notEmptyStr(''))
 console.log(util.notEmptyStr('a'))
 
-const db = util.convertQueryCriteria({ id: 'aaa' })
-console.log(db)
+const {dstCriteria, sourceCriteria} = util.convertQueryCriteria({ id: 'aaa' })
+console.log(dstCriteria, sourceCriteria)
