@@ -5,7 +5,7 @@
  * Created Date: 2020-06-27 00:57:14
  * Author: Zz
  * -----
- * Last Modified: 2020-11-19 18:55:06
+ * Last Modified: 2020-11-19 19:27:25
  * Modified By: Zz
  * -----
  * Description:
@@ -28,7 +28,7 @@ console.log(util.isValueOf('a', { b: 'b' }))
 console.log(util.notEmptyStr(''))
 console.log(util.notEmptyStr('!a'))
 
-const {dstCriteria, sourceCriteria} = util.convertQueryCriteria({ id: '!{a,b}!' })
+const {dstCriteria, sourceCriteria} = util.convertQueryCriteria({ id: '!{-1}!' })
 console.log(dstCriteria, sourceCriteria)
 
-console.log(util.convertRangeQueryCriteriaMysql('a', '!{a,b}!'))
+console.log(util.convertRangeQueryCriteriaMysql('a', '!{-1}!'))

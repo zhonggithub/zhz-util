@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: 2020-11-19 19:05:53
+ * Last Modified: 2020-11-19 19:28:19
  * Modified By: Zz
  * -----
  * Description:
@@ -427,7 +427,7 @@ module.exports = {
       let left = string(value).left(2);
       let right = string(value).right(2);
 
-      if (left === '!{' && right === '}!') {
+      if (left.toString() === '!{' && right.toString() === '}!') {
         return true;
       }
 
