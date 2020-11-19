@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: 2020-11-19 19:00:15
+ * Last Modified: 2020-11-19 19:05:53
  * Modified By: Zz
  * -----
  * Description:
@@ -451,7 +451,7 @@ module.exports = {
     const condition = {
       [key]: {},
     };
-    if (value.startsWith('!{') && value.endsWidth('}!')) {
+    if (value.startsWith('!{') && value.endsWith('}!')) {
       let array = value;
       array = array.replace(/(\!{)|(\}!)/g, '');
       array = array.split(',');
@@ -509,7 +509,7 @@ module.exports = {
     const condition = {
       [key]: {},
     };
-    if (value.startsWith('!{') && value.endsWidth('}!')) {
+    if (value.startsWith('!{') && value.endsWith('}!')) {
       let array = value;
       array = array.replace(/(\!{)|(\}!)/g, '');
       array = array.split(',');
