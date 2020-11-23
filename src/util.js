@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: 2020-11-23 21:55:54
+ * Last Modified: 2020-11-23 22:02:45
  * Modified By: Zz
  * -----
  * Description:
@@ -452,11 +452,10 @@ module.exports = {
       [key]: {},
     };
 
-    if (Array.isArray(value)) {
-      condition = {
+    if (typeof value !== 'string') {
+      return {
         [key]: value,
       };
-      return condition
     }
 
     if (value.startsWith('!{') && value.endsWith('}!')) {
@@ -517,11 +516,10 @@ module.exports = {
     const condition = {
       [key]: {},
     };
-    if (Array.isArray(value)) {
-      condition = {
+    if (typeof value !== 'string') {
+      return {
         [key]: value,
       };
-      return condition
     }
     if (value.startsWith('!{') && value.endsWith('}!')) {
       let array = value;
