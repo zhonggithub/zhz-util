@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-11-13 15:55:42
+ * Last Modified: 2020-12-04 21:09:37
  * Modified By: Zz
  * -----
  * Description:
@@ -25,6 +25,7 @@ class Service extends ServiceBase {
     listCacheOn,
     opt,
     logger,
+    expandCacheOn,
   }) {
     super(role, seneca, opt === false ? false : opt || true);
 
@@ -32,7 +33,7 @@ class Service extends ServiceBase {
       model,
       cache,
       resourceName,
-      cacheTTL,
+      cacheTTL
     }, ['model', 'resourceName'], {
       model: (val) => typeof val === 'object' || typeof val === 'function',
       cache: (val) => typeof val === 'object' || typeof val === 'function' || val === undefined,
@@ -52,6 +53,7 @@ class Service extends ServiceBase {
     this.logger = logger || seneca.logger;
     this.errCode = util.createResourceErrorCode(resourceName);
     this.listCacheOn = listCacheOn === false ? false : true; // list api 默认缓存每一项
+    this.expandCacheOn = expandCacheOn || false;
   }
 
   getUResourceName() {
@@ -298,12 +300,10 @@ class Service extends ServiceBase {
       const include = this.parseExpand2Include(tmpExpand);
 
       let result = null;
-      let cacheKey = this.getCacheKey(id, tmpExpand);
-
-      if (this.cache) {
+      let cacheKey = this.getCacheKey(id);
+      if (this.cache && !tmpExpand) {
         result = await this.cache.get(cacheKey);
       }
-
       if (!result) {
         result = await this.model.findById(id, include);
       }
@@ -319,7 +319,7 @@ class Service extends ServiceBase {
         result, tmpExpand,
       );
       
-      if (this.cache) {
+      if (this.cache && !tmpExpand) {
         await this.cache.set(cacheKey, data, this.getCacheTTL());
       }
       
@@ -444,7 +444,7 @@ class Service extends ServiceBase {
       if (this.listCacheOn && this.cache && !query.attributes) {
         await Promise.all(items.map(async (item) => {
           if (item.id) {
-            const cacheKey = this.getCacheKey(item.id, expand);
+            const cacheKey = this.getCacheKey(item.id);
             await this.cache.set(cacheKey, item, this.getCacheTTL());
           }
         }))
@@ -495,7 +495,7 @@ class Service extends ServiceBase {
       if (this.listCacheOn && this.cache && !query.attributes) {
         await Promise.all(items.map(async (item) => {
           if (item.id) {
-            const cacheKey = this.getCacheKey(item.id, expand);
+            const cacheKey = this.getCacheKey(item.id);
             await this.cache.set(cacheKey, item, this.getCacheTTL());
           }
         }))
@@ -528,7 +528,7 @@ class Service extends ServiceBase {
       }
       const data = await this.db2logic(result, tmpExpand);
       if (this.cache && data.id) {
-        const cacheKey = this.getCacheKey(data.id, tmpExpand);
+        const cacheKey = this.getCacheKey(data.id);
         await this.cache.set(cacheKey, data, this.getCacheTTL());
       }
       return util.responseSuccess(data);
@@ -555,7 +555,7 @@ class Service extends ServiceBase {
       if (this.listCacheOn && this.cache && !query.attributes) {
         await Promise.all(items.map(async (item) => {
           if (item.id) {
-            const cacheKey = this.getCacheKey(item.id, expand);
+            const cacheKey = this.getCacheKey(item.id);
             await this.cache.set(cacheKey, item, this.getCacheTTL());
           }
         }))
@@ -584,7 +584,7 @@ class Service extends ServiceBase {
       if (this.listCacheOn && this.cache && !query.attributes) {
         await Promise.all(items.map(async (item) => {
           if (item.id) {
-            const cacheKey = this.getCacheKey(item.id, expand);
+            const cacheKey = this.getCacheKey(item.id);
             await this.cache.set(cacheKey, item, this.getCacheTTL());
           }
         }))

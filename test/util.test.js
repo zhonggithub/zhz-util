@@ -5,7 +5,7 @@
  * Created Date: 2020-06-27 00:57:14
  * Author: Zz
  * -----
- * Last Modified: 2020-11-19 19:46:41
+ * Last Modified: 2020-11-30 15:45:38
  * Modified By: Zz
  * -----
  * Description:
@@ -32,3 +32,4 @@ const {dstCriteria, sourceCriteria} = util.convertQueryCriteria({ type: util.not
 console.log(dstCriteria, sourceCriteria)
 
 console.log(util.convertRangeQueryCriteriaMysql('a', '!{-1}!'))
+console.log(util.convertRangeQueryCriteriaMysql('a', ''))
