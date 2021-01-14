@@ -43,3 +43,9 @@ console.log(tmpParams)
 const sortKey = Object.keys(tmpParams.sort).toString()
 const sortValue = parseInt(Object.values(tmpParams.sort).toString(), 10)
 console.log(`${sortKey} ${sortValue === -1 ? 'desc' : 'asc'}`)
+
+tmp = util.convertRangeQueryCriteriaMongodb(
+  'createdAt',
+  '[2020-10-21,2020-11-11]',
+)
+console.log(tmp)

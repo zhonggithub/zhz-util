@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: 2020-11-23 22:02:45
+ * Last Modified: Thu Jan 14 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -701,6 +701,15 @@ module.exports = {
     return {
       start: dateRangeValues[0] ? moment(dateRangeValues[0]).toDate() : null,
       end: dateRangeValues[1] ? moment(dateRangeValues[1]).toDate() : null
+    }
+  },
+
+  parseRangeQuery(rangeStr) {
+    const dateRangStr = rangeStr.replace(/(\[)|(\])|(\()|(\))|(\{)|(\})/g, '')
+    const dateRangeValues = dateRangStr.split(',')
+    return {
+      start: dateRangeValues[0] || null,
+      end: dateRangeValues[1] || null
     }
   }
 }
