@@ -5,7 +5,7 @@
  * Created Date: 2020-06-27 00:57:14
  * Author: Zz
  * -----
- * Last Modified: 2020-11-30 15:45:38
+ * Last Modified: Thu Jan 14 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -33,3 +33,13 @@ console.log(dstCriteria, sourceCriteria)
 
 console.log(util.convertRangeQueryCriteriaMysql('a', '!{-1}!'))
 console.log(util.convertRangeQueryCriteriaMysql('a', ''))
+
+const params = {
+  sort: '-createdAt',
+}
+const tmpParams = util.convertPagination(params)
+console.log(tmpParams)
+
+const sortKey = Object.keys(tmpParams.sort).toString()
+const sortValue = parseInt(Object.values(tmpParams.sort).toString(), 10)
+console.log(`${sortKey} ${sortValue === -1 ? 'desc' : 'asc'}`)
