@@ -5,11 +5,12 @@
  * Created Date: 2020-06-27 00:57:14
  * Author: Zz
  * -----
- * Last Modified: Thu Jan 14 2021
+ * Last Modified: Sat Jan 16 2021
  * Modified By: Zz
  * -----
  * Description:
  */
+const { objKeySort } = require('../src/util')
 const util = require('../src/util')
 
 // true
@@ -49,3 +50,8 @@ tmp = util.convertRangeQueryCriteriaMongodb(
   '[2020-10-21,2020-11-11]',
 )
 console.log(tmp)
+
+console.log(objKeySort({
+  b: '1',
+  a: '2'
+}))

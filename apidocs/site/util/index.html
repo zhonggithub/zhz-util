@@ -167,6 +167,12 @@
         
             <li><a class="toctree-l3" href="#zerror500">zerror500</a></li>
         
+            <li><a class="toctree-l3" href="#parsedaterange">parseDateRange</a></li>
+        
+            <li><a class="toctree-l3" href="#parserangequery">parseRangeQuery</a></li>
+        
+            <li><a class="toctree-l3" href="#objkeysort">objKeySort</a></li>
+        
         </ul>
     
 
@@ -2597,6 +2603,169 @@
 <td>否</td>
 <td>无</td>
 <td>ZError对象</td>
+</tr>
+</tbody>
+</table>
+<h2 id="parsedaterange">parseDateRange</h2>
+<p><code>parseDateRange (timeRangeStr)</code></p>
+<p>解析时间范围字符串</p>
+<h3 id="_81">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>timeRangeStr</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_82">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>data</td>
+<td>Object</td>
+<td>否</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>data.start</td>
+<td>Date</td>
+<td>否</td>
+<td>无</td>
+<td>起始时间。Date 对象或null</td>
+</tr>
+<tr>
+<td>data.end</td>
+<td>Date</td>
+<td>否</td>
+<td>无</td>
+<td>截止时间。Date 对象或null</td>
+</tr>
+</tbody>
+</table>
+<h2 id="parserangequery">parseRangeQuery</h2>
+<p><code>parseRangeQuery (rangeStr)</code></p>
+<p>解析范围字符串</p>
+<h3 id="_83">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>rangeStr</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_84">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>data</td>
+<td>Object</td>
+<td>否</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>data.start</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td>起始值。如果没有为null</td>
+</tr>
+<tr>
+<td>data.end</td>
+<td>Date</td>
+<td>否</td>
+<td>无</td>
+<td>截止值。如果没有为null</td>
+</tr>
+</tbody>
+</table>
+<h2 id="objkeysort">objKeySort</h2>
+<p><code>objKeySort (obj)</code></p>
+<p>json对象按key字母顺序排序</p>
+<h3 id="_85">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>obj</td>
+<td>Object</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_86">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>obj</td>
+<td>Object</td>
+<td>是</td>
+<td>无</td>
+<td>排序后的对象</td>
 </tr>
 </tbody>
 </table>

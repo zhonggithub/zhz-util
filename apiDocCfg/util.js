@@ -5,7 +5,7 @@
  * Created Date: 2020-06-17 13:24:59
  * Author: Zz
  * -----
- * Last Modified: 2020-09-18 16:32:09
+ * Last Modified: Sat Jan 16 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -998,8 +998,47 @@ module.exports = {
         },
         end: {
           type: DataTypes.Date,
-          desc: '起始时间。Date 对象或null',
+          desc: '截止时间。Date 对象或null',
         }
+      }
+    },
+  },
+
+  parseRangeQuery: {
+    desc: '解析范围字符串',
+    params: {
+      rangeStr: {
+        type: DataTypes.String,
+        required: true,
+      },
+    },
+    returns: {
+      data: {
+        start: {
+          type: DataTypes.String,
+          desc: '起始值。如果没有为null',
+        },
+        end: {
+          type: DataTypes.Date,
+          desc: '截止值。如果没有为null',
+        }
+      }
+    },
+  },
+
+  objKeySort: {
+    desc: 'json对象按key字母顺序排序',
+    params: {
+      obj: {
+        type: DataTypes.Object,
+        required: true,
+      },
+    },
+    returns: {
+      obj: {
+        type: DataTypes.Object,
+        required: true,
+        desc: '排序后的对象',
       }
     },
   }

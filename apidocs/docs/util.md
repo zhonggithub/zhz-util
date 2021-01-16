@@ -863,5 +863,45 @@ unix时间戳转Date
 |--- | --- | --- | --- | ---|
 |data | Object | 否 | |
 |data.start | Date | 否 | 无 | 起始时间。Date 对象或null|
-|data.end | Date | 否 | 无 | 起始时间。Date 对象或null|
+|data.end | Date | 否 | 无 | 截止时间。Date 对象或null|
+
+
+## parseRangeQuery
+` parseRangeQuery (rangeStr)`
+
+解析范围字符串
+
+### 参数
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|rangeStr | String | 是 | 无 | |
+
+
+### 返回值
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|data | Object | 否 | |
+|data.start | String | 否 | 无 | 起始值。如果没有为null|
+|data.end | Date | 否 | 无 | 截止值。如果没有为null|
+
+
+## objKeySort
+` objKeySort (obj)`
+
+json对象按key字母顺序排序
+
+### 参数
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|obj | Object | 是 | 无 | |
+
+
+### 返回值
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|obj | Object | 是 | 无 | 排序后的对象|
 

@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: Thu Jan 14 2021
+ * Last Modified: Sat Jan 16 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -711,5 +711,18 @@ module.exports = {
       start: dateRangeValues[0] || null,
       end: dateRangeValues[1] || null
     }
+  },
+
+  /**
+   * 对obj按key进行升序排序
+   * @param {*} obj 
+   */
+  objKeySort(obj) {
+    const newkey = Object.keys(obj).sort();
+    const newObj = {};
+    for (let i = 0; i < newkey.length; i += 1) {
+      newObj[newkey[i]] = obj[newkey[i]];
+    }
+    return newObj;
   }
 }
