@@ -14,8 +14,9 @@ const crypto = require('crypto');
 const { Op } = require('sequelize');
 const lodash = require('lodash');
 const moment = require('moment');
-const zerror = require('z-error');
 const string = require('string');
+const validator = require('validator')
+const zerror = require('z-error');
 
 const { ZError, verify } = zerror;
 
@@ -724,5 +725,9 @@ module.exports = {
       newObj[newkey[i]] = obj[newkey[i]];
     }
     return newObj;
+  },
+
+  isJSON(str) {
+    return validator.isJSON(str)
   }
 }

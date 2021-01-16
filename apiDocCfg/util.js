@@ -1041,6 +1041,23 @@ module.exports = {
         desc: '排序后的对象',
       }
     },
+  },
+
+  isJSON: {
+    desc: '判断一个字符串是否是json字符串',
+    params: {
+      str: {
+        type: DataTypes.String,
+        required: true,
+      },
+    },
+    returns: {
+      bo: {
+        type: DataTypes.Boolean,
+        required: true,
+        desc: '如果是JSON字符串返回true，否则返回false',
+      }
+    },
   }
 }
 
