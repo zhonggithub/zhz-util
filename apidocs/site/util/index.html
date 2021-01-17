@@ -149,6 +149,8 @@
         
             <li><a class="toctree-l3" href="#notemptystr">notEmptyStr</a></li>
         
+            <li><a class="toctree-l3" href="#emptyorstr">emptyOrStr</a></li>
+        
             <li><a class="toctree-l3" href="#isvalueof">isValueOf</a></li>
         
             <li><a class="toctree-l3" href="#avatest">avaTest</a></li>
@@ -2070,9 +2072,9 @@
 </tr>
 </tbody>
 </table>
-<h2 id="isvalueof">isValueOf</h2>
-<p><code>isValueOf (actualValue, expectedValues)</code></p>
-<p>判断一个值是否在期望值之内。如果actualValue和expectedValues都是Number、Boolean、String类型，采用<code>===</code>比较。如果expectedValues是Array或Object类型。则判断actualValue值是否是存在数组或Object.values(expectedValues)中</p>
+<h2 id="emptyorstr">emptyOrStr</h2>
+<p><code>emptyOrStr (val)</code></p>
+<p>判断一个值是否为非空符串或空字符串。如果是则返回true，否则返回false</p>
 <h3 id="_63">参数</h3>
 <table>
 <thead>
@@ -2086,15 +2088,8 @@
 </thead>
 <tbody>
 <tr>
-<td>actualValue</td>
-<td>Number，Boolean，String</td>
-<td>是</td>
-<td>无</td>
-<td></td>
-</tr>
-<tr>
-<td>expectedValues</td>
-<td>Number，Boolean，String，Array，Object</td>
+<td>val</td>
+<td>Any</td>
 <td>是</td>
 <td>无</td>
 <td></td>
@@ -2122,10 +2117,62 @@
 </tr>
 </tbody>
 </table>
+<h2 id="isvalueof">isValueOf</h2>
+<p><code>isValueOf (actualValue, expectedValues)</code></p>
+<p>判断一个值是否在期望值之内。如果actualValue和expectedValues都是Number、Boolean、String类型，采用<code>===</code>比较。如果expectedValues是Array或Object类型。则判断actualValue值是否是存在数组或Object.values(expectedValues)中</p>
+<h3 id="_65">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>actualValue</td>
+<td>Number，Boolean，String</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>expectedValues</td>
+<td>Number，Boolean，String，Array，Object</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_66">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bo</td>
+<td>Boolean</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <h2 id="avatest">avaTest</h2>
 <p><code>avaTest (t, actual, expected, expand)</code></p>
 <p>测试 { ...expected, ...expand } 属性值和actual是否一致。</p>
-<h3 id="_65">参数</h3>
+<h3 id="_67">参数</h3>
 <table>
 <thead>
 <tr>
@@ -2167,7 +2214,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_66">返回值</h3>
+<h3 id="_68">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -2191,7 +2238,7 @@
 <h2 id="utctodate">utcToDate</h2>
 <p><code>utcToDate (unixTimestamp)</code></p>
 <p>unix时间戳转Date</p>
-<h3 id="_67">参数</h3>
+<h3 id="_69">参数</h3>
 <table>
 <thead>
 <tr>
@@ -2206,51 +2253,6 @@
 <tr>
 <td>unixTimestamp</td>
 <td>Number</td>
-<td>是</td>
-<td>无</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h3 id="_68">返回值</h3>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>类型</th>
-<th>必填</th>
-<th>默认值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>date</td>
-<td>Date</td>
-<td>否</td>
-<td>current date</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h2 id="datestrtodate">dateStrToDate</h2>
-<p><code>dateStrToDate (dateStr)</code></p>
-<p>日期字符串转utc Date</p>
-<h3 id="_69">参数</h3>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>类型</th>
-<th>必填</th>
-<th>默认值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>dateStr</td>
-<td>String</td>
 <td>是</td>
 <td>无</td>
 <td></td>
@@ -2278,9 +2280,9 @@
 </tr>
 </tbody>
 </table>
-<h2 id="zerror400">zerror400</h2>
-<p><code>zerror400 (name, code, message, desc)</code></p>
-<p>参数错误对象，对应http code 为400</p>
+<h2 id="datestrtodate">dateStrToDate</h2>
+<p><code>dateStrToDate (dateStr)</code></p>
+<p>日期字符串转utc Date</p>
 <h3 id="_71">参数</h3>
 <table>
 <thead>
@@ -2294,30 +2296,9 @@
 </thead>
 <tbody>
 <tr>
-<td>name</td>
+<td>dateStr</td>
 <td>String</td>
 <td>是</td>
-<td>无</td>
-<td></td>
-</tr>
-<tr>
-<td>code</td>
-<td>String</td>
-<td>是</td>
-<td>无</td>
-<td></td>
-</tr>
-<tr>
-<td>message</td>
-<td>String</td>
-<td>否</td>
-<td>无</td>
-<td></td>
-</tr>
-<tr>
-<td>desc</td>
-<td>String</td>
-<td>否</td>
 <td>无</td>
 <td></td>
 </tr>
@@ -2336,17 +2317,17 @@
 </thead>
 <tbody>
 <tr>
-<td>zerror</td>
-<td>Object</td>
+<td>date</td>
+<td>Date</td>
 <td>否</td>
-<td>无</td>
-<td>ZError对象</td>
+<td>current date</td>
+<td></td>
 </tr>
 </tbody>
 </table>
-<h2 id="zerror409">zerror409</h2>
-<p><code>zerror409 (name, code, message, desc)</code></p>
-<p>参数错误对象，对应http code 为409</p>
+<h2 id="zerror400">zerror400</h2>
+<p><code>zerror400 (name, code, message, desc)</code></p>
+<p>参数错误对象，对应http code 为400</p>
 <h3 id="_73">参数</h3>
 <table>
 <thead>
@@ -2410,9 +2391,9 @@
 </tr>
 </tbody>
 </table>
-<h2 id="zerror404">zerror404</h2>
-<p><code>zerror404 (name, code, message, desc)</code></p>
-<p>参数错误对象，对应http code 为404</p>
+<h2 id="zerror409">zerror409</h2>
+<p><code>zerror409 (name, code, message, desc)</code></p>
+<p>参数错误对象，对应http code 为409</p>
 <h3 id="_75">参数</h3>
 <table>
 <thead>
@@ -2476,9 +2457,9 @@
 </tr>
 </tbody>
 </table>
-<h2 id="zerror422">zerror422</h2>
-<p><code>zerror422 (name, code, message, desc)</code></p>
-<p>参数错误对象，对应http code 为422</p>
+<h2 id="zerror404">zerror404</h2>
+<p><code>zerror404 (name, code, message, desc)</code></p>
+<p>参数错误对象，对应http code 为404</p>
 <h3 id="_77">参数</h3>
 <table>
 <thead>
@@ -2542,9 +2523,9 @@
 </tr>
 </tbody>
 </table>
-<h2 id="zerror500">zerror500</h2>
-<p><code>zerror500 (name, code, message, desc)</code></p>
-<p>参数错误对象，对应http code 为500</p>
+<h2 id="zerror422">zerror422</h2>
+<p><code>zerror422 (name, code, message, desc)</code></p>
+<p>参数错误对象，对应http code 为422</p>
 <h3 id="_79">参数</h3>
 <table>
 <thead>
@@ -2608,10 +2589,76 @@
 </tr>
 </tbody>
 </table>
+<h2 id="zerror500">zerror500</h2>
+<p><code>zerror500 (name, code, message, desc)</code></p>
+<p>参数错误对象，对应http code 为500</p>
+<h3 id="_81">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>code</td>
+<td>String</td>
+<td>是</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>message</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>desc</td>
+<td>String</td>
+<td>否</td>
+<td>无</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_82">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>zerror</td>
+<td>Object</td>
+<td>否</td>
+<td>无</td>
+<td>ZError对象</td>
+</tr>
+</tbody>
+</table>
 <h2 id="parsedaterange">parseDateRange</h2>
 <p><code>parseDateRange (timeRangeStr)</code></p>
 <p>解析时间范围字符串</p>
-<h3 id="_81">参数</h3>
+<h3 id="_83">参数</h3>
 <table>
 <thead>
 <tr>
@@ -2632,7 +2679,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_82">返回值</h3>
+<h3 id="_84">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -2670,7 +2717,7 @@
 <h2 id="parserangequery">parseRangeQuery</h2>
 <p><code>parseRangeQuery (rangeStr)</code></p>
 <p>解析范围字符串</p>
-<h3 id="_83">参数</h3>
+<h3 id="_85">参数</h3>
 <table>
 <thead>
 <tr>
@@ -2691,7 +2738,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_84">返回值</h3>
+<h3 id="_86">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -2729,7 +2776,7 @@
 <h2 id="objkeysort">objKeySort</h2>
 <p><code>objKeySort (obj)</code></p>
 <p>json对象按key字母顺序排序</p>
-<h3 id="_85">参数</h3>
+<h3 id="_87">参数</h3>
 <table>
 <thead>
 <tr>
@@ -2750,7 +2797,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_86">返回值</h3>
+<h3 id="_88">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -2774,7 +2821,7 @@
 <h2 id="isjson">isJSON</h2>
 <p><code>isJSON (str)</code></p>
 <p>判断一个字符串是否是json字符串</p>
-<h3 id="_87">参数</h3>
+<h3 id="_89">参数</h3>
 <table>
 <thead>
 <tr>
@@ -2795,7 +2842,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_88">返回值</h3>
+<h3 id="_90">返回值</h3>
 <table>
 <thead>
 <tr>

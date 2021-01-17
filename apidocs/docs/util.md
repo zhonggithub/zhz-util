@@ -655,6 +655,25 @@ destroy成功时返回数据
 |bo | Boolean | 否 | 无 | |
 
 
+## emptyOrStr
+` emptyOrStr (val)`
+
+判断一个值是否为非空符串或空字符串。如果是则返回true，否则返回false
+
+### 参数
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|val | Any | 是 | 无 | |
+
+
+### 返回值
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|bo | Boolean | 否 | 无 | |
+
+
 ## isValueOf
 ` isValueOf (actualValue, expectedValues)`
 

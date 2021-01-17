@@ -5,7 +5,7 @@
  * Created Date: 2020-06-17 13:24:59
  * Author: Zz
  * -----
- * Last Modified: Sat Jan 16 2021
+ * Last Modified: Sun Jan 17 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -764,6 +764,20 @@ module.exports = {
   },
   notEmptyStr: {
     description: '判断一个值是否为非空符串。如果是非空字符串，返回true，否则返回false',
+    params: {
+      val: {
+        type: 'Any',
+        required: true,
+      },
+    },
+    returns: {
+      bo: {
+        type: DataTypes.Boolean,
+      }
+    }
+  },
+  emptyOrStr: {
+    description: '判断一个值是否为非空符串或空字符串。如果是则返回true，否则返回false',
     params: {
       val: {
         type: 'Any',
