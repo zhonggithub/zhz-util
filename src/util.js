@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: Sat Jan 16 2021
+ * Last Modified: Sun Jan 17 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -645,6 +645,12 @@ module.exports = {
    * @returns {Boolean} 如果是非空字符串，返回true，否则返回false
    */
   notEmptyStr(str) {
+    return typeof str === 'string' && (!str === false);
+  },
+  emptyOrStr(str) {
+    if (str === '') {
+      return true;
+    }
     return typeof str === 'string' && (!str === false);
   },
   /**
