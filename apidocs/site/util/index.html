@@ -177,6 +177,8 @@
         
             <li><a class="toctree-l3" href="#isjson">isJSON</a></li>
         
+            <li><a class="toctree-l3" href="#convertobjkey">convertObjKey</a></li>
+        
         </ul>
     
 
@@ -2860,6 +2862,65 @@
 <td>是</td>
 <td>无</td>
 <td>如果是JSON字符串返回true，否则返回false</td>
+</tr>
+</tbody>
+</table>
+<h2 id="convertobjkey">convertObjKey</h2>
+<p><code>convertObjKey (pendData, type, handle)</code></p>
+<p>转换对象的key为下划线或驼峰风格</p>
+<h3 id="_91">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pendData</td>
+<td>Object</td>
+<td>是</td>
+<td>无</td>
+<td>待转换的对象</td>
+</tr>
+<tr>
+<td>type</td>
+<td>String</td>
+<td>否</td>
+<td>hump</td>
+<td>值为：hump 或 line</td>
+</tr>
+<tr>
+<td>handle</td>
+<td>Function</td>
+<td>否</td>
+<td>无</td>
+<td>自定义处理函数。接收参数：(key, value, distData)。处理成功时把数据填在distData并返回ture</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_92">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>obj</td>
+<td>Object</td>
+<td>是</td>
+<td>无</td>
+<td>处理后的对象</td>
 </tr>
 </tbody>
 </table>

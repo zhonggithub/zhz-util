@@ -5,7 +5,7 @@
  * Created Date: 2020-06-27 00:57:14
  * Author: Zz
  * -----
- * Last Modified: Sat Jan 16 2021
+ * Last Modified: Mon Jan 18 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -54,4 +54,26 @@ console.log(tmp)
 console.log(objKeySort({
   b: '1',
   a: '2'
+}))
+
+
+console.log(util.convertObjKey({
+  isType: 0,
+  isHelp: 'ssss'
+}, 'line'))
+
+console.log(util.convertObjKey({
+  is_type: 0,
+  is_help: 'ssss'
+}, 'hump'))
+
+console.log(util.convertObjKey({
+  is_type: 0,
+  is_help: 'ssss'
+}, 'hump', (key, value, data) => {
+  if (key === 'is_type') {
+    data.hello = value
+    return true
+  }
+  return false
 }))

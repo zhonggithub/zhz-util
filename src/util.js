@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: Sun Jan 17 2021
+ * Last Modified: Mon Jan 18 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -735,5 +735,31 @@ module.exports = {
 
   isJSON(str) {
     return validator.isJSON(str)
+  },
+
+  convertObjKey(pendData, type = 'hump', handle) {
+    if (Array.isArray(pendData)) {
+      return pendData.map((item) => this.convertObjKey(item, type, handle));
+    }
+    if (typeof pendData === 'object') {
+      const data = {};
+      Object.keys(pendData).forEach((key) => {
+        const value = pendData[key];
+        let bo = false;
+        if (handle && this.isFunction(handle)) {
+          bo = handle(key, value, data);
+        }
+        if (bo) {
+          return;
+        }
+        const objKey = type === 'hump' ? this.toHump(key) : this.toLine(key)
+        data[objKey] = this.convertObjKey(value, type, handle);
+      });
+      return data;
+    }
+    if (pendData === '') {
+      return pendData;
+    }
+    return pendData;
   }
 }

@@ -943,3 +943,24 @@ json对象按key字母顺序排序
 |--- | --- | --- | --- | ---|
 |bo | Boolean | 是 | 无 | 如果是JSON字符串返回true，否则返回false|
 
+
+## convertObjKey
+` convertObjKey (pendData, type, handle)`
+
+转换对象的key为下划线或驼峰风格
+
+### 参数
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|pendData | Object | 是 | 无 | 待转换的对象|
+|type | String | 否 | hump | 值为：hump 或 line|
+|handle | Function | 否 | 无 | 自定义处理函数。接收参数：(key, value, distData)。处理成功时把数据填在distData并返回ture|
+
+
+### 返回值
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|obj | Object | 是 | 无 | 处理后的对象|
+

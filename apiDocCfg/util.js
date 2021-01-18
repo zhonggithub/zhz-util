@@ -5,7 +5,7 @@
  * Created Date: 2020-06-17 13:24:59
  * Author: Zz
  * -----
- * Last Modified: Sun Jan 17 2021
+ * Last Modified: Mon Jan 18 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -1070,6 +1070,33 @@ module.exports = {
         type: DataTypes.Boolean,
         required: true,
         desc: '如果是JSON字符串返回true，否则返回false',
+      }
+    },
+  },
+
+  convertObjKey: {
+    desc: '转换对象的key为下划线或驼峰风格',
+    params: {
+      pendData: {
+        type: DataTypes.Object,
+        required: true,
+        desc: '待转换的对象',
+      },
+      type: {
+        type: DataTypes.String,
+        desc: '值为：hump 或 line',
+        defaultValue: 'hump'
+      },
+      handle: {
+        type: DataTypes.Function,
+        desc: '自定义处理函数。接收参数：(key, value, distData)。处理成功时把数据填在distData并返回ture',
+      }
+    },
+    returns: {
+      obj: {
+        type: DataTypes.Object,
+        required: true,
+        desc: '处理后的对象',
       }
     },
   }
