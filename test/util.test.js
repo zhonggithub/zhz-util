@@ -5,7 +5,7 @@
  * Created Date: 2020-06-27 00:57:14
  * Author: Zz
  * -----
- * Last Modified: Tue Jan 19 2021
+ * Last Modified: Wed Feb 03 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -100,6 +100,7 @@ const tmp1 = {
     }
   ],
   "sign_view_url": "https://www.baidu.com",
-  "login_pwd": ""
+  "login_pwd": "",
+  "upd_user1": null,
 }
 console.log(util.convertObjKey(tmp1, 'hump'))

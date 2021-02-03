@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: Mon Jan 18 2021
+ * Last Modified: Wed Feb 03 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -738,6 +738,9 @@ module.exports = {
   },
 
   convertObjKey(pendData, type = 'hump', handle) {
+    if (!pendData) {
+      return pendData
+    }
     if (Array.isArray(pendData)) {
       return pendData.map((item) => this.convertObjKey(item, type, handle));
     }
