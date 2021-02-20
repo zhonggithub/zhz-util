@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: Wed Feb 03 2021
+ * Last Modified: Sat Feb 20 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -463,7 +463,7 @@ module.exports = {
       let array = value;
       array = array.replace(/(\!{)|(\}!)/g, '');
       array = array.split(',');
-      condition[key][Op.notIn] = array;
+      condition[key][Op.notIn] = array.map(item => formatValue(item));
       return condition
     }
     
@@ -526,7 +526,7 @@ module.exports = {
       let array = value;
       array = array.replace(/(\!{)|(\}!)/g, '');
       array = array.split(',');
-      condition[key] = { $nin: array };
+      condition[key] = { $nin: array.map(item => formatValue(item)) };
       return condition;
     }
     const beginStr = value[0];

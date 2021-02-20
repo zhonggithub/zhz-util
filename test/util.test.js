@@ -5,7 +5,7 @@
  * Created Date: 2020-06-27 00:57:14
  * Author: Zz
  * -----
- * Last Modified: Wed Feb 03 2021
+ * Last Modified: Sat Feb 20 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -104,3 +104,10 @@ const tmp1 = {
   "upd_user1": null,
 }
 console.log(util.convertObjKey(tmp1, 'hump'))
+
+
+console.log(util.notInValue(-1))
+
+
+console.log(util.convertRangeQueryCriteriaMysql('a', '!{-1}!', val => parseInt(val, 10)))
+console.log(util.convertRangeQueryCriteriaMongodb('a', '!{-1}!', val => parseInt(val, 10)))
