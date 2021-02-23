@@ -5,7 +5,7 @@
  * Created Date: 2020-07-28 14:15:37
  * Author: Zz
  * -----
- * Last Modified: 2020-10-20 11:12:30
+ * Last Modified: Tue Feb 23 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -48,6 +48,9 @@ class XmlUtil {
     }
     if (Object.prototype.hasOwnProperty.call(obj, '_text')) {
       return obj._text
+    }
+    if (Object.prototype.hasOwnProperty.call(obj, '_cdata')) {
+      return obj._cdata
     }
     const resultObj = {}
     for (const [k, v] of Object.entries(obj)) {
