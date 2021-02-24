@@ -5,7 +5,7 @@
  * Created Date: 2020-06-14 15:35:22
  * Author: Zz
  * -----
- * Last Modified: 2020-09-18 16:34:11
+ * Last Modified: Thu Feb 25 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -219,7 +219,7 @@ module.exports = {
     }
   },
 
-  logic2db: {
+  do2po: {
     funcType: DataTypes.FuncType.kAsync,
     description: '逻辑层数据转成db层数据',
     params: {
@@ -236,7 +236,7 @@ module.exports = {
     }
   },
 
-  logic2DBWhenUpdate: {
+  do2poWhenUpdate: {
     funcType: DataTypes.FuncType.kAsync,
     description: '逻辑层数据转db层数据',
     params: {
@@ -253,9 +253,9 @@ module.exports = {
     }
   },
 
-  db2logic: {
+  po2do: {
     funcType: DataTypes.FuncType.kAsync,
-    description: 'db层数据转逻辑层数据',
+    description: 'db层数据转逻辑层数据。DO：Data Object。微服务运行时的实体，是核心业务的载体；PO：Persistent Object。与数据库结构一一映射，是数据持久化过程的数据载体。',
     params: {
       data: {
         type: DataTypes.Object,
@@ -274,7 +274,7 @@ module.exports = {
     }
   },
 
-  list2logic: {
+  list2do: {
     funcType: DataTypes.FuncType.kAsync,
     description: 'list获得数据转换层逻辑表现层数据。默认循环调用db2logic',
     params: {

@@ -241,28 +241,6 @@ class Service extends ServiceBase {
     return null;
   }
 
-  async logic2DBWhenUpdate(logicInfo) {
-    return logicInfo;
-  }
-
-  async logic2DB(logicInfo) {
-    return logicInfo;
-  }
-
-  async db2logic(item, expand = {}) {
-    if (!item) {
-      return null;
-    }
-    return item.toJSON ? item.toJSON() : item;
-  }
-
-  async list2logic(items, expand = { }) {
-    if (!items || items.length === 0) {
-      return [];
-    }
-    return Promise.all(items.map(async (item) => this.db2logic(item, expand)));
-  }
-
   async do2po(doObj) {
     return doObj;
   }
@@ -293,11 +271,11 @@ class Service extends ServiceBase {
       if (existError) {
         return existError.toJSON();
       }
-      const body = await this.logic2DB(msg.params);
+      const body = await this.do2po(msg.params);
       await this.beforeCreate(body);
       const result = await this.model.create(body);
       await this.afterCreate(result);
-      const ret = await this.db2logic(result);
+      const ret = await this.po2do(result);
       return util.responseCreateSuccess(ret);
     } catch (dbError) {
       return this.handleCatchErr(dbError);
@@ -336,7 +314,7 @@ class Service extends ServiceBase {
         );
       }
 
-      const data = await this.db2logic(
+      const data = await this.po2do(
         result, tmpExpand,
       );
       
@@ -358,7 +336,7 @@ class Service extends ServiceBase {
     }
 
     try {
-      const data = await this.logic2DBWhenUpdate(msg.params);
+      const data = await this.do2poWhenUpdate(msg.params);
       await this.beforeUpdate(data);
       const result = await this.model.findByIdAndUpdate(
         msg.params.id, data,
@@ -372,7 +350,7 @@ class Service extends ServiceBase {
       await this.afterUpdate(result);
       await this.delCache(msg.params.id);
       
-      const ret = await this.db2logic(result);
+      const ret = await this.po2do(result);
       return util.responseSuccess(ret);
     } catch (dbError) {
       return this.handleCatchErr(dbError);
@@ -400,7 +378,7 @@ class Service extends ServiceBase {
       await this.afterUpdateStatus(result);
       await this.delCache(id);
       
-      const ret = await this.db2logic(result);
+      const ret = await this.po2do(result);
       return util.responseSuccess(ret);
     } catch (dbError) {
       return this.handleCatchErr(dbError);
@@ -461,7 +439,7 @@ class Service extends ServiceBase {
       this.appendInclude(params, expand);
 
       const result = await this.model.find(params);
-      const items = await this.list2logic(result, expand);
+      const items = await this.list2do(result, expand);
       if (this.listCacheOn && this.cache && !query.attributes) {
         await Promise.all(items.map(async (item) => {
           if (item.id) {
@@ -512,7 +490,7 @@ class Service extends ServiceBase {
       const tmpExpand = util.parseExpand(expand);
       this.appendInclude(query, tmpExpand);
       const result = await this.model.find(query);
-      const items = await this.list2logic(result, tmpExpand);
+      const items = await this.list2do(result, tmpExpand);
       if (this.listCacheOn && this.cache && !query.attributes) {
         await Promise.all(items.map(async (item) => {
           if (item.id) {
@@ -547,7 +525,7 @@ class Service extends ServiceBase {
           this.errCode[404],
         );
       }
-      const data = await this.db2logic(result, tmpExpand);
+      const data = await this.po2do(result, tmpExpand);
       if (this.cache && data.id) {
         const cacheKey = this.getCacheKey(data.id);
         await this.cache.set(cacheKey, data, this.getCacheTTL());
@@ -572,7 +550,7 @@ class Service extends ServiceBase {
       const tmpExpand = util.parseExpand(expand);
       this.appendInclude(query, tmpExpand);
       const result = await this.model.find(query);
-      const items = await this.list2logic(result, tmpExpand);
+      const items = await this.list2do(result, tmpExpand);
       if (this.listCacheOn && this.cache && !query.attributes) {
         await Promise.all(items.map(async (item) => {
           if (item.id) {
@@ -601,7 +579,7 @@ class Service extends ServiceBase {
       const tmpExpand = util.parseExpand(expand);
       this.appendInclude(query, tmpExpand);
       const result = await this.model.find(query);
-      const items = await this.list2logic(result, tmpExpand);
+      const items = await this.list2do(result, tmpExpand);
       if (this.listCacheOn && this.cache && !query.attributes) {
         await Promise.all(items.map(async (item) => {
           if (item.id) {

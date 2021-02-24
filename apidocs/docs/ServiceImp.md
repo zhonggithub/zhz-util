@@ -194,8 +194,8 @@ count前转换传入的查询条件。逻辑表达查询条件转换成sql条件
 |ret | Object | 否 | 无 | 转换后的查询条件|
 
 
-## logic2db
-`async logic2db (data)`
+## do2po
+`async do2po (data)`
 
 逻辑层数据转成db层数据
 
@@ -213,8 +213,8 @@ count前转换传入的查询条件。逻辑表达查询条件转换成sql条件
 |data | Object | 否 | 无 | 返回db层数据|
 
 
-## logic2DBWhenUpdate
-`async logic2DBWhenUpdate (data)`
+## do2poWhenUpdate
+`async do2poWhenUpdate (data)`
 
 逻辑层数据转db层数据
 
@@ -232,10 +232,10 @@ count前转换传入的查询条件。逻辑表达查询条件转换成sql条件
 |data | Object | 否 | 无 | 返回db层数据|
 
 
-## db2logic
-`async db2logic (data, expand)`
+## po2do
+`async po2do (data, expand)`
 
-db层数据转逻辑层数据
+db层数据转逻辑层数据。DO：Data Object。微服务运行时的实体，是核心业务的载体；PO：Persistent Object。与数据库结构一一映射，是数据持久化过程的数据载体。
 
 ### 参数
 
@@ -252,8 +252,8 @@ db层数据转逻辑层数据
 |data | Object | 否 | 无 | 返回逻辑表现层数据|
 
 
-## list2logic
-`async list2logic (items, expand)`
+## list2do
+`async list2do (items, expand)`
 
 list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 
