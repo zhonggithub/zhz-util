@@ -5,11 +5,13 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-12-04 21:09:37
+ * Last Modified: Thu Feb 25 2021
  * Modified By: Zz
  * -----
  * Description:
  * 
+ * DO：Data Object。微服务运行时的实体，是核心业务的载体。
+ * PO：Persistent Object。与数据库结构一一映射，是数据持久化过程的数据载体。
  */
 const { verify } = require('z-error');
 const util = require('../util');
@@ -259,6 +261,25 @@ class Service extends ServiceBase {
       return [];
     }
     return Promise.all(items.map(async (item) => this.db2logic(item, expand)));
+  }
+
+  async do2po(doObj) {
+    return doObj;
+  }
+
+  async do2poWhenUpdate(doObj) {
+    return doObj;
+  }
+
+  async po2do(poObj) {
+    return poObj
+  }
+
+  async list2do(items, expand = { }) {
+    if (!items || items.length === 0) {
+      return [];
+    }
+    return Promise.all(items.map(async (item) => this.po2do(item, expand)));
   }
 
   async create(msg) {
