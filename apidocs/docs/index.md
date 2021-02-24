@@ -6,6 +6,7 @@
 ](https://www.npmjs.com/package/@alicloud/fc2)提供调用类似seneca的实例
 * Service: 通过[z-seneca-extended](https://www.npmjs.com/package/z-seneca-extended)提供类rpc的api
 
+## version: 4.0.0
 ## Install
 
 ```shell

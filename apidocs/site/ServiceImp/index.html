@@ -102,13 +102,13 @@
         
             <li><a class="toctree-l3" href="#convertcountcriteria">convertCountCriteria</a></li>
         
-            <li><a class="toctree-l3" href="#logic2db">logic2db</a></li>
+            <li><a class="toctree-l3" href="#do2po">do2po</a></li>
         
-            <li><a class="toctree-l3" href="#logic2dbwhenupdate">logic2DBWhenUpdate</a></li>
+            <li><a class="toctree-l3" href="#do2powhenupdate">do2poWhenUpdate</a></li>
         
-            <li><a class="toctree-l3" href="#db2logic">db2logic</a></li>
+            <li><a class="toctree-l3" href="#po2do">po2do</a></li>
         
-            <li><a class="toctree-l3" href="#list2logic">list2logic</a></li>
+            <li><a class="toctree-l3" href="#list2do">list2do</a></li>
         
             <li><a class="toctree-l3" href="#beforecreate">beforeCreate</a></li>
         
@@ -713,8 +713,8 @@
 </tr>
 </tbody>
 </table>
-<h2 id="logic2db">logic2db</h2>
-<p><code>async logic2db (data)</code></p>
+<h2 id="do2po">do2po</h2>
+<p><code>async do2po (data)</code></p>
 <p>逻辑层数据转成db层数据</p>
 <h3 id="_20">参数</h3>
 <table>
@@ -758,8 +758,8 @@
 </tr>
 </tbody>
 </table>
-<h2 id="logic2dbwhenupdate">logic2DBWhenUpdate</h2>
-<p><code>async logic2DBWhenUpdate (data)</code></p>
+<h2 id="do2powhenupdate">do2poWhenUpdate</h2>
+<p><code>async do2poWhenUpdate (data)</code></p>
 <p>逻辑层数据转db层数据</p>
 <h3 id="_22">参数</h3>
 <table>
@@ -803,9 +803,9 @@
 </tr>
 </tbody>
 </table>
-<h2 id="db2logic">db2logic</h2>
-<p><code>async db2logic (data, expand)</code></p>
-<p>db层数据转逻辑层数据</p>
+<h2 id="po2do">po2do</h2>
+<p><code>async po2do (data, expand)</code></p>
+<p>db层数据转逻辑层数据。DO：Data Object。微服务运行时的实体，是核心业务的载体；PO：Persistent Object。与数据库结构一一映射，是数据持久化过程的数据载体。</p>
 <h3 id="_24">参数</h3>
 <table>
 <thead>
@@ -855,8 +855,8 @@
 </tr>
 </tbody>
 </table>
-<h2 id="list2logic">list2logic</h2>
-<p><code>async list2logic (items, expand)</code></p>
+<h2 id="list2do">list2do</h2>
+<p><code>async list2do (items, expand)</code></p>
 <p>list获得数据转换层逻辑表现层数据。默认循环调用db2logic</p>
 <h3 id="_26">参数</h3>
 <table>
