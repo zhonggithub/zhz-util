@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: Thu Feb 25 2021
+ * Last Modified: Sat Mar 06 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -249,8 +249,11 @@ class Service extends ServiceBase {
     return doObj;
   }
 
-  async po2do(poObj) {
-    return poObj
+  async po2do(poObj, expand = {}) {
+    if (!poObj) {
+      return null;
+    }
+    return poObj.toJSON ? poObj.toJSON() : poObj;
   }
 
   async list2do(items, expand = { }) {
