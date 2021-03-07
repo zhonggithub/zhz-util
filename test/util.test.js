@@ -5,13 +5,13 @@
  * Created Date: 2020-06-27 00:57:14
  * Author: Zz
  * -----
- * Last Modified: Sat Feb 20 2021
+ * Last Modified: Sun Mar 07 2021
  * Modified By: Zz
  * -----
  * Description:
  */
 const { objKeySort } = require('../src/util')
-const util = require('../src/util')
+const { util } = require('../src')
 
 // true
 console.log(util.isValueOf('a', 'a'))
