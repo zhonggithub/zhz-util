@@ -5,7 +5,7 @@
  * Created Date: 2020-06-14 09:07:50
  * Author: Zz
  * -----
- * Last Modified: 2020-06-21 17:36:45
+ * Last Modified: Sun Mar 07 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -41,7 +41,22 @@ class MongoosModel extends ModelBase {
   }
 
   async find(query) {
-    return this.model.find(query);
+    const { sort, offset, limit } = query || {};
+    delete query.sort;
+    delete query.offset;
+    delete query.limit;
+
+    let tmp = this.model.find(query);
+    if (sort) {
+      tmp = tmp.sort(sort);
+    }
+    if (offset === 0 || offset) {
+      tmp = tmp.skip(offset);
+    }
+    if (limit) {
+      tmp = tmp.limit(limit);
+    }
+    return tmp;
   }
 
   async findOne(query) {
