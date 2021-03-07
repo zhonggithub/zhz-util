@@ -5,7 +5,7 @@
  * Created Date: 2020-06-25 12:28:46
  * Author: Zz
  * -----
- * Last Modified: 2020-08-15 15:33:03
+ * Last Modified: Sun Mar 07 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -20,6 +20,28 @@ class MongodbService extends ServiceImp {
       ...tmpCriteria.dstCriteria,
       ...tmpCriteria.sourceCriteria,
     };
+  }
+
+  isValidDataWhenRetrieve(data) {
+    const error = super.isValidDataWhenRetrieve(data)
+    if (error) {
+      return error;
+    }
+    return util.isValidData(data, ['id'], {
+      id: (val) => validator.isMongoId(val),
+    });
+  }
+
+  isValidDataWhenUpdate(data) {
+    return util.isValidData(data, ['id'], {
+      id: (val) => validator.isMongoId(val),
+    });
+  }
+
+  isValidDataWhenUpdateStatus(data) {
+    return util.isValidData(data, ['id', 'status'], {
+      id: (val) => validator.isMongoId(val),
+    });
   }
 
   async logicDel(msg) {
