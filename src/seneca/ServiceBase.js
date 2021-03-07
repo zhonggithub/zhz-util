@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-08-04 23:45:45
+ * Last Modified: Sun Mar 07 2021
  * Modified By: Zz
  * -----
  * Description: ServiceBase为Service抽象接口类
@@ -48,16 +48,17 @@ const operate = {
 
 class ServiceBase extends ServiceInterface {
   /**
-   *
    * @param {*} role
    * @param {*} seneca
    * @param {*} opt false 表示不加载任何默认操作；true 表示加载所有操作；json对象表示加载对应的操作
+   * @param {*} excludeOpt false 表示不排除任何默认操作；json对象表示加载对应的操作
    */
-  constructor(role, seneca, opt = true) {
+  constructor(role, seneca, opt = true, excludeOpt = null) {
     const err = verify({ role, seneca }, ['role', 'seneca'], {
       role: (val) => typeof val === 'string',
       seneca: (val) => typeof val === 'object' || typeof val === 'function',
       opt: (val) => typeof val === 'object' || typeof val === 'boolean',
+      excludeOpt: (val) => typeof val === 'object' || val === null,
     });
     if (err) {
       throw err;
@@ -68,6 +69,12 @@ class ServiceBase extends ServiceInterface {
     this.seneca = seneca;
 
     this.opt = opt === false ? opt : opt || operate;
+    if(excludeOpt) {
+      this.opt = {
+        ...this.opt,
+        ...excludeOpt,
+      }
+    }
   }
 
   loadCmd() {

@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: Sat Mar 06 2021
+ * Last Modified: Sun Mar 07 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -26,10 +26,11 @@ class Service extends ServiceBase {
     cacheTTL,
     listCacheOn,
     opt,
+    excludeOpt,
     logger,
     expandCacheOn,
   }) {
-    super(role, seneca, opt === false ? false : opt || true);
+    super(role, seneca, opt === false ? false : opt || true, excludeOpt || null);
 
     const err = verify({
       model,
