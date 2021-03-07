@@ -30,7 +30,7 @@ class Service extends ServiceBase {
     logger,
     expandCacheOn,
   }) {
-    super(role, seneca, opt === false ? false : opt || true, excludeOpt || null);
+    super(role, seneca, opt === false ? false : opt || true, excludeOpt || []);
 
     const err = verify({
       model,
