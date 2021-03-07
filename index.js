@@ -10,35 +10,5 @@
  * -----
  * Description:
  */
-const {
-  EnumConst,
-  ModelBase,
-  RedisCache,
-  ServiceImp,
-  ServiceBase,
-  mysqlSeneca,
-  mongodbSeneca,
-  util,
-  XmlUtil,
-  setLocal,
-  FCClient,
-  FCService,
- } = require('./src')
 
- module.exports = {
-  EnumConst,
-  ModelBase,
-  RedisCache,
-  ServiceImp,
-  ServiceBase,
-  mysqlSeneca,
-  mongodbSeneca,
-  
-  util,
-  XmlUtil,
-  setLocal,
-  FCClient,
-  FCService,
- }
-
-// module.exports = require('./src')
+module.exports = require('./src')

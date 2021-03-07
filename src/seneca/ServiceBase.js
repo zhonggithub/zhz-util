@@ -69,6 +69,8 @@ class ServiceBase extends ServiceInterface {
     this.seneca = seneca;
 
     this.opt = opt === false ? opt : opt || operate;
+    this.excludeOpt = excludeOpt;
+
     if(excludeOpt) {
       excludeOpt.forEach(item => {
         this.opt[item] = false;
@@ -89,7 +91,14 @@ class ServiceBase extends ServiceInterface {
 
     if (this.opt) {
       lodash.each(cmd, (v, k) => {
-        if (util.isFunction(v) && (this.opt === true || this.opt[k])) {
+        let excluedBo = false;
+        if (this.excludeOpt.indexOf(k) !== -1) {
+          excluedBo = true;
+        }
+        if (
+          util.isFunction(v)
+          && (this.opt === true || this.opt[k])
+          && excluedBo === false) {
           this.seneca.addAsync({
             role: this.role,
             cmd: k,
