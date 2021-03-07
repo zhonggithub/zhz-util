@@ -70,12 +70,6 @@ class ServiceBase extends ServiceInterface {
 
     this.opt = opt === false ? opt : opt || operate;
     this.excludeOpt = excludeOpt;
-
-    if(excludeOpt) {
-      excludeOpt.forEach(item => {
-        this.opt[item] = false;
-      })
-    }
   }
 
   loadCmd() {
