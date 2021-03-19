@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: Thu Mar 18 2021
+ * Last Modified: Fri Mar 19 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -47,15 +47,15 @@ module.exports = {
   },
 
   createResourceErrorCode(resourceName) {
-    // if (!resourceName) {
-    //   throw new Error('resourceName is required')
-    // }
-    // const resource = (this.toLine(resourceName)).toUpperCase()
+    if (!resourceName) {
+      throw new Error('resourceName is required')
+    }
+    const resource = (this.toLine(resourceName)).toUpperCase()
     return {
       400: 'MISSING_PARAMS',
       422: 'INVALID_PARAMS',
-      404: `ERROR_RESOURCE_NOT_EXIST`,
-      409: `ERROR_RESOURCE_EXIST`,
+      404: `ERROR_${resource}_NOT_EXIST`,
+      409: `ERROR_${resource}_EXIST`,
       500: `ERROR_UNKNOW`,
     }
   },
