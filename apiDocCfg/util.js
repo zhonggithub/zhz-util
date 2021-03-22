@@ -5,7 +5,7 @@
  * Created Date: 2020-06-17 13:24:59
  * Author: Zz
  * -----
- * Last Modified: Mon Jan 18 2021
+ * Last Modified: Mon Mar 22 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -1098,6 +1098,17 @@ module.exports = {
         required: true,
         desc: '处理后的对象',
       }
+    },
+  },
+
+  delay: {
+    desc: '延迟函数。类似进程的sleep函数。',
+    params: {
+      sec: {
+        type: 'Float',
+        required: true,
+        defaultValue: '0.1'
+      },
     },
   }
 }
