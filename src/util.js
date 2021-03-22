@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: Thu Mar 18 2021
+ * Last Modified: Mon Mar 22 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -90,13 +90,10 @@ module.exports = {
   inValue(val) {
     if (!val) return '';
     if (typeof val === 'string') {
-      return val.split(',');
-      // return `{${vallue}}`;
+      return `{${val}}`
     }
     if (typeof val === 'array') {
-      return val;
-
-      // return `{${vallue.toString()}}`;
+      return `{${val.toString()}}`
     }
     return '';
   },

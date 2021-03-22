@@ -664,6 +664,54 @@ module.exports = {
     }
   },
 
+  convertPagination: {
+    desc: 'list 转换查询条件',
+    parmas: {
+      queryBody: {
+        type: DataTypes.Object,
+        required: true,
+        desc: '业务查询条件',
+      }
+    },
+    returns: {
+      filter: {
+        type: DataTypes.Object,
+        required: true,
+        desc: '查询条件',
+      },
+      sort: {
+        type: DataTypes.Object,
+        required: true,
+        desc: '排序条件。如: { index: -1 }',
+      },
+      skip: {
+        type: DataTypes.Number,
+        required: true,
+        desc: '跳过的记录条数',
+      },
+      limit: {
+        type: DataTypes.Number,
+        required: true,
+        desc: '获取条数。同pageSize',
+      },
+      pageSize: {
+        type: DataTypes.Number,
+        required: true,
+        desc: '每页条数',
+      },
+      page: {
+        type: DataTypes.Number,
+        required: true,
+        desc: '当前页数',
+      },
+      expand: {
+        type: DataTypes.Object,
+        required: true,
+        desc: '扩展资资源。如：{ department: true }'
+      }
+    }
+  },
+
   convertQueryCriteria: {
     description: '把逻辑层的查询条件转成db层的查询条件。默认会处理范围查找的条件。',
     params: {
