@@ -551,6 +551,22 @@ destroy成功时返回数据
 |val | Object | 否 | 无 | {a: true, b: true, c: true}|
 
 
+## convertPagination
+list 转换查询条件
+
+### 返回值
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|filter | Object | 是 | 无 | 查询条件|
+|sort | Object | 是 | 无 | 排序条件。如: { index: -1 }|
+|skip | Number | 是 | 无 | 跳过的记录条数|
+|limit | Number | 是 | 无 | 获取条数。同pageSize|
+|pageSize | Number | 是 | 无 | 每页条数|
+|page | Number | 是 | 无 | 当前页数|
+|expand | Object | 是 | 无 | 扩展资资源。如：{ department: true }|
+
+
 ## convertQueryCriteria
 ` convertQueryCriteria (querycriteria, dbType, handle)`
 
@@ -963,4 +979,16 @@ json对象按key字母顺序排序
 |参数|类型|必填|默认值|描述|
 |--- | --- | --- | --- | ---|
 |obj | Object | 是 | 无 | 处理后的对象|
+
+
+## delay
+` delay (sec)`
+
+延迟函数。类似进程的sleep函数。
+
+### 参数
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|sec | Float | 是 | 0.1 | |
 

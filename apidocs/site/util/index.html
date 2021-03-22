@@ -139,6 +139,8 @@
         
             <li><a class="toctree-l3" href="#parseexpand">parseExpand</a></li>
         
+            <li><a class="toctree-l3" href="#convertpagination">convertPagination</a></li>
+        
             <li><a class="toctree-l3" href="#convertquerycriteria">convertQueryCriteria</a></li>
         
             <li><a class="toctree-l3" href="#israngequery">isRangeQuery</a></li>
@@ -178,6 +180,8 @@
             <li><a class="toctree-l3" href="#isjson">isJSON</a></li>
         
             <li><a class="toctree-l3" href="#convertobjkey">convertObjKey</a></li>
+        
+            <li><a class="toctree-l3" href="#delay">delay</a></li>
         
         </ul>
     
@@ -1786,10 +1790,75 @@
 </tr>
 </tbody>
 </table>
+<h2 id="convertpagination">convertPagination</h2>
+<p>list 转换查询条件</p>
+<h3 id="_53">返回值</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>filter</td>
+<td>Object</td>
+<td>是</td>
+<td>无</td>
+<td>查询条件</td>
+</tr>
+<tr>
+<td>sort</td>
+<td>Object</td>
+<td>是</td>
+<td>无</td>
+<td>排序条件。如: { index: -1 }</td>
+</tr>
+<tr>
+<td>skip</td>
+<td>Number</td>
+<td>是</td>
+<td>无</td>
+<td>跳过的记录条数</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>Number</td>
+<td>是</td>
+<td>无</td>
+<td>获取条数。同pageSize</td>
+</tr>
+<tr>
+<td>pageSize</td>
+<td>Number</td>
+<td>是</td>
+<td>无</td>
+<td>每页条数</td>
+</tr>
+<tr>
+<td>page</td>
+<td>Number</td>
+<td>是</td>
+<td>无</td>
+<td>当前页数</td>
+</tr>
+<tr>
+<td>expand</td>
+<td>Object</td>
+<td>是</td>
+<td>无</td>
+<td>扩展资资源。如：{ department: true }</td>
+</tr>
+</tbody>
+</table>
 <h2 id="convertquerycriteria">convertQueryCriteria</h2>
 <p><code>convertQueryCriteria (querycriteria, dbType, handle)</code></p>
 <p>把逻辑层的查询条件转成db层的查询条件。默认会处理范围查找的条件。</p>
-<h3 id="_53">参数</h3>
+<h3 id="_54">参数</h3>
 <table>
 <thead>
 <tr>
@@ -1824,7 +1893,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_54">返回值</h3>
+<h3 id="_55">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -1862,7 +1931,7 @@
 <h2 id="israngequery">isRangeQuery</h2>
 <p><code>isRangeQuery (value)</code></p>
 <p>判断一个字符串是否是范围字符串</p>
-<h3 id="_55">参数</h3>
+<h3 id="_56">参数</h3>
 <table>
 <thead>
 <tr>
@@ -1883,7 +1952,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_56">返回值</h3>
+<h3 id="_57">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -1907,7 +1976,7 @@
 <h2 id="isvaliddata">isValidData</h2>
 <p><code>isValidData (data, requiredParams, fieldVerfiyFunc, missingPrefix, invalidePrefix)</code></p>
 <p>验证数据的合法性和有效性</p>
-<h3 id="_57">参数</h3>
+<h3 id="_58">参数</h3>
 <table>
 <thead>
 <tr>
@@ -1956,7 +2025,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_58">返回值</h3>
+<h3 id="_59">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -1980,7 +2049,7 @@
 <h2 id="isint">isInt</h2>
 <p><code>isInt (val, strong)</code></p>
 <p>判断一个值是否为整数或整数字符串</p>
-<h3 id="_59">参数</h3>
+<h3 id="_60">参数</h3>
 <table>
 <thead>
 <tr>
@@ -2008,7 +2077,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_60">返回值</h3>
+<h3 id="_61">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -2032,7 +2101,7 @@
 <h2 id="notemptystr">notEmptyStr</h2>
 <p><code>notEmptyStr (val)</code></p>
 <p>判断一个值是否为非空符串。如果是非空字符串，返回true，否则返回false</p>
-<h3 id="_61">参数</h3>
+<h3 id="_62">参数</h3>
 <table>
 <thead>
 <tr>
@@ -2053,7 +2122,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_62">返回值</h3>
+<h3 id="_63">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -2077,7 +2146,7 @@
 <h2 id="emptyorstr">emptyOrStr</h2>
 <p><code>emptyOrStr (val)</code></p>
 <p>判断一个值是否为非空符串或空字符串。如果是则返回true，否则返回false</p>
-<h3 id="_63">参数</h3>
+<h3 id="_64">参数</h3>
 <table>
 <thead>
 <tr>
@@ -2098,7 +2167,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_64">返回值</h3>
+<h3 id="_65">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -2122,7 +2191,7 @@
 <h2 id="isvalueof">isValueOf</h2>
 <p><code>isValueOf (actualValue, expectedValues)</code></p>
 <p>判断一个值是否在期望值之内。如果actualValue和expectedValues都是Number、Boolean、String类型，采用<code>===</code>比较。如果expectedValues是Array或Object类型。则判断actualValue值是否是存在数组或Object.values(expectedValues)中</p>
-<h3 id="_65">参数</h3>
+<h3 id="_66">参数</h3>
 <table>
 <thead>
 <tr>
@@ -2150,7 +2219,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_66">返回值</h3>
+<h3 id="_67">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -2174,7 +2243,7 @@
 <h2 id="avatest">avaTest</h2>
 <p><code>avaTest (t, actual, expected, expand)</code></p>
 <p>测试 { ...expected, ...expand } 属性值和actual是否一致。</p>
-<h3 id="_67">参数</h3>
+<h3 id="_68">参数</h3>
 <table>
 <thead>
 <tr>
@@ -2216,7 +2285,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_68">返回值</h3>
+<h3 id="_69">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -2240,7 +2309,7 @@
 <h2 id="utctodate">utcToDate</h2>
 <p><code>utcToDate (unixTimestamp)</code></p>
 <p>unix时间戳转Date</p>
-<h3 id="_69">参数</h3>
+<h3 id="_70">参数</h3>
 <table>
 <thead>
 <tr>
@@ -2261,7 +2330,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_70">返回值</h3>
+<h3 id="_71">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -2285,7 +2354,7 @@
 <h2 id="datestrtodate">dateStrToDate</h2>
 <p><code>dateStrToDate (dateStr)</code></p>
 <p>日期字符串转utc Date</p>
-<h3 id="_71">参数</h3>
+<h3 id="_72">参数</h3>
 <table>
 <thead>
 <tr>
@@ -2306,7 +2375,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_72">返回值</h3>
+<h3 id="_73">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -2330,7 +2399,7 @@
 <h2 id="zerror400">zerror400</h2>
 <p><code>zerror400 (name, code, message, desc)</code></p>
 <p>参数错误对象，对应http code 为400</p>
-<h3 id="_73">参数</h3>
+<h3 id="_74">参数</h3>
 <table>
 <thead>
 <tr>
@@ -2372,7 +2441,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_74">返回值</h3>
+<h3 id="_75">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -2396,7 +2465,7 @@
 <h2 id="zerror409">zerror409</h2>
 <p><code>zerror409 (name, code, message, desc)</code></p>
 <p>参数错误对象，对应http code 为409</p>
-<h3 id="_75">参数</h3>
+<h3 id="_76">参数</h3>
 <table>
 <thead>
 <tr>
@@ -2438,7 +2507,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_76">返回值</h3>
+<h3 id="_77">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -2462,7 +2531,7 @@
 <h2 id="zerror404">zerror404</h2>
 <p><code>zerror404 (name, code, message, desc)</code></p>
 <p>参数错误对象，对应http code 为404</p>
-<h3 id="_77">参数</h3>
+<h3 id="_78">参数</h3>
 <table>
 <thead>
 <tr>
@@ -2504,7 +2573,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_78">返回值</h3>
+<h3 id="_79">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -2528,7 +2597,7 @@
 <h2 id="zerror422">zerror422</h2>
 <p><code>zerror422 (name, code, message, desc)</code></p>
 <p>参数错误对象，对应http code 为422</p>
-<h3 id="_79">参数</h3>
+<h3 id="_80">参数</h3>
 <table>
 <thead>
 <tr>
@@ -2570,7 +2639,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_80">返回值</h3>
+<h3 id="_81">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -2594,7 +2663,7 @@
 <h2 id="zerror500">zerror500</h2>
 <p><code>zerror500 (name, code, message, desc)</code></p>
 <p>参数错误对象，对应http code 为500</p>
-<h3 id="_81">参数</h3>
+<h3 id="_82">参数</h3>
 <table>
 <thead>
 <tr>
@@ -2636,7 +2705,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_82">返回值</h3>
+<h3 id="_83">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -2660,7 +2729,7 @@
 <h2 id="parsedaterange">parseDateRange</h2>
 <p><code>parseDateRange (timeRangeStr)</code></p>
 <p>解析时间范围字符串</p>
-<h3 id="_83">参数</h3>
+<h3 id="_84">参数</h3>
 <table>
 <thead>
 <tr>
@@ -2681,7 +2750,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_84">返回值</h3>
+<h3 id="_85">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -2719,7 +2788,7 @@
 <h2 id="parserangequery">parseRangeQuery</h2>
 <p><code>parseRangeQuery (rangeStr)</code></p>
 <p>解析范围字符串</p>
-<h3 id="_85">参数</h3>
+<h3 id="_86">参数</h3>
 <table>
 <thead>
 <tr>
@@ -2740,7 +2809,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_86">返回值</h3>
+<h3 id="_87">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -2778,7 +2847,7 @@
 <h2 id="objkeysort">objKeySort</h2>
 <p><code>objKeySort (obj)</code></p>
 <p>json对象按key字母顺序排序</p>
-<h3 id="_87">参数</h3>
+<h3 id="_88">参数</h3>
 <table>
 <thead>
 <tr>
@@ -2799,7 +2868,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_88">返回值</h3>
+<h3 id="_89">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -2823,7 +2892,7 @@
 <h2 id="isjson">isJSON</h2>
 <p><code>isJSON (str)</code></p>
 <p>判断一个字符串是否是json字符串</p>
-<h3 id="_89">参数</h3>
+<h3 id="_90">参数</h3>
 <table>
 <thead>
 <tr>
@@ -2844,7 +2913,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_90">返回值</h3>
+<h3 id="_91">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -2868,7 +2937,7 @@
 <h2 id="convertobjkey">convertObjKey</h2>
 <p><code>convertObjKey (pendData, type, handle)</code></p>
 <p>转换对象的key为下划线或驼峰风格</p>
-<h3 id="_91">参数</h3>
+<h3 id="_92">参数</h3>
 <table>
 <thead>
 <tr>
@@ -2903,7 +2972,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_92">返回值</h3>
+<h3 id="_93">返回值</h3>
 <table>
 <thead>
 <tr>
@@ -2921,6 +2990,30 @@
 <td>是</td>
 <td>无</td>
 <td>处理后的对象</td>
+</tr>
+</tbody>
+</table>
+<h2 id="delay">delay</h2>
+<p><code>delay (sec)</code></p>
+<p>延迟函数。类似进程的sleep函数。</p>
+<h3 id="_94">参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>必填</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sec</td>
+<td>Float</td>
+<td>是</td>
+<td>0.1</td>
+<td></td>
 </tr>
 </tbody>
 </table>
