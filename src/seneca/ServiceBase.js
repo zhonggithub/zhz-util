@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: Sun Mar 07 2021
+ * Last Modified: Tue Mar 23 2021
  * Modified By: Zz
  * -----
  * Description: ServiceBase为Service抽象接口类
@@ -70,6 +70,14 @@ class ServiceBase extends ServiceInterface {
 
     this.opt = opt === false ? opt : opt || operate;
     this.excludeOpt = excludeOpt;
+  }
+
+  handleCatchError(err) {
+    return {
+      status: 500,
+      code: 'ERROR_UNKNOW',
+      messag: err.messag,
+    }
   }
 
   loadCmd() {
