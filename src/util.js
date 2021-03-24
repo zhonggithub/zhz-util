@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: Mon Mar 22 2021
+ * Last Modified: Wed Mar 24 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -20,7 +20,50 @@ const zerror = require('z-error');
 
 const { ZError, verify } = zerror;
 
+async function packageError(res) {
+  const data = await res.json()
+  return {
+    code: -1,
+    message: data.message || '',
+    status: res.status,
+    data,
+  }
+}
+
+async function packageSuccess(res) {
+  const data = await res.json()
+  return {
+    code: 0,
+    message: 'success',
+    status: res.status,
+    data,
+  }
+}
+
 module.exports = {
+  package200(res) {
+    if (res.status !== 200) {
+      return packageError(res)
+    }
+    return packageSuccess(res)
+  },
+  package201(res) {
+    if (res.status !== 201) {
+      return packageError(res)
+    }
+    return packageSuccess(res)
+  },
+  package204(res) {
+    if (res.status !== 204) {
+      return packageError(res)
+    }
+    return Promise.resolve({
+      code: 0,
+      message: 'success',
+      status: res.status,
+    })
+  },
+  
   isFunction(functionName) {
     return functionName && typeof functionName === 'function';
   },
