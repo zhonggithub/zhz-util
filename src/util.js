@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: Wed Mar 24 2021
+ * Last Modified: Fri Mar 26 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -320,14 +320,22 @@ module.exports = {
   errorDB(code, message) {
     return new ZError('Error', code || 'ERROR_RESOURCE_DB', message, '', 500).toJson();
   },
-  filterData(dataInfo, excludeAttribute = []) {
+  filterData(dataInfo, attribute = [], tag = 1) {
     if (!dataInfo) {
       return {};
     }
-    const retDataInfo = { ...dataInfo };
-    for (const item of excludeAttribute) {
-      delete retDataInfo[item];
+    let retDataInfo = { };
+    if (tag === 1) {
+      retDataInfo = { ...dataInfo }
+      for (const item of attribute) {
+        delete retDataInfo[item];
+      }
+    } else {
+      for (const item of attribute) {
+        retDataInfo[item] = dataInfo[item];
+      }
     }
+    
     return retDataInfo;
   },
   parseExpand(expand) {
