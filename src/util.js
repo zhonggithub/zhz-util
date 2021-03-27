@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: Fri Mar 26 2021
+ * Last Modified: Sat Mar 27 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -320,6 +320,13 @@ module.exports = {
   errorDB(code, message) {
     return new ZError('Error', code || 'ERROR_RESOURCE_DB', message, '', 500).toJson();
   },
+  /**
+   * 过滤属性
+   * @param {*} dataInfo 
+   * @param {*} attribute 
+   * @param {*} tag 1=排除属性，0=指定属性
+   * @returns 
+   */
   filterData(dataInfo, attribute = [], tag = 1) {
     if (!dataInfo) {
       return {};

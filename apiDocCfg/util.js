@@ -5,7 +5,7 @@
  * Created Date: 2020-06-17 13:24:59
  * Author: Zz
  * -----
- * Last Modified: Mon Mar 22 2021
+ * Last Modified: Sat Mar 27 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -634,11 +634,16 @@ module.exports = {
         type: DataTypes.Object,
         required: true,
       },
-      excludeAttribute: {
+      attribute: {
         type: 'Array',
         required: true,
         description: '过滤的属性数组',
       },
+      tag: {
+        type: DataTypes.Number,
+        default: 1,
+        desc: '1=排除attribute属性值；0=只获取attribute里的属性值',
+      }
     },
     returns: {
       data: {
