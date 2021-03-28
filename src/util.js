@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: Sat Mar 27 2021
+ * Last Modified: Sun Mar 28 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -593,32 +593,32 @@ module.exports = {
       array = array.replace(/(\[)|(\])|(\()|(\))|(\{)|(\})/g, '');
       array = array.split(',');
       if (beginStr === '[' && endStr === ']') {
-        if (array[0] !== ' ' && array[0] !== '') {
-          condition[key]['>='] = formatValue(array[0]);
+        if (array[0] && array[0] !== ' ' && array[0] !== '') {
+          condition[key].$gte = formatValue(array[0]);
         }
-        if (array[1] !== ' ' && array[1] !== '') {
-          condition[key]['<='] = formatValue(array[1]);
+        if (array[1] && array[1] !== ' ' && array[1] !== '') {
+          condition[key].$lte = formatValue(array[1]);
         }
       } else if (beginStr === '(' && endStr === ']') {
-        if (array[0] !== ' ' && array[0] !== '') {
-          condition[key]['>'] = formatValue(array[0]);
+        if (array[0] && array[0] !== ' ' && array[0] !== '') {
+          condition[key].$gt = formatValue(array[0]);
         }
-        if (array[1] !== ' ' && array[1] !== '') {
-          condition[key]['<='] = formatValue(array[1]);
+        if (array[1] &&  array[1] !== ' ' && array[1] !== '') {
+          condition[key].$lte = formatValue(array[1]);
         }
       } else if (beginStr === '[' && endStr === ')') {
-        if (array[0] !== ' ' && array[0] !== '') {
-          condition[key]['>='] = formatValue(array[0]);
+        if (array[0] && array[0] !== ' ' && array[0] !== '') {
+          condition[key].$gte = formatValue(array[0]);
         }
-        if (array[1] !== ' ' && array[1] !== '') {
-          condition[key]['<'] = formatValue(array[1]);
+        if (array[1] &&  array[1] !== ' ' && array[1] !== '') {
+          condition[key].$lt = formatValue(array[1]);
         }
       } else if (beginStr === '(' && endStr === ')') {
-        if (array[0] !== ' ' && array[0] !== '') {
-          condition[key]['>'] = formatValue(array[0]);
+        if (array[0] && array[0] !== ' ' && array[0] !== '') {
+          condition[key].$gt = formatValue(array[0]);
         }
-        if (array[1] !== ' ' && array[1] !== '') {
-          condition[key]['<'] = formatValue(array[1]);
+        if (array[1] &&  array[1] !== ' ' && array[1] !== '') {
+          condition[key].$lt = formatValue(array[1]);
         }
       } else if (beginStr === '{' && endStr === '}') {
         condition[key] = array;
