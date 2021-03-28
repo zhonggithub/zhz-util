@@ -531,31 +531,31 @@ module.exports = {
       array = array.replace(/(\[)|(\])|(\()|(\))|(\{)|(\})/g, '');
       array = array.split(',');
       if (beginStr === '[' && endStr === ']') {
-        if (array[0] !== ' ' && array[0] !== '') {
+        if (array[0] && array[0] !== ' ' && array[0] !== '') {
           condition[key][Op.gte] = formatValue(array[0]);
         }
-        if (array[1] !== ' ' && array[1] !== '') {
+        if (array[1] && array[1] !== ' ' && array[1] !== '') {
           condition[key][Op.lte] = formatValue(array[1]);
         }
       } else if (beginStr === '(' && endStr === ']') {
-        if (array[0] !== ' ' && array[0] !== '') {
+        if (array[0] &&  array[0] !== ' ' && array[0] !== '') {
           condition[key][Op.gt] = formatValue(array[0]);
         }
-        if (array[1] !== ' ' && array[1] !== '') {
+        if (array[1] &&  array[1] !== ' ' && array[1] !== '') {
           condition[key][Op.lte] = formatValue(array[1]);
         }
       } else if (beginStr === '[' && endStr === ')') {
-        if (array[0] !== ' ' && array[0] !== '') {
+        if (array[0] &&  array[0] !== ' ' && array[0] !== '') {
           condition[key][Op.gte] = formatValue(array[0]);
         }
-        if (array[1] !== ' ' && array[1] !== '') {
+        if (array[1] &&  array[1] !== ' ' && array[1] !== '') {
           condition[key][Op.lt] = formatValue(array[1]);
         }
       } else if (beginStr === '(' && endStr === ')') {
-        if (array[0] !== ' ' && array[0] !== '') {
+        if (array[0] &&  array[0] !== ' ' && array[0] !== '') {
           condition[key][Op.gt] = formatValue(array[0]);
         }
-        if (array[1] !== ' ' && array[1] !== '') {
+        if (array[1] &&  array[1] !== ' ' && array[1] !== '') {
           condition[key][Op.lt] = formatValue(array[1]);
         }
       } else if (beginStr === '{' && endStr === '}') {
