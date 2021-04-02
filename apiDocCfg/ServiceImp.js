@@ -5,7 +5,7 @@
  * Created Date: 2020-06-14 15:35:22
  * Author: Zz
  * -----
- * Last Modified: Thu Feb 25 2021
+ * Last Modified: Fri Apr 02 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -373,7 +373,7 @@ module.exports = {
     },
   },
   
-  afterDestroyDestroy: {
+  afterDestroy: {
     description: '删除之后调用',
     funcType: DataTypes.FuncType.kAsync,
     params: {
