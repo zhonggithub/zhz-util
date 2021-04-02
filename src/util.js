@@ -71,6 +71,9 @@ module.exports = {
     let tmp = { ...obj };
     for (const item of keys) {
       tmp = tmp[item];
+      if (!tmp) {
+        return '';
+      }
     }
     return tmp;
   },
