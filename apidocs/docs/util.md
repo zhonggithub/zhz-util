@@ -513,7 +513,7 @@ destroy成功时返回数据
 
 
 ## filterData
-` filterData (data, excludeAttribute)`
+` filterData (data, attribute, tag)`
 
 过滤属性值
 
@@ -522,7 +522,8 @@ destroy成功时返回数据
 |参数|类型|必填|默认值|描述|
 |--- | --- | --- | --- | ---|
 |data | Object | 是 | 无 | |
-|excludeAttribute | Array | 是 | 无 | 过滤的属性数组|
+|attribute | Array | 是 | 无 | 过滤的属性数组|
+|tag | Number | 否 | 无 | 1=排除attribute属性值；0=只获取attribute里的属性值|
 
 
 ### 返回值

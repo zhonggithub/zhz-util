@@ -1694,7 +1694,7 @@
 </tbody>
 </table>
 <h2 id="filterdata">filterData</h2>
-<p><code>filterData (data, excludeAttribute)</code></p>
+<p><code>filterData (data, attribute, tag)</code></p>
 <p>过滤属性值</p>
 <h3 id="_49">参数</h3>
 <table>
@@ -1716,11 +1716,18 @@
 <td></td>
 </tr>
 <tr>
-<td>excludeAttribute</td>
+<td>attribute</td>
 <td>Array</td>
 <td>是</td>
 <td>无</td>
 <td>过滤的属性数组</td>
+</tr>
+<tr>
+<td>tag</td>
+<td>Number</td>
+<td>否</td>
+<td>无</td>
+<td>1=排除attribute属性值；0=只获取attribute里的属性值</td>
 </tr>
 </tbody>
 </table>

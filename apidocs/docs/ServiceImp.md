@@ -356,8 +356,8 @@ list获得数据转换层逻辑表现层数据。默认循环调用db2logic
 |data | Object | 否 | 无 | 删除时传入的数据|
 
 
-## afterDestroyDestroy
-`async afterDestroyDestroy (data)`
+## afterDestroy
+`async afterDestroy (data)`
 
 删除之后调用
 
