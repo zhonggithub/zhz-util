@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: Sun Mar 28 2021
+ * Last Modified: Fri Apr 02 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -62,6 +62,17 @@ module.exports = {
       message: 'success',
       status: res.status,
     })
+  },
+
+  getAttributeValue(obj, ...keys) {
+    if (!obj || typeof obj !== 'object') {
+      return '';
+    }
+    let tmp = { ...obj };
+    for (const item of keys) {
+      tmp = tmp[item];
+    }
+    return tmp;
   },
   
   isFunction(functionName) {
