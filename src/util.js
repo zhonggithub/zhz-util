@@ -57,11 +57,7 @@ module.exports = {
     if (res.status !== 204) {
       return packageError(res)
     }
-    return Promise.resolve({
-      code: 0,
-      message: 'success',
-      status: res.status,
-    })
+    return packageSuccess(res)
   },
 
   getAttributeValue(obj, ...keys) {

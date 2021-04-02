@@ -533,6 +533,26 @@ destroy成功时返回数据
 |data | Object | 否 | 无 | |
 
 
+## getAttributeValue
+` getAttributeValue (obj, keys)`
+
+获取Object某个属性对应的value
+
+### 参数
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|obj | Object | 是 | 无 | |
+|keys | String | Array | Object | 是 | 无 | 可变参数|
+
+
+### 返回值
+
+|参数|类型|必填|默认值|描述|
+|--- | --- | --- | --- | ---|
+|data | String | Array | Object | 否 | 无 | 属性值|
+
+
 ## parseExpand
 ` parseExpand (expand)`
 

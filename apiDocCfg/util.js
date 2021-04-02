@@ -5,7 +5,7 @@
  * Created Date: 2020-06-17 13:24:59
  * Author: Zz
  * -----
- * Last Modified: Sat Mar 27 2021
+ * Last Modified: Fri Apr 02 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -648,6 +648,27 @@ module.exports = {
     returns: {
       data: {
         type: DataTypes.Object,
+      }
+    }
+  },
+
+  getAttributeValue: {
+    desc: '获取Object某个属性对应的value',
+    params: {
+      obj: {
+        type: DataTypes.Object,
+        required: true,
+      },
+      keys: {
+        type: 'String | Array | Object',
+        desc: '可变参数',
+        required: true,
+      }
+    },
+    returns: {
+      data: {
+        type: 'String | Array | Object',
+        desc: '属性值',
       }
     }
   },
