@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: Sun Mar 07 2021
+ * Last Modified: Wed Apr 14 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -278,7 +278,7 @@ class Service extends ServiceBase {
       const body = await this.do2po(msg.params);
       await this.beforeCreate(body);
       const result = await this.model.create(body);
-      await this.afterCreate(result);
+      await this.afterCreate(result, body);
       const ret = await this.po2do(result);
       return util.responseCreateSuccess(ret);
     } catch (dbError) {
@@ -351,7 +351,7 @@ class Service extends ServiceBase {
           this.errCode[404],
         );
       }
-      await this.afterUpdate(result);
+      await this.afterUpdate(result, data);
       await this.delCache(msg.params.id);
       
       const ret = await this.po2do(result);
@@ -379,7 +379,7 @@ class Service extends ServiceBase {
           this.errCode[404],
         );
       }
-      await this.afterUpdateStatus(result);
+      await this.afterUpdateStatus(result, msg.params);
       await this.delCache(id);
       
       const ret = await this.po2do(result);
