@@ -5,7 +5,7 @@
  * Created Date: 2020-06-27 00:57:14
  * Author: Zz
  * -----
- * Last Modified: Sun Mar 07 2021
+ * Last Modified: Sat Apr 17 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -111,3 +111,10 @@ console.log(util.notInValue(-1))
 
 console.log(util.convertRangeQueryCriteriaMysql('a', '!{-1}!', val => parseInt(val, 10)))
 console.log(util.convertRangeQueryCriteriaMongodb('a', '!{-1}!', val => parseInt(val, 10)))
+
+
+console.log(util.convertRangeQueryCriteriaMysql(
+  'aa',
+  '{14,16,15}',
+  (typeItem) => parseInt(typeItem, 10),
+))
