@@ -145,7 +145,7 @@ module.exports = {
     if (typeof val === 'string') {
       return `{${val}}`
     }
-    if (typeof val === 'array') {
+    if (Array.isArray(val)) {
       return `{${val.toString()}}`
     }
     return '';
@@ -155,7 +155,7 @@ module.exports = {
     if (typeof val === 'string' || typeof val === 'number') {
       return `!{${val}}!`;
     }
-    if (typeof val === 'array') {
+    if (Array.isArray(val)) {
       return `!{${val.toString()}}!`;
     }
     return '';
