@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: Sat Feb 20 2021
+ * Last Modified: Sat Apr 17 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -91,7 +91,7 @@ module.exports = {
       return val.split(',');
       // return `{${vallue}}`;
     }
-    if (typeof val === 'array') {
+    if (Array.isArray(val)) {
       return val;
 
       // return `{${vallue.toString()}}`;
@@ -103,7 +103,7 @@ module.exports = {
     if (typeof val === 'string' || typeof val === 'number') {
       return `!{${val}}!`;
     }
-    if (typeof val === 'array') {
+    if (Array.isArray(val)) {
       return `!{${val.toString()}}!`;
     }
     return '';
@@ -502,7 +502,7 @@ module.exports = {
           condition[key][Op.lt] = formatValue(array[1]);
         }
       } else if (beginStr === '{' && endStr === '}') {
-        condition[key] = array;
+        condition[key] = array.map(item => formatValue(item));
       }
     } else {
       condition[key] = value;
@@ -564,7 +564,7 @@ module.exports = {
           condition[key]['<'] = formatValue(array[1]);
         }
       } else if (beginStr === '{' && endStr === '}') {
-        condition[key] = array;
+        condition[key] = array.map(item => formatValue(item));
       }
     } else {
       condition[key] = value;
