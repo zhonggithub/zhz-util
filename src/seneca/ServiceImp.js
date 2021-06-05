@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: Thu Feb 25 2021
+ * Last Modified: Sat Jun 05 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -167,7 +167,7 @@ class Service extends ServiceBase {
 
   async beforeCreate(data) {
   }
-  async afterCreate(data) {
+  async afterCreate(data, preData) {
   }
 
   async beforeUpdate(data) {
@@ -296,7 +296,7 @@ class Service extends ServiceBase {
       const body = await this.logic2DB(msg.params);
       await this.beforeCreate(body);
       const result = await this.model.create(body);
-      await this.afterCreate(result);
+      await this.afterCreate(result, body);
       const ret = await this.db2logic(result);
       return util.responseCreateSuccess(ret);
     } catch (dbError) {
@@ -369,7 +369,7 @@ class Service extends ServiceBase {
           this.errCode[404],
         );
       }
-      await this.afterUpdate(result);
+      await this.afterUpdate(result, data);
       await this.delCache(msg.params.id);
       
       const ret = await this.db2logic(result);
@@ -397,7 +397,7 @@ class Service extends ServiceBase {
           this.errCode[404],
         );
       }
-      await this.afterUpdateStatus(result);
+      await this.afterUpdateStatus(result, msg.params);
       await this.delCache(id);
       
       const ret = await this.db2logic(result);
@@ -431,7 +431,7 @@ class Service extends ServiceBase {
           this.errCode[404],
         );
       }
-      await this.afterDestroy(delResult, exist);
+      await this.afterDestroy(delResult, msg.params);
       await this.delCache(id);
       return util.responseDestroySuccess(delResult);
     } catch (dbError) {
