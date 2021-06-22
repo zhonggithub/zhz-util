@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: Wed Apr 14 2021
+ * Last Modified: Tue Jun 22 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -298,7 +298,7 @@ class Service extends ServiceBase {
       return err.toJson();
     }
     try {
-      const { id, expand } = msg.params;
+      const { id, expand, attributes } = msg.params;
       const tmpExpand = util.parseExpand(expand);
       const include = this.parseExpand2Include(tmpExpand);
 
@@ -308,7 +308,14 @@ class Service extends ServiceBase {
         result = await this.cache.get(cacheKey);
       }
       if (!result) {
-        result = await this.model.findById(id, include);
+        const params = {}
+        if (include) {
+          params.include = include
+        }
+        if (attributes) {
+          params.attributes = attributes
+        }
+        result = await this.model.findById(id, params);
       }
 
       if (!result) {

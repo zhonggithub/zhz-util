@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: 2020-08-14 19:56:58
+ * Last Modified: Tue Jun 22 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -14,9 +14,9 @@
 const ModelBase = require('../ModelBase');
 
 class SequelizeModel extends ModelBase {
-  async findById(id, include) {
-    if (include) {
-      return this.model.findByPk(id, { include });
+  async findById(id, options) {
+    if (options) {
+      return this.model.findByPk(id, options);
     }
     return this.model.findByPk(id);
   }
