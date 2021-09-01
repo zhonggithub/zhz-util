@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: Tue Jun 22 2021
+ * Last Modified: Wed Sep 01 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -602,6 +602,28 @@ class Service extends ServiceBase {
       return util.responseSuccess(items);
     } catch (dbError) {
       return this.handleCatchErr(dbError)
+    }
+  }
+
+  async updateBy (msg) {
+    this.logger.info(msg);
+    try {
+      const error = util.isValidData(msg.params, ['condition', 'data'], {
+        condition: (val) => typeof val === 'object',
+        data: (val) => typeof val === 'object',
+      });
+      if (error) {
+        return error.toJSON();
+      }
+      const { condition, data } = msg.params;
+      const Data = await this.do2poWhenUpdate(data);
+      const result = await this.model.getModel().update(data, {
+        where: condition,
+        fields: Object.keys(Data),
+      });
+      return util.responseSuccess(result);
+    } catch (err) {
+      return this.handleCatchErr(err);
     }
   }
 }
