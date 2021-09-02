@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: Wed Sep 01 2021
+ * Last Modified: Thu Sep 02 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -304,7 +304,7 @@ class Service extends ServiceBase {
 
       let result = null;
       let cacheKey = this.getCacheKey(id);
-      if (this.cache && !tmpExpand) {
+      if (this.cache && !tmpExpand && !attributes) {
         result = await this.cache.get(cacheKey);
       }
       if (!result) {
@@ -329,7 +329,7 @@ class Service extends ServiceBase {
         result, tmpExpand,
       );
       
-      if (this.cache && !tmpExpand) {
+      if (this.cache && !tmpExpand && !attributes) {
         await this.cache.set(cacheKey, data, this.getCacheTTL());
       }
       
@@ -537,10 +537,6 @@ class Service extends ServiceBase {
         );
       }
       const data = await this.po2do(result, tmpExpand);
-      if (this.cache && data.id) {
-        const cacheKey = this.getCacheKey(data.id);
-        await this.cache.set(cacheKey, data, this.getCacheTTL());
-      }
       return util.responseSuccess(data);
     } catch (dbError) {
       return this.handleCatchErr(dbError);
