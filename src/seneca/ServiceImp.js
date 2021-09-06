@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: Sun Mar 07 2021
+ * Last Modified: Mon Sep 06 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -530,10 +530,6 @@ class Service extends ServiceBase {
         );
       }
       const data = await this.po2do(result, tmpExpand);
-      if (this.cache && data.id) {
-        const cacheKey = this.getCacheKey(data.id);
-        await this.cache.set(cacheKey, data, this.getCacheTTL());
-      }
       return util.responseSuccess(data);
     } catch (dbError) {
       return this.handleCatchErr(dbError);

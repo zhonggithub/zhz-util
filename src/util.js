@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 19:47:49
  * Author: Zz
  * -----
- * Last Modified: Fri Mar 19 2021
+ * Last Modified: Mon Sep 06 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -64,25 +64,25 @@ module.exports = {
     if (!val1 && !val2) {
       return '';
     }
-    return `[${val1 || ''}, ${val2 || ''}]`
+    return `[${val1 || ''},${val2 || ''}]`
   },
   gtLte(val1, val2) {
     if (!val1 && !val2) {
       return '';
     }
-    return `(${val1 || ''}, ${val2 || ''}]`
+    return `(${val1 || ''},${val2 || ''}]`
   },
   gteLt(val1, val2) {
     if (!val1 && !val2) {
       return '';
     }
-    return `[${val1 || ''}, ${val2 || ''})`
+    return `[${val1 || ''},${val2 || ''})`
   },
   gtLt(val1, val2) {
     if (!val1 && !val2) {
       return '';
     }
-    return `(${val1 || ''}, ${val2 || ''})`
+    return `(${val1 || ''},${val2 || ''})`
   },
   /**
    * @param {String or Array} val 
