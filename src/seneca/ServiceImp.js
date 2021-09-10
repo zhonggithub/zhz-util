@@ -539,11 +539,7 @@ class Service extends ServiceBase {
       const { filter, expand, sort } = util.convertPagination(msg.params);
       const params = this.convertQueryCriteria(filter);
       const query = this.parseListQuery(params, sort);
-
-      delete msg.params.expand;
       
-      // const params = this.convertQueryCriteria(msg.params);
-      // const query = this.parseQuery(params);
       const tmpExpand = util.parseExpand(expand);
       this.appendInclude(query, tmpExpand);
       const result = await this.model.find(query);
