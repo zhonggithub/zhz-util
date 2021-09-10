@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: Thu Sep 02 2021
+ * Last Modified: Fri Sep 10 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -316,6 +316,9 @@ class Service extends ServiceBase {
           params.attributes = attributes
         }
         result = await this.model.findById(id, params);
+        if (this.cache) {
+          await this.cache.set(cacheKey, data.toJSON(), this.getCacheTTL());
+        }
       }
 
       if (!result) {
@@ -324,15 +327,10 @@ class Service extends ServiceBase {
           this.errCode[404],
         );
       }
-
+     
       const data = await this.po2do(
         result, tmpExpand,
       );
-      
-      if (this.cache && !tmpExpand && !attributes) {
-        await this.cache.set(cacheKey, data, this.getCacheTTL());
-      }
-      
       return util.responseSuccess(data);
     } catch (dbError) {
       return this.handleCatchErr(dbError);
@@ -451,14 +449,6 @@ class Service extends ServiceBase {
 
       const result = await this.model.find(params);
       const items = await this.list2do(result, expand);
-      if (this.listCacheOn && this.cache && !query.attributes) {
-        await Promise.all(items.map(async (item) => {
-          if (item.id) {
-            const cacheKey = this.getCacheKey(item.id);
-            await this.cache.set(cacheKey, item, this.getCacheTTL());
-          }
-        }))
-      }
       const total = await this.model.count(this.parseQuery(query));
       return util.responseSuccess({
         items,
