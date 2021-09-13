@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: Fri Sep 10 2021
+ * Last Modified: Mon Sep 13 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -317,7 +317,7 @@ class Service extends ServiceBase {
         }
         result = await this.model.findById(id, params);
         if (this.cache) {
-          await this.cache.set(cacheKey, data.toJSON(), this.getCacheTTL());
+          await this.cache.set(cacheKey, result.toJSON(), this.getCacheTTL());
         }
       }
 
