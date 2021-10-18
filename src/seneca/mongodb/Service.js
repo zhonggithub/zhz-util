@@ -5,7 +5,7 @@
  * Created Date: 2020-06-25 12:28:46
  * Author: Zz
  * -----
- * Last Modified: Mon Mar 08 2021
+ * Last Modified: Mon Oct 18 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -67,6 +67,24 @@ class MongodbService extends ServiceImp {
       return util.responseSuccess(delResult, 204);
     } catch (dbError) {
       return this.handleCatchErr(dbError);
+    }
+  }
+
+  updateBy = async (msg) => {
+    this.logger.info(msg);
+    try {
+      const error = util.isValidData(msg.params, ['query', 'data']);
+      if (error) {
+        return error.toJSON();
+      }
+      const { query, data } = msg.params;
+      const row = await this.model.getModel().findOneAndUpdate(query, data, {
+        new: true,
+      });
+      const result = await this.po2do(row);
+      return util.responseSuccess(result);
+    } catch (err) {
+      return this.handleCatchErr(err);
     }
   }
 }
