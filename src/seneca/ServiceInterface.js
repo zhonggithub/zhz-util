@@ -5,7 +5,7 @@
  * Created Date: 2020-08-04 23:05:51
  * Author: Zz
  * -----
- * Last Modified: 2020-08-04 23:40:19
+ * Last Modified: Mon Oct 18 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -25,6 +25,7 @@ class ServiceInterface {
   async treeList(msg = { params }) {}
   async findAll(msg = { params }) {}
   async findByIds(msg = { params }) {}
+  async updateBy(msg = { params }) {}
 }
 
 module.exports = ServiceInterface
