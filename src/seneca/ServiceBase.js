@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: Wed Sep 01 2021
+ * Last Modified: Mon Oct 18 2021
  * Modified By: Zz
  * -----
  * Description: ServiceBase为Service抽象接口类
@@ -45,6 +45,7 @@ const operate = {
   findAll: true,
   findByIds: true,
   updateBy: true,
+  batchCreate: true,
 };
 
 class ServiceBase extends ServiceInterface {

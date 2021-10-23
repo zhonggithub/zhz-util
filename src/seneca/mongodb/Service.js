@@ -87,6 +87,30 @@ class MongodbService extends ServiceImp {
       return this.handleCatchErr(err);
     }
   }
+
+  async batchCreate(msg) {
+    this.logger.info(msg);
+    try {
+      let error = util.isValidData(msg.params, ['data'], {
+        data: (val) => {
+          if (!Array.isArray(val)) {
+            return false;
+          }
+          for (const item of val) {
+            error = this.isValidDataWhenCreate(item);
+            if (error) {
+              return false;
+            }
+          }
+          return true;
+        },
+      });
+      const row = await this.model.getModel().insertMany(msg.params.data);
+      return util.responseSuccess(row);
+    } catch (err) {
+      return this.handleCatchErr(err);
+    }
+  }
 }
 
 module.exports = MongodbService;

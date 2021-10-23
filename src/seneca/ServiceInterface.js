@@ -26,6 +26,7 @@ class ServiceInterface {
   async findAll(msg = { params }) {}
   async findByIds(msg = { params }) {}
   async updateBy(msg = { params }) {}
+  async batchCreate(msg = { params }) {}
 }
 
 module.exports = ServiceInterface

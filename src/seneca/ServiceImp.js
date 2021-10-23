@@ -5,7 +5,7 @@
  * Created Date: 2020-06-13 18:45:05
  * Author: Zz
  * -----
- * Last Modified: Mon Sep 13 2021
+ * Last Modified: Sat Oct 23 2021
  * Modified By: Zz
  * -----
  * Description:
@@ -181,7 +181,7 @@ class Service extends ServiceBase {
   async afterUpdateStatus(data) {
   }
 
-  async beforeDestroy(params) {
+  async beforeDestroy(params, exist) {
   }
   /**
    * @param {*} delResult 删除结果，如果是逻辑删除，返回的是数据；如果是物理删，返回number
@@ -410,7 +410,7 @@ class Service extends ServiceBase {
         );
       }
     
-      await this.beforeDestroy(msg.params);
+      await this.beforeDestroy(msg.params, exist);
       const delResult = await this.model.findByIdAndDelete(id);
       if (!delResult) {
         return util.responseError404(
